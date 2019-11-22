@@ -1,0 +1,18 @@
+{
+  "name": "autofab-main-server",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Edouard <edouardbuilder87@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Edouard87/autofab-main-server",
+  "directory":"public/components/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
