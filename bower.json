@@ -7,12 +7,15 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/Edouard87/autofab-main-server",
-  "directory":"public/components/",
+  "directory": "/public/components/",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
 }

@@ -1,17 +1,94 @@
-<% include header %>
-
-  <h1><%-title %></h1>
-  <p>Welcome to <%-title %></p>
-
-  <script src="/js/socket.io.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="/components/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+  
+  <h1>Welcome to the LCC Fab Lab</h1>
+  <h2>Student Reservation</h2>
+  <form method="post" action="/reserve">
+  
+    <label for="">User</label><input name="user" type="text"><br>
+    <label for="">Password</label><input name="password" type="password"><br>
+    <label for="">Machine</label>
+    <select name="machine">
+      <% for (var i = 0; i < machines.length; i++ ) { %>
+      <option value="<%= machines[i].index %>"><%= machines[i].name %></option>
+      <% } %>
+    </select>
+    <h3>Start Time</h3>
+    <label for="date">Date</label><input name="schedule[date][start]" type="date">
+    <label for="time">Time</label><input name="schedule[time][start]" type="time">
+    <h3>End Time</h3>
+    <label for="date">Date</label><input name="schedule[date][end]" type="date">
+    <label for="time">Time</label><input name="schedule[time][end]" type="time">
+  
+    <button>Reserve</button>
+  
+  </form>
+  <h2>Schedule</h2>
+  
+  <div id="schedule">
+  
+  </div>
+  
   <script>
-    var socket = io.connect('http://localhost:3000');
-    socket.on('news', function (data) {
-      console.log(data);
-      // socket.emit('my other event', {
-      //   my: 'data'
-      // });
-    });
-  </script>
 
-<% include footer %>
+    $.ajax({
+      url: "/schedule/machine-0",
+      method: "get",
+      success: function(data) {
+
+        console.log(data)
+
+        for (var i = 0; i < data.length; i++) {
+
+          console.log(i)
+          console.log("appending...")
+          $("#schedule").append($(".schedule-block"))
+
+        }
+
+      }
+    })
+
+  </script>
+  
+  <h2>Admin Panel</h2>
+  <h3>Machines</h3>
+  <form action="">
+  
+  </form>
+  <h3>Users</h3>
+  <form action="">
+  
+  </form>
+  
+  <style>
+    h4 {
+  
+      font-weight: 400;
+  
+    }
+    .schedule-block {
+
+      background: black;
+      width: 50%;
+      height: 100px;
+
+    }
+  </style>
+
+  <div class="template">
+    <div class="schedule-block">
+
+    </div>
+  </div>
+
+</body>
+</html>
