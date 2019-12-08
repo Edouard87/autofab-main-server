@@ -1,12 +1,1 @@
-{
-    "machines": [
-        {
-            "name": "Laser Cutter",
-            "index": 0
-        },
-        {
-            "name": "Milling Machine",
-            "index": 0
-        }
-    ]
-}
+{"machines":[{"name":"Laser Cutter","index":0},{"name":"Milling Machine","index":1}]}

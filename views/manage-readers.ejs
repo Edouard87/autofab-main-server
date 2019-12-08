@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <h1>Manage Reader</h1>
+    <h2>Info</h2>
+    <p><strong>Ip: <%= reader.ip %></strong></p>
+    <p><strong>Machine: <%= reader.machine %></strong></p>
+    <h2>Actions</h2>
+    <p>Make changes to the reader remotely</p>
+    <h3>Change machine</h3>
+    <p>Change the type of machine</p>
+    <form action="/readers/pushmachine" method="post">
+        <input type="hidden" value="<%= reader.ip %>" name="ip">
+         <select name="machine">
+           <% for (var i = 0; i < machines.length; i++ ) { %>
+           <option value="<%= machines[i].index %>"><%= machines[i].name %></option>
+           <% } %>
+         </select>
+         <button>Change Machine</button>
+    </form>
+</body>
+</html>

@@ -1,8 +1,1 @@
-{
-    "users": [
-        {
-            "name": "Edouard",
-            "rfid": 12345
-        }
-    ]
-}
+{"users":[{"name":"David","rfid":"12345"},{"name":"Edouard","rfid":"123"}]}
