@@ -41,29 +41,49 @@ function isBetween(x, min, max) {
 
 }
 
+function formatDate(date) {
+
+    var dd = date.getDate();
+    var mm = date.getMonth() + 1; //January is 0!
+
+    var yyyy = date.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    var formattedDate = mm + "-" + dd + "-" + yyyy
+
+    return formattedDate;
+
+}
+
 app.get('/', (req, res) => {
 
     var machines =  JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
-    var schedules = [];
+    // var schedules = [];
     var readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
     var users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
 
-    for (var i = 0; i < machines.length; i++) {
+    // for (var i = 0; i < machines.length; i++) {
 
-        schedules.push(JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + machines[i].index + ".json", "utf-8")).schedule)
+    //     schedules.push(JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + machines[i].index + ".json", "utf-8")).schedule)
 
-    };
+    // };
 
-    res.render("index", { machines: machines, schedules: schedules, readers: readers, users: users})
+    res.render("index", { machines: machines, readers: readers, users: users})
 
 });
 
-app.get("/schedule/:machine", function(req, res) {
+app.get("/allschedules/:machine", function (req, res) {
 
     try {
 
-        var schedule = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + ".json")).schedule
-        res.send(schedule)
+        // var allSchedules = fs.readdirSync(__dirname + "/data/schedules/" + req.params.machine)
+        // var schedule = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + ".json")).schedule
+        res.send(fs.readdirSync(__dirname + "/data/schedules/" + req.params.machine))
 
     } catch(err) {
 
@@ -72,6 +92,16 @@ app.get("/schedule/:machine", function(req, res) {
     }
 
 });
+
+
+app.get("/schedule/:machine/:day", function(req, res) {
+
+    var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + "/" + req.params.day, "utf-8")).schedule
+    // console.log(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + "/" + req.params.day));
+    console.log(file)
+    res.send(file);
+
+})
 
  app.get("/readers/manage/:ip", function (req, res) {
 
@@ -147,9 +177,7 @@ app.post("/machine/new", function(req, res) {
 
     // Create the schedule for it
 
-    fs.writeFileSync(__dirname + "/data/schedules/machine-" + assignedIndex + ".json", JSON.stringify({
-        schedule: []
-    }));
+    fs.mkdirSync(__dirname + "/data/schedules/machine-" + assignedIndex);
 
     console.log(file)
 
@@ -200,37 +228,58 @@ app.post("/reserve", function(req, res) {
 
     var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
     var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
+
+    // format for date is mm/dd/yy
+
+    today = formatDate(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start))
     
-    var data = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + ".json", "utf-8"))
-    
-    
-    for (var i = 0; i < data.schedule.length; i++) {
+    try {
 
-        console.log(data.schedule.length)
+        var data = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, "utf-8"))
 
-        console.log("======== TESTING ========")
 
-        console.log(isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]))
-        console.log(isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1]))
+        for (var i = 0; i < data.schedule.length; i++) {
 
-        console.log("======== TESTING ========")
+          console.log(data.schedule.length)
 
-        if (isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]) || isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1])) {
+          console.log("======== TESTING ========")
+
+          console.log(isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]))
+          console.log(isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1]))
+
+          console.log("======== TESTING ========")
+
+          if (isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]) || isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1])) {
 
             return res.render("reservationFail.ejs")
 
-        }
+          }
 
-    };
+        };
 
-    data.schedule.push({
-      name: req.body.user,
-      time: [start, end]
-    })
-    console.log(data);
-    console.log(JSON.stringify(data))
-    fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + ".json", JSON.stringify(data));
-    res.render("reservationSuccess.ejs")
+        data.schedule.push({
+          name: req.body.user,
+          time: [start, end]
+        })
+        fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, JSON.stringify(data));
+        res.render("reservationSuccess.ejs")
+
+    } catch(err) {
+
+        // no schedule yet
+        var data = {schedule:[]};
+        data.schedule.push({
+          name: req.body.user,
+          time: [start, end]
+        })
+        fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, JSON.stringify(data));
+        res.render("reservationSuccess.ejs")
+
+    }
+
+    
+
+    
 
 });
 

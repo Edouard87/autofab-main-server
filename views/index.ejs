@@ -37,10 +37,13 @@
   
   </form>
   <h2>Schedule</h2>
-  <select id="machine-schedule" style="display:none">
+  <label for="">Machine: </label><select id="machine-schedule" style="display:none">
     <% for (var i = 0; i < machines.length; i++ ) { %>
     <option value="<%= machines[i].index %>"><%= machines[i].name %></option>
     <% } %>
+  </select>
+  <label for="">Day: </label><select name="" id="machine-schedule-day">
+
   </select>
   <div id="schedule">
   
@@ -91,46 +94,89 @@
 
         template = data;
         $("#machine-schedule").css("display","block");
-        retrieveSchedule(0);
+        getDays($("#machine-schedule").val());
         console.log(template);
 
       }
 
-    })
+    });
 
-    function retrieveSchedule(machineIndex) {
+    var startMins;
+    var endMins;
+
+    function getSchedule(machineIndex, day) {
+
+      console.log(machineIndex)
+      console.log(day.toString())
+
+      $.ajax({
+        url: "/schedule/" + "machine-" + machineIndex + "/" + day,
+        method: "get",
+        success: function(data) {
+
+          $("#schedule").empty();
+
+          for (var i = 0; i < data.length; i++) {
+
+            startMins = (new Date(data[i].time[0] * 1000 ).getHours()*60) + new Date(data[i].time[0] * 1000).getMinutes();
+            endMins = new Date(data[i].time[1] * 1000 ).getHours() + new Date(data[i].time[1] * 1000 ).getMinutes();
+
+            $("#schedule").append(Mustache.to_html(template, { name: data[i].name, startTime: new Date(data[i].time[0] * 1000), endTime: new Date(data[i].time[1] * 1000 ),
+            height: (startMins * 0.5) + "pt"}));
+
+          }
+
+        } 
+      });
+
+      
+
+    }
+
+    function getDays(machineIndex) {
 
       $("#schedule").empty();
       console.log(machineIndex)
 
       $.ajax({
-        url: "/schedule/machine-"+machineIndex,
+        url: "/allschedules/machine-"+machineIndex,
         method: "get",
         success: function (data) {
 
           console.log(data);
-
+          $("#machine-schedule-day").empty()
           for (var i = 0; i < data.length; i++) {
 
             console.log(i)
             console.log("appending...")
-            console.log(data[i].time[0])
-            $("#schedule").append(Mustache.to_html(template, { name: data[i].name, startDate: new Date(data[i].time[0] *
-            1000).getDate(), startTime: new Date(data[i].time[0] * 1000), endTime: new Date(data[i].time[1] * 1000 )}))
+            console.log(data[i])
+            $("#machine-schedule-day").append("<option val='" + data[i] + "'>" + data[i] + "</option>");
+            getSchedule(machineIndex, $("#machine-schedule-day").val());
 
           }
+
+          
 
         }
       });
 
     }
 
-    $("#machine-schedule").on("change", function() {
+    $("#machine-schedule-day").on("change", function() {
 
       console.log("changing...")
-      retrieveSchedule($(this).val());
+      getSchedule($("#machine-schedule").val(),$(this).val());
 
     })
+
+    $("#machine-schedule").on("change", function () {
+
+        console.log("changing...")
+        getDays($(this).val());
+
+      })
+
+
 
   </script>
   
