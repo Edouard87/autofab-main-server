@@ -93,6 +93,10 @@ app.get("/allschedules/:machine", function (req, res) {
 
 });
 
+app.get("/retrieve/:page", function(req, res) {
+    res.render(req.params.page);
+})
+
 
 app.get("/schedule/:machine/:day", function(req, res) {
 
