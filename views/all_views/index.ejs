@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="/components/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+  
+  <h1>Welcome to the LCC Fab Lab</h1>
+  <h2>Student Reservation</h2>
+  <form method="post" action="/reserve">
+  
+    <label for="">User</label><input required name="user" type="text"><br>
+    <label for="">Password</label><input name="password" type="password"><br>
+    <label for="">Machine</label>
+    <select name="machine">
+      <% for (var i = 0; i < machines.length; i++ ) { %>
+      <option value="<%= machines[i].index %>"><%= machines[i].name %></option>
+      <% } %>
+    </select>
+    <h3>Date</h3>
+    <label for="date">Date: </label><input required id="date" name="schedule[global][date]" type="date">
+    <h3>Start Time</h3>
+    <!-- <label for="date">Date</label><input name="schedule[date][start]" type="date"> -->
+    <label for="time">Time</label><input required id="start-time" name="schedule[time][start]" type="time">
+    <h3>End Time</h3>
+    <!-- <label for="date">Date</label><input name="schedule[date][end]" type="date"> -->
+    <label for="time">Time</label><input required id="end-time" name="schedule[time][end]" type="time">
+    <div style="display: none" class="warn">
+      <p>Error. Please make sure the end time is AFTER the start time.</p>
+    </div>
+    <br>
+    <button class="submit-reservation">Reserve</button>
+  
+  </form>
+  <h2>Schedule</h2>
+  <label for="">Machine: </label><select id="machine-schedule" style="display:none">
+    <% for (var i = 0; i < machines.length; i++ ) { %>
+    <option value="<%= machines[i].index %>"><%= machines[i].name %></option>
+    <% } %>
+  </select>
+  <label for="">Day: </label><select name="" id="machine-schedule-day">
+
+  </select>
+  <div id="schedule">
+  
+  </div>
+
+  <script>
+
+    var start;
+    var end;
+
+    function checkTimeFields() {
+
+      start = Math.floor(new Date($("#date").val() + " " + $("#start-time").val()).getTime() / 1000);
+      end = Math.floor(new Date($("#date").val() + " " + $("#end-time").val()).getTime() / 1000);
+      console.log(start);
+      console.log(end);
+      if (start >= end) {
+
+        $(".warn").fadeIn();
+        $(".submit-reservation").attr("disabled",true)
+
+      } else {
+
+        $(".warn").fadeOut();
+        $(".submit-reservation").attr("disabled", false)
+
+      }
+
+    }
+  
+    $("#start-time").on('keyup', function() {checkTimeFields()});
+    $("#end-time").on('keyup', function() {checkTimeFields()});
+
+  
+  </script>
+
+  <script src="/components/mustache.js/mustache.js"></script>
+
+  <script>
+
+    var template;
+
+    $.ajax({
+
+      url: "/templates/schedule-block.html",
+      method: "get",
+      success: function(data) {
+
+        template = data;
+        $("#machine-schedule").css("display","block");
+        getDays($("#machine-schedule").val());
+        console.log(template);
+
+      }
+
+    });
+
+    var startMins;
+    var endMins;
+
+    function getSchedule(machineIndex, day) {
+
+      console.log(machineIndex)
+      console.log(day.toString())
+
+      $.ajax({
+        url: "/schedule/" + "machine-" + machineIndex + "/" + day,
+        method: "get",
+        success: function(data) {
+
+          $("#schedule").empty();
+
+          for (var i = 0; i < data.length; i++) {
+
+            startMins = (new Date(data[i].time[0] * 1000 ).getHours()*60) + new Date(data[i].time[0] * 1000).getMinutes();
+            endMins = new Date(data[i].time[1] * 1000 ).getHours() + new Date(data[i].time[1] * 1000 ).getMinutes();
+
+            $("#schedule").append(Mustache.to_html(template, { name: data[i].name, startTime: new Date(data[i].time[0] * 1000), endTime: new Date(data[i].time[1] * 1000 ),
+            height: (startMins * 0.5) + "pt"}));
+
+          }
+
+        } 
+      });
+
+      
+
+    }
+
+    function getDays(machineIndex) {
+
+      $("#schedule").empty();
+      console.log(machineIndex)
+
+      $.ajax({
+        url: "/allschedules/machine-"+machineIndex,
+        method: "get",
+        success: function (data) {
+
+          console.log(data);
+          $("#machine-schedule-day").empty()
+          for (var i = 0; i < data.length; i++) {
+
+            console.log(i)
+            console.log("appending...")
+            console.log(data[i])
+            $("#machine-schedule-day").append("<option val='" + data[i] + "'>" + data[i] + "</option>");
+            getSchedule(machineIndex, $("#machine-schedule-day").val());
+
+          }
+
+          
+
+        }
+      });
+
+    }
+
+    $("#machine-schedule-day").on("change", function() {
+
+      console.log("changing...")
+      getSchedule($("#machine-schedule").val(),$(this).val());
+
+    })
+
+    $("#machine-schedule").on("change", function () {
+
+        console.log("changing...")
+        getDays($(this).val());
+
+      })
+
+
+
+  </script>
+  
+  <h2>Admin Panel</h2>
+  <h3>Machines</h3>
+  <form action="/machine/new" method="post">
+    <h4>Register a new machine</h4>
+    <input required type="text" name="machine">
+    <button>Create</button>
+  </form>
+  <h4>All machines</h4>
+  <table class="machines-table">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>ID</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (var i = 0; i < machines.length; i++) { %>
+        <tr>
+          <td><%= machines[i].name %></td>
+          <td><%= machines[i].index %></td>
+          <td>
+            <a href="/machine/delete/<%= machines[i].name %>">Delete</a> <br>
+            <a href="/machine/clear/<%= machines[i].index %>">Clear Schedule</a> <br>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <h3>Users</h3>
+  <p>Regsiter a new user</p>
+  <form action="/users/new" method="post">
+    <label for="">Name: </label><input type="text" name="name" id=""><br>
+    <label for="">RFID Tag: </label><input type="text" name="rfid" id=""><br>
+    <button>Register</button>
+  </form>
+  <p>All users</p>
+  <table class="machines-table">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>RFID Tag</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (var i = 0; i < users.length; i++) { %>
+      <tr>
+        <td><%= users[i].name %></td>
+        <td><%= users[i].rfid %></td>
+        <td><a href="">Manage Badges</a></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <a href="/users/deleteall">Delete all users</a>
+  <h3>Badges</h3>
+  <p>Create new badge</p>
+  <form action="">
+    <label for="">Name: </label><input type="text" name="name"><br>
+    <label for="">Image: </label><br>
+    <label for="">Description: </label><input type="text" name="description"><br>
+    <button>Create</button>
+  </form>
+  <p>All badges</p>
+  <table class="machines-table">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <td></td>
+      <td></td>
+    </tbody>
+  </table>
+  <h3>Time Restrictions</h3>
+  <p>Create new restrictions</p>
+  <form action="">
+    <p>The Fab Lab is unavailable during the following times</p>
+    <label for="">From: </label><input type="time" name="start"><br>
+    <label for="">To: </label><input type="time" name="end"><br>
+    <p>This restriction should be applied...</p>
+    <select name="type" id="restriction-type">
+      <option value="0">Every Day</option>
+      <option value="1">Repeating a specific day of the week</option>
+      <option value="2">Only on a specific day</option>
+    </select>
+    <div class="restriction-0 restriction-type-field">
+      <p>There are no additional parameters to this restriction.</p>
+    </div>
+    <div style="display: none;" class="restriction-type-field restriction-1">
+      <label for="">Select day of the week: </label>
+      <select name="" id="">
+        <option value="0">Monday</option>
+        <option value="1">Tuesday</option>
+        <option value="2">Wednesday</option>
+        <option value="3">Thursday</option>
+        <option value="4">Friday</option>
+        <option value="5">Saturday</option>
+        <option value="6">Sunday</option>
+      </select>
+    </div>
+    <div style="display: none;" class="restriction-type-field restriction-2">
+      <p>Select the only day this restriction will be applied.</p>
+      <label for="">Date: </label><input type="date"><br>
+    </div>
+    <button>Create</button>
+  </form>
+  <script>
+  
+    $("#restriction-type").on('change', function() {
+      console.log("changed...")
+
+      $(".restriction-type-field").fadeOut();
+      $(".restriction-" + $(this).val()).fadeIn();
+
+    })
+  
+  </script>
+  <h3>Connected Readers</h3>
+  <table class="machines-table">
+    <thead>
+      <tr>
+        <td>IP</td>
+        <td>Machine</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (var i = 0; i < readers.length; i++) { %>
+      <tr>
+      <td><%= readers[i].ip %></td>
+      <td><%= readers[i].machine %></td>
+      <td><a href="/readers/manage/<%= readers[i].ip%>">Manage</a></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <style>
+    h4 {
+  
+      font-weight: 400;
+  
+    }
+    .schedule-block {
+
+      background: black;
+      width: 50%;
+      /* height: 100px; */
+      padding: 10px;
+
+    }
+    .schedule-block h2 {
+      color: white;
+    }
+    .schedule-block p {
+      color: white;
+    }
+
+    .machines-table {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+
+    .machines-table td {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+
+  </style>
+
+</body>
+</html>

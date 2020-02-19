@@ -60,12 +60,21 @@ function formatDate(date) {
 
 }
 
-app.get('/', (req, res) => {
-
+function loadFile(req,res,next) {
     var machines =  JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
     // var schedules = [];
     var readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
     var users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
+    next()
+}
+
+app.get("/page/:name", function(req, res) {
+    res.render(req.params.name)
+});
+
+app.get('/', loadFile() ,function(req, res) => {
+
+    
 
     // for (var i = 0; i < machines.length; i++) {
 
