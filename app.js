@@ -31,6 +31,11 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Stuff for user auth
+
+const store = require("data-store")(__dirname + "/data/accounts.json");
+const jwt = require("jsonwebtoken");
+
 function isBetween(x, min, max) {
 
     if (x >= min && x <= max ) {
@@ -61,29 +66,77 @@ function formatDate(date) {
 }
 
 function loadFile(req,res,next) {
-    var machines =  JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
-    // var schedules = [];
-    var readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
-    var users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
+    req.machines =  JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
+    req.readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
+    req.users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
     next()
 }
 
-app.get("/page/:name", function(req, res) {
+function authenticate(req, res, next) {
+  const token = req.cookies.auth
+  if (token == undefined) {
+    res.redirect("/welcome")
+  } else {
+    try {
+      const result = jwt.verify(token, 'shhhhh');
+      req.decoded = result;
+      next();
+    } catch (err) {
+      res.redirect("/welcome")
+    }
+  }
+}
+
+app.get("/page/:name", loadFile, authenticate, function (req, res) {
     res.render(req.params.name)
 });
 
-app.get('/', loadFile() ,function(req, res) => {
+app.get('/', loadFile, authenticate, function (req, res) {
 
-    
+    res.render("account", {info: req})
 
-    // for (var i = 0; i < machines.length; i++) {
+});
 
-    //     schedules.push(JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + machines[i].index + ".json", "utf-8")).schedule)
+app.get('/welcome', loadFile, function (req, res) {
 
-    // };
+  res.render("welcome", {info: req})
 
-    res.render("index", { machines: machines, readers: readers, users: users})
+});
 
+app.get("/login", function(req, res) {
+    res.render("login")
+});
+
+app.post("/login", function(req, res) {
+    console.log(store.get(req.body.username))
+    console.log("===" + req.body.password)
+    store.get(req.body.username).password
+    if (store.has(req.body.username)) {
+      if (req.body.password == store.get(req.body.username).password) {
+        const token = jwt.sign({
+          user: req.body.username
+        }, 'shhhhh');
+        res.cookie("auth", token);
+        res.redirect("/")
+      } else {
+        return res.send("bad_pass")
+      }
+    } else {
+      return res.send("no_user")
+    }
+})
+
+app.get("/new", function(req, res) {
+    res.render("create_account")
+})
+
+app.post("/createaccount", function(req, res) {
+    store.set(req.body.username, {
+      username: req.body.username,
+      password: req.body.password,
+      permission: 0
+    });
+    res.redirect('/')
 });
 
 app.get("/allschedules/:machine", function (req, res) {
