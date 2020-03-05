@@ -31,6 +31,14 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// User auth stuff
+
+const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken");
+
+mongoose.connect("mongodb://localhost/autofab")
+
+
 function isBetween(x, min, max) {
 
     if (x >= min && x <= max ) {
@@ -61,10 +69,10 @@ function formatDate(date) {
 }
 
 function loadFile(req,res,next) {
-    var machines =  JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
+    req.machines =  JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
     // var schedules = [];
-    var readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
-    var users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
+    req.readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
+    req.users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
     next()
 }
 
@@ -72,7 +80,7 @@ app.get("/page/:name", function(req, res) {
     res.render(req.params.name)
 });
 
-app.get('/', loadFile() ,function(req, res) => {
+app.get('/', loadFile ,function(req, res) {
 
     
 
@@ -82,7 +90,7 @@ app.get('/', loadFile() ,function(req, res) => {
 
     // };
 
-    res.render("index", { machines: machines, readers: readers, users: users})
+    res.render("index", {req: req})
 
 });
 

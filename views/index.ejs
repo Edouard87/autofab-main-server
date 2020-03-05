@@ -14,8 +14,8 @@
 
     <label for="">Machine</label>
     <select name="machine">
-      <% for (var i = 0; i < machines.length; i++ ) { %>
-      <option value="<%= machines[i].index %>"><%= machines[i].name %></option>
+      <% for (var i = 0; i < req.machines.length; i++ ) { %>
+      <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
       <% } %>
     </select>
     <h3>Date</h3>
@@ -34,8 +34,8 @@
   </form>
   <h2>Schedule</h2>
   <label for="">Machine: </label><select id="machine-schedule" style="display:none">
-    <% for (var i = 0; i < machines.length; i++ ) { %>
-    <option value="<%= machines[i].index %>"><%= machines[i].name %></option>
+    <% for (var i = 0; i < req.machines.length; i++ ) { %>
+    <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
     <% } %>
   </select>
   <label for="">Day: </label><select name="" id="machine-schedule-day">
