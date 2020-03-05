@@ -31,12 +31,29 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// User auth stuff
+//mongodb stuff
 
 const mongoose = require('mongoose');
-const jwt = require("jsonwebtoken");
 
 mongoose.connect("mongodb://localhost/autofab")
+
+var userSchema = mongoose.Schema({
+  username: String,
+  password: String,
+  permission: Number
+})
+
+var userModel = mongoose.model("User", userSchema);
+
+// User auth stuff
+
+const jwt = require("jsonwebtoken");
+
+const crypto = require("crypto");
+
+function hmacPass(password) {
+  return crypto.createHmac("sha256", "edtgfaufruwe").update(password).digest("hex")
+}
 
 
 function isBetween(x, min, max) {
@@ -75,6 +92,22 @@ function loadFile(req,res,next) {
     req.users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
     next()
 }
+
+app.post("/register", function(req, res) {
+  userModel.create({
+    username: req.body.username,
+    password: hmacPass(req.body.password),
+    permission: 0
+  });
+  res.send("User created!")
+})
+
+app.post("/login", function(req, res) {
+
+  console.log(req.body.username)
+  console.log(userModel.find({username: "ed"}))
+
+});
 
 app.get("/page/:name", function(req, res) {
     res.render(req.params.name)
@@ -297,10 +330,6 @@ app.post("/reserve", function(req, res) {
         res.render("reservationSuccess.ejs")
 
     }
-
-    
-
-    
 
 });
 
