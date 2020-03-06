@@ -68,7 +68,9 @@ function authenticate(req, res, next) {
   } else {
     try {
       const result = jwt.verify(token, 'hgfhjnbghj');
+      console.log(result)
       req.decoded = result;
+      console.log(req.decoded)
       next();
     } catch (err) {
       res.render("login", {
@@ -154,7 +156,7 @@ app.post("/login", function(req, res) {
       if (hmacPass(req.body.password) == data.password) {
         // password is correct
         const token = jwt.sign({
-          user: req.body.username
+          username: req.body.username
         }, 'hgfhjnbghj');
         res.cookie("auth", token);
         res.redirect("/")
@@ -195,8 +197,6 @@ app.get("/allschedules/:machine", function (req, res) {
 
     try {
 
-        // var allSchedules = fs.readdirSync(__dirname + "/data/schedules/" + req.params.machine)
-        // var schedule = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + ".json")).schedule
         res.send(fs.readdirSync(__dirname + "/data/schedules/" + req.params.machine))
 
     } catch(err) {
@@ -208,18 +208,29 @@ app.get("/allschedules/:machine", function (req, res) {
 });
 
 
-app.get("/schedule/:machine/:day", function(req, res) {
+app.get("/schedule/:machine/:day", authenticate, function(req, res) {
 
     var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + "/" + req.params.day, "utf-8")).schedule
-    // console.log(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + "/" + req.params.day));
-    console.log(file)
     res.send(file);
 
 })
 
- app.get("/readers/manage/:ip", function (req, res) {
+app.get("/myreservations/:machine/:day", authenticate, function(req, res) {
 
-   console.log("opening...")
+  var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + "/" + req.params.day, "utf-8")).schedule
+  var returnData = []
+
+  for (var i = 0; i < file.length; i++) {
+    if (file[i].username == req.decoded.username) {
+      returnData.push(file[i])
+    }
+  }
+
+  res.send(returnData);
+
+})
+
+ app.get("/readers/manage/:ip", function (req, res) {
 
    var readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json", "utf-8")).readers;
    var reader;
@@ -338,7 +349,9 @@ app.get("/machine/clear/:machine", function(req, res) {
 
 })
 
-app.post("/reserve", function(req, res) {
+app.post("/reserve", authenticate, function(req, res) {
+
+  console.log("User is: " + req.decoded.username)
 
     var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
     var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
@@ -351,17 +364,7 @@ app.post("/reserve", function(req, res) {
 
         var data = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, "utf-8"))
 
-
         for (var i = 0; i < data.schedule.length; i++) {
-
-          console.log(data.schedule.length)
-
-          console.log("======== TESTING ========")
-
-          console.log(isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]))
-          console.log(isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1]))
-
-          console.log("======== TESTING ========")
 
           if (isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]) || isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1])) {
 
@@ -372,8 +375,8 @@ app.post("/reserve", function(req, res) {
         };
 
         data.schedule.push({
-          name: req.body.user,
-          time: [start, end]
+          time: [start, end],
+          username: req.decoded.username
         })
         fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, JSON.stringify(data));
         res.render("reservationSuccess.ejs")
@@ -383,8 +386,8 @@ app.post("/reserve", function(req, res) {
         // no schedule yet
         var data = {schedule:[]};
         data.schedule.push({
-          name: req.body.user,
-          time: [start, end]
+          time: [start, end],
+          username: req.decoded.username
         })
         fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, JSON.stringify(data));
         res.render("reservationSuccess.ejs")
