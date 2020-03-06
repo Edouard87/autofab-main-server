@@ -64,20 +64,22 @@ function authenticate(req, res, next) {
   console.log("authenticating...")
   const token = req.cookies.auth
   if (token == undefined) {
-    res.render("login_form")
+    res.render("login", {iserr: false, err: null})
   } else {
     try {
       const result = jwt.verify(token, 'hgfhjnbghj');
       req.decoded = result;
       next();
     } catch (err) {
-      res.render("login_form")
+      res.render("login", {
+        iserr: false,
+        err: null
+      })
     }
   }
 }
 
 // other stuff
-
 
 function isBetween(x, min, max) {
 
@@ -137,13 +139,17 @@ app.post("/register", function(req, res) {
     permission: req.body.permission,
     rfid: req.body.rfid
   });
-  res.send("User created!")
+  res.redirect("/")
 })
 
 app.post("/login", function(req, res) {
   userModel.findOne({username: req.body.username}).then(data => {
     if (data == null) {
       // no user exists
+      res.render("login", {
+        iserr: true,
+        err: "No user with that username exists. If you think this is an error, please ask your teacher to register you as a student."
+      });
     } else {
       if (hmacPass(req.body.password) == data.password) {
         // password is correct
@@ -154,6 +160,10 @@ app.post("/login", function(req, res) {
         res.redirect("/")
       } else {
         // password is incorrect
+        res.render("login", {
+          iserr: true,
+          err: "The password you have supplied is incorrect."
+        });
       }
     }
   })
@@ -167,7 +177,7 @@ app.get("/page/:name", authenticate, function(req, res) {
 
 app.get('/', authenticate, function(req, res) {
 
-    res.render("account", {info: req})
+    res.render("account", {req: req})
 
 });
 
@@ -179,38 +189,6 @@ app.get('/welcome', loadFile, function (req, res) {
 
 app.get("/login", function(req, res) {
     res.render("login")
-});
-
-app.post("/login", function(req, res) {
-    console.log(store.get(req.body.username))
-    console.log("===" + req.body.password)
-    store.get(req.body.username).password
-    if (store.has(req.body.username)) {
-      if (req.body.password == store.get(req.body.username).password) {
-        const token = jwt.sign({
-          user: req.body.username
-        }, 'shhhhh');
-        res.cookie("auth", token);
-        res.redirect("/")
-      } else {
-        return res.send("bad_pass")
-      }
-    } else {
-      return res.send("no_user")
-    }
-})
-
-app.get("/new", function(req, res) {
-    res.render("create_account")
-})
-
-app.post("/createaccount", function(req, res) {
-    store.set(req.body.username, {
-      username: req.body.username,
-      password: req.body.password,
-      permission: 0
-    });
-    res.redirect('/')
 });
 
 app.get("/allschedules/:machine", function (req, res) {

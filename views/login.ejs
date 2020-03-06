@@ -19,10 +19,36 @@
         <form method="post" action="/login">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
-            <div class="form-group"><input class="form-control" type="text" name="email" placeholder="Email"></div>
+            <div class="form-group"><input class="form-control" type="text" name="username" placeholder="Username"></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a class="forgot" href="#">Forgot your email or password?</a></form>
     </div>
+    <% if (iserr == true) { %>
+        <div class="error-msg">
+            <h1>Error</h1>
+            <p> <%= err %></p>
+        </div>
+    <% } %>
+    <style>
+        .error-msg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #d60f2d;
+            padding: 10px;
+            border: 2px solid white;
+            width: 100vw;
+        }
+
+        .error-msg * {
+            color: white;
+            text-align: center;
+        }
+
+        .error-msg p {
+            margin: 10px 20px;
+        }
+    </style>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
