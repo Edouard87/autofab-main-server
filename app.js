@@ -40,7 +40,8 @@ mongoose.connect("mongodb://localhost/autofab")
 var userSchema = mongoose.Schema({
   username: String,
   password: String,
-  permission: Number
+  permission: Number,
+  rfid: String
 })
 
 var userModel = mongoose.model("User", userSchema);
@@ -54,6 +55,24 @@ const crypto = require("crypto");
 function hmacPass(password) {
   return crypto.createHmac("sha256", "edtgfaufruwe").update(password).digest("hex")
 }
+
+function authenticate(req, res, next) {
+  console.log("authenticating...")
+  const token = req.cookies.auth
+  if (token == undefined) {
+    res.render("login_form")
+  } else {
+    try {
+      const result = jwt.verify(token, 'hgfhjnbghj');
+      req.decoded = result;
+      next();
+    } catch (err) {
+      res.render("login_form")
+    }
+  }
+}
+
+// other stuff
 
 
 function isBetween(x, min, max) {
@@ -90,30 +109,59 @@ function loadFile(req,res,next) {
     // var schedules = [];
     req.readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
     req.users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
-    next()
+    userModel.find({}).then(data => {
+      var accounts = []
+      for (var i = 0; i < data.length; i++) {
+        accounts.push({
+          username: data[i].username,
+          permission: data[i].permission,
+          rfid: data[i].rfid
+        })
+      }
+      req.accounts = accounts
+      console.log(accounts)
+      next()
+      });
 }
+
+app.all("*", loadFile)
 
 app.post("/register", function(req, res) {
   userModel.create({
     username: req.body.username,
     password: hmacPass(req.body.password),
-    permission: 0
+    permission: req.body.permission,
+    rfid: req.body.rfid
   });
   res.send("User created!")
 })
 
 app.post("/login", function(req, res) {
-
-  console.log(req.body.username)
-  console.log(userModel.find({username: "ed"}))
-
+  userModel.findOne({username: req.body.username}).then(data => {
+    if (data == null) {
+      // no user exists
+    } else {
+      if (hmacPass(req.body.password) == data.password) {
+        // password is correct
+        const token = jwt.sign({
+          user: req.body.username
+        }, 'hgfhjnbghj');
+        res.cookie("auth", token);
+        res.redirect("/")
+      } else {
+        // password is incorrect
+      }
+    }
+  })
 });
 
-app.get("/page/:name", function(req, res) {
-    res.render(req.params.name)
+app.get("/page/:name", authenticate, function(req, res) {
+    res.render(req.params.name, {
+      req: req
+    })
 });
 
-app.get('/', loadFile ,function(req, res) {
+app.get('/', authenticate, function(req, res) {
 
     
 
@@ -142,10 +190,6 @@ app.get("/allschedules/:machine", function (req, res) {
     }
 
 });
-
-app.get("/retrieve/:page", function(req, res) {
-    res.render(req.params.page);
-})
 
 
 app.get("/schedule/:machine/:day", function(req, res) {

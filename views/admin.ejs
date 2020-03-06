@@ -24,15 +24,48 @@
       </tr>
     </thead>
     <tbody>
-      <% for (var i = 0; i < machines.length; i++) { %>
+      <% for (var i = 0; i < req.machines.length; i++) { %>
         <tr>
-          <td><%= machines[i].name %></td>
-          <td><%= machines[i].index %></td>
+          <td><%= req.machines[i].name %></td>
+          <td><%= req.machines[i].index %></td>
           <td>
-            <a href="/machine/delete/<%= machines[i].name %>">Delete</a> <br>
-            <a href="/machine/clear/<%= machines[i].index %>">Clear Schedule</a> <br>
+            <a href="/machine/delete/<%= req.machines[i].name %>">Delete</a> <br>
+            <a href="/machine/clear/<%= req.machines[i].index %>">Clear Schedule</a> <br>
           </td>
         </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <h3>Accounts</h3>
+  <h4>New User Account</h4>
+  <form action="/register" method="post">
+    <input name="username" type="text" placeholder="Username">
+    <input name="password" type="password" placeholder="Password">
+    <input name="rfid" type="text" placeholder="RFID tag">
+    <label>Permission:</label><select name="permission">
+      <option value="-1">Admin</option>
+      <option value="0">Student</option>
+    </select>
+    <button>Create User</button>
+  </form>
+  <h4>All User Accounts</h4>
+  <table class="machines-table">
+    <thead>
+      <tr>
+        <td>Username</td>
+        <td>RFID Tag</td>
+        <td>Permission</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (var i = 0; i < req.accounts.length; i++) { %>
+      <tr>
+        <td><%= req.accounts[i].username %></td>
+        <td><%= req.accounts[i].rfid %></td>
+        <td><%= req.accounts[i].permission %></td>
+        <td><a>Delete</a></td>
+      </tr>
       <% } %>
     </tbody>
   </table>
@@ -53,10 +86,10 @@
       </tr>
     </thead>
     <tbody>
-      <% for (var i = 0; i < users.length; i++) { %>
+      <% for (var i = 0; i < req.users.length; i++) { %>
       <tr>
-        <td><%= users[i].name %></td>
-        <td><%= users[i].rfid %></td>
+        <td><%= req.users[i].name %></td>
+        <td><%= req.users[i].rfid %></td>
         <td><a href="">Manage Badges</a></td>
       </tr>
       <% } %>
@@ -138,11 +171,11 @@
       </tr>
     </thead>
     <tbody>
-      <% for (var i = 0; i < readers.length; i++) { %>
+      <% for (var i = 0; i < req.readers.length; i++) { %>
       <tr>
-      <td><%= readers[i].ip %></td>
-      <td><%= readers[i].machine %></td>
-      <td><a href="/readers/manage/<%= readers[i].ip%>">Manage</a></td>
+      <td><%= req.readers[i].ip %></td>
+      <td><%= req.readers[i].machine %></td>
+      <td><a href="/readers/manage/<%= req.readers[i].ip%>">Manage</a></td>
       </tr>
       <% } %>
     </tbody>
