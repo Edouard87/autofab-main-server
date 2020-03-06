@@ -34,7 +34,50 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Stuff for user auth
 
 const store = require("data-store")(__dirname + "/data/accounts.json");
+
+//mongodb stuff
+
+const mongoose = require('mongoose');
+
+mongoose.connect("mongodb://localhost/autofab")
+
+var userSchema = mongoose.Schema({
+  username: String,
+  password: String,
+  permission: Number,
+  rfid: String
+})
+
+var userModel = mongoose.model("User", userSchema);
+
+// User auth stuff
+
 const jwt = require("jsonwebtoken");
+
+const crypto = require("crypto");
+
+function hmacPass(password) {
+  return crypto.createHmac("sha256", "edtgfaufruwe").update(password).digest("hex")
+}
+
+function authenticate(req, res, next) {
+  console.log("authenticating...")
+  const token = req.cookies.auth
+  if (token == undefined) {
+    res.render("login_form")
+  } else {
+    try {
+      const result = jwt.verify(token, 'hgfhjnbghj');
+      req.decoded = result;
+      next();
+    } catch (err) {
+      res.render("login_form")
+    }
+  }
+}
+
+// other stuff
+
 
 function isBetween(x, min, max) {
 
@@ -67,31 +110,62 @@ function formatDate(date) {
 
 function loadFile(req,res,next) {
     req.machines =  JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
+    // var schedules = [];
     req.readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
     req.users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
-    next()
+    userModel.find({}).then(data => {
+      var accounts = []
+      for (var i = 0; i < data.length; i++) {
+        accounts.push({
+          username: data[i].username,
+          permission: data[i].permission,
+          rfid: data[i].rfid
+        })
+      }
+      req.accounts = accounts
+      console.log(accounts)
+      next()
+      });
 }
 
-function authenticate(req, res, next) {
-  const token = req.cookies.auth
-  if (token == undefined) {
-    res.redirect("/welcome")
-  } else {
-    try {
-      const result = jwt.verify(token, 'shhhhh');
-      req.decoded = result;
-      next();
-    } catch (err) {
-      res.redirect("/welcome")
+app.all("*", loadFile)
+
+app.post("/register", function(req, res) {
+  userModel.create({
+    username: req.body.username,
+    password: hmacPass(req.body.password),
+    permission: req.body.permission,
+    rfid: req.body.rfid
+  });
+  res.send("User created!")
+})
+
+app.post("/login", function(req, res) {
+  userModel.findOne({username: req.body.username}).then(data => {
+    if (data == null) {
+      // no user exists
+    } else {
+      if (hmacPass(req.body.password) == data.password) {
+        // password is correct
+        const token = jwt.sign({
+          user: req.body.username
+        }, 'hgfhjnbghj');
+        res.cookie("auth", token);
+        res.redirect("/")
+      } else {
+        // password is incorrect
+      }
     }
-  }
-}
-
-app.get("/page/:name", loadFile, authenticate, function (req, res) {
-    res.render(req.params.name)
+  })
 });
 
-app.get('/', loadFile, authenticate, function (req, res) {
+app.get("/page/:name", authenticate, function(req, res) {
+    res.render(req.params.name, {
+      req: req
+    })
+});
+
+app.get('/', authenticate, function(req, res) {
 
     res.render("account", {info: req})
 
@@ -154,10 +228,6 @@ app.get("/allschedules/:machine", function (req, res) {
     }
 
 });
-
-app.get("/retrieve/:page", function(req, res) {
-    res.render(req.params.page);
-})
 
 
 app.get("/schedule/:machine/:day", function(req, res) {
@@ -342,10 +412,6 @@ app.post("/reserve", function(req, res) {
         res.render("reservationSuccess.ejs")
 
     }
-
-    
-
-    
 
 });
 
