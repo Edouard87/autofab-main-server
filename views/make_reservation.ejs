@@ -8,25 +8,62 @@
 </head>
 <body>
     <%- include ../partials/navbar.ejs %>
-    <form method="post" action="/reserve">
-      <label for="">Machine</label>
-      <select name="machine">
-        <% for (var i = 0; i < req.machines.length; i++ ) { %>
-        <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
+    <div class="page-content">
+        <h1>Make a new reservation</h1>
+        <% if (err != null) { %>
+            <div class="warn">
+                <h1>Error</h1>
+                <p> <%= err %></p>
+            </div>
         <% } %>
-      </select>
-      <h3>Date</h3>
-      <label for="date">Date: </label><input required id="date" name="schedule[global][date]" type="date">
-      <h3>Start Time</h3>
-      <label for="time">Time</label><input required id="start-time" name="schedule[time][start]" type="time">
-      <h3>End Time</h3>
-      <label for="time">Time</label><input required id="end-time" name="schedule[time][end]" type="time">
-      <div style="display: none" class="warn">
-        <p>Error. Please make sure the end time is AFTER the start time.</p>
-      </div>
-      <br>
-      <button class="submit-reservation">Reserve</button>
-    </form>
+        <form method="post" action="/reserve">
+            <p>I want to make a reservation for the </p>
+          <select name="machine">
+            <% for (var i = 0; i < req.machines.length; i++ ) { %>
+            <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
+            <% } %>
+          </select>
+          <p> on </p>
+          <input required id="date" name="schedule[global][date]" type="date">
+          <p> from </p>
+          <input required id="start-time" name="schedule[time][start]" type="time">
+          <p> to </p>
+          <input required id="end-time" name="schedule[time][end]" type="time">
+          <button style="display: block !important" class="submit-reservation btn btn-lg btn-outline-primary">Reserve</button>
+        </form>
+        <div style="display: none" class="warn">
+          <h2>Attention</h2>
+          <p>Before you make this resrevation, please make sure the end time is <b>after</b> the start time.</p>
+        </div>
+    </div>
+    <style>
+        .page-content form * {
+            display: inline;
+            font-size: 15px;
+        }
+        .submit-reservation {
+            margin-top: 30px;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        .warn {
+            background: #bf0a0a;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .warn * {
+            color: white;
+            text-align: center;
+        }
+
+        .warn p {
+            margin-bottom: 0;
+        }
+    </style>
     <script>
       var start;
       var end;

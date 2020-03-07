@@ -61,16 +61,13 @@ function hmacPass(password) {
 }
 
 function authenticate(req, res, next) {
-  console.log("authenticating...")
   const token = req.cookies.auth
   if (token == undefined) {
     res.render("login", {iserr: false, err: null})
   } else {
     try {
       const result = jwt.verify(token, 'hgfhjnbghj');
-      console.log(result)
       req.decoded = result;
-      console.log(req.decoded)
       next();
     } catch (err) {
       res.render("login", {
@@ -85,9 +82,9 @@ function authenticate(req, res, next) {
 
 function isBetween(x, min, max) {
 
-    if (x > min && x < max ) {
+    if (x >= min && x <= max ) {
 
-        return true
+      return true
 
     } else {
       
@@ -352,9 +349,13 @@ app.get("/machine/clear/:machine", function(req, res) {
 
 })
 
-app.post("/reserve", authenticate, function(req, res) {
+app.get("/reserve", authenticate, (req, res) => {
 
-  console.log("User is: " + req.decoded.username)
+  res.render("make_reservation", {req: req, iserr: false, err: null, status: null})
+
+});
+
+app.post("/reserve", authenticate, function(req, res) {
 
     var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
     var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
@@ -363,37 +364,66 @@ app.post("/reserve", authenticate, function(req, res) {
 
     today = formatDate(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start))
     
+    function saveData(data) {
+      data.schedule.push({
+        time: [start, end],
+        username: req.decoded.username
+      })
+      fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, JSON.stringify(data));
+      res.render("make_reservation", {
+        req: req,
+        err: null
+      });
+    }
+
     try {
 
         var data = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, "utf-8"))
+
+      var check = 0;
 
         for (var i = 0; i < data.schedule.length; i++) {
 
           if (isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]) || isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1])) {
 
-            return res.render("reservationFail.ejs")
+            console.log("*** 1 ***")
+
+            if (end == data.schedule[i].time[0] && start != data.schedule[i].time[1]) {
+              console.log("*** ok-1 ***")
+              console.log(data.schedule[i])
+              check++
+              // return saveData(data)
+            } else if (start == data.schedule[i].time[1] && end != data.schedule[i].time[0]) {
+              console.log("*** ok-2 ***")
+              // return saveData(data)
+              check++
+            }
+            console.log("*** no ***")
+
+          } else {
+
+            check++
 
           }
 
         };
 
-        data.schedule.push({
-          time: [start, end],
-          username: req.decoded.username
-        })
-        fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, JSON.stringify(data));
-        res.render("reservationSuccess.ejs")
+        if (check == data.schedule.length) {
+          // a time slot is available
+          saveData(data)
+        } else {
+          // a time slot is not available
+          return res.render("make_reservation", {
+            req: req,
+            err: "The time you requested is not available (i.e. another resrevation was made by somebody else). Please try another time."
+          })
+        }
 
     } catch(err) {
 
         // no schedule yet
         var data = {schedule:[]};
-        data.schedule.push({
-          time: [start, end],
-          username: req.decoded.username
-        })
-        fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, JSON.stringify(data));
-        res.render("reservationSuccess.ejs")
+        saveData(data)
 
     }
 
