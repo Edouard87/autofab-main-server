@@ -85,11 +85,15 @@ function authenticate(req, res, next) {
 
 function isBetween(x, min, max) {
 
-    if (x >= min && x <= max ) {
+    if (x > min && x < max ) {
 
         return true
 
-    } else {return false}
+    } else {
+      
+      return false
+    
+    }
 
 }
 
@@ -179,15 +183,13 @@ app.get("/page/:name", authenticate, function(req, res) {
 
 app.get('/', authenticate, function(req, res) {
 
-    res.render("account", {req: req})
+  res.render("home", {req: req})
 
 });
 
-app.get('/welcome', loadFile, function (req, res) {
-
-  res.render("welcome", {info: req})
-
-});
+app.get("/calendar", authenticate, function(req, res) {
+  res.render("calendar", {req: req})
+})
 
 app.get("/login", function(req, res) {
     res.render("login")
@@ -211,6 +213,7 @@ app.get("/allschedules/:machine", function (req, res) {
 app.get("/schedule/:machine/:day", authenticate, function(req, res) {
 
     var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + "/" + req.params.day, "utf-8")).schedule
+    console.log(file)
     res.send(file);
 
 })

@@ -5,80 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script src="/components/jquery/dist/jquery.min.js"></script>
+  <%- include ../partials/global-header.ejs %>
 </head>
 <body>
   
-  <h2>Student Reservation</h2>
-  <form method="post" action="/reserve">
-
-    <label for="">Machine</label>
-    <select name="machine">
-      <% for (var i = 0; i < req.machines.length; i++ ) { %>
-      <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
-      <% } %>
-    </select>
-    <h3>Date</h3>
-    <label for="date">Date: </label><input required id="date" name="schedule[global][date]" type="date">
-    <h3>Start Time</h3>
-    <!-- <label for="date">Date</label><input name="schedule[date][start]" type="date"> -->
-    <label for="time">Time</label><input required id="start-time" name="schedule[time][start]" type="time">
-    <h3>End Time</h3>
-    <!-- <label for="date">Date</label><input name="schedule[date][end]" type="date"> -->
-    <label for="time">Time</label><input required id="end-time" name="schedule[time][end]" type="time">
-    <div style="display: none" class="warn">
-      <p>Error. Please make sure the end time is AFTER the start time.</p>
-    </div>
-    <br>
-    <button class="submit-reservation">Reserve</button>
-  </form>
-  <h2>Schedule</h2>
-  <label for="">Machine: </label><select id="machine-schedule" style="display:none">
+<%- include ../partials/navbar.ejs %>
+<div class="page-content">
+  <h1>Calendar</h1>
+  <p class="calendar-text"> Display reservations for the </p>
+  <select class="calendar-dropdown" id="machine-schedule" style="display:none">
     <% for (var i = 0; i < req.machines.length; i++ ) { %>
     <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
     <% } %>
   </select>
-  <label for="">Day: </label><select name="" id="machine-schedule-day">
+  <p class="calendar-text"> on </p>
+  <select class="calendar-dropdown" name="" id="machine-schedule-day">
 
   </select>
-  <div id="schedule">
-  
-  </div>
-
-  <script>
-
-    var start;
-    var end;
-
-    function checkTimeFields() {
-
-      start = Math.floor(new Date($("#date").val() + " " + $("#start-time").val()).getTime() / 1000);
-      end = Math.floor(new Date($("#date").val() + " " + $("#end-time").val()).getTime() / 1000);
-      console.log(start);
-      console.log(end);
-      if (start >= end) {
-
-        $(".warn").fadeIn();
-        $(".submit-reservation").attr("disabled",true)
-
-      } else {
-
-        $(".warn").fadeOut();
-        $(".submit-reservation").attr("disabled", false)
-
-      }
-
-    }
-  
-    $("#start-time").on('keyup', function() {checkTimeFields()});
-    $("#end-time").on('keyup', function() {checkTimeFields()});
-
-  
-  </script>
+  <div id="schedule"></div>
+  <div id="schedule-lines"></div>
+</div>
 
   <script src="/components/mustache.js/mustache.js"></script>
 
   <script>
+
+    // Important variables
+    // 1 minute = 0.5 pt
+
+    var scale = 0.5
+    var markerHeight = 24;
+
+    // Format pages
+
+    $("#schedule").css("height",(24*60*scale) + "px")
+    $("#schedule-lines").css("height",(24*60*scale) + "px")
+
+    for (var i = 0; i < 24; i++) {
+      $("#schedule-lines").append("<hr class='time-divider' style='" + "top: " + (i*60*scale) + "px" + "'>")
+      $("#schedule-lines").append("<p class='hour-marker' style='" + "top: " + ((i*60*scale) - (markerHeight * 0.5)) + "px" + "' height='" + markerHeight + "px" + "'>" + i + "</p>")
+    }
+
+    function leadingZeroes(num) {
+
+      var digits = num.toString().length;
+      if (digits < 2) {
+        return ("0" + num).slice(-2);
+      } else {
+        return num
+      }
+
+    }
 
     var template;
 
@@ -89,9 +66,8 @@
       success: function(data) {
 
         template = data;
-        $("#machine-schedule").css("display","block");
+        $("#machine-schedule").css("display","inline");
         getDays($("#machine-schedule").val());
-        console.log(template);
 
       }
 
@@ -112,14 +88,39 @@
 
           $("#schedule").empty();
 
+          var startDate;
+          var endDate;
+          var displayText;
+
           for (var i = 0; i < data.length; i++) {
 
-            startMins = (new Date(data[i].time[0] * 1000 ).getHours()*60) + new Date(data[i].time[0] * 1000).getMinutes();
-            endMins = new Date(data[i].time[1] * 1000 ).getHours() + new Date(data[i].time[1] * 1000 ).getMinutes();
+            startMins = (new Date(data[i].time[0] * 1000).getHours()*60) + new Date(data[i].time[0] * 1000).getMinutes();
+            endMins = (new Date(data[i].time[1] * 1000).getHours()*60) + new Date(data[i].time[1] * 1000 ).getMinutes();
+            duration = endMins-startMins;
 
-            $("#schedule").append(Mustache.to_html(template, { name: data[i].name, startTime: new Date(data[i].time[0] * 1000), endTime: new Date(data[i].time[1] * 1000 ),
-            height: (startMins * 0.5) + "pt"}));
+            if (duration >= 60) {
+              displayText = "block"
+            } else {
+              displayText = "none"
+            }
 
+            startDate = new Date(data[i].time[0] * 1000)
+            endDate = new Date(data[i].time[1] * 1000)
+
+            console.log(duration)
+
+            // scale
+
+            $("#schedule").append(Mustache.to_html(template, { 
+              name: data[i].name, 
+              startHours: startDate.getHours(),
+              startMinutes: leadingZeroes(startDate.getMinutes()),
+              endHours: endDate.getHours(),
+              endMinutes: leadingZeroes(endDate.getMinutes()),
+              height: (duration * scale) + "px",
+              top: (startMins * scale) + "px",
+              displayText: displayText
+            }));
           }
 
         } 
@@ -171,8 +172,6 @@
         getDays($(this).val());
 
       })
-
-
 
   </script>
 

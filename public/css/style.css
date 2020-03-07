@@ -1,8 +1,64 @@
 body {
-  padding: 50px;
+  /* padding: 50px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.page-content {
+  margin: 0 40px;
+}
+
+.schedule-block {
+  background: black;
+  position: absolute;
+  width: 40vw;
+  right: 0;
+  /* z-index: 3; */
+  /* top: 0; */
+}
+
+.schedule-block * {
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+#schedule {
+  position: absolute;
+  top: 250px;
+  width: 50vw;
+  z-index: 2;
+}
+
+#schedule-lines {
+  position: absolute;
+  top: 250px;
+  z-index: 1;
+  width: 50vw;
+}
+
+#schedule-lines hr {
+  z-index: 3;
+  /* border-color: white; */
+}
+
+.calendar-dropdown,
+.calendar-text {
+  display: inline;
+}
+
+.time-divider {
+  margin: 0;
+  position: absolute;
+  width: 50vw;
+}
+
+.hour-marker {
+  position: absolute;
+  z-index: 4;
+  background-color: white;
+  width: 15px;
 }

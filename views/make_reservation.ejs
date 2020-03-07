@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include ../partials/global-header.ejs %>
+</head>
+<body>
+    <%- include ../partials/navbar.ejs %>
+    <form method="post" action="/reserve">
+      <label for="">Machine</label>
+      <select name="machine">
+        <% for (var i = 0; i < req.machines.length; i++ ) { %>
+        <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
+        <% } %>
+      </select>
+      <h3>Date</h3>
+      <label for="date">Date: </label><input required id="date" name="schedule[global][date]" type="date">
+      <h3>Start Time</h3>
+      <label for="time">Time</label><input required id="start-time" name="schedule[time][start]" type="time">
+      <h3>End Time</h3>
+      <label for="time">Time</label><input required id="end-time" name="schedule[time][end]" type="time">
+      <div style="display: none" class="warn">
+        <p>Error. Please make sure the end time is AFTER the start time.</p>
+      </div>
+      <br>
+      <button class="submit-reservation">Reserve</button>
+    </form>
+    <script>
+      var start;
+      var end;
+
+      function checkTimeFields() {
+
+        start = Math.floor(new Date($("#date").val() + " " + $("#start-time").val()).getTime() / 1000);
+        end = Math.floor(new Date($("#date").val() + " " + $("#end-time").val()).getTime() / 1000);
+        console.log(start);
+        console.log(end);
+        if (start >= end) {
+
+          $(".warn").fadeIn();
+          $(".submit-reservation").attr("disabled", true)
+
+        } else {
+
+          $(".warn").fadeOut();
+          $(".submit-reservation").attr("disabled", false)
+
+        }
+
+      }
+
+      $("#start-time").on('keyup', function () {
+        checkTimeFields()
+      });
+      $("#end-time").on('keyup', function () {
+        checkTimeFields()
+      });
+    </script>
+</body>
+</html>
