@@ -206,15 +206,6 @@ app.post("/reserve", function(req, res) {
     
     for (var i = 0; i < data.schedule.length; i++) {
 
-        console.log(data.schedule.length)
-
-        console.log("======== TESTING ========")
-
-        console.log(isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]))
-        console.log(isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1]))
-
-        console.log("======== TESTING ========")
-
         if (isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]) || isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1])) {
 
             return res.render("reservationFail.ejs")
@@ -227,8 +218,6 @@ app.post("/reserve", function(req, res) {
       name: req.body.user,
       time: [start, end]
     })
-    console.log(data);
-    console.log(JSON.stringify(data))
     fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + ".json", JSON.stringify(data));
     res.render("reservationSuccess.ejs")
 
