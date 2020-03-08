@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include ../partials/global-header.ejs %>
+</head>
+<body>
+    <%- include ../partials/navbar.ejs %>
+    <div class="page-content">
+        <h1>Manage Your Reservations</h1>
+        <p>See reservations for the </p><select id="machine-schedule">
+          <% for (var i = 0; i < req.machines.length; i++ ) { %>
+          <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
+          <% } %>
+        </select>
+        <p> on </p><input class="myreservations-date" type="date">
+        <table class="myreservations-table">
+            <thead>
+                <tr>
+                    <td>Start</td>
+                    <td>End</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div style="display: none" class="dialogue-box msg-box">
+          <h2>Loading...</h2>
+          <p>Loading...</p>
+        </div>
+    </div>
+    <style>
+        thead * {
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+        }
+        table {
+            margin-top: 10px;
+        }
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        p, input {
+            display: inline;
+        }
+    </style>
+    <script src="/components/mustache.js/mustache.js"></script>
+    <script src="/js/reservations.js"></script>
+
+    <script>
+      var template;
+
+      $.ajax({
+
+        url: "/templates/myreservations-row.mustache",
+        method: "get",
+        success: function (data) {
+
+          template = data;
+          $("#machine-schedule").css("display", "inline");
+          console.log(template);
+
+        }
+
+      });
+
+      var startMins;
+      var endMins;
+
+      function getSchedule(machineIndex, day) {
+
+        $.ajax({
+          url: "/myreservations/" + "machine-" + machineIndex + "/" + day,
+          method: "get",
+          success: function (data) {
+
+            $(".myreservations-table tbody").empty();
+
+            for (var i = 0; i < data.length; i++) {
+
+                var startEpoch = data[i].time[0]
+                var endEpoch = data[i].time[1]
+
+                var startDate = new Date(startEpoch * 1000)
+                var endDate = new Date(endEpoch * 1000)
+
+              startMins = (new Date(data[i].time[0] * 1000).getHours() * 60) + new Date(data[i].time[0] * 1000)
+                .getMinutes();
+              endMins = new Date(data[i].time[1] * 1000).getHours() + new Date(data[i].time[1] * 1000)
+                .getMinutes();
+
+              $(".myreservations-table tbody").append(Mustache.to_html(template, {
+                startHours: startDate.getHours(),
+                startMinutes: leadingZeroes(startDate.getMinutes()),
+                endHours: endDate.getHours(),
+                endMinutes: leadingZeroes(endDate.getMinutes()),
+                start: startEpoch,
+                end: endEpoch
+              }));
+
+            }
+
+          },
+          statusCode: {
+            500: function() {
+                $(".msg-box").css("display","block")
+                $(".msg-box").addClass("warn")
+                $(".msg-box h2").html("Please Note")
+                $(".msg-box p").html("The table is blank as you have no reservations for that day")
+            }
+          }
+        });
+
+        }
+
+        function formatDate(date) {
+            var selectedDate = date.split("-")
+            var yr = selectedDate[0]
+            var month = selectedDate[1]
+            var day = selectedDate[2]
+            return month + "-" + day + "-" + yr
+        }
+
+      $(".myreservations-date").on("change", function () {
+        
+        getSchedule($("#machine-schedule").val(),formatDate($(this).val()));
+
+      })
+
+      function deleteReservation(start, end) {
+         $.ajax({
+            url: "/reservations/delete",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify({
+                start: start,
+                end: end,
+                machine: $("#machine-schedule").val(),
+                date: formatDate($(".myreservations-date").val()),
+            }),
+            dataType:'json'
+         });
+      }
+    </script>
+</body>
+</html>

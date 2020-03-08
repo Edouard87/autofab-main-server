@@ -28,14 +28,14 @@ a {
 
 #schedule {
   position: absolute;
-  top: 250px;
+  top: 300px;
   width: 50vw;
   z-index: 2;
 }
 
 #schedule-lines {
   position: absolute;
-  top: 250px;
+  top: 300px;
   z-index: 1;
   width: 50vw;
 }

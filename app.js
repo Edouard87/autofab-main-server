@@ -78,6 +78,14 @@ function authenticate(req, res, next) {
   }
 }
 
+function checkAdmin(req, res, next) {
+  if (req.decoded.permission == -1) {
+    return next()
+  } else {
+    return res.redirect("/")
+  }
+}
+
 // other stuff
 
 function isBetween(x, min, max) {
@@ -157,7 +165,8 @@ app.post("/login", function(req, res) {
       if (hmacPass(req.body.password) == data.password) {
         // password is correct
         const token = jwt.sign({
-          username: req.body.username
+          username: req.body.username,
+          permission: data.permission
         }, 'hgfhjnbghj');
         res.cookie("auth", token);
         res.redirect("/")
@@ -172,6 +181,13 @@ app.post("/login", function(req, res) {
   })
 });
 
+app.get("/logout", (req, res) => {
+
+  res.clearCookie("auth");
+  res.redirect("/")
+
+});
+
 app.get("/page/:name", authenticate, function(req, res) {
     res.render(req.params.name, {
       req: req
@@ -179,8 +195,31 @@ app.get("/page/:name", authenticate, function(req, res) {
 });
 
 app.get('/', authenticate, function(req, res) {
-
   res.render("home", {req: req})
+});
+
+app.get("/account", authenticate, (req, res) => {
+  res.render("myaccount",{req:req, status: null});
+});
+
+app.get("/admin", authenticate, checkAdmin, (req, res) => {
+  res.render("admin", {req:req});
+})
+
+app.post("/changepassword", authenticate, (req, res) => {
+
+  userModel.findOneAndUpdate({username: req.decoded.username},{password: hmacPass(req.body.password)}).then(() => {
+    res.render("myaccount",{req:req,status: {type: "success", header: "Success", msg: "Your password has been changed"}})
+  }).catch(err => {
+    res.render("myaccount", {
+      req: req,
+      status: {
+        type: "err",
+        header: "Error",
+        msg: "An unknown error occured. Please seek assistance; there may be an error in your account."
+      }
+    })
+  })
 
 });
 
@@ -360,6 +399,9 @@ app.post("/reserve", authenticate, function(req, res) {
     var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
     var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
 
+  console.log(start)
+  console.log(end)
+
     // format for date is mm/dd/yy
 
     today = formatDate(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start))
@@ -370,10 +412,11 @@ app.post("/reserve", authenticate, function(req, res) {
         username: req.decoded.username
       })
       fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, JSON.stringify(data));
-      res.render("make_reservation", {
-        req: req,
-        err: null
-      });
+      res.send({
+        type: "success",
+        header: "Success",
+        msg: "Your reservation has been made"
+      })
     }
 
     try {
@@ -413,9 +456,10 @@ app.post("/reserve", authenticate, function(req, res) {
           saveData(data)
         } else {
           // a time slot is not available
-          return res.render("make_reservation", {
-            req: req,
-            err: "The time you requested is not available (i.e. another resrevation was made by somebody else). Please try another time."
+          return res.send({
+            type: "err",
+            header: "Reservation Failed",
+            msg: "The time you requested is not available (i.e. another reservation was made by somebody else). Please try another time."
           })
         }
 
@@ -426,6 +470,30 @@ app.post("/reserve", authenticate, function(req, res) {
         saveData(data)
 
     }
+
+});
+
+app.get("/reservations/all",authenticate,(req, res) => {
+  res.render("myreservations",{req: req})
+});
+
+app.post("/reservations/delete", authenticate, (req, res) => {
+
+  var fileDir = __dirname + "/data/schedules/machine-" + req.body.machine + "/" + req.body.date
+
+  var {schedule} = JSON.parse(fs.readFileSync(fileDir, "utf-8"));
+  
+  console.log(schedule)
+
+  for (var i = 0; i < schedule.length; i++) {
+    if (schedule[i].time[0] == req.body.start && schedule[i].time[1] == req.body.end && schedule[i].username == req.decoded.username) {
+      schedule.splice(i, 1)
+    }
+  }
+
+  console.log(schedule)
+
+  fs.writeFileSync(fileDir, JSON.stringify(schedule));
 
 });
 

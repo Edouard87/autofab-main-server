@@ -7,15 +7,17 @@
         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false"
             href="#">Account</a>
           <div class="dropdown-menu" role="menu"></a><a
-              class="dropdown-item" role="presentation" href="#">My Reservations</a><a class="dropdown-item"
-              role="presentation" href="#">Account Settings</a></div>
+              class="dropdown-item" role="presentation" href="/reservations/all">My Reservations</a><a
+                class="dropdown-item"
+              role="presentation" href="/account">Account Settings</a></div>
         </li>
         <li class="nav-item" role="presentation"><a class="nav-link" href="/calendar">Calendar</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/reserve">Make a Reservation</a></li>
-        
+        <% if (req.decoded.permission == -1) { %>
+         <li class="nav-item" role="presentation"><a class="nav-link" href="/admin">Admin Panel</a></li>
+        <% } %>
       </ul><span class="navbar-text actions"> <a class="login" href="#">Welcome <b><%= req.decoded.username %></b></a><a
           class="btn btn-light action-button"
-          role="button" href="#">Log Out</a></span>
+          role="button" href="/logout">Log Out</a></span>
     </div>
   </div>
 </nav>

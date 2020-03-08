@@ -1,0 +1,82 @@
+
+<form style="display: none" class="reservation-form" method="post" action="/reserve">
+    <p>I want to make a reservation for the </p>
+    <select name="machine">
+    <% for (var i = 0; i < req.machines.length; i++ ) { %>
+    <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
+    <% } %>
+    </select>
+    <p> on </p>
+    <input required id="date" name="schedule[global][date]" type="date">
+    <p> from </p>
+    <input required id="start-time" name="schedule[time][start]" type="time">
+    <p> to </p>
+    <input required id="end-time" name="schedule[time][end]" type="time">
+    <button style="display: block !important" class="submit-reservation btn btn-lg btn-outline-primary">Reserve</button>
+    <div style="display: none" class="dialogue-box warn">
+      <h2>Warning</h2>
+      <p>Before you make this reservation, please make sure the end time is <b>after</b> the start time.</p>
+    </div>
+    <div style="display: none" class="dialogue-box recieve-status">
+      <h2>Loading...</h2>
+      <p>Loading...</p>
+    </div>
+</form>
+<style>
+    form[action="/reserve"] {
+        margin-top: 20px;
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid #007bff;
+        /* text-align: center; */
+    }
+
+    form[action="/reserve"] input,
+    form[action="/reserve"] p {
+        display: inline;
+        font-size: 15px;
+    }
+
+  form[action="/reserve"] button {
+      display: block !important;
+  }
+
+  .submit-reservation {
+    margin-top: 30px;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+  }
+</style>
+<script>
+  var start;
+  var end;
+
+  function checkTimeFields() {
+
+    start = Math.floor(new Date($("#date").val() + " " + $("#start-time").val()).getTime() / 1000);
+    end = Math.floor(new Date($("#date").val() + " " + $("#end-time").val()).getTime() / 1000);
+    console.log(start);
+    console.log(end);
+    if (start >= end) {
+
+      $(".warn").fadeIn();
+      $(".submit-reservation").attr("disabled", true)
+
+    } else {
+
+      $(".warn").fadeOut();
+      $(".submit-reservation").attr("disabled", false)
+
+    }
+
+  }
+
+  $("#start-time").on('keyup', function () {
+    checkTimeFields()
+  });
+  $("#end-time").on('keyup', function () {
+    checkTimeFields()
+  });
+</script>

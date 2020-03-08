@@ -9,26 +9,81 @@
 </head>
 <body>
   
-<%- include ../partials/navbar.ejs %>
-<div class="page-content">
-  <h1>Calendar</h1>
-  <p class="calendar-text"> Display reservations for the </p>
-  <select class="calendar-dropdown" id="machine-schedule" style="display:none">
-    <% for (var i = 0; i < req.machines.length; i++ ) { %>
-    <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
-    <% } %>
-  </select>
-  <p class="calendar-text"> on </p>
-  <select class="calendar-dropdown" name="" id="machine-schedule-day">
+  <%- include ../partials/navbar.ejs %>
+  <div class="page-content">
+    <h1>Calendar</h1>
+    <p class="calendar-text"> Display reservations for the </p>
+    <select class="calendar-dropdown" id="machine-schedule" style="display:none">
+      <% for (var i = 0; i < req.machines.length; i++ ) { %>
+      <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
+      <% } %>
+    </select>
+    <p class="calendar-text"> on </p>
+    <select class="calendar-dropdown" name="" id="machine-schedule-day"></select>
+    <button class="btn btn-outline-success reserve-collapsable">Make a new Reservation</button>
+    <%- include ../partials/reservation.ejs %>
+    <div class="calendar-panel" id="schedule"></div>
+    <div class="calendar-panel" id="schedule-lines"></div>
+  </div>
 
-  </select>
-  <div id="schedule"></div>
-  <div id="schedule-lines"></div>
-</div>
+  <style>
+    .reserve-collapsable {
+      display: block !important;
+      margin-top: 10px;
+    }
+  </style>
 
   <script src="/components/mustache.js/mustache.js"></script>
+  <script src="/js/reservations.js"></script>
 
   <script>
+
+    // submitting the form
+
+    $('form[action="/reserve"]').submit(function(ev) {
+      ev.preventDefault();
+      $.ajax({
+        url: $(this).attr("action"),
+        method: $(this).attr("method"),
+        data: $(this).serialize(),
+        success: data => {
+          console.log(data)
+          $(".recieve-status").css("display","block")
+          $(".recieve-status").removeClass("success")
+          $(".recieve-status").removeClass("err")
+          $(".recieve-status").addClass(data.type)
+          $(".recieve-status h2").html(data.header)
+          $(".recieve-status p").html(data.msg)
+          getSchedule($("#machine-schedule").val(),$("#machine-schedule-day").val());
+        }
+      })
+    });
+    
+
+    // collapsable menu
+
+    var buttonState = 1;
+
+    $(".reserve-collapsable").trigger("click")
+
+    $(".reserve-collapsable").on("click", (event) => {
+
+      if (buttonState == 0) {
+        $(".reservation-form").css("display","none");
+        $(".reserve-collapsable").html("Make a new Reservation")
+        $(".calendar-panel").css("top","300px")
+        buttonState++
+      } else {
+        $(".reservation-form").css("display","block");
+        $(".reserve-collapsable").html("Cancel")
+        $(".calendar-panel").css("top","550px")
+        buttonState--
+      }
+
+      
+      // console.log(this)
+
+    });
 
     // Important variables
     // 1 minute = 0.5 pt
@@ -44,17 +99,6 @@
     for (var i = 0; i < 24; i++) {
       $("#schedule-lines").append("<hr class='time-divider' style='" + "top: " + (i*60*scale) + "px" + "'>")
       $("#schedule-lines").append("<p class='hour-marker' style='" + "top: " + ((i*60*scale) - (markerHeight * 0.5)) + "px" + "' height='" + markerHeight + "px" + "'>" + i + "</p>")
-    }
-
-    function leadingZeroes(num) {
-
-      var digits = num.toString().length;
-      if (digits < 2) {
-        return ("0" + num).slice(-2);
-      } else {
-        return num
-      }
-
     }
 
     var template;

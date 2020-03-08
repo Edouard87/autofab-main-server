@@ -4,27 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%- include ../partials/global-header.ejs %>
     <title>Document</title>
 </head>
 <body>
-    <h2>Admin Panel</h2>
-    <h3>Machines</h3>
+  <%- include ../partials/navbar.ejs %>
+  <div class="page-content">
+    <h1>Main Admin Panel</h1>
+    <h2>Machines</h2>
     <form action="/machine/new" method="post">
-    <h4>Register a new machine</h4>
-    <input required type="text" name="machine">
-    <button>Create</button>
-  </form>
-  <h4>All machines</h4>
-  <table class="machines-table">
-    <thead>
-      <tr>
-        <td>Name</td>
-        <td>ID</td>
-        <td>Action</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% for (var i = 0; i < req.machines.length; i++) { %>
+      <h4>Register a new machine</h4>
+      <input required type="text" name="machine">
+      <button>Create</button>
+    </form>
+    <h4>All machines</h4>
+    <table class="machines-table">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>ID</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i = 0; i < req.machines.length; i++) { %>
         <tr>
           <td><%= req.machines[i].name %></td>
           <td><%= req.machines[i].index %></td>
@@ -33,153 +36,153 @@
             <a href="/machine/clear/<%= req.machines[i].index %>">Clear Schedule</a> <br>
           </td>
         </tr>
-      <% } %>
-    </tbody>
-  </table>
-  <h3>Accounts</h3>
-  <h4>New User Account</h4>
-  <form action="/register" method="post">
-    <input name="username" type="text" placeholder="Username">
-    <input name="password" type="password" placeholder="Password">
-    <input name="rfid" type="text" placeholder="RFID tag">
-    <label>Permission:</label><select name="permission">
-      <option value="-1">Admin</option>
-      <option value="0">Student</option>
-    </select>
-    <button>Create User</button>
-  </form>
-  <h4>All User Accounts</h4>
-  <table class="machines-table">
-    <thead>
-      <tr>
-        <td>Username</td>
-        <td>RFID Tag</td>
-        <td>Permission</td>
-        <td>Action</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% for (var i = 0; i < req.accounts.length; i++) { %>
-      <tr>
-        <td><%= req.accounts[i].username %></td>
-        <td><%= req.accounts[i].rfid %></td>
-        <td><%= req.accounts[i].permission %></td>
-        <td><a>Delete</a></td>
-      </tr>
-      <% } %>
-    </tbody>
-  </table>
-  <h3>Users</h3>
-  <p>Regsiter a new user</p>
-  <form action="/users/new" method="post">
-    <label for="">Name: </label><input type="text" name="name" id=""><br>
-    <label for="">RFID Tag: </label><input type="text" name="rfid" id=""><br>
-    <button>Register</button>
-  </form>
-  <p>All users</p>
-  <table class="machines-table">
-    <thead>
-      <tr>
-        <td>Name</td>
-        <td>RFID Tag</td>
-        <td>Action</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% for (var i = 0; i < req.users.length; i++) { %>
-      <tr>
-        <td><%= req.users[i].name %></td>
-        <td><%= req.users[i].rfid %></td>
-        <td><a href="">Manage Badges</a></td>
-      </tr>
-      <% } %>
-    </tbody>
-  </table>
-  <a href="/users/deleteall">Delete all users</a>
-  <h3>Badges</h3>
-  <p>Create new badge</p>
-  <form action="">
-    <label for="">Name: </label><input type="text" name="name"><br>
-    <label for="">Image: </label><br>
-    <label for="">Description: </label><input type="text" name="description"><br>
-    <button>Create</button>
-  </form>
-  <p>All badges</p>
-  <table class="machines-table">
-    <thead>
-      <tr>
-        <td>Name</td>
-        <td>Action</td>
-      </tr>
-    </thead>
-    <tbody>
-      <td></td>
-      <td></td>
-    </tbody>
-  </table>
-  <h3>Time Restrictions</h3>
-  <p>Create new restrictions</p>
-  <form action="">
-    <p>The Fab Lab is unavailable during the following times</p>
-    <label for="">From: </label><input type="time" name="start"><br>
-    <label for="">To: </label><input type="time" name="end"><br>
-    <p>This restriction should be applied...</p>
-    <select name="type" id="restriction-type">
-      <option value="0">Every Day</option>
-      <option value="1">Repeating a specific day of the week</option>
-      <option value="2">Only on a specific day</option>
-    </select>
-    <div class="restriction-0 restriction-type-field">
-      <p>There are no additional parameters to this restriction.</p>
-    </div>
-    <div style="display: none;" class="restriction-type-field restriction-1">
-      <label for="">Select day of the week: </label>
-      <select name="" id="">
-        <option value="0">Monday</option>
-        <option value="1">Tuesday</option>
-        <option value="2">Wednesday</option>
-        <option value="3">Thursday</option>
-        <option value="4">Friday</option>
-        <option value="5">Saturday</option>
-        <option value="6">Sunday</option>
+        <% } %>
+      </tbody>
+    </table>
+    <h3>Accounts</h3>
+    <h4>New User Account</h4>
+    <form action="/register" method="post">
+      <input name="username" type="text" placeholder="Username">
+      <input name="password" type="password" placeholder="Password">
+      <input name="rfid" type="text" placeholder="RFID tag">
+      <label>Permission:</label><select name="permission">
+        <option value="-1">Admin</option>
+        <option value="0">Student</option>
       </select>
-    </div>
-    <div style="display: none;" class="restriction-type-field restriction-2">
-      <p>Select the only day this restriction will be applied.</p>
-      <label for="">Date: </label><input type="date"><br>
-    </div>
-    <button>Create</button>
-  </form>
-  <script>
-  
-    $("#restriction-type").on('change', function() {
-      console.log("changed...")
+      <button>Create User</button>
+    </form>
+    <h4>All User Accounts</h4>
+    <table class="machines-table">
+      <thead>
+        <tr>
+          <td>Username</td>
+          <td>RFID Tag</td>
+          <td>Permission</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i = 0; i < req.accounts.length; i++) { %>
+        <tr>
+          <td><%= req.accounts[i].username %></td>
+          <td><%= req.accounts[i].rfid %></td>
+          <td><%= req.accounts[i].permission %></td>
+          <td><a>Delete</a></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <h1>Beta Features</h1>
+    <h3>Users</h3>
+    <p>Regsiter a new user</p>
+    <form action="/users/new" method="post">
+      <label for="">Name: </label><input type="text" name="name" id=""><br>
+      <label for="">RFID Tag: </label><input type="text" name="rfid" id=""><br>
+      <button>Register</button>
+    </form>
+    <p>All users</p>
+    <table class="machines-table">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>RFID Tag</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i = 0; i < req.users.length; i++) { %>
+        <tr>
+          <td><%= req.users[i].name %></td>
+          <td><%= req.users[i].rfid %></td>
+          <td><a href="">Manage Badges</a></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <a href="/users/deleteall">Delete all users</a>
+    <h3>Badges</h3>
+    <p>Create new badge</p>
+    <form action="">
+      <label for="">Name: </label><input type="text" name="name"><br>
+      <label for="">Image: </label><br>
+      <label for="">Description: </label><input type="text" name="description"><br>
+      <button>Create</button>
+    </form>
+    <p>All badges</p>
+    <table class="machines-table">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <td></td>
+        <td></td>
+      </tbody>
+    </table>
+    <h3>Time Restrictions</h3>
+    <p>Create new restrictions</p>
+    <form action="">
+      <p>The Fab Lab is unavailable during the following times</p>
+      <label for="">From: </label><input type="time" name="start"><br>
+      <label for="">To: </label><input type="time" name="end"><br>
+      <p>This restriction should be applied...</p>
+      <select name="type" id="restriction-type">
+        <option value="0">Every Day</option>
+        <option value="1">Repeating a specific day of the week</option>
+        <option value="2">Only on a specific day</option>
+      </select>
+      <div class="restriction-0 restriction-type-field">
+        <p>There are no additional parameters to this restriction.</p>
+      </div>
+      <div style="display: none;" class="restriction-type-field restriction-1">
+        <label for="">Select day of the week: </label>
+        <select name="" id="">
+          <option value="0">Monday</option>
+          <option value="1">Tuesday</option>
+          <option value="2">Wednesday</option>
+          <option value="3">Thursday</option>
+          <option value="4">Friday</option>
+          <option value="5">Saturday</option>
+          <option value="6">Sunday</option>
+        </select>
+      </div>
+      <div style="display: none;" class="restriction-type-field restriction-2">
+        <p>Select the only day this restriction will be applied.</p>
+        <label for="">Date: </label><input type="date"><br>
+      </div>
+      <button>Create</button>
+    </form>
+    <script>
+      $("#restriction-type").on('change', function () {
+        console.log("changed...")
 
-      $(".restriction-type-field").fadeOut();
-      $(".restriction-" + $(this).val()).fadeIn();
+        $(".restriction-type-field").fadeOut();
+        $(".restriction-" + $(this).val()).fadeIn();
 
-    })
-  
-  </script>
-  <h3>Connected Readers</h3>
-  <table class="machines-table">
-    <thead>
-      <tr>
-        <td>IP</td>
-        <td>Machine</td>
-        <td>Action</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% for (var i = 0; i < req.readers.length; i++) { %>
-      <tr>
-      <td><%= req.readers[i].ip %></td>
-      <td><%= req.readers[i].machine %></td>
-      <td><a href="/readers/manage/<%= req.readers[i].ip%>">Manage</a></td>
-      </tr>
-      <% } %>
-    </tbody>
-  </table>
+      })
+    </script>
+    <h3>Connected Readers</h3>
+    <table class="machines-table">
+      <thead>
+        <tr>
+          <td>IP</td>
+          <td>Machine</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i = 0; i < req.readers.length; i++) { %>
+        <tr>
+          <td><%= req.readers[i].ip %></td>
+          <td><%= req.readers[i].machine %></td>
+          <td><a href="/readers/manage/<%= req.readers[i].ip%>">Manage</a></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
   <style>
     h4 {
   
