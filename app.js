@@ -206,6 +206,16 @@ app.get("/admin", authenticate, checkAdmin, (req, res) => {
   res.render("admin", {req:req});
 })
 
+app.get("/accounts/delete/:username", authenticate, checkAdmin, (req, res) => {
+  userModel.findOneAndDelete({username: req.params.username}).then(() => {
+    res.render("admin",{req:req})
+  }).catch((err) => {
+    res.render("admin", {
+      req: req
+    })
+  });
+});
+
 app.post("/changepassword", authenticate, (req, res) => {
 
   userModel.findOneAndUpdate({username: req.decoded.username},{password: hmacPass(req.body.password)}).then(() => {
@@ -231,7 +241,7 @@ app.get("/login", function(req, res) {
     res.render("login")
 });
 
-app.get("/allschedules/:machine", function (req, res) {
+app.get("/allschedules/:machine", authenticate, function (req, res) {
 
     try {
 
@@ -304,7 +314,7 @@ app.get("/myreservations/:machine/:day", authenticate, function(req, res) {
 
  });
 
-app.post("/machine/new", function(req, res) {
+app.post("/machine/new", authenticate, checkAdmin, function(req, res) {
 
     var file = JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8"));
     var index = -1;
@@ -349,7 +359,7 @@ app.post("/machine/new", function(req, res) {
 
 });
 
-app.get("/machine/delete/:machine", function(req, res) {
+app.get("/machine/delete/:machine", authenticate, checkAdmin, function (req, res) {
 
     // Remove from machines directory
 
@@ -379,7 +389,7 @@ app.get("/machine/delete/:machine", function(req, res) {
 
 });
 
-app.get("/machine/clear/:machine", function(req, res) {
+app.get("/machine/clear/:machine", authenticate, checkAdmin, function (req, res) {
 
     var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + req.params.machine + ".json", "utf-8"));
     file.schedule.length = 0;

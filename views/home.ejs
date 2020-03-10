@@ -12,15 +12,15 @@
         <h1>Welcome to AutoFAB</h1>
         <p>Using this app, easily reserve machines in advance for ultimate convenience and total peace of mind.</p>
         <% if (req.decoded.permission == -1) { %>
-            <button class="btn btn-lg btn-outline-primary">Admin Panel</button>
+            <button onclick='openPage("/admin")' class="btn btn-lg btn-outline-primary">Admin Panel</button>
             <p>You are using an <b>admin</b> account. The admin Panel holds all of the <b>Administrative Tools</b> you
               will need to make sure the Fab Lab runs correctly.</p>
         <% } %>
-        <button class="btn btn-lg btn-outline-primary">Calendar</button>
+        <button onclick='openPage("/calendar")' class="btn btn-lg btn-outline-primary">Calendar</button>
         <p>Use the <b>Calendar</b> to view the current reservations for any machine.</p>
-        <button class="btn btn-lg btn-outline-primary">My Reservations</button>
+        <button onclick='openPage("/reservations/all")' class="btn btn-lg btn-outline-primary">My Reservations</button>
         <p>Press <b>My Reservations</b> to view all active reservations made to your name.</p>
-        <button class="btn btn-lg btn-outline-primary">Account Settings</button>
+        <button onclick='openPage("/account")' class="btn btn-lg btn-outline-primary">Account Settings</button>
         <p>Take a look at <b>Account Settings</b> to manage your account (i.e. change your password).</p>
 
         <style>
@@ -31,6 +31,11 @@
                 color: white;
             }
         </style>
+        <script>
+            function openPage(page) {
+                location.href = page
+            }
+        </script>
     </div>
 </body>
 </html>

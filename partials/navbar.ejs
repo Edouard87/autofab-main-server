@@ -15,7 +15,7 @@
         <% if (req.decoded.permission == -1) { %>
          <li class="nav-item" role="presentation"><a class="nav-link" href="/admin">Admin Panel</a></li>
         <% } %>
-      </ul><span class="navbar-text actions"> <a class="login" href="#">Welcome <b><%= req.decoded.username %></b></a><a
+      </ul><span class="navbar-text actions"> <a class="login" href="/account">Welcome <b><%= req.decoded.username %></b></a><a
           class="btn btn-light action-button"
           role="button" href="/logout">Log Out</a></span>
     </div>

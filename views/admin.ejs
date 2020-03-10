@@ -67,7 +67,7 @@
           <td><%= req.accounts[i].username %></td>
           <td><%= req.accounts[i].rfid %></td>
           <td><%= req.accounts[i].permission %></td>
-          <td><a>Delete</a></td>
+          <td><a href="/accounts/delete/<%= req.accounts[i].username %>">Delete</a></td>
         </tr>
         <% } %>
       </tbody>
