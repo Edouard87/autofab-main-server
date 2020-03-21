@@ -41,7 +41,9 @@ const mongoose = require('mongoose');
 
 mongoose.connect("mongodb://localhost/autofab")
 
-var userSchema = mongoose.Schema({
+// Users
+
+var userSchema = new mongoose.Schema({
   username: String,
   password: String,
   permission: Number,
@@ -49,6 +51,27 @@ var userSchema = mongoose.Schema({
 })
 
 var userModel = mongoose.model("User", userSchema);
+
+// Machines
+
+var machineSchema = new mongoose.Schema({
+  name: String,
+  type: String
+})
+
+var machines = mongoose.model("machine",machineSchema)
+
+// Reservations
+
+var reservationSchema = new mongoose.Schema({
+  start: Number,
+  end: Number,
+  date: String,
+  machine: String,
+  username: String
+})
+
+var reservations = mongoose.model("reservation",reservationSchema)
 
 // User auth stuff
 
@@ -122,23 +145,16 @@ function formatDate(date) {
 }
 
 function loadFile(req,res,next) {
-    req.machines =  JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
-    // var schedules = [];
-    req.readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
-    req.users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
-    userModel.find({}).then(data => {
-      var accounts = []
-      for (var i = 0; i < data.length; i++) {
-        accounts.push({
-          username: data[i].username,
-          permission: data[i].permission,
-          rfid: data[i].rfid
-        })
-      }
-      req.accounts = accounts
-      console.log(accounts)
-      next()
-      });
+
+  Promise.all([userModel.find({}), machines.find({})]).then((values) => {
+    req.accounts = values[0]
+    req.users = values[0]
+    req.machines = values[1]
+    req.readers = []
+    console.log(req.machines)
+    next()
+  })
+    
 }
 
 app.all("*", loadFile)
@@ -256,10 +272,13 @@ app.get("/allschedules/:machine", authenticate, function (req, res) {
 });
 
 
-app.get("/schedule/:machine/:day", authenticate, function(req, res) {
+app.get("/schedule/:id/:day", authenticate, function(req, res) {
+
+  console.log(req.params.day)
+
+  // reservations.findOne({})
 
     var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + "/" + req.params.day, "utf-8")).schedule
-    console.log(file)
     res.send(file);
 
 })
@@ -316,76 +335,20 @@ app.get("/myreservations/:machine/:day", authenticate, function(req, res) {
 
 app.post("/machine/new", authenticate, checkAdmin, function(req, res) {
 
-    var file = JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8"));
-    var index = -1;
-    for (var i = 0; i < file.machines.length; i++) {
-
-        console.log(req.body.machine)
-        console.log(file.machines[i].name)
-
-        if (req.body.machine == file.machines[i].name) {
-
-            return res.send("that name already exists")
-
-        }
-
-        if (index < file.machines[i].index) {
-
-            index = file.machines[i].index
-
-        }
-
-    }
-
-    // Assign the index
-
-    var assignedIndex = index+1
-
-    // Create the machine
-
-    file.machines.push({
-        "name": req.body.machine,
-        "index": assignedIndex
-    })
-    fs.writeFileSync(__dirname + "/data/machines.json", JSON.stringify(file))
-
-    // Create the schedule for it
-
-    fs.mkdirSync(__dirname + "/data/schedules/machine-" + assignedIndex);
-
-    console.log(file)
-
+    machines.create({
+      name: req.body.name,
+      type: req.body.type
+    }).catch(err => console.log(err));
     res.redirect("/")
 
 });
 
-app.get("/machine/delete/:machine", authenticate, checkAdmin, function (req, res) {
+app.get("/machine/delete/:id", authenticate, checkAdmin, function (req, res) {
 
-    // Remove from machines directory
-
-    console.log("Deleting...")
-
-    var index;
-
-    var file = JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8"));
-    console.log(file)
-    for (var i = 0; i < file.machines.length; i++) {
-
-        console.log("searching...")
-        console.log(req.params.machine)
-
-        if (file.machines[i].name == req.params.machine) {
-            // Remove schedule
-            fs.unlinkSync(__dirname + "/data/schedules/machine-" + file.machines[i].index + ".json")
-            // Remove from machines database
-            file.machines.splice(i, 1);
-            fs.writeFileSync(__dirname + "/data/machines.json", JSON.stringify(file))
-            return res.redirect("/")
-        }
-
-    }
-
-    res.send("An error occured")
+  machines.findById(req.params.id).then(data => console.log("Data: ", data))
+  machines.findByIdAndRemove(req.params.id).exec().then((err, data) => {
+    res.redirect("/")
+  })
 
 });
 
@@ -404,82 +367,68 @@ app.get("/reserve", authenticate, (req, res) => {
 
 });
 
-app.post("/reserve", authenticate, function(req, res) {
+app.post("/reservations/new", authenticate, function(req, res) {
 
-    var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
-    var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
+  var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
+  var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
 
-  console.log(start)
-  console.log(end)
+  // find the date of the reservation in mm-dd-yyyy
 
-    // format for date is mm/dd/yy
+  var selectedDate = req.body.schedule.global.date.split("-")
+  var mm = selectedDate[1]
+  var dd = selectedDate[2]
+  var yyyy = selectedDate[0]
+  selectedDate = mm + "-" + dd + "-" + yyyy
 
-    today = formatDate(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start))
-    
-    function saveData(data) {
-      data.schedule.push({
-        time: [start, end],
-        username: req.decoded.username
-      })
-      fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, JSON.stringify(data));
-      res.send({
-        type: "success",
-        header: "Success",
-        msg: "Your reservation has been made"
-      })
-    }
+  console.log("date is " + selectedDate)
 
-    try {
 
-        var data = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + "/" + today, "utf-8"))
 
+  reservations.find({}).then((data) => {
       var check = 0;
 
-        for (var i = 0; i < data.schedule.length; i++) {
+      for (var i = 0; i < data.length; i++) {
 
-          if (isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]) || isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1])) {
+        if (isBetween(start, data[i].start, data[i].end) || isBetween(end, data[i].start, data[i].end)) {
 
-            console.log("*** 1 ***")
-
-            if (end == data.schedule[i].time[0] && start != data.schedule[i].time[1]) {
-              console.log("*** ok-1 ***")
-              console.log(data.schedule[i])
-              check++
-              // return saveData(data)
-            } else if (start == data.schedule[i].time[1] && end != data.schedule[i].time[0]) {
-              console.log("*** ok-2 ***")
-              // return saveData(data)
-              check++
-            }
-            console.log("*** no ***")
-
-          } else {
-
+          if (end == data[i].start && start != data[i].end) {
             check++
-
+          } else if (start == data[i].end && end != data[i].start) {
+            check++
           }
 
-        };
-
-        if (check == data.schedule.length) {
-          // a time slot is available
-          saveData(data)
         } else {
-          // a time slot is not available
-          return res.send({
-            type: "err",
-            header: "Reservation Failed",
-            msg: "The time you requested is not available (i.e. another reservation was made by somebody else). Please try another time."
-          })
+
+          check++
+
         }
 
-    } catch(err) {
+      };
 
-        // no schedule yet
-        var data = {schedule:[]};
-        saveData(data)
+      if (check == data.length) {
+        // a time slot is available
+        reservations.create({
+          start: start,
+          end: end,
+          date: selectedDate,
+          machine: req.body.id,
+          username: req.decoded.username
+        })
+        res.send({
+          type: "success",
+          header: "Success",
+          msg: "Your reservation has been made"
+        })
+      } else {
+        // a time slot is not available
+        return res.send({
+          type: "err",
+          header: "Reservation Failed",
+          msg: "The time you requested is not available (i.e. another reservation was made by somebody else). Please try another time."
+        })
+      }
 
-    }
+  })
 
 });
 

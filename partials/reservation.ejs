@@ -1,9 +1,9 @@
 
-<form style="display: none" class="reservation-form" method="post" action="/reserve">
+<form style="display: none" class="reservation-form" method="post" action="/reservations/new">
     <p>I want to make a reservation for the </p>
-    <select name="machine">
+    <select name="id">
     <% for (var i = 0; i < req.machines.length; i++ ) { %>
-    <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
+    <option value="<%= req.machines[i].id %>"><%= req.machines[i].name %></option>
     <% } %>
     </select>
     <p> on </p>
@@ -23,7 +23,7 @@
     </div>
 </form>
 <style>
-    form[action="/reserve"] {
+    form[action="/reservations/new"] {
         margin-top: 20px;
         padding: 30px;
         border-radius: 20px;
@@ -31,13 +31,13 @@
         /* text-align: center; */
     }
 
-    form[action="/reserve"] input,
-    form[action="/reserve"] p {
+    form[action="/reservations/new"] input,
+    form[action="/reservations/new"] p {
         display: inline;
         font-size: 15px;
     }
 
-  form[action="/reserve"] button {
+  form[action="/reservations/new§"] button {
       display: block !important;
   }
 

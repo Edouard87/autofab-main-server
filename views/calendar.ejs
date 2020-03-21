@@ -15,11 +15,12 @@
     <p class="calendar-text"> Display reservations for the </p>
     <select class="calendar-dropdown" id="machine-schedule" style="display:none">
       <% for (var i = 0; i < req.machines.length; i++ ) { %>
-      <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
+      <option value="<%= req.machines[i].id %>"><%= req.machines[i].name %></option>
       <% } %>
     </select>
     <p class="calendar-text"> on </p>
-    <select class="calendar-dropdown" name="" id="machine-schedule-day"></select>
+    <input type="date" class="calendar-date-picker" id="machine-schedule-day">
+    <!-- <select class="calendar-dropdown" name="" id="machine-schedule-day"></select> -->
     <button class="btn btn-outline-success reserve-collapsable">Make a new Reservation</button>
     <%- include ../partials/reservation.ejs %>
     <div class="calendar-panel" id="schedule"></div>
@@ -40,7 +41,7 @@
 
     // submitting the form
 
-    $('form[action="/reserve"]').submit(function(ev) {
+    $('form[action="/reservations/new"]').submit(function(ev) {
       ev.preventDefault();
       $.ajax({
         url: $(this).attr("action"),
@@ -120,15 +121,14 @@
     var startMins;
     var endMins;
 
-    function getSchedule(machineIndex, day) {
-
-      console.log(machineIndex)
-      console.log(day.toString())
+    function getSchedule(id, date) {
 
       $.ajax({
-        url: "/schedule/" + "machine-" + machineIndex + "/" + day,
+        url: "/schedule/" + id + "/" + date,
         method: "get",
         success: function(data) {
+
+          console.log(data)
 
           $("#schedule").empty();
 
@@ -170,52 +170,14 @@
         } 
       });
 
-      
-
     }
 
-    function getDays(machineIndex) {
-
-      $("#schedule").empty();
-      console.log(machineIndex)
-
-      $.ajax({
-        url: "/allschedules/machine-"+machineIndex,
-        method: "get",
-        success: function (data) {
-
-          console.log(data);
-          $("#machine-schedule-day").empty()
-          for (var i = 0; i < data.length; i++) {
-
-            console.log(i)
-            console.log("appending...")
-            console.log(data[i])
-            $("#machine-schedule-day").append("<option val='" + data[i] + "'>" + data[i] + "</option>");
-            getSchedule(machineIndex, $("#machine-schedule-day").val());
-
-          }
-
-          
-
-        }
-      });
-
-    }
-
-    $("#machine-schedule-day").on("change", function() {
+    $(".calendar-date-picker").on("change", function() {
 
       console.log("changing...")
-      getSchedule($("#machine-schedule").val(),$(this).val());
+      getSchedule($("#machine-schedule").val(),formatDate($(this).val()));
 
     })
-
-    $("#machine-schedule").on("change", function () {
-
-        console.log("changing...")
-        getDays($(this).val());
-
-      })
 
   </script>
 

@@ -14,7 +14,8 @@
     <h2>Machines</h2>
     <form action="/machine/new" method="post">
       <h4>Register a new machine</h4>
-      <input required type="text" name="machine">
+      <input required placeholder="Machine Name" type="text" name="name">
+      <input required placeholder="Machine Type" type="text" name="type">
       <button>Create</button>
     </form>
     <h4>All machines</h4>
@@ -22,7 +23,7 @@
       <thead>
         <tr>
           <td>Name</td>
-          <td>ID</td>
+          <td>Type</td>
           <td>Action</td>
         </tr>
       </thead>
@@ -30,9 +31,9 @@
         <% for (var i = 0; i < req.machines.length; i++) { %>
         <tr>
           <td><%= req.machines[i].name %></td>
-          <td><%= req.machines[i].index %></td>
+          <td><%= req.machines[i].type %></td>
           <td>
-            <a href="/machine/delete/<%= req.machines[i].name %>">Delete</a> <br>
+            <a href="/machine/delete/<%= req.machines[i].id %>">Delete</a> <br>
             <a href="/machine/clear/<%= req.machines[i].index %>">Clear Schedule</a> <br>
           </td>
         </tr>
