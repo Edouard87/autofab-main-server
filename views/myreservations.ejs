@@ -12,7 +12,7 @@
         <h1>Manage Your Reservations</h1>
         <p>See reservations for the </p><select id="machine-schedule">
           <% for (var i = 0; i < req.machines.length; i++ ) { %>
-          <option value="<%= req.machines[i].index %>"><%= req.machines[i].name %></option>
+          <option value="<%= req.machines[i].id %>"><%= req.machines[i].name %></option>
           <% } %>
         </select>
         <p> on </p><input class="myreservations-date" type="date">
@@ -64,7 +64,6 @@
 
           template = data;
           $("#machine-schedule").css("display", "inline");
-          console.log(template);
 
         }
 
@@ -73,26 +72,28 @@
       var startMins;
       var endMins;
 
-      function getSchedule(machineIndex, day) {
+      function getSchedule(id, date) {
+        console.log(id)
+        console.log(date)
 
         $.ajax({
-          url: "/myreservations/" + "machine-" + machineIndex + "/" + day,
+          url: "/myreservations/" +id + "/" + date,
           method: "get",
           success: function (data) {
-
+            console.log(data)
             $(".myreservations-table tbody").empty();
 
             for (var i = 0; i < data.length; i++) {
 
-                var startEpoch = data[i].time[0]
-                var endEpoch = data[i].time[1]
+                var startEpoch = data[i].start
+                var endEpoch = data[i].end
 
                 var startDate = new Date(startEpoch * 1000)
                 var endDate = new Date(endEpoch * 1000)
 
-              startMins = (new Date(data[i].time[0] * 1000).getHours() * 60) + new Date(data[i].time[0] * 1000)
+              startMins = (new Date(data[i].start * 1000).getHours() * 60) + new Date(data[i].start * 1000)
                 .getMinutes();
-              endMins = new Date(data[i].time[1] * 1000).getHours() + new Date(data[i].time[1] * 1000)
+              endMins = new Date(data[i].end * 1000).getHours() + new Date(data[i].end * 1000)
                 .getMinutes();
 
               $(".myreservations-table tbody").append(Mustache.to_html(template, {

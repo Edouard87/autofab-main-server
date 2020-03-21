@@ -257,20 +257,6 @@ app.get("/login", function(req, res) {
     res.render("login")
 });
 
-app.get("/allschedules/:machine", authenticate, function (req, res) {
-
-    try {
-
-        res.send(fs.readdirSync(__dirname + "/data/schedules/" + req.params.machine))
-
-    } catch(err) {
-
-        console.log("No schedule to show, as no machines have been created")
-
-    }
-
-});
-
 
 app.get("/schedule/:id/:date", authenticate, function(req, res) {
 
@@ -281,18 +267,16 @@ app.get("/schedule/:id/:date", authenticate, function(req, res) {
 
 })
 
-app.get("/myreservations/:machine/:day", authenticate, function(req, res) {
+app.get("/myreservations/:id/:date", authenticate, function(req, res) {
 
-  var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + "/" + req.params.day, "utf-8")).schedule
-  var returnData = []
-
-  for (var i = 0; i < file.length; i++) {
-    if (file[i].username == req.decoded.username) {
-      returnData.push(file[i])
-    }
-  }
-
-  res.send(returnData);
+  reservations.find({
+    machine: req.params.id,
+    username: req.decoded.username,
+    date: req.params.date
+  }).then(data => {
+    console.log(data)
+    res.send(data)
+  })
 
 })
 
