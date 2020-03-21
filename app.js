@@ -272,14 +272,12 @@ app.get("/allschedules/:machine", authenticate, function (req, res) {
 });
 
 
-app.get("/schedule/:id/:day", authenticate, function(req, res) {
+app.get("/schedule/:id/:date", authenticate, function(req, res) {
 
-  console.log(req.params.day)
-
-  // reservations.findOne({})
-
-    var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + "/" + req.params.day, "utf-8")).schedule
-    res.send(file);
+    reservations.find({
+      machine: req.params.id,
+      date: req.params.date
+    }).then(data => res.send(data))
 
 })
 

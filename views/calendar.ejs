@@ -20,7 +20,6 @@
     </select>
     <p class="calendar-text"> on </p>
     <input type="date" class="calendar-date-picker" id="machine-schedule-day">
-    <!-- <select class="calendar-dropdown" name="" id="machine-schedule-day"></select> -->
     <button class="btn btn-outline-success reserve-collapsable">Make a new Reservation</button>
     <%- include ../partials/reservation.ejs %>
     <div class="calendar-panel" id="schedule"></div>
@@ -55,7 +54,7 @@
           $(".recieve-status").addClass(data.type)
           $(".recieve-status h2").html(data.header)
           $(".recieve-status p").html(data.msg)
-          getSchedule($("#machine-schedule").val(),$("#machine-schedule-day").val());
+          getSchedule($("#machine-schedule").val(),formatDate($(".calendar-date-picker").val()));
         }
       })
     });
@@ -112,7 +111,6 @@
 
         template = data;
         $("#machine-schedule").css("display","inline");
-        getDays($("#machine-schedule").val());
 
       }
 
@@ -138,8 +136,8 @@
 
           for (var i = 0; i < data.length; i++) {
 
-            startMins = (new Date(data[i].time[0] * 1000).getHours()*60) + new Date(data[i].time[0] * 1000).getMinutes();
-            endMins = (new Date(data[i].time[1] * 1000).getHours()*60) + new Date(data[i].time[1] * 1000 ).getMinutes();
+            startMins = (new Date(data[i].start * 1000).getHours()*60) + new Date(data[i].start * 1000).getMinutes();
+            endMins = (new Date(data[i].end * 1000).getHours()*60) + new Date(data[i].end * 1000 ).getMinutes();
             duration = endMins-startMins;
 
             if (duration >= 60) {
@@ -148,15 +146,13 @@
               displayText = "none"
             }
 
-            startDate = new Date(data[i].time[0] * 1000)
-            endDate = new Date(data[i].time[1] * 1000)
-
-            console.log(duration)
+            startDate = new Date(data[i].start * 1000)
+            endDate = new Date(data[i].end * 1000)
 
             // scale
 
             $("#schedule").append(Mustache.to_html(template, { 
-              name: data[i].name, 
+              name: data[i].username, 
               startHours: startDate.getHours(),
               startMinutes: leadingZeroes(startDate.getMinutes()),
               endHours: endDate.getHours(),
