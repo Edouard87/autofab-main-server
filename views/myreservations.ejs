@@ -82,6 +82,14 @@
           success: function (data) {
             console.log(data)
             $(".myreservations-table tbody").empty();
+            console.log(data.length )
+            if (data.length == 0) {
+              console.log("true!")
+              $(".msg-box").css("display","block")
+              $(".msg-box").addClass("warn")
+              $(".msg-box h2").html("Please Note")
+              $(".msg-box p").html("The table is blank as you have no reservations for that day")
+            }
 
             for (var i = 0; i < data.length; i++) {
 
@@ -102,19 +110,12 @@
                 endHours: endDate.getHours(),
                 endMinutes: leadingZeroes(endDate.getMinutes()),
                 start: startEpoch,
-                end: endEpoch
+                end: endEpoch,
+                id: data[i]._id
               }));
 
             }
 
-          },
-          statusCode: {
-            500: function() {
-                $(".msg-box").css("display","block")
-                $(".msg-box").addClass("warn")
-                $(".msg-box h2").html("Please Note")
-                $(".msg-box p").html("The table is blank as you have no reservations for that day")
-            }
           }
         });
 
@@ -125,20 +126,6 @@
 
       })
 
-      function deleteReservation(start, end) {
-         $.ajax({
-            url: "/reservations/delete",
-            type: 'POST',
-            contentType:'application/json',
-            data: JSON.stringify({
-                start: start,
-                end: end,
-                machine: $("#machine-schedule").val(),
-                date: formatDate($(".myreservations-date").val()),
-            }),
-            dataType:'json'
-         });
-      }
     </script>
 </body>
 </html>

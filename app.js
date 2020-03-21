@@ -418,23 +418,14 @@ app.get("/reservations/all",authenticate,(req, res) => {
   res.render("myreservations",{req: req})
 });
 
-app.post("/reservations/delete", authenticate, (req, res) => {
+app.get("/reservations/delete/:id", authenticate, (req, res) => {
 
-  var fileDir = __dirname + "/data/schedules/machine-" + req.body.machine + "/" + req.body.date
-
-  var {schedule} = JSON.parse(fs.readFileSync(fileDir, "utf-8"));
-  
-  console.log(schedule)
-
-  for (var i = 0; i < schedule.length; i++) {
-    if (schedule[i].time[0] == req.body.start && schedule[i].time[1] == req.body.end && schedule[i].username == req.decoded.username) {
-      schedule.splice(i, 1)
-    }
-  }
-
-  console.log(schedule)
-
-  fs.writeFileSync(fileDir, JSON.stringify(schedule));
+  reservations.findOneAndDelete({
+    username: req.decoded.username,
+    _id: req.params.id
+  }).exec().then((data, err) => {
+    res.redirect("/")
+  })
 
 });
 
