@@ -39,7 +39,7 @@ const store = require("data-store")(__dirname + "/data/accounts.json");
 
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost/autofab")
+mongoose.connect("mongodb://" + (process.env.MONGODB || "localhost") + "/autofab")
 
 // Users
 
@@ -82,6 +82,19 @@ const crypto = require("crypto");
 function hmacPass(password) {
   return crypto.createHmac("sha256", "edtgfaufruwe").update(password).digest("hex")
 }
+
+// populate default values
+
+userModel.find().then(doc => {
+  if (doc.length == 0) {
+    userModel.create({
+      username: "admin",
+      password: hmacPass("admin"),
+      permission: -1,
+      rfid: 1
+    })
+  }
+})
 
 function authenticate(req, res, next) {
   const token = req.cookies.auth
@@ -656,6 +669,6 @@ io.on("connection", function (socket) {
 
 });
 
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
 
 // module.exports = app;
