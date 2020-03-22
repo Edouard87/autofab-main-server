@@ -1,0 +1,33 @@
+ .warn {
+   background: #db8307;
+ }
+
+ .err {
+   background: #c21d08
+ }
+
+ .success {
+   background: #0cc912;
+ }
+
+ .dialogue-box {
+   padding: 10px;
+   border-radius: 5px;
+   margin-top: 30px;
+   text-align: center;
+   /* margin-bottom: 30px; */
+ }
+
+ .dialogue-box * {
+   color: white;
+   text-align: center;
+ }
+
+ .dialogue-box p {
+   margin-bottom: 0;
+   text-align: center;
+ }
+
+ .dialogue-box h2 {
+   font-size: 25px;
+ }

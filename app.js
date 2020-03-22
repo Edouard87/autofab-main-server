@@ -31,51 +31,269 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Stuff for user auth
+
+const store = require("data-store")(__dirname + "/data/accounts.json");
+
+//mongodb stuff
+
+const mongoose = require('mongoose');
+
+mongoose.connect("mongodb://" + (process.env.MONGODB || "localhost") + "/autofab")
+
+// Users
+
+var userSchema = new mongoose.Schema({
+  username: String,
+  password: String,
+  permission: Number,
+  rfid: String
+})
+
+var userModel = mongoose.model("User", userSchema);
+
+// Machines
+
+var machineSchema = new mongoose.Schema({
+  name: String,
+  type: String
+})
+
+var machines = mongoose.model("machine",machineSchema)
+
+// Reservations
+
+var reservationSchema = new mongoose.Schema({
+  start: Number,
+  end: Number,
+  date: String,
+  machine: String,
+  username: String
+})
+
+var reservations = mongoose.model("reservation",reservationSchema)
+
+// User auth stuff
+
+const jwt = require("jsonwebtoken");
+
+const crypto = require("crypto");
+
+function hmacPass(password) {
+  return crypto.createHmac("sha256", "edtgfaufruwe").update(password).digest("hex")
+}
+
+// populate default values
+
+userModel.find().then(doc => {
+  if (doc.length == 0) {
+    userModel.create({
+      username: "admin",
+      password: hmacPass("admin"),
+      permission: -1,
+      rfid: 1
+    })
+  }
+})
+
+function authenticate(req, res, next) {
+  const token = req.cookies.auth
+  if (token == undefined) {
+    res.render("login", {iserr: false, err: null})
+  } else {
+    try {
+      const result = jwt.verify(token, 'hgfhjnbghj');
+      req.decoded = result;
+      next();
+    } catch (err) {
+      res.render("login", {
+        iserr: false,
+        err: null
+      })
+    }
+  }
+}
+
+function checkAdmin(req, res, next) {
+  if (req.decoded.permission == -1) {
+    return next()
+  } else {
+    return res.redirect("/")
+  }
+}
+
+// other stuff
+
 function isBetween(x, min, max) {
 
     if (x >= min && x <= max ) {
 
-        return true
+      return true
 
-    } else {return false}
+    } else {
+      
+      return false
+    
+    }
 
 }
 
-app.get('/', (req, res) => {
+function formatDate(date) {
 
-    var machines =  JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
-    var schedules = [];
-    var readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json")).readers;
-    var users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
+    var dd = date.getDate();
+    var mm = date.getMonth() + 1; //January is 0!
 
-    for (var i = 0; i < machines.length; i++) {
-
-        schedules.push(JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + machines[i].index + ".json", "utf-8")).schedule)
-
-    };
-
-    res.render("index", { machines: machines, schedules: schedules, readers: readers, users: users})
-
-});
-
-app.get("/schedule/:machine", function(req, res) {
-
-    try {
-
-        var schedule = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/" + req.params.machine + ".json")).schedule
-        res.send(schedule)
-
-    } catch(err) {
-
-        console.log("No schedule to show, as no machines have been created")
-
+    var yyyy = date.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
     }
 
+    var formattedDate = mm + "-" + dd + "-" + yyyy
+
+    return formattedDate;
+
+}
+
+function loadFile(req,res,next) {
+
+  Promise.all([userModel.find({}), machines.find({})]).then((values) => {
+    req.accounts = values[0]
+    req.users = values[0]
+    req.machines = values[1]
+    req.readers = []
+    console.log(req.machines)
+    next()
+  })
+    
+}
+
+app.all("*", loadFile)
+
+app.post("/register", function(req, res) {
+  userModel.create({
+    username: req.body.username,
+    password: hmacPass(req.body.password),
+    permission: req.body.permission,
+    rfid: req.body.rfid
+  });
+  res.redirect("/")
+})
+
+app.post("/login", function(req, res) {
+  userModel.findOne({username: req.body.username}).then(data => {
+    if (data == null) {
+      // no user exists
+      res.render("login", {
+        iserr: true,
+        err: "No user with that username exists. If you think this is an error, please ask your teacher to register you as a student."
+      });
+    } else {
+      if (hmacPass(req.body.password) == data.password) {
+        // password is correct
+        const token = jwt.sign({
+          username: req.body.username,
+          permission: data.permission
+        }, 'hgfhjnbghj');
+        res.cookie("auth", token);
+        res.redirect("/")
+      } else {
+        // password is incorrect
+        res.render("login", {
+          iserr: true,
+          err: "The password you have supplied is incorrect."
+        });
+      }
+    }
+  })
 });
 
- app.get("/readers/manage/:ip", function (req, res) {
+app.get("/logout", (req, res) => {
 
-   console.log("opening...")
+  res.clearCookie("auth");
+  res.redirect("/")
+
+});
+
+app.get("/page/:name", authenticate, function(req, res) {
+    res.render(req.params.name, {
+      req: req
+    })
+});
+
+app.get('/', authenticate, function(req, res) {
+  res.render("home", {req: req})
+});
+
+app.get("/account", authenticate, (req, res) => {
+  res.render("myaccount",{req:req, status: null});
+});
+
+app.get("/admin", authenticate, checkAdmin, (req, res) => {
+  res.render("admin", {req:req});
+})
+
+app.get("/accounts/delete/:username", authenticate, checkAdmin, (req, res) => {
+  userModel.findOneAndDelete({username: req.params.username}).then(() => {
+    res.render("admin",{req:req})
+  }).catch((err) => {
+    res.render("admin", {
+      req: req
+    })
+  });
+});
+
+app.post("/changepassword", authenticate, (req, res) => {
+
+  userModel.findOneAndUpdate({username: req.decoded.username},{password: hmacPass(req.body.password)}).then(() => {
+    res.render("myaccount",{req:req,status: {type: "success", header: "Success", msg: "Your password has been changed"}})
+  }).catch(err => {
+    res.render("myaccount", {
+      req: req,
+      status: {
+        type: "err",
+        header: "Error",
+        msg: "An unknown error occured. Please seek assistance; there may be an error in your account."
+      }
+    })
+  })
+
+});
+
+app.get("/calendar", authenticate, function(req, res) {
+  res.render("calendar", {req: req})
+})
+
+app.get("/login", function(req, res) {
+    res.render("login")
+});
+
+
+app.get("/schedule/:id/:date", authenticate, function(req, res) {
+
+    reservations.find({
+      machine: req.params.id,
+      date: req.params.date
+    }).then(data => res.send(data))
+
+})
+
+app.get("/myreservations/:id/:date", authenticate, function(req, res) {
+
+  reservations.find({
+    machine: req.params.id,
+    username: req.decoded.username,
+    date: req.params.date
+  }).then(data => {
+    console.log(data)
+    res.send(data)
+  })
+
+})
+
+ app.get("/readers/manage/:ip", function (req, res) {
 
    var readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json", "utf-8")).readers;
    var reader;
@@ -110,84 +328,26 @@ app.get("/schedule/:machine", function(req, res) {
 
  });
 
-app.post("/machine/new", function(req, res) {
+app.post("/machine/new", authenticate, checkAdmin, function(req, res) {
 
-    var file = JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8"));
-    var index = -1;
-    for (var i = 0; i < file.machines.length; i++) {
-
-        console.log(req.body.machine)
-        console.log(file.machines[i].name)
-
-        if (req.body.machine == file.machines[i].name) {
-
-            return res.send("that name already exists")
-
-        }
-
-        if (index < file.machines[i].index) {
-
-            index = file.machines[i].index
-
-        }
-
-    }
-
-    // Assign the index
-
-    var assignedIndex = index+1
-
-    // Create the machine
-
-    file.machines.push({
-        "name": req.body.machine,
-        "index": assignedIndex
-    })
-    fs.writeFileSync(__dirname + "/data/machines.json", JSON.stringify(file))
-
-    // Create the schedule for it
-
-    fs.writeFileSync(__dirname + "/data/schedules/machine-" + assignedIndex + ".json", JSON.stringify({
-        schedule: []
-    }));
-
-    console.log(file)
-
+    machines.create({
+      name: req.body.name,
+      type: req.body.type
+    }).catch(err => console.log(err));
     res.redirect("/")
 
 });
 
-app.get("/machine/delete/:machine", function(req, res) {
+app.get("/machine/delete/:id", authenticate, checkAdmin, function (req, res) {
 
-    // Remove from machines directory
-
-    console.log("Deleting...")
-
-    var index;
-
-    var file = JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8"));
-    console.log(file)
-    for (var i = 0; i < file.machines.length; i++) {
-
-        console.log("searching...")
-        console.log(req.params.machine)
-
-        if (file.machines[i].name == req.params.machine) {
-            // Remove schedule
-            fs.unlinkSync(__dirname + "/data/schedules/machine-" + file.machines[i].index + ".json")
-            // Remove from machines database
-            file.machines.splice(i, 1);
-            fs.writeFileSync(__dirname + "/data/machines.json", JSON.stringify(file))
-            return res.redirect("/")
-        }
-
-    }
-
-    res.send("An error occured")
+  machines.findById(req.params.id).then(data => console.log("Data: ", data))
+  machines.findByIdAndRemove(req.params.id).exec().then((err, data) => {
+    res.redirect("/")
+  })
 
 });
 
-app.get("/machine/clear/:machine", function(req, res) {
+app.get("/machine/clear/:machine", authenticate, checkAdmin, function (req, res) {
 
     var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + req.params.machine + ".json", "utf-8"));
     file.schedule.length = 0;
@@ -196,30 +356,89 @@ app.get("/machine/clear/:machine", function(req, res) {
 
 })
 
-app.post("/reserve", function(req, res) {
+app.get("/reserve", authenticate, (req, res) => {
 
-    var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
-    var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
-    
-    var data = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + ".json", "utf-8"))
-    
-    
-    for (var i = 0; i < data.schedule.length; i++) {
+  res.render("make_reservation", {req: req, iserr: false, err: null, status: null})
 
-        if (isBetween(start, data.schedule[i].time[0], data.schedule[i].time[1]) || isBetween(end, data.schedule[i].time[0], data.schedule[i].time[1])) {
+});
 
-            return res.render("reservationFail.ejs")
+app.post("/reservations/new", authenticate, function(req, res) {
+
+  var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
+  var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
+
+  // find the date of the reservation in mm-dd-yyyy
+
+  var selectedDate = req.body.schedule.global.date.split("-")
+  var mm = selectedDate[1]
+  var dd = selectedDate[2]
+  var yyyy = selectedDate[0]
+  selectedDate = mm + "-" + dd + "-" + yyyy
+
+  console.log("date is " + selectedDate)
+
+
+
+  reservations.find({}).then((data) => {
+      var check = 0;
+
+      for (var i = 0; i < data.length; i++) {
+
+        if (isBetween(start, data[i].start, data[i].end) || isBetween(end, data[i].start, data[i].end)) {
+
+          if (end == data[i].start && start != data[i].end) {
+            check++
+          } else if (start == data[i].end && end != data[i].start) {
+            check++
+          }
+
+        } else {
+
+          check++
 
         }
 
-    };
+      };
 
-    data.schedule.push({
-      name: req.body.user,
-      time: [start, end]
-    })
-    fs.writeFileSync(__dirname + "/data/schedules/machine-" + req.body.machine + ".json", JSON.stringify(data));
-    res.render("reservationSuccess.ejs")
+      if (check == data.length) {
+        // a time slot is available
+        reservations.create({
+          start: start,
+          end: end,
+          date: selectedDate,
+          machine: req.body.id,
+          username: req.decoded.username
+        })
+        res.send({
+          type: "success",
+          header: "Success",
+          msg: "Your reservation has been made"
+        })
+      } else {
+        // a time slot is not available
+        return res.send({
+          type: "err",
+          header: "Reservation Failed",
+          msg: "The time you requested is not available (i.e. another reservation was made by somebody else). Please try another time."
+        })
+      }
+
+  })
+
+});
+
+app.get("/reservations/all",authenticate,(req, res) => {
+  res.render("myreservations",{req: req})
+});
+
+app.get("/reservations/delete/:id", authenticate, (req, res) => {
+
+  reservations.findOneAndDelete({
+    username: req.decoded.username,
+    _id: req.params.id
+  }).exec().then((data, err) => {
+    res.redirect("/")
+  })
 
 });
 
@@ -450,6 +669,6 @@ io.on("connection", function (socket) {
 
 });
 
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
 
 // module.exports = app;
