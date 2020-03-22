@@ -17,6 +17,9 @@ const env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
+
+process.env.MONGODB_URI = "mongodb+srv://general:TuQGoa7owVjpMwa7@autofab-zce16.mongodb.net/test?retryWrites=true&w=majority"
+
 console.log("========[ ENVIRONMENT VARIABLES ]===========")
 console.log(process.env.PORT)
 console.log(process.env.MONGODB_URI)
@@ -43,7 +46,7 @@ const store = require("data-store")(__dirname + "/data/accounts.json");
 
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://" + (process.env.MONGODB_URI || "localhost") + "/autofab", {
+mongoose.connect((process.env.MONGODB_URI || "localhost"), {
   useNewUrlParser: true
 })
 
