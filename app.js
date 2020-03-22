@@ -39,7 +39,7 @@ const store = require("data-store")(__dirname + "/data/accounts.json");
 
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://" + (process.env.MONGODB || "localhost") + "/autofab")
+mongoose.connect("mongodb://" + (process.env.MONGODB_URI || "localhost") + "/autofab")
 
 // Users
 
