@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const fs = require("fs")
 
 const routes = require('./routes/index');
-const users = require('./routes/user');
+// const users = require('./routes/user');
 
 const express = require('express');
 const app = express();
@@ -16,9 +16,6 @@ const io = require("socket.io")(server)
 const env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
-
-
-process.env.MONGODB_URI = "mongodb+srv://general:TuQGoa7owVjpMwa7@autofab-zce16.mongodb.net/test?retryWrites=true&w=majority"
 
 console.log("========[ ENVIRONMENT VARIABLES ]===========")
 console.log(process.env.PORT)
@@ -46,20 +43,20 @@ const store = require("data-store")(__dirname + "/data/accounts.json");
 
 const mongoose = require('mongoose');
 
-mongoose.connect((process.env.MONGODB_URI || "localhost"), {
+mongoose.connect((process.env.MONGODB_URI || "mongodb://localhost"), {
   useNewUrlParser: true
 })
 
 // Users
 
 var userSchema = new mongoose.Schema({
-  username: String,
+  username: {type: String, unique: true},
   password: String,
   permission: Number,
-  rfid: String
+  rfid: {type: String, unique: true}
 })
 
-var userModel = mongoose.model("User", userSchema);
+var users = mongoose.model("User", userSchema);
 
 // Machines
 
@@ -94,9 +91,9 @@ function hmacPass(password) {
 
 // populate default values
 
-userModel.find().then(doc => {
+users.find().then(doc => {
   if (doc.length == 0) {
-    userModel.create({
+    users.create({
       username: "admin",
       password: hmacPass("admin"),
       permission: -1,
@@ -107,7 +104,9 @@ userModel.find().then(doc => {
 
 function authenticate(req, res, next) {
   const token = req.cookies.auth
-  if (token == undefined) {
+  if (req.url == "/login") {
+    next()
+  } else if (token == undefined) {
     res.render("login", {iserr: false, err: null})
   } else {
     try {
@@ -168,7 +167,7 @@ function formatDate(date) {
 
 function loadFile(req,res,next) {
 
-  Promise.all([userModel.find({}), machines.find({})]).then((values) => {
+  Promise.all([users.find({}), machines.find({})]).then((values) => {
     req.accounts = values[0]
     req.users = values[0]
     req.machines = values[1]
@@ -179,20 +178,45 @@ function loadFile(req,res,next) {
     
 }
 
-app.all("*", loadFile)
+app.all("*", loadFile, authenticate);
+
+app.get("/p/:name", function(req, res, next) {
+  var admin_pages = ["machines","users"]
+  for (var i = 0; i < admin_pages.length; i++) {
+    if (req.params.name == admin_pages[i]) {
+      return res.redirect("/a/" + req.params.name)
+    }
+  }
+  res.render(req.params.name, {req: req})
+})
+
+app.get("/a/:name", checkAdmin, function (req, res, next) {
+  res.render(req.params.name, { req: req })
+})
 
 app.post("/register", function(req, res) {
-  userModel.create({
+  users.create({
     username: req.body.username,
     password: hmacPass(req.body.password),
     permission: req.body.permission,
     rfid: req.body.rfid
-  });
-  res.redirect("/")
+  }).then(() => {
+    res.send({
+      type: "success",
+      header: "User Created",
+      msg: "User " + req.body.username + " was created." 
+    })
+  }).catch((err) => {
+    res.send({
+      type: "err",
+      header: "Failed to create user",
+      msg: "User " + req.body.username + " could not be created. Please make sure you supply a unique username and RFID tag."
+    })
+  })
 })
 
 app.post("/login", function(req, res) {
-  userModel.findOne({username: req.body.username}).then(data => {
+  users.findOne({username: req.body.username}).then(data => {
     if (data == null) {
       // no user exists
       res.render("login", {
@@ -226,26 +250,12 @@ app.get("/logout", (req, res) => {
 
 });
 
-app.get("/page/:name", authenticate, function(req, res) {
-    res.render(req.params.name, {
-      req: req
-    })
+app.get('/', function(req, res) {
+  res.redirect("/p/home")
 });
 
-app.get('/', authenticate, function(req, res) {
-  res.render("home", {req: req})
-});
-
-app.get("/account", authenticate, (req, res) => {
-  res.render("myaccount",{req:req, status: null});
-});
-
-app.get("/admin", authenticate, checkAdmin, (req, res) => {
-  res.render("admin", {req:req});
-})
-
-app.get("/accounts/delete/:username", authenticate, checkAdmin, (req, res) => {
-  userModel.findOneAndDelete({username: req.params.username}).then(() => {
+app.get("/accounts/delete/:username", checkAdmin, (req, res) => {
+  users.findOneAndDelete({username: req.params.username}).then(() => {
     res.render("admin",{req:req})
   }).catch((err) => {
     res.render("admin", {
@@ -254,33 +264,25 @@ app.get("/accounts/delete/:username", authenticate, checkAdmin, (req, res) => {
   });
 });
 
-app.post("/changepassword", authenticate, (req, res) => {
+app.post("/changepassword", (req, res) => {
 
-  userModel.findOneAndUpdate({username: req.decoded.username},{password: hmacPass(req.body.password)}).then(() => {
-    res.render("myaccount",{req:req,status: {type: "success", header: "Success", msg: "Your password has been changed"}})
+  users.findOneAndUpdate({username: req.decoded.username},{password: hmacPass(req.body.password)}).then(() => {
+    res.send({
+      type: "success",
+      header: "Success",
+      msg: "Your password has been changed"
+    })
   }).catch(err => {
-    res.render("myaccount", {
-      req: req,
-      status: {
-        type: "err",
-        header: "Error",
-        msg: "An unknown error occured. Please seek assistance; there may be an error in your account."
-      }
+    res.send({
+      type: "err",
+      header: "Error",
+      msg: "An unknown error occured. Please seek assistance; there may be an error in your account."
     })
   })
-
-});
-
-app.get("/calendar", authenticate, function(req, res) {
-  res.render("calendar", {req: req})
-})
-
-app.get("/login", function(req, res) {
-    res.render("login")
 });
 
 
-app.get("/schedule/:id/:date", authenticate, function(req, res) {
+app.get("/schedule/:id/:date", function(req, res) {
 
     reservations.find({
       machine: req.params.id,
@@ -289,7 +291,7 @@ app.get("/schedule/:id/:date", authenticate, function(req, res) {
 
 })
 
-app.get("/myreservations/:id/:date", authenticate, function(req, res) {
+app.get("/myreservations/:id/:date", function(req, res) {
 
   reservations.find({
     machine: req.params.id,
@@ -337,26 +339,47 @@ app.get("/myreservations/:id/:date", authenticate, function(req, res) {
 
  });
 
-app.post("/machine/new", authenticate, checkAdmin, function(req, res) {
+ app.get("/machine/all", function(req, res) {
+  machines.find({}).then(data => {
+    res.send(data)
+  })
+ });
+
+app.post("/machine/new", checkAdmin, function(req, res) {
 
     machines.create({
       name: req.body.name,
       type: req.body.type
-    }).catch(err => console.log(err));
-    res.redirect("/")
+    }).then(() => {
+      res.send({
+        type: "success",
+        header: "Success",
+        msg: "Machine " + req.body.name + ", which is a " + req.body.type + " was created successfully."
+      })
+    }).catch(err => {
+      res.send({
+        type: "err",
+        header: "Failed to create machine",
+        msg: "An unknown error occured."
+      })
+    });
+    
 
 });
 
-app.get("/machine/delete/:id", authenticate, checkAdmin, function (req, res) {
+app.get("/machine/delete/:id", checkAdmin, function (req, res) {
 
-  machines.findById(req.params.id).then(data => console.log("Data: ", data))
   machines.findByIdAndRemove(req.params.id).exec().then((err, data) => {
-    res.redirect("/")
+    res.send({
+      type: "success",
+      header: "Success",
+      msg: "Machine successfully deleted."
+    })
   })
 
 });
 
-app.get("/machine/clear/:machine", authenticate, checkAdmin, function (req, res) {
+app.get("/machine/clear/:machine", checkAdmin, function (req, res) {
 
     var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + req.params.machine + ".json", "utf-8"));
     file.schedule.length = 0;
@@ -365,13 +388,13 @@ app.get("/machine/clear/:machine", authenticate, checkAdmin, function (req, res)
 
 })
 
-app.get("/reserve", authenticate, (req, res) => {
+app.get("/reserve", (req, res) => {
 
   res.render("make_reservation", {req: req, iserr: false, err: null, status: null})
 
 });
 
-app.post("/reservations/new", authenticate, function(req, res) {
+app.post("/reservations/new", function(req, res) {
 
   var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
   var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
@@ -436,11 +459,7 @@ app.post("/reservations/new", authenticate, function(req, res) {
 
 });
 
-app.get("/reservations/all",authenticate,(req, res) => {
-  res.render("myreservations",{req: req})
-});
-
-app.get("/reservations/delete/:id", authenticate, (req, res) => {
+app.get("/reservations/delete/:id", (req, res) => {
 
   reservations.findOneAndDelete({
     username: req.decoded.username,

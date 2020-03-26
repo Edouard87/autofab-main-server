@@ -1,5 +1,5 @@
 
-<form style="display: none" class="reservation-form" method="post" action="/reservations/new">
+<form style="display: none" class="reservation-form ajax-form" method="post" action="/reservations/new">
     <p>I want to make a reservation for the </p>
     <select name="id">
     <% for (var i = 0; i < req.machines.length; i++ ) { %>
@@ -16,10 +16,6 @@
     <div style="display: none" class="dialogue-box warn">
       <h2>Warning</h2>
       <p>Before you make this reservation, please make sure the end time is <b>after</b> the start time.</p>
-    </div>
-    <div style="display: none" class="dialogue-box recieve-status">
-      <h2>Loading...</h2>
-      <p>Loading...</p>
     </div>
 </form>
 <style>
@@ -79,4 +75,7 @@
   $("#end-time").on('keyup', function () {
     checkTimeFields()
   });
+  $("form[action='/reservations/new']").on("success",() => {
+     getSchedule($("#machine-schedule").val(), formatDate($(".calendar-date-picker").val()));
+  })
 </script>

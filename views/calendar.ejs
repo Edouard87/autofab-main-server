@@ -32,32 +32,14 @@
       margin-top: 10px;
     }
   </style>
-
-  <script src="/components/mustache.js/mustache.js"></script>
+  
   <script src="/js/reservations.js"></script>
 
   <script>
 
     // submitting the form
 
-    $('form[action="/reservations/new"]').submit(function(ev) {
-      ev.preventDefault();
-      $.ajax({
-        url: $(this).attr("action"),
-        method: $(this).attr("method"),
-        data: $(this).serialize(),
-        success: data => {
-          console.log(data)
-          $(".recieve-status").css("display","block")
-          $(".recieve-status").removeClass("success")
-          $(".recieve-status").removeClass("err")
-          $(".recieve-status").addClass(data.type)
-          $(".recieve-status h2").html(data.header)
-          $(".recieve-status p").html(data.msg)
-          getSchedule($("#machine-schedule").val(),formatDate($(".calendar-date-picker").val()));
-        }
-      })
-    });
+    
     
 
     // collapsable menu

@@ -13,18 +13,10 @@
         <h2>General Account Information</h2>
         <p><b>Username: </b> <%= req.decoded.username %></p>
         <h2>Password Reset</h2>
-        <form action="/changepassword" method="post">
+        <form action="/changepassword" method="post" class="ajax-form">
           <input name="password" type="password" placeholder="New Password">
           <button class="btn btn-danger">Change Password</button>
         </form>
-        <% if (status != null) { %>
-
-            <div class="dialogue-box <%= status.type %>">
-              <h2><%= status.header %></h2>
-              <p><%= status.msg %></p>
-            </div>
-
-        <% } %>
     </div>
 </body>
 </html>

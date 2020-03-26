@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <%- include ../partials/global-header.ejs %>
+  <title>Document</title>
+</head>
+
+<body>
+  <%- include ../partials/navbar.ejs %>
+  <div class="page-content">
+    <h1>Machines</h1>
+    <form action="/machine/new" method="post" class="ajax-form">
+      <h2>Register a new machine</h2>
+      <input required placeholder="Machine Name" type="text" name="name">
+      <input required placeholder="Machine Type" type="text" name="type">
+      <button>Create</button>
+    </form>
+    <h2>All machines</h2>
+    <table class="machines-table">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Type</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+  </div>
+  <script>
+      function getUsers() {
+            $.ajax({
+            url: "/templates/machines-row.mustache",
+            method: "get",
+            success: template => {
+                $(".machines-table tbody").empty()
+                $.ajax({
+                url: "/machine/all",
+                method: "get",
+                success: (data) => {
+                        data.forEach(i => {
+                            $(".machines-table tbody").append(Mustache.to_html(template,i))
+                        })
+                        $(".delete-machine").on("click", function() {
+                            $.ajax({
+                                url: "/machine/delete/" + $(this).attr("data-id"),
+                                method: "get",
+                                success: msg => {
+                                    $.ajax({
+                                        url: "/templates/dialogue-msg.mustache",
+                                        method: "get",
+                                        success: dialogue => {
+                                            $("body").append(Mustache.to_html(dialogue,msg))
+                                            getUsers()
+                                        }
+                                    })
+                                }
+                            })
+                        })
+                    }
+                })
+            }
+          })
+      }
+      getUsers()
+      $(".ajax-form").on("success",getUsers)
+  </script>
+  <style>
+    h4 {
+
+      font-weight: 400;
+
+    }
+
+    .schedule-block {
+
+      background: black;
+      width: 50%;
+      /* height: 100px; */
+      padding: 10px;
+
+    }
+
+    .schedule-block h2 {
+      color: white;
+    }
+
+    .schedule-block p {
+      color: white;
+    }
+
+    .machines-table {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+
+    .machines-table td {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+  </style>
+</body>
+
+</html>
