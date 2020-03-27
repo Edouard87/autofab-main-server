@@ -74,7 +74,9 @@ var reservationSchema = new mongoose.Schema({
   end: Number,
   date: String,
   machine: String,
-  username: String
+  username: String,
+  status: String,
+  justification: String
 })
 
 var reservations = mongoose.model("reservation",reservationSchema)
@@ -286,8 +288,15 @@ app.get("/schedule/:id/:date", function(req, res) {
 
     reservations.find({
       machine: req.params.id,
-      date: req.params.date
+      date: req.params.date,
+      status: "approved"
     }).then(data => res.send(data))
+
+})
+
+app.get("/schedule", function (req, res) {
+
+  reservations.find().then(data => res.send(data))
 
 })
 
@@ -394,6 +403,8 @@ app.get("/reserve", (req, res) => {
 
 });
 
+
+
 app.post("/reservations/new", function(req, res) {
 
   var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
@@ -411,7 +422,7 @@ app.post("/reservations/new", function(req, res) {
 
 
 
-  reservations.find({}).then((data) => {
+  reservations.find({status:"approved"}).then((data) => {
       var check = 0;
 
       for (var i = 0; i < data.length; i++) {
@@ -439,7 +450,9 @@ app.post("/reservations/new", function(req, res) {
           end: end,
           date: selectedDate,
           machine: req.body.id,
-          username: req.decoded.username
+          username: req.decoded.username,
+          status: "pending",
+          justification: req.body.justification
         })
         res.send({
           type: "success",

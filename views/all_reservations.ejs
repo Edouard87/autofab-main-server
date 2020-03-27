@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <%- include ../partials/global-header.ejs %>
+  <title>Document</title>
+</head>
+
+<body>
+  <%- include ../partials/navbar.ejs %>
+  <div class="page-content">
+    <h2>All Reservations</h2>
+    <p>Filters</p>
+    <label>Machine: </label><select name="machine">
+      <option value="any">Any</option>
+      <% for (var i = 0; i < req.machines.length; i++ ) { %>
+      <option value="<%= req.machines[i].id %>"><%= req.machines[i].name %></option>
+      <% } %>
+    </select>
+    <input type="text" name="username" placeholder="Username">
+    <label>Status: </label>
+    <input type="checkbox" id="option1" name="pending" value="pending">
+    <label for="option1">Pending</label><br>
+    <input type="checkbox" id="option2" name="approved" value="approved">
+    <label for="option2">Approved</label><br>
+    <button id="search">Search</button>
+    <table class="machines-table">
+      <thead>
+        <tr>
+          <td>Username</td>
+          <td>Machine</td>
+          <td>Date</td>
+          <td>Start</td>
+          <td>End</td>
+          <td>Status</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    function humanReadableTime(date) {
+      return date.getHours() + ":" + leadingZeroes(date.getMinutes())
+    }
+      $("#search").on("click",() => {
+        $("tbody").empty()
+        $.ajax({
+          url: "/schedule",
+          method: "get",
+          success: (data) => {
+            $.ajax({
+              url: "/templates/all-reservations-row.mustache",
+              method: "get",
+              success: (template) => {
+                var start;
+                var end;
+                for (var i in data) {
+                  data[i].start = humanReadableTime(new Date(data[i].start * 1000))
+                  data[i].end = humanReadableTime(new Date(data[i].end * 1000))
+                  data[i].machine = $("option[value='" + data[i].machine + "']").html()
+                  console.log(template)
+                  console.log(data)
+                  $("tbody").append(Mustache.to_html(template,data[i]))
+                }
+              }
+            })
+            // console.log(data)
+          }
+        })
+      })
+  </script>
+  <style>
+    h4 {
+
+      font-weight: 400;
+
+    }
+
+    .schedule-block {
+
+      background: black;
+      width: 50%;
+      /* height: 100px; */
+      padding: 10px;
+
+    }
+
+    .schedule-block h2 {
+      color: white;
+    }
+
+    .schedule-block p {
+      color: white;
+    }
+
+    .machines-table {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+
+    .machines-table td {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+  </style>
+</body>
+
+</html>

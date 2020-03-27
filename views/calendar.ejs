@@ -11,17 +11,96 @@
   
   <%- include ../partials/navbar.ejs %>
   <div class="page-content">
-    <h1>Calendar</h1>
-    <p class="calendar-text"> Display reservations for the </p>
-    <select class="calendar-dropdown" id="machine-schedule" style="display:none">
-      <% for (var i = 0; i < req.machines.length; i++ ) { %>
-      <option value="<%= req.machines[i].id %>"><%= req.machines[i].name %></option>
-      <% } %>
-    </select>
-    <p class="calendar-text"> on </p>
-    <input type="date" class="calendar-date-picker" id="machine-schedule-day">
-    <button class="btn btn-outline-success reserve-collapsable">Make a new Reservation</button>
-    <%- include ../partials/reservation.ejs %>
+    <form class="reservation-form ajax-form" method="post" action="/reservations/new">
+      <select name="id" id="machine-schedule">
+        <% for (var i = 0; i < req.machines.length; i++ ) { %>
+        <option value="<%= req.machines[i].id %>"><%= req.machines[i].name %></option>
+        <% } %>
+      </select>
+      <input required id="date" class="calendar-date-picker" name="schedule[global][date]" type="date">
+      <h1>New Reservation</h1>
+      <p> from </p>
+      <input required id="start-time" name="schedule[time][start]" type="time">
+      <p> to </p>
+      <input required id="end-time" name="schedule[time][end]" type="time">
+      <textarea name="justification" placeholder="Enter a reason here"></textarea>
+      <button style="display: block !important" class="submit-reservation btn btn-lg btn-outline-primary">Reserve</button>
+      <div style="display: none" class="dialogue-box warn">
+        <h2>Warning</h2>
+        <p>Before you make this reservation, please make sure the end time is <b>after</b> the start time.</p>
+      </div>
+    </form>
+    <style>
+      form[action="/reservations/new"] {
+        margin-top: 20px;
+        padding: 30px;
+        position: absolute;
+        right: 10px;
+        z-index: 3;
+        max-width: 30vw;
+        /* border-radius: 20px; */
+        /* border: 1px solid #007bff; */
+        /* text-align: center; */
+      }
+
+      form[action="/reservations/new"] textarea {
+        display: block;
+        margin-top: 10px;
+      }
+
+      form[action="/reservations/new"] input,
+      form[action="/reservations/new"] p {
+        display: inline;
+        font-size: 15px;
+      }
+
+      form[action="/reservations/new§"] button {
+        display: block !important;
+      }
+
+      .submit-reservation {
+        margin-top: 30px;
+      }
+
+      h1 {
+        margin-bottom: 30px;
+      }
+    </style>
+    <script>
+      var start;
+      var end;
+
+      function checkTimeFields() {
+
+        start = Math.floor(new Date($("#date").val() + " " + $("#start-time").val()).getTime() / 1000);
+        end = Math.floor(new Date($("#date").val() + " " + $("#end-time").val()).getTime() / 1000);
+        console.log(start);
+        console.log(end);
+        if (start >= end) {
+
+          $(".warn").fadeIn();
+          $(".submit-reservation").attr("disabled", true)
+
+        } else {
+
+          $(".warn").fadeOut();
+          $(".submit-reservation").attr("disabled", false)
+
+        }
+
+      }
+
+      $("#start-time").on('keyup', function () {
+        checkTimeFields()
+      });
+      $("#end-time").on('keyup', function () {
+        checkTimeFields()
+      });
+      $("form[action='/reservations/new']").on("success", () => {
+        getSchedule($("#machine-schedule").val(), formatDate($(".calendar-date-picker").val()));
+      })
+    </script>
+    <!-- Calendar itself is below -->
     <div class="calendar-panel" id="schedule"></div>
     <div class="calendar-panel" id="schedule-lines"></div>
   </div>
