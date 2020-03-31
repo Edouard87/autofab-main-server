@@ -25,26 +25,52 @@
       <button>Create User</button>
     </form>
     <h2>All User Accounts</h2>
-    <table class="machines-table">
+    <table class="machines-table ajax-table" data-url="/users/all">
       <thead>
         <tr>
-          <td>Username</td>
-          <td>RFID Tag</td>
-          <td>Permission</td>
+          <td data-tag="username">Username</td>
+          <td data-tag="rfid">RFID Tag</td>
+          <td data-tag="permission">Permission</td>
           <td>Action</td>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="/accounts/delete/">Delete</a></td>
-        </tr>
       </tbody>
     </table>
   </div>
   <script>
+
+    // console.log())
+    function refreshAjaxTable() {
+      $(".ajax-table tbody").empty();
+      $.ajax({
+        url: $(".ajax-table").data("url"),
+        method: "get",
+        success: data => {
+          var tRow = "<tr>"
+          $(".ajax-table thead td[data-tag]").each(index => {
+            tRow = tRow + "<td>{{" + $(".ajax-table thead td")[index].getAttribute("data-tag") + "}}</td>"
+          })
+          tRow += "<td><button "
+          $(" .ajax-table thead td[data-tag]").each(index=> {
+            tRow += "data-" + $(".ajax-table thead td")[index].getAttribute("data-tag") +
+            "='{{" + $(".ajax-table thead td")[index].getAttribute("data-tag") + "}}' "
+            })
+            tRow += ">Manage</button></td></tr>"
+        console.log(tRow)
+        var tableRow = $(".ajax-table thead").html()
+        console.log(tableRow)
+        data.forEach(element => {
+          $(".ajax-table tbody").append(Mustache.to_html(tRow,element))
+        })
+      }
+      })
+    }
+    refreshAjaxTable()
+    $(".ajax-form").on("success",refreshAjaxTable)
+
+    
+
   </script>
   <style>
     h4 {

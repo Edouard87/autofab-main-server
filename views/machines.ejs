@@ -34,6 +34,10 @@
     </table>
   </div>
   <script>
+    // code for setting up ajax-table
+
+
+
       function getUsers() {
             $.ajax({
             url: "/templates/machines-row.mustache",
@@ -44,6 +48,7 @@
                 url: "/machine/all",
                 method: "get",
                 success: (data) => {
+                  console.log(data)
                         data.forEach(i => {
                             $(".machines-table tbody").append(Mustache.to_html(template,i))
                         })

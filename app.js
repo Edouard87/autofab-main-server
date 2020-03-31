@@ -503,6 +503,14 @@ app.post("/users/new", function(req, res) {
     fs.writeFileSync(__dirname + "/data/users.json", JSON.stringify(usersFile));
     res.redirect("/")
 
+});
+
+app.get("/users/all", checkAdmin, function(req, res) {
+
+  users.find().then(data => {
+    res.send(data)
+  })
+
 })
 
 app.get("/users/deleteall", function(req, res) {
