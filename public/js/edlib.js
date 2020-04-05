@@ -6,6 +6,14 @@ function formatDate(date) {
   return month + "-" + day + "-" + yr
 }
 
+function deformatDate(date) {
+  var selectedDate = date.split("-")
+  var yr = selectedDate[2]
+  var month = selectedDate[0]
+  var day = selectedDate[1]
+  return yr + "-" + month + "-" + day
+}
+
 function leadingZeroes(num) {
 
   var digits = num.toString().length;

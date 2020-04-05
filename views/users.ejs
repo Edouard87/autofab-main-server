@@ -39,35 +39,22 @@
     </table>
   </div>
   <script>
-
-    // console.log())
-    function refreshAjaxTable() {
-      $(".ajax-table tbody").empty();
-      $.ajax({
-        url: $(".ajax-table").data("url"),
-        method: "get",
-        success: data => {
-          var tRow = "<tr>"
-          $(".ajax-table thead td[data-tag]").each(index => {
-            tRow = tRow + "<td>{{" + $(".ajax-table thead td")[index].getAttribute("data-tag") + "}}</td>"
-          })
-          tRow += "<td><button "
-          $(" .ajax-table thead td[data-tag]").each(index=> {
-            tRow += "data-" + $(".ajax-table thead td")[index].getAttribute("data-tag") +
-            "='{{" + $(".ajax-table thead td")[index].getAttribute("data-tag") + "}}' "
-          })
-          tRow += ">Manage</button></td></tr>"
-          var tableRow = $(".ajax-table thead").html()
-          data.forEach(element => {
-            $(".ajax-table tbody").append(Mustache.to_html(tRow,element))
-          })
-        }
-      })
+    tableConfig = {
+      action: (e) => {
+        $.ajax({
+          url:"/users/delete/" + e.data.username,
+          method: "get",
+          success: (msg) => {
+            statusMsg(msg)
+            setupAjaxTable(tableConfig)
+          }
+        })
+      },
+      actionName: "Delete",
+      actionClasses: ["btn","btn-sm","btn-danger"]
     }
-    refreshAjaxTable()
-    $(".ajax-form").on("success",refreshAjaxTable)
-
-    
+    setupAjaxTable(tableConfig)
+    $(".ajax-form").on("success",() => { return setupAjaxTable(tableConfig) });
 
   </script>
   <style>

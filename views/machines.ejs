@@ -20,11 +20,11 @@
       <button>Create</button>
     </form>
     <h2>All machines</h2>
-    <table class="machines-table">
+    <table class="machines-table ajax-table" data-url="/machine/all">
       <thead>
         <tr>
-          <td>Name</td>
-          <td>Type</td>
+          <td data-tag="name">Name</td>
+          <td data-tag="type">Type</td>
           <td>Action</td>
         </tr>
       </thead>
@@ -34,47 +34,26 @@
     </table>
   </div>
   <script>
-    // code for setting up ajax-table
 
 
+    tableConfig = {
+      action: (e) => {
+        console.log(e.data)
+        $.ajax({
+          url:"/machine/delete/" + e.data._id,
+          method: "get",
+          success: (msg) => {
+            statusMsg(msg)
+            setupAjaxTable(tableConfig)
+          }
+        })
+      },
+      actionName: "Delete",
+      actionClasses: ["btn","btn-sm","btn-danger"]
+    }
+    setupAjaxTable(tableConfig)
+    $(".ajax-form").on("success",() => {return setupAjaxTable(tableConfig)});
 
-      function getUsers() {
-            $.ajax({
-            url: "/templates/machines-row.mustache",
-            method: "get",
-            success: template => {
-                $(".machines-table tbody").empty()
-                $.ajax({
-                url: "/machine/all",
-                method: "get",
-                success: (data) => {
-                  console.log(data)
-                        data.forEach(i => {
-                            $(".machines-table tbody").append(Mustache.to_html(template,i))
-                        })
-                        $(".delete-machine").on("click", function() {
-                            $.ajax({
-                                url: "/machine/delete/" + $(this).attr("data-id"),
-                                method: "get",
-                                success: msg => {
-                                    $.ajax({
-                                        url: "/templates/dialogue-msg.mustache",
-                                        method: "get",
-                                        success: dialogue => {
-                                            $("body").append(Mustache.to_html(dialogue,msg))
-                                            getUsers()
-                                        }
-                                    })
-                                }
-                            })
-                        })
-                    }
-                })
-            }
-          })
-      }
-      getUsers()
-      $(".ajax-form").on("success",getUsers)
   </script>
   <style>
     h4 {

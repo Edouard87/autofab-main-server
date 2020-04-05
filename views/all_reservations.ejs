@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <%- include ../partials/global-header.ejs %>
+  <link rel="stylesheet" href="../css/all_reservations.css">
   <title>Document</title>
 </head>
 
@@ -27,52 +28,105 @@
     <input type="checkbox" id="option2" name="approved" value="approved">
     <label for="option2">Approved</label><br>
     <button id="search">Search</button>
-    <table class="machines-table">
+    <table class="machines-table ajax-table" data-url="/schedule">
       <thead>
         <tr>
-          <td>Username</td>
-          <td>Machine</td>
-          <td>Date</td>
-          <td>Start</td>
-          <td>End</td>
-          <td>Status</td>
+          <td data-tag="username">Username</td>
+          <td data-tag="machine">Machine</td>
+          <td data-tag="date">Date</td>
+          <td data-tag="start">Start</td>
+          <td data-tag="end">End</td>
+          <td data-tag="status">Status</td>
           <td>Action</td>
         </tr>
       </thead>
       <tbody>
       </tbody>
     </table>
+    <div class="action-menu"">
+      <form class="ajax-form" action="/reservations/new" method="post">
+        <h1>View Reservation</h1>
+        <p>View the reservation and make modifications thereto.</p>
+        <input placeholder="Username" type="text" id="username">
+        <select id="machine" name="id">
+          <option value="any">Any</option>
+          <% for (var i = 0; i < req.machines.length; i++ ) { %>
+          <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>"><%= req.machines[i].name %>
+          </option>
+          <% } %>
+        </select>
+        <input type="date" id="date" name="schedule[global][date]">
+        <input type="time" id="start" name="schedule[time][start]">
+        <input type="time" id="end" name="schedule[time][end]">
+        <textarea id="justification" name="justification"></textarea>
+        <select name="status" id="status" name="status">
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+        </select>
+        <div>
+          <button class="btn btn-sm btn-success">Save Changes</button>
+        </div>
+      </form>
+      
+    </div>
   </div>
   <script>
     function humanReadableTime(date) {
       return date.getHours() + ":" + leadingZeroes(date.getMinutes())
     }
-      $("#search").on("click",() => {
-        $("tbody").empty()
-        $.ajax({
-          url: "/schedule",
-          method: "get",
-          success: (data) => {
-            $.ajax({
-              url: "/templates/all-reservations-row.mustache",
-              method: "get",
-              success: (template) => {
-                var start;
-                var end;
-                for (var i in data) {
-                  data[i].start = humanReadableTime(new Date(data[i].start * 1000))
-                  data[i].end = humanReadableTime(new Date(data[i].end * 1000))
-                  data[i].machine = $("option[value='" + data[i].machine + "']").html()
-                  console.log(template)
-                  console.log(data)
-                  $("tbody").append(Mustache.to_html(template,data[i]))
-                }
-              }
-            })
-            // console.log(data)
+
+      tableConfig = {
+        action: (e) => {
+          dataKeys = Object.keys(e.data);
+          console.log(e.data["machine"])
+          var menElmnt;
+          const formStruct = {
+            text: ["username"],
+            textarea: ["justification"],
+            time: ["start","end"],
+            select: ["status"],
+            date: ["date"],
+            machine: ["machine"]
           }
-        })
+          dataKeys.forEach(elmnt=> {
+            console.log()
+            menElmnt = $(".action-menu #" + elmnt)
+            if (formStruct.text.includes(elmnt)) {
+              menElmnt.val(e.data[elmnt])
+            } else if (formStruct.textarea.includes(elmnt)) {
+              menElmnt.html(e.data[elmnt])
+            } else if (formStruct.time.includes(elmnt)) {
+              menElmnt.val(e.data[elmnt])
+            } else if (formStruct.select.includes(elmnt)) {
+              $("#status option[value='" + e.data[elmnt] + "']").attr('selected', 'selected');
+            } else if (formStruct.date.includes(elmnt)) {
+              menElmnt.val(deformatDate(e.data[elmnt]))
+            } else if (formStruct.machine.includes(elmnt)) {
+              console.log(e.data[elmnt])
+              $("#machine option[data-name='" + e.data[elmnt] + "']").attr('selected', 'selected');
+            }
+            // console.log(elmnt)
+            
+            $(".action-menu").css("display","block")
+          })
+        },
+        validator: (e) => {
+          console.log(e)
+          e.start = humanReadableTime(new Date(e.start * 1000))
+          e.end = humanReadableTime(new Date(e.end * 1000))
+          e.machine = $("option[value='" + e.machine + "']").html()
+        },
+        actionName: "Manage",
+        actionClasses: ["btn","btn-sm","btn-warning"]
+      }
+
+      setupAjaxTable(tableConfig)
+      $("#search").on("click",() => {return setupAjaxTable(tableConfig)})
+
+      $("#accept-res").on("click", () => {
+
       })
+
   </script>
   <style>
     h4 {

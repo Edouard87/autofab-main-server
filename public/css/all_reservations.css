@@ -1,0 +1,8 @@
+.action-menu input {
+    display: block;
+    margin: 10px;
+}
+
+.action-menu {
+    display: none;
+}

@@ -43,7 +43,7 @@ const store = require("data-store")(__dirname + "/data/accounts.json");
 
 const mongoose = require('mongoose');
 
-mongoose.connect((process.env.MONGODB_URI || "mongodb://localhost"), {
+mongoose.connect((process.env.MONGODB_URI || "mongodb://localhost/autofab"), {
   useNewUrlParser: true
 })
 
@@ -124,8 +124,16 @@ function authenticate(req, res, next) {
   }
 }
 
-function checkAdmin(req, res, next) {
+function isAdmin(req) {
   if (req.decoded.permission == -1) {
+    return true
+  } else {
+    return false
+  }
+}
+
+function checkAdmin(req, res, next) {
+  if (isAdmin(req)) {
     return next()
   } else {
     return res.redirect("/")
@@ -256,9 +264,13 @@ app.get('/', function(req, res) {
   res.redirect("/p/home")
 });
 
-app.get("/accounts/delete/:username", checkAdmin, (req, res) => {
+app.get("/users/delete/:username", checkAdmin, (req, res) => {
   users.findOneAndDelete({username: req.params.username}).then(() => {
-    res.render("admin",{req:req})
+    res.send({
+      type: "success",
+      header: "Success",
+      msg: "User successfully deleted."
+    })
   }).catch((err) => {
     res.render("admin", {
       req: req
@@ -403,8 +415,6 @@ app.get("/reserve", (req, res) => {
 
 });
 
-
-
 app.post("/reservations/new", function(req, res) {
 
   var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
@@ -418,9 +428,19 @@ app.post("/reservations/new", function(req, res) {
   var yyyy = selectedDate[0]
   selectedDate = mm + "-" + dd + "-" + yyyy
 
-  console.log("date is " + selectedDate)
+  console.log("date is " + selectedDate);
 
+  var status;
 
+  if (isAdmin(req)) {
+    status = req.body.status
+  } else {
+    status = "pending"
+  }
+
+  if (status == undefined) {
+    status = "pending"
+  }
 
   reservations.find({status:"approved"}).then((data) => {
       var check = 0;
@@ -451,7 +471,7 @@ app.post("/reservations/new", function(req, res) {
           date: selectedDate,
           machine: req.body.id,
           username: req.decoded.username,
-          status: "pending",
+          status: status,
           justification: req.body.justification
         })
         res.send({
