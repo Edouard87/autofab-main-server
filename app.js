@@ -306,9 +306,18 @@ app.get("/schedule/:id/:date", function(req, res) {
 
 })
 
-app.get("/schedule", function (req, res) {
+app.post("/schedule/a", checkAdmin, function (req, res) {
 
-  reservations.find().then(data => res.send(data))
+  console.log("OBJECT:",req.body)
+  reservations.find(req.body).then(data => res.send(data)).catch(err=>console.log(err))
+
+})
+
+app.post("/schedule/p", function (req, res) {
+
+  console.log(req.body)
+  req.body.username = req.decoded.username
+  reservations.find(req.body).then(data => res.send(data)).catch(err => console.log(err))
 
 })
 
@@ -415,6 +424,46 @@ app.get("/reserve", (req, res) => {
 
 });
 
+app.post("/reservations/delete", (req, res) => {
+  console.log(req.body._id)
+  if (isAdmin(req)) {
+    reservations.findByIdAndDelete({
+      _id: req.body._id
+    }).exec().then((document) => {
+      res.send({
+        type: "success",
+        header: "Success",
+        msg: "The resrevation was successfully deleted. It will not longer take place"
+      })
+    }).catch((err) => {
+      console.log(err)
+      res.send({
+        type: "error",
+        header: "Error",
+        msg: "An error occured"
+      })
+    })
+  } else {
+    reservations.findOneAndDelete({
+      username: req.decoded.username,
+      _id: req.body.resId
+    }).exec().then((document) => {
+      res.send({
+        type: "success",
+        header: "Success",
+        msg: "The resrevation was successfully deleted. It will not longer take place"
+      })
+    }).catch((err) => {
+      res.send({
+        type: "error",
+        header: "Error",
+        msg: "An error occured"
+      })
+    })
+  }
+  
+})
+
 app.post("/reservations/new", function(req, res) {
 
   var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
@@ -428,8 +477,6 @@ app.post("/reservations/new", function(req, res) {
   var yyyy = selectedDate[0]
   selectedDate = mm + "-" + dd + "-" + yyyy
 
-  console.log("date is " + selectedDate);
-
   var status;
 
   if (isAdmin(req)) {
@@ -442,43 +489,97 @@ app.post("/reservations/new", function(req, res) {
     status = "pending"
   }
 
-  reservations.find({status:"approved"}).then((data) => {
+  reservations.find({
+    status:"approved"
+  }).then((data) => {
       var check = 0;
 
       for (var i = 0; i < data.length; i++) {
 
-        if (isBetween(start, data[i].start, data[i].end) || isBetween(end, data[i].start, data[i].end)) {
+          if (isBetween(start, data[i].start, data[i].end) || isBetween(end, data[i].start, data[i].end)) {
 
-          if (end == data[i].start && start != data[i].end) {
-            check++
-          } else if (start == data[i].end && end != data[i].start) {
+            if (end == data[i].start && start != data[i].end) {
+              check++
+            } else if (start == data[i].end && end != data[i].start) {
+              check++
+            }
+          } else {
             check++
           }
-
-        } else {
-
-          check++
-
-        }
 
       };
 
       if (check == data.length) {
         // a time slot is available
-        reservations.create({
-          start: start,
-          end: end,
-          date: selectedDate,
-          machine: req.body.id,
-          username: req.decoded.username,
-          status: status,
-          justification: req.body.justification
-        })
-        res.send({
-          type: "success",
-          header: "Success",
-          msg: "Your reservation has been made"
-        })
+        console.log(req.body._id)
+
+        if (isAdmin(req)) {
+          // The user is an admin
+          if (req.body._id == undefined) {
+            // This is a new reservation
+            reservations.create({
+              start: start,
+              end: end,
+              date: selectedDate,
+              machine: req.body.id,
+              username: req.body.username || req.decoded.username,
+              status: status,
+              justification: req.body.justification
+            }).then(res.send({
+              type: "success",
+              header: "Success",
+              msg: "Your resrevation was created."
+            }))
+          } else {
+            // This is a medification of an existing reservation
+            reservations.findOneAndUpdate({ _id: req.body._id }, {
+              start: start,
+              end: end,
+              date: selectedDate,
+              machine: req.body.id,
+              username: req.body.username,
+              status: status,
+              justification: req.body.justification
+            }).exec().then(res.send({
+              type: "success",
+              header: "Success",
+              msg: "Your changes have been made."
+            }))
+          }
+        } else {
+          // The user is not an admin
+          if (req._id == undefined) {
+            // This is a new resrevation
+            reservations.create({
+              start: start,
+              end: end,
+              date: selectedDate,
+              machine: req.body.id,
+              username: req.decoded.username,
+              status: "pending",
+              justification: req.body.justification
+            }).then(res.send({
+              type: "success",
+              header: "Success",
+              msg: "Your reservation has been created. Your teacher may now approve it."
+            }))
+          } else {
+            // This is a medification of an existing reservation
+            reservations.findOneAndUpdate({ _id: req._id,username:req.body.username}, {
+              start: start,
+              end: end,
+              date: selectedDate,
+              machine: req.body.id,
+              username: req.decoded.username,
+              status: "pending",
+              justification: req.body.justification
+            }).then(res.send({
+              type: "success",
+              header: "Success",
+              msg: "Your changes have been made..."
+            }))
+          }
+        }
       } else {
         // a time slot is not available
         return res.send({

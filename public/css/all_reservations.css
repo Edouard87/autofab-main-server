@@ -6,3 +6,7 @@
 .action-menu {
     display: none;
 }
+
+.action-menu input[type="checkbox"] {
+    display: inline !important
+}

@@ -7,7 +7,7 @@
         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false"
             href="#">Account</a>
           <div class="dropdown-menu" role="menu"></a><a
-              class="dropdown-item" role="presentation" href="/p/myreservations">My Reservations</a><a
+              class="dropdown-item" role="presentation" href="/p/reservations">My Reservations</a><a
                 class="dropdown-item"
               role="presentation" href="/p/myaccount">Account Settings</a></div>
         </li>
@@ -15,12 +15,14 @@
         <% if (req.decoded.permission == -1) { %>
           <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false"
               href="#">Admin Tools</a>
-            <div class="dropdown-menu" role="menu"></a><a class="dropdown-item" role="presentation"
-                href="/p/machines">Machines</a><a class="dropdown-item" role="presentation"
-                href="/p/users">Users</a></div>
+            <div class="dropdown-menu" role="menu"></a>
+              <a class="dropdown-item" role="presentation" href="/p/machines">Machines</a>
+              <a class="dropdown-item" role="presentation" href="/p/users">Users</a>
+              <a class="dropdown-item" role="presentation" href="/p/reservations?all">All Reservations</a>
+            </div>
           </li>
         <% } %>
-      </ul><span class="navbar-text actions"> <a class="login" href="/account">Welcome <b><%= req.decoded.username %></b></a><a
+      </ul><span class="navbar-text actions"> <a class="login" href="/p/myaccount">Welcome <b><%= req.decoded.username %></b></a><a
           class="btn btn-light action-button"
           role="button" href="/logout">Log Out</a></span>
     </div>

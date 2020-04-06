@@ -1,10 +1,21 @@
 function setupAjaxTable(tableConfig) {
+  console.log($(".ajax-table").data("method"))
   $(".ajax-table tbody").empty();
+  var query;
+  try {
+    query = tableConfig.preSend()
+  } catch(err) {
+    query = {}
+  }
   $.ajax({
     url: $(".ajax-table").data("url"),
-    method: "get",
+    method: $(".ajax-table").data("method"),
     context: $(".ajax-table .action-btn"),
+    data: JSON.stringify(query),
+    contentType: 'application/json',
     success: data => {
+      console.log(data)
+      console.log($(".ajax-table").data("url"))
       data.forEach((elmt) => {
         try {
           tableConfig.validator(elmt)

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <%- include ../partials/global-header.ejs %>
+  <link rel="stylesheet" href="../css/all_reservations.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <%- include ../partials/navbar.ejs %>
+  <div class="page-content">
+    <h2>All Reservations</h2>
+    <div class="filters">
+      <p>Filters</p>
+      <label>Machine: </label><select class="machine-select" id="filter-machine" name="machine">
+        <option value="any">Any</option>
+        <% for (var i = 0; i < req.machines.length; i++ ) { %>
+        <option value="<%= req.machines[i].id %>"><%= req.machines[i].name %></option>
+        <% } %>
+      </select>
+      <lable data-restricted="true">Username: </lable>
+      <select data-restricted="true" id="filter-username-type">
+        <option value="any">Any</option>
+        <option value="pending">Specific</option>
+      </select>
+      <select data-restricted="true" id="filter-username" name="username">
+        <% for (var i = 0; i < req.users.length; i++ ) { %>
+        <option value="<%= req.users[i].username %>"><%= req.users[i].username %>
+        </option>
+        <% } %>
+      </select>
+      <label>Status: </label>
+      <select id="filter-status">
+        <option value="any">Any</option>
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+      </select>
+      <label>Date</label><select id="filter-date-type">
+        <option value="any">Any</option>
+        <option value="specific">Specific</option>
+      </select><input type="date" id="filter-date">
+      <button id="search">Search</button>
+    </div>
+    <table class="machines-table ajax-table" data-url="" data-method="post">
+      <thead>
+        <tr>
+          <td data-tag="username">Username</td>
+          <td data-tag="machine">Machine</td>
+          <td data-tag="date">Date</td>
+          <td data-tag="start">Start</td>
+          <td data-tag="end">End</td>
+          <td data-tag="status">Status</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div class="action-menu"">
+      <form class="ajax-form" action="/reservations/new" method="post">
+        <h1>View Reservation</h1>
+        <p>View the reservation and make modifications thereto.</p>
+        <input type="hidden" name="_id" id="resId">
+        <select data-restricted="true" id="username" name="username">
+          <% for (var i = 0; i < req.users.length; i++ ) { %>
+          <option value="<%= req.users[i].username %>"><%= req.users[i].username %>
+          </option>
+          <% } %>
+        </select>
+        <select id="machine" name="id">
+          <% for (var i = 0; i < req.machines.length; i++ ) { %>
+          <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>"><%= req.machines[i].name %>
+          </option>
+          <% } %>
+        </select>
+        <input type="date" id="date" name="schedule[global][date]">
+        <input type="time" id="start" name="schedule[time][start]">
+        <input type="time" id="end" name="schedule[time][end]">
+        <textarea id="justification" name="justification"></textarea>
+        <select data-restricted="true" name="status" id="status" name="status">
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+        </select>
+        <div>
+          <input id="save-duplicate" type="checkbox" name="save-duplicate"><label for="save-duplicate">Save as a
+            duplicate</label>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-success">Save Changes</button>
+        </div>
+      </form>
+      <button id="deleteRes" class="btn btn-sm btn-danger">Delete</button>
+    </div>
+  </div>
+  <script>
+    if (location.href.split("?")[1] == "all") {
+      $(".ajax-table").attr("data-url","/schedule/a")
+    } else {
+      // restrict the page for people viewing the not all page
+      $(".ajax-table").attr("data-url","/schedule/p")
+      $("[data-restricted='true'").css('display',"none")
+    }
+
+    function humanReadableTime(date) {
+      return date.getHours() + ":" + leadingZeroes(date.getMinutes())
+    }
+
+      tableConfig = {
+        action: (e) => {
+          dataKeys = Object.keys(e.data);
+          console.log(e.data)
+          var menElmnt;
+          const formStruct = {
+            text: ["username"],
+            textarea: ["justification"],
+            time: ["start","end"],
+            select: ["status"],
+            date: ["date"],
+            machine: ["machine"],
+            hidden: ["_id"]
+          }
+          dataKeys.forEach(elmnt=> {
+            console.log()
+            menElmnt = $(".action-menu #" + elmnt)
+            if (formStruct.text.includes(elmnt)) {
+              menElmnt.val(e.data[elmnt])
+            } else if (formStruct.textarea.includes(elmnt)) {
+              menElmnt.html(e.data[elmnt])
+            } else if (formStruct.time.includes(elmnt)) {
+              menElmnt.val(e.data[elmnt])
+            } else if (formStruct.select.includes(elmnt)) {
+              $("#status").val(e.data[elmnt])
+            } else if (formStruct.date.includes(elmnt)) {
+              menElmnt.val(deformatDate(e.data[elmnt]))
+            } else if (formStruct.machine.includes(elmnt)) {
+              $("#machine option").removeAttr("selected");
+              $("#machine option[data-name='" + e.data[elmnt] + "']").attr("selected","selected")
+            } else if (formStruct.hidden.includes(elmnt)) {
+              $("#resId").val(e.data[elmnt])
+            }
+            $(".action-menu").css("display","block")
+          })
+        },
+        validator: (e) => {
+          console.log(e)
+          e.start = humanReadableTime(new Date(e.start * 1000))
+          e.end = humanReadableTime(new Date(e.end * 1000))
+          e.machine = $("option[value='" + e.machine + "']").html()
+        },
+        preSend: () => {
+          var query = {}
+          console.log($("#filter-machine").val())
+          if ($("#filter-machine").val() != "any") {
+            query.machine = $("#filter-machine").val()
+          }
+          console.log($("#filter-status").val())
+          if ($("#filter-status").val() != "any") {
+            query.status = $("#filter-status").val()
+          }
+          console.log($("#filter-date").val())
+          console.log($("#filter-date-type").val())
+          if ($("#filter-date-type").val() != "any") {
+            query.date = formatDate($("#filter-date").val())
+          }
+          if ($("#filter-username-type").val() != "any") {
+            query.username = $("#filter-username").val()
+          }
+        console.log(query)
+          return query || {}
+        },
+        actionName: "Manage",
+        actionClasses: ["btn","btn-sm","btn-warning"]
+      }
+
+      setupAjaxTable(tableConfig)
+      $("#search").on("click",() => {return setupAjaxTable(tableConfig)})
+      
+      $("#deleteRes").on("click", () => {
+        var deleteQuery = {
+          _id: $("#resId").val()
+        }
+        $.ajax({
+          url: "/reservations/delete",
+          type: "post",
+          data: JSON.stringify(deleteQuery),
+          contentType: "application/json",
+          dataType: "json",
+          success: msg => {
+            setupAjaxTable(tableConfig)
+            $(".action-menu").css("display","none")
+            statusMsg(msg)
+          }
+        })
+      })
+
+      $(".ajax-form").on("success",() => {
+        setupAjaxTable(tableConfig)
+      })
+
+  </script>
+  <style>
+    h4 {
+
+      font-weight: 400;
+
+    }
+
+    .schedule-block {
+
+      background: black;
+      width: 50%;
+      /* height: 100px; */
+      padding: 10px;
+
+    }
+
+    .schedule-block h2 {
+      color: white;
+    }
+
+    .schedule-block p {
+      color: white;
+    }
+
+    .machines-table {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+
+    .machines-table td {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+  </style>
+</body>
+
+</html>
