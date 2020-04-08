@@ -451,7 +451,7 @@ app.post("/reservations/delete", (req, res) => {
       res.send({
         type: "success",
         header: "Success",
-        msg: "The resrevation was successfully deleted. It will not longer take place"
+        msg: "The reservation was successfully deleted. It will not longer take place"
       })
     }).catch((err) => {
       res.send({
