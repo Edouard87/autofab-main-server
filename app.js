@@ -688,6 +688,8 @@ io.use(encrypt(process.env.secret || "secret"))
 
 io.on("connection", function(socket) {
 
+  console.log("User has connected!")
+
     socket.on("disconnect", function(a) {
       var i = connectedReaders.indexOf(socket);
       connectedReaders.splice(i, 1);
