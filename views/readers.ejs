@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <%- include ../partials/global-header.ejs %>
+  <link rel="stylesheet" href="../css/all_reservations.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <%- include ../partials/navbar.ejs %>
+  <div class="page-content">
+    <h1>Connected Readers</h1>
+    <table class="machines-table ajax-table" data-url="/readers/all" data-method="get">
+      <thead>
+        <tr>
+          <td data-tag="ip">IP</td>
+          <td data-tag="machine">Machine</td>
+          <td data-tag="status">Status</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <button id="refresh" class="btn btn-sm btn-success">Refresh</button>
+    <div class="action-menu"">
+      <form class="ajax-form" action="/reservations/new" method="post">
+        <h1>Reader Parameters</h1>
+        <p>View the reader and make modifications thereto.</p>
+        <select id="machine" name="id">
+          <% for (var i = 0; i < req.machines.length; i++ ) { %>
+          <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>"><%= req.machines[i].name %></option>
+          <% } %>
+        </select>
+        <div>
+          <button class="btn btn-sm btn-success">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+
+    function humanReadableTime(date) {
+      return date.getHours() + ":" + leadingZeroes(date.getMinutes())
+    }
+
+      tableConfig = {
+        action: (e) => {
+          dataKeys = Object.keys(e.data);
+          console.log(e.data)
+          var menElmnt;
+          const formStruct = {
+            text: ["username"],
+            textarea: ["justification"],
+            time: ["start","end"],
+            select: ["status"],
+            date: ["date"],
+            machine: ["machine"],
+            hidden: ["_id"]
+          }
+          dataKeys.forEach(elmnt=> {
+            console.log()
+            menElmnt = $(".action-menu #" + elmnt)
+            if (formStruct.text.includes(elmnt)) {
+              menElmnt.val(e.data[elmnt])
+            } else if (formStruct.textarea.includes(elmnt)) {
+              menElmnt.html(e.data[elmnt])
+            } else if (formStruct.time.includes(elmnt)) {
+              menElmnt.val(e.data[elmnt])
+            } else if (formStruct.select.includes(elmnt)) {
+              $("#status").val(e.data[elmnt])
+            } else if (formStruct.date.includes(elmnt)) {
+              menElmnt.val(deformatDate(e.data[elmnt]))
+            } else if (formStruct.machine.includes(elmnt)) {
+              $("#machine option").removeAttr("selected");
+              $("#machine option[data-name='" + e.data[elmnt] + "']").attr("selected","selected")
+            } else if (formStruct.hidden.includes(elmnt)) {
+              $("#resId").val(e.data[elmnt])
+            }
+            $(".action-menu").css("display","block")
+          })
+        },
+        validator: (e) => {
+          e.machine = $("option[value='" + e.machine + "']").html()
+        },
+        actionName: "Manage",
+        actionClasses: ["btn","btn-sm","btn-warning"]
+      }
+
+      setupAjaxTable(tableConfig)
+      $("#refresh").on("click",() => {return setupAjaxTable(tableConfig)})
+      
+      $("#deleteRes").on("click", () => {
+        var deleteQuery = {
+          _id: $("#resId").val()
+        }
+        $.ajax({
+          url: "/reservations/delete",
+          type: "post",
+          data: JSON.stringify(deleteQuery),
+          contentType: "application/json",
+          dataType: "json",
+          success: msg => {
+            setupAjaxTable(tableConfig)
+            $(".action-menu").css("display","none")
+            statusMsg(msg)
+          }
+        })
+      })
+
+      $(".ajax-form").on("success",() => {
+        setupAjaxTable(tableConfig)
+      })
+
+  </script>
+  <style>
+    h4 {
+
+      font-weight: 400;
+
+    }
+
+    .schedule-block {
+
+      background: black;
+      width: 50%;
+      /* height: 100px; */
+      padding: 10px;
+
+    }
+
+    .schedule-block h2 {
+      color: white;
+    }
+
+    .schedule-block p {
+      color: white;
+    }
+
+    .machines-table {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+
+    .machines-table td {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 3px;
+
+    }
+  </style>
+</body>
+
+</html>

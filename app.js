@@ -13,6 +13,8 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server)
 
+const encrypt = require("socket.io-encrypt")
+
 const env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
@@ -80,6 +82,16 @@ var reservationSchema = new mongoose.Schema({
 })
 
 var reservations = mongoose.model("reservation",reservationSchema)
+
+// readers
+
+var readersSchema = new mongoose.Schema({
+  ip: {type: String, unique: true},
+  machine: String,
+  status: String
+})
+
+var readers = new mongoose.model("reader",readersSchema)
 
 // User auth stuff
 
@@ -644,33 +656,59 @@ app.get("/users/deleteall", function(req, res) {
 
 });
 
-try {
-    fs.unlinkSync(__dirname + "/data/readers.json");
-} catch(err) {}
+var connectedReaders =[];
 
-fs.writeFileSync(__dirname + "/data/readers.json", JSON.stringify({
-    readers:[]
-}));
-var readersFile = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json","utf-8"));
-var checkReaders = "";
-io.on("connection", function (socket) {
+app.get("/readers/tmp", checkAdmin, (req, res) => {
+   readers.find().then(data => {
+     var ips = [];
+     var sendItems = [];
+     data.forEach(elmnt => {
+       ips.push(elmnt.ip)
+     })
+     console.log("IPs",ips)
+    connectedReaders.forEach(elmnt => {
+      console.log(ips.includes(elmnt.ip))
+      if (!ips.includes(elmnt.ip)) {
+        sendItems.push(elmnt)
+      }
+    })
+    res.send(sendItems)
+   })
+})
 
-    socket.emit("ping", {server: true});
+app.post("/readers/accept", checkAdmin, (req, res) => {
+  readers.create({
+    ip: req.body.ip,
+    machine: req.body.machine
+  });
+});
+
+app.get("/readers/all", checkAdmin, (req, res) => {
+  readers.find().then(data => {
+    var ips = [];
+    var sendItems = [];
+    connectedReaders.forEach(elmnt => {
+      ips.push(elmnt.ip)
+    })
+    data.forEach(elmnt => {
+      if (ips.includes(elmnt.ip)) {
+        elmnt.status="connected"
+      } else {
+        elmnt.status = "not connected"
+      }
+      sendItems.push(elmnt)
+    })
+    res.send(sendItems)
+  })
+})
+
+io.use(encrypt(process.env.secret || "secret"))
+
+io.on("connection", function(socket) {
 
     socket.on("disconnect", function(a) {
-        // fs.unlinkSync(__dirname + "/data/readers.json")
-        // console.log(a);
-        // socket.emit("readers_update");
-        // socket.on("readers_return", function(returnIP) {
-
-        //     // for (var i = 0; i < readersFile.readers.length; i++) {
-
-        //     //     if ()
-
-        //     // }
-
-        // });
-
+      var i = connectedReaders.indexOf(socket);
+      connectedReaders.splice(i, 1);
     })
 
     // if (checkReaders == "") {
@@ -701,38 +739,10 @@ io.on("connection", function (socket) {
     // }
 
     socket.on("handshake", function(data) {
-
-        // The readers who connect may only have a unique IP. Else, they will be disconnected.
-        if (readersFile.readers.length == 0) {
-            readersFile.readers.push({
-              ip: data.ip,
-              machine: data.machine
-            });
-            console.log(readersFile)
-            fs.writeFileSync(__dirname + "/data/readers.json", JSON.stringify(readersFile));
-        } else {
-            for (var i = 0; i < readersFile.readers.length; i++) {
-
-              console.log("searching...")
-
-              if (readersFile.readers[i].ip == data.ip) {
-
-                socket.disconnect();
-
-              } else {
-
-                readersFile.readers.push({
-                  ip: data.ip,
-                  machine: data.machine
-                });
-                console.log(readersFile)
-                fs.writeFileSync(__dirname + "/data/readers.json", JSON.stringify(readersFile));
-
-              }
-
-            }
-        }
-        
+        connectedReaders.push({
+          ip: data.ip,
+          text: data.text
+        });
     })
     
     socket.on("scan", function(data) {
