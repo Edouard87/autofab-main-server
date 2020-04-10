@@ -29,7 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -194,7 +194,6 @@ function loadFile(req,res,next) {
     req.users = values[0]
     req.machines = values[1]
     req.readers = []
-    console.log(req.machines)
     next()
   })
     
@@ -319,41 +318,30 @@ app.get("/schedule/:id/:date", function(req, res) {
 })
 
 app.post("/schedule/a", checkAdmin, function (req, res) {
-
-  console.log("OBJECT:",req.body)
   reservations.find(req.body).then(data => res.send(data)).catch(err=>console.log(err))
-
 })
 
 app.post("/schedule/p", function (req, res) {
-
-  console.log(req.body)
   req.body.username = req.decoded.username
   reservations.find(req.body).then(data => res.send(data)).catch(err => console.log(err))
-
 })
 
 app.get("/myreservations/:id/:date", function(req, res) {
-
   reservations.find({
     machine: req.params.id,
     username: req.decoded.username,
     date: req.params.date
   }).then(data => {
-    console.log(data)
     res.send(data)
   })
-
 })
 
  app.get("/readers/manage/:ip", function (req, res) {
 
    var readers = JSON.parse(fs.readFileSync(__dirname + "/data/readers.json", "utf-8")).readers;
    var reader;
-   console.log(readers)
 
    for (var i = 0; i < readers.length; i++) {
-    //    console.log("searching...")
 
      if (readers[i].ip == req.params.ip) {
 
@@ -362,8 +350,6 @@ app.get("/myreservations/:id/:date", function(req, res) {
      }
 
    }
-
-   console.log(reader)
 
    var machines = JSON.parse(fs.readFileSync(__dirname + "/data/machines.json", "utf-8")).machines
 
@@ -437,7 +423,6 @@ app.get("/reserve", (req, res) => {
 });
 
 app.post("/reservations/delete", (req, res) => {
-  console.log(req.body._id)
   if (isAdmin(req)) {
     reservations.findByIdAndDelete({
       _id: req.body._id
@@ -523,7 +508,6 @@ app.post("/reservations/new", function(req, res) {
 
       if (check == data.length) {
         // a time slot is available
-        console.log(req.body._id)
 
         if (isAdmin(req)) {
           // The user is an admin
@@ -665,9 +649,7 @@ app.get("/readers/tmp", checkAdmin, (req, res) => {
      data.forEach(elmnt => {
        ips.push(elmnt.ip)
      })
-     console.log("IPs",ips)
     connectedReaders.forEach(elmnt => {
-      console.log(ips.includes(elmnt.ip))
       if (!ips.includes(elmnt.ip)) {
         sendItems.push(elmnt)
       }
@@ -850,5 +832,6 @@ io.on("connection", function(socket) {
 });
 
 server.listen(process.env.PORT || 3000);
+console.log("PORT: ", process.env.PORT)
 
 // module.exports = app;
