@@ -731,6 +731,8 @@ io.on("connection", function(socket) {
     
     socket.on("scan", function(data) {
 
+      console.log("scanned! Data is: ", data)
+
         try {
 
              var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + data.machine + ".json"));
