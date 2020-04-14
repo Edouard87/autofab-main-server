@@ -731,9 +731,9 @@ io.on("connection", function(socket) {
     
     socket.on("scan", function(data) {
 
-      var trimData = data.trim()
+      data.id = data.id.trim()
 
-      console.log("scanned! Data is: ", trimData)
+      console.log("scanned! Data is: ", data)
 
         try {
 
