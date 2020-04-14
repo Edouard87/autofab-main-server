@@ -728,110 +728,21 @@ io.on("connection", function(socket) {
           text: data.text
         });
     })
+
+    async function findUser(data) {
+      await users
+      users.find({
+        rfid: data.id
+      }).then(foundUser => {
+        io.emit("user", foundUser[0])
+      })
+    }
     
-    socket.on("scan", function(data) {
+    socket.on("scan", async function(data) {
 
+      data.id = data.id.toString();
       data.id = data.id.trim()
-
-      console.log("scanned! Data is: ", data)
-
-        try {
-
-             var file = JSON.parse(fs.readFileSync(__dirname + "/data/schedules/machine-" + data.machine + ".json"));
-
-        } catch(err) {
-
-            return socket.emit("status", {
-                machine: data.machine,
-                status: "does_not_exist"
-            });
-
-        }
-        // console.log(file)
-        console.log(file.schedule);
-
-        var users = JSON.parse(fs.readFileSync(__dirname + "/data/users.json")).users;
-        console.log(users)
-
-        var authorizedUser = "";
-
-        console.log("starting... " + users.length)
-
-        for (var i = 0; i < users.length; i++) {
-
-            console.log("indexing...")
-            console.log(data.rfid)
-            console.log(users[i].rfid)
-
-
-            if (data.rfid == users[i].rfid) {
-
-                authorizedUser = users[i].name;
-                
-                break;
-
-            }
-
-        }
-
-        // Send appropriate status messages
-
-        if (authorizedUser == "") {
-
-            socket.emit("status", {
-              machine: data.machine,
-              status: "no_match"
-            })
-
-        } else {
-
-            socket.emit("status", {
-                machine: data.machine,
-                status: "usr_match",
-                user: authorizedUser
-            })
-
-        }
-
-        var now = Math.floor(new Date().getTime() / 1000);
-        var falseSlots = 0;
-        console.log("checking...")
-        console.log(file.schedule)
-
-        for (var i = 0; i < file.schedule.length; i++) {
-
-            if (file.schedule[i].name == authorizedUser) {
-
-                if(isBetween(now, file.schedule[i].time[0], file.schedule[i].time[1])){
-                    
-                    return io.emit("status", {
-                        machine: data.machine,
-                        status: "authorized",
-                        end: file.schedule[i].time[1]
-                    })
-
-                } else {
-                    falseSlots++
-                }
-
-            } else {
-                falseSlots++
-            }
-
-        }
-        // falseSlots = falseSlots+4
-
-        if (falseSlots==file.schedule.length) {
-            console.log(falseSlots)
-            console.log(file.schedule.length)
-            io.emit("status", {
-
-              machine: data.machine,
-              status: "no_rez"
-
-            });
-            falseSlots = 0;
-        }
+      findUser(data)
 
     });
 
