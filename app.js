@@ -671,6 +671,36 @@ app.post("/readers/accept", checkAdmin, (req, res) => {
   });
 });
 
+app.post("/readers/delete", checkAdmin, (req, res) => {
+  readers.findByIdAndDelete(req.body.readerId).exec().then(doc => {
+    res.send({
+      type: "success",
+      header: "Reader Deleted",
+      msg: "The reader was deleted"
+    })
+  }).catch(err => {
+    console.log(err)
+  })
+})
+
+app.post("/readers/modify", checkAdmin, (req, res) => {
+  readers.find({
+    _id: req.body.readerId
+  }).then((doc) => {
+    console.log(doc)
+  })
+  readers.findOneAndUpdate({_id: req.body.readerId},req.body).exec().then((doc) => {
+    console.log("changed document", doc)
+    res.send({
+      type: "success",
+      header: "Changes Saved",
+      msg: "The reader was successfully updated"
+    })
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
 app.get("/readers/all", checkAdmin, (req, res) => {
   readers.find().then(data => {
     var ips = [];
