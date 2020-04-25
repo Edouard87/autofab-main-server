@@ -11,38 +11,120 @@
 </head>
 
 <body>
-  <%- include ../partials/navbar.ejs %>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#connected-readers-modal">
+  Launch demo modal
+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#unauth-readers-modal">
+  Launch demo modal
+</button>
+  <!-- Modals -->
+  <!-- Connected Readers Modal -->
+  <div class="modal fade" id="connected-readers-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Please fill out the apropriate fields:
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Unauthorized Readers Modal -->
+  <div class="modal fade" id="unauth-readers-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Reader</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="ajax-form" action="/readers/accept" method="post">
+            <p>Ip Address: <span style="font-weight: bold" id="reader-ip"></span></p>
+            <p>Text: <span style="font-weight: bold" id="reader-text"></span></p>
+            <input type="hidden" name="ip" id="reader-ip-field" value>
+            <p>Please select a machine for this reader:</p>
+            <select id="machine" name="machine">
+              <% for (var i = 0; i < req.machines.length; i++ ) { %>
+              <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>">
+                <%= req.machines[i].name %>
+              </option>
+              <% } %>
+            </select>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="auth-action" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $("#auth-action").on("click", () => {
+      $("#unauth-readers-modal form").submit()
+      console.log("submitting!")
+    })
+  </script>
+
   <div class="page-content">
-    <h1>Connected Readers</h1>
-    <table class="machines-table ajax-table" data-url="/readers/tmp" data-method="get">
-      <thead>
-        <tr>
-          <td data-tag="ip">IP</td>
-          <td data-tag="text">Text</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+
+  <%- include ../partials/navbar.ejs %>
+    
     <button id="refresh" class="btn btn-sm btn-success">Refresh</button>
-    <div class="action-menu"">
-      <form class="ajax-form" action="/readers/accept" method="post">
-        <h1>Add New Reader</h1>
-        <p>Please select the machine for this reader.</p>
-        <p id="reader-ip"></p>
-        <input type="hidden" name="ip" id="reader-ip-field" value>
-        <p id="reader-text"></p>
-        <select id="machine" name="machine">
+    <div class="connected-readers">
+      <h1>Connected Readers</h1>
+      <div id="table-wrapper-1"></div>
+       <div class="action-menu"">
+        <form class=" ajax-form" action="/reservations/new" method="post">
+         <h1>Reader Parameters</h1>
+         <p>View the reader and make modifications thereto.</p>
+         <select id="machine" name="id">
+           <% for (var i = 0; i < req.machines.length; i++ ) { %>
+           <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>"><%= req.machines[i].name %>
+           </option>
+           <% } %>
+         </select>
+         <div>
+           <button class="btn btn-sm btn-success">Save Changes</button>
+         </div>
+         </form>
+       </div>
+    </div>
+    <div class="unauthorized-readers">
+      <h1>Unauthorized Readers</h1>
+      <div id="table-wrapper-2"> </div>
+      <div id="authorize" class="action-menu"">
+        <form class="ajax-form" action="/readers/accept" method="post">
+          <h1>Add New Reader</h1>
+          <p>Please select the machine for this reader.</p>
+          <p id="reader-ip"></p>
+          <input type="hidden" name="ip" id="reader-ip-field" value>
+          <p id="reader-text"></p>
+          <select id="machine" name="machine">
           <% for (var i = 0; i < req.machines.length; i++ ) { %>
           <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>"><%= req.machines[i].name %>
           </option>
           <% } %>
-        </select>
-        <div>
-          <button class="btn btn-sm btn-success">Save Changes</button>
-        </div>
-      </form>
+          </select>
+          <div>
+            <button class="btn btn-sm btn-success">Save Changes</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   <script>
@@ -50,25 +132,77 @@
     function humanReadableTime(date) {
       return date.getHours() + ":" + leadingZeroes(date.getMinutes())
     }
-
-      tableConfig = {
+    ajaxTable.summon($("#table-wrapper-1"),{
+      url: "/readers/all",
+      method: "get",
+      id: "authorized-readers",
+      ignore: ["_id","__v"],
+      firstCap: true,
+      connect: {
+        action: (e) => {
+          dataKeys = Object.keys(e.data);
+          console.log(e.data)
+          var menElmnt;
+          const formStruct = {
+            text: ["username"],
+            textarea: ["justification"],
+            time: ["start", "end"],
+            select: ["status"],
+            date: ["date"],
+            machine: ["machine"],
+            hidden: ["_id"]
+          }
+          dataKeys.forEach(elmnt => {
+            console.log()
+            menElmnt = $(".action-menu #" + elmnt)
+            if (formStruct.text.includes(elmnt)) {
+              menElmnt.val(e.data[elmnt])
+            } else if (formStruct.textarea.includes(elmnt)) {
+              menElmnt.html(e.data[elmnt])
+            } else if (formStruct.time.includes(elmnt)) {
+              menElmnt.val(e.data[elmnt])
+            } else if (formStruct.select.includes(elmnt)) {
+              $("#status").val(e.data[elmnt])
+            } else if (formStruct.date.includes(elmnt)) {
+              menElmnt.val(deformatDate(e.data[elmnt]))
+            } else if (formStruct.machine.includes(elmnt)) {
+              $("#machine option").removeAttr("selected");
+              $("#machine option[data-name='" + e.data[elmnt] + "']").attr("selected", "selected")
+            } else if (formStruct.hidden.includes(elmnt)) {
+              $("#resId").val(e.data[elmnt])
+            }
+            $(".action-menu").css("display", "block")
+          })
+        },
+        validator: (e) => {
+          e.machine = $("option[value='" + e.machine + "']").html()
+        },
+        actionName: "Manage",
+        actionClasses: ["btn", "btn-sm", "btn-warning"]
+      }
+    })
+    ajaxTable.summon($("#table-wrapper-2"), {
+      url: "/readers/tmp",
+      method: "get",
+      id: "unauth-readers",
+      ignore: ["_id","__v"],
+      firstCap: true,
+      connect: {
         action: (e) => {
           console.log(e.data);
-          $(".action-menu").css("display","block")
-          $(".action-menu #reader-ip").html(e.data.ip)
-          $(".action-menu #reader-text").html(e.data.text)
-          $(".action-menu #reader-ip-field").val(e.data.ip)
+          $('#unauth-readers-modal').modal('toggle')
+          $("#unauth-readers-modal #reader-ip").html(e.data.ip)
+          $("#unauth-readers-modal #reader-text").html(e.data.text)
+          $("#unauth-readers-modal #reader-ip-field").val(e.data.ip)
         },
         actionName: "Accept",
-        actionClasses: ["btn","btn-sm","btn-success"]
+        actionClasses: ["btn", "btn-sm", "btn-success"]
       }
+    });
 
-      setupAjaxTable(tableConfig)
-      $("#refresh").on("click",() => {return setupAjaxTable(tableConfig)})
+      $("#refresh").on("click", ajaxTable.refreshAll)
 
-      $(".ajax-form").on("success",() => {
-        setupAjaxTable(tableConfig)
-      })
+      $(".ajax-form").on("success",ajaxTable.refreshAll)
 
   </script>
   <style>

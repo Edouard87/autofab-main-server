@@ -4,6 +4,8 @@ $.ajax({
     success: data => {
         const successmsg = data
         $(".ajax-form").submit(function (ev) {
+          console.log("submitting form!")
+          console.log($(this).attr("action"))
           ev.preventDefault();
           $(".ajax-form").find(".dialogue-box").remove()
           $.ajax({
@@ -11,6 +13,7 @@ $.ajax({
             method: $(this).attr("method"),
             data: $(this).serialize(),
             success: data => {
+              console.log(data)
               console.log(data)
               console.log(Mustache.to_html(successmsg, data))
               $(".ajax-form").append(Mustache.to_html(successmsg, data))

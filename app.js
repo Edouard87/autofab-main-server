@@ -662,6 +662,12 @@ app.post("/readers/accept", checkAdmin, (req, res) => {
   readers.create({
     ip: req.body.ip,
     machine: req.body.machine
+  }).then(() => {
+    res.send({
+      type: "success",
+      header: "Machine added",
+      msg: "The machine was successfully added"
+    })
   });
 });
 
