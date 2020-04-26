@@ -447,7 +447,7 @@ app.get("/reserve", (req, res) => {
 app.post("/reservations/delete", (req, res) => {
   if (isAdmin(req)) {
     reservations.findByIdAndDelete({
-      _id: req.body._id
+      _id: req.body.id
     }).exec().then((document) => {
       res.send({
         type: "success",
@@ -533,13 +533,13 @@ app.post("/reservations/new", function(req, res) {
 
         if (isAdmin(req)) {
           // The user is an admin
-          if (req.body._id == undefined) {
+          if (req.body.id == undefined) {
             // This is a new reservation
             reservations.create({
               start: start,
               end: end,
               date: selectedDate,
-              machine: req.body.id,
+              machine: req.body.machine,
               username: req.body.username || req.decoded.username,
               status: status,
               justification: req.body.justification
@@ -550,11 +550,11 @@ app.post("/reservations/new", function(req, res) {
             }))
           } else {
             // This is a medification of an existing reservation
-            reservations.findOneAndUpdate({ _id: req.body._id }, {
+            reservations.findOneAndUpdate({ _id: req.body.id }, {
               start: start,
               end: end,
               date: selectedDate,
-              machine: req.body.id,
+              machine: req.body.machine,
               username: req.body.username,
               status: status,
               justification: req.body.justification
@@ -566,13 +566,13 @@ app.post("/reservations/new", function(req, res) {
           }
         } else {
           // The user is not an admin
-          if (req._id == undefined) {
+          if (req.id == undefined) {
             // This is a new resrevation
             reservations.create({
               start: start,
               end: end,
               date: selectedDate,
-              machine: req.body.id,
+              machine: req.body.machine,
               username: req.decoded.username,
               status: "pending",
               justification: req.body.justification
@@ -583,11 +583,11 @@ app.post("/reservations/new", function(req, res) {
             }))
           } else {
             // This is a medification of an existing reservation
-            reservations.findOneAndUpdate({ _id: req._id,username:req.body.username}, {
+            reservations.findOneAndUpdate({ _id: req.id,username:req.body.username}, {
               start: start,
               end: end,
               date: selectedDate,
-              machine: req.body.id,
+              machine: req.body.machine,
               username: req.decoded.username,
               status: "pending",
               justification: req.body.justification

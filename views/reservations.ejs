@@ -11,87 +11,137 @@
 </head>
 
 <body>
-  <%- include ../partials/navbar.ejs %>
-  <div class="page-content">
-    <h2>All Reservations</h2>
-    <div class="filters">
-      <p>Filters</p>
-      <label>Machine: </label><select class="machine-select" id="filter-machine" name="machine">
-        <option value="any">Any</option>
-        <% for (var i = 0; i < req.machines.length; i++ ) { %>
-        <option value="<%= req.machines[i].id %>"><%= req.machines[i].name %></option>
-        <% } %>
-      </select>
-      <lable data-restricted="true">Username: </lable>
-      <select data-restricted="true" id="filter-username-type">
-        <option value="any">Any</option>
-        <option value="pending">Specific</option>
-      </select>
-      <select data-restricted="true" id="filter-username" name="username">
-        <% for (var i = 0; i < req.users.length; i++ ) { %>
-        <option value="<%= req.users[i].username %>"><%= req.users[i].username %>
-        </option>
-        <% } %>
-      </select>
-      <label>Status: </label>
-      <select id="filter-status">
-        <option value="any">Any</option>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-      </select>
-      <label>Date</label><select id="filter-date-type">
-        <option value="any">Any</option>
-        <option value="specific">Specific</option>
-      </select><input type="date" id="filter-date">
-      <button id="search">Search</button>
+  <!-- Modals -->
+  <!-- General Purpose Dialogues -->
+  <% include ../partials/success-modal.ejs %>
+  <!-- Edit Filters Modal -->
+  <div class="modal fade" id="edit-filters-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Filters</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="filters">
+            <label>Machine: </label><select class="machine-select" id="filter-machine" name="machine">
+              <option value="any">Any</option>
+              <% for (var i = 0; i < req.machines.length; i++ ) { %>
+              <option value="<%= req.machines[i].id %>"><%= req.machines[i].name %></option>
+              <% } %>
+            </select>
+            <lable data-restricted="true">Username: </lable>
+            <select data-restricted="true" id="filter-username" name="username">
+              <option value="any">Any</option>
+              <% for (var i = 0; i < req.users.length; i++ ) { %>
+              <option value="<%= req.users[i].username %>"><%= req.users[i].username %>
+              </option>
+              <% } %>
+            </select>
+            <label>Status: </label>
+            <select id="filter-status">
+              <option value="any">Any</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+            </select>
+            <label>Date</label><select id="filter-date-type">
+              <option value="any">Any</option>
+              <option value="specific">Specific</option>
+            </select><input type="date" id="filter-date">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" id="apply-filters" data-dismiss="modal">Apply</button>
+        </div>
+      </div>
     </div>
-    <div id="table-wrapper-1"></div>
-    <div class="action-menu"">
-      <form class="ajax-form" action="/reservations/new" method="post">
-        <h1>View Reservation</h1>
-        <p>View the reservation and make modifications thereto.</p>
-        <input type="hidden" name="_id" id="resId">
-        <select data-restricted="true" id="username" name="username">
-          <% for (var i = 0; i < req.users.length; i++ ) { %>
-          <option value="<%= req.users[i].username %>"><%= req.users[i].username %>
-          </option>
-          <% } %>
-        </select>
-        <select id="machine" name="id">
-          <% for (var i = 0; i < req.machines.length; i++ ) { %>
-          <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>"><%= req.machines[i].name %>
-          </option>
-          <% } %>
-        </select>
-        <input type="date" id="date" name="schedule[global][date]">
-        <input type="time" id="start" name="schedule[time][start]">
-        <input type="time" id="end" name="schedule[time][end]">
-        <textarea id="justification" name="justification"></textarea>
-        <select data-restricted="true" name="status" id="status" name="status">
-          <option value="pending">Pending</option>
-          <option value="approved">Approved</option>
-        </select>
-        <div>
-          <input id="save-duplicate" type="checkbox" name="save-duplicate"><label for="save-duplicate">Save as a
-            duplicate</label>
+  </div>
+  <!-- Edit Reservation Modal -->
+  <div class="modal fade" id="edit-reservation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Reservation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div>
-          <button class="btn btn-sm btn-success">Save Changes</button>
+        <div class="modal-body">
+          <form class="ajax-form" action="/reservations/new" method="post">
+            <input type="hidden" name="id" id="resId">
+            <select data-restricted="true" id="username" name="username">
+              <% for (var i = 0; i < req.users.length; i++ ) { %>
+              <option value="<%= req.users[i].username %>"><%= req.users[i].username %>
+              </option>
+              <% } %>
+            </select>
+            <select id="machine" name="machine">
+              <% for (var i = 0; i < req.machines.length; i++ ) { %>
+              <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>">
+                <%= req.machines[i].name %>
+              </option>
+              <% } %>
+            </select>
+            <input type="date" id="date" name="schedule[global][date]">
+            <input type="time" id="start" name="schedule[time][start]">
+            <input type="time" id="end" name="schedule[time][end]">
+            <textarea id="justification" name="justification"></textarea>
+            <select data-restricted="true" name="status" id="status" name="status">
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+            </select>
+            <!-- <div>
+              <input id="save-duplicate" type="checkbox" name="save-duplicate"><label for="save-duplicate">Save as a
+                duplicate</label>
+            </div> -->
+          </form>
         </div>
-      </form>
-      <button id="deleteRes" class="btn btn-sm btn-danger">Delete</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" id="delete-res" data-dismiss="modal">Delete Reservation</button>
+          <button type="button" class="btn btn-primary" id="save-res" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
     </div>
   </div>
   <script>
+     $("#apply-filters").on("click",ajaxTable.refreshAll)
+     $("#delete-res").on("click", () => {
+       ajaxForm.submitTo({
+        url: "/reservations/delete",
+        method: "post",
+       },$("#edit-reservation-modal form"))
+     })
+     $("#save-res").on("click", () => {
+       ajaxForm.submit($("#edit-reservation-modal form"))
+     })
+  </script>
+  <%- include ../partials/navbar.ejs %>
+  <div class="page-content">
+    <h1 id="page-head"></h1>
+    <button type="button" style="margin-bottom: 10px;" class="btn btn-primary" data-toggle="modal"
+      data-target="#edit-filters-modal">Set Filters</button>
+    <div id="table-wrapper-1"></div>
+  </div>
+  <script>
     var scheduleTarget
+    var ignoreFields = ["_id","__v"];
     if (location.href.split("?")[1] == "all") {
-      $(".ajax-table").attr("data-url","/schedule/a")
-      scheduleTarget = "/schedule/a"
+      $(".ajax-table").attr("data-url","/schedule/a");
+      scheduleTarget = "/schedule/a";
+      $("#page-head").html("All Reservations")
     } else {
       // restrict the page for people viewing the not all page
       $(".ajax-table").attr("data-url","/schedule/p")
       $("[data-restricted='true'").css('display',"none")
       scheduleTarget = "/schedule/p"
+      ignoreFields.push("username")
+      $("#page-head").html("My Reservations")
     }
 
     function humanReadableTime(date) {
@@ -102,7 +152,7 @@
       url: scheduleTarget,
       method: "post",
       id: "schedule-table",
-      ignore: ["_id","__v"],
+      ignore: ignoreFields,
       firstCap: true
     },()=> {
       ajaxTable.connect($("#table-wrapper-1").children().first(),{
@@ -121,7 +171,7 @@
           }
           dataKeys.forEach(elmnt=> {
             console.log()
-            menElmnt = $(".action-menu #" + elmnt)
+            menElmnt = $("#edit-reservation-modal #" + elmnt)
             if (formStruct.text.includes(elmnt)) {
               menElmnt.val(e.data[elmnt])
             } else if (formStruct.textarea.includes(elmnt)) {
@@ -138,7 +188,7 @@
             } else if (formStruct.hidden.includes(elmnt)) {
               $("#resId").val(e.data[elmnt])
             }
-            $(".action-menu").css("display","block")
+            $("#edit-reservation-modal").modal("toggle")
           })
         },
         validator: (e) => {
@@ -162,7 +212,7 @@
           if ($("#filter-date-type").val() != "any") {
             query.date = formatDate($("#filter-date").val())
           }
-          if ($("#filter-username-type").val() != "any") {
+          if ($("#filter-username").val() != "any") {
             query.username = $("#filter-username").val()
           }
         console.log(query)
@@ -172,67 +222,15 @@
         actionClasses: ["btn","btn-sm","btn-warning"]
       })
     })
-      $("#search").on("click",ajaxTable.refreshAll)
-      
-      $("#deleteRes").on("click", () => {
-        var deleteQuery = {
-          _id: $("#resId").val()
-        }
-        $.ajax({
-          url: "/reservations/delete",
-          type: "post",
-          data: JSON.stringify(deleteQuery),
-          contentType: "application/json",
-          dataType: "json",
-          success: msg => {
-            setupAjaxTable(tableConfig)
-            $(".action-menu").css("display","none")
-            statusMsg(msg)
-          }
-        })
-      })
 
       $(".ajax-form").on("success",ajaxTable.refreshAll)
+      setInterval(ajaxTable.refreshAll,1000);
 
   </script>
   <style>
-    h4 {
-
-      font-weight: 400;
-
-    }
-
-    .schedule-block {
-
-      background: black;
-      width: 50%;
-      /* height: 100px; */
-      padding: 10px;
-
-    }
-
-    .schedule-block h2 {
-      color: white;
-    }
-
-    .schedule-block p {
-      color: white;
-    }
-
-    .machines-table {
-
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 3px;
-
-    }
-
-    .machines-table td {
-
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 3px;
-
+    #edit-reservation-modal .modal-body * {
+      display: block;
+      margin: 10px 0;
     }
   </style>
 </body>
