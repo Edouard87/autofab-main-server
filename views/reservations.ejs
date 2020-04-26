@@ -45,21 +45,7 @@
       </select><input type="date" id="filter-date">
       <button id="search">Search</button>
     </div>
-    <table class="machines-table ajax-table" data-url="" data-method="post">
-      <thead>
-        <tr>
-          <td data-tag="username">Username</td>
-          <td data-tag="machine">Machine</td>
-          <td data-tag="date">Date</td>
-          <td data-tag="start">Start</td>
-          <td data-tag="end">End</td>
-          <td data-tag="status">Status</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <div id="table-wrapper-1"></div>
     <div class="action-menu"">
       <form class="ajax-form" action="/reservations/new" method="post">
         <h1>View Reservation</h1>
@@ -97,19 +83,29 @@
     </div>
   </div>
   <script>
+    var scheduleTarget
     if (location.href.split("?")[1] == "all") {
       $(".ajax-table").attr("data-url","/schedule/a")
+      scheduleTarget = "/schedule/a"
     } else {
       // restrict the page for people viewing the not all page
       $(".ajax-table").attr("data-url","/schedule/p")
       $("[data-restricted='true'").css('display',"none")
+      scheduleTarget = "/schedule/p"
     }
 
     function humanReadableTime(date) {
       return date.getHours() + ":" + leadingZeroes(date.getMinutes())
     }
 
-      tableConfig = {
+    ajaxTable.summon($("#table-wrapper-1"),{
+      url: scheduleTarget,
+      method: "post",
+      id: "schedule-table",
+      ignore: ["_id","__v"],
+      firstCap: true
+    },()=> {
+      ajaxTable.connect($("#table-wrapper-1").children().first(),{
         action: (e) => {
           dataKeys = Object.keys(e.data);
           console.log(e.data)
@@ -174,10 +170,9 @@
         },
         actionName: "Manage",
         actionClasses: ["btn","btn-sm","btn-warning"]
-      }
-
-      setupAjaxTable(tableConfig)
-      $("#search").on("click",() => {return setupAjaxTable(tableConfig)})
+      })
+    })
+      $("#search").on("click",ajaxTable.refreshAll)
       
       $("#deleteRes").on("click", () => {
         var deleteQuery = {
@@ -197,9 +192,7 @@
         })
       })
 
-      $(".ajax-form").on("success",() => {
-        setupAjaxTable(tableConfig)
-      })
+      $(".ajax-form").on("success",ajaxTable.refreshAll)
 
   </script>
   <style>

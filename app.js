@@ -202,7 +202,7 @@ function loadFile(req,res,next) {
 app.all("*", loadFile, authenticate);
 
 app.get("/p/:name", function(req, res, next) {
-  var admin_pages = ["machines","users"]
+  var admin_pages = ["machines","users","readers"]
   for (var i = 0; i < admin_pages.length; i++) {
     if (req.params.name == admin_pages[i]) {
       return res.redirect("/a/" + req.params.name)
@@ -213,27 +213,6 @@ app.get("/p/:name", function(req, res, next) {
 
 app.get("/a/:name", checkAdmin, function (req, res, next) {
   res.render(req.params.name, { req: req })
-})
-
-app.post("/register", function(req, res) {
-  users.create({
-    username: req.body.username,
-    password: hmacPass(req.body.password),
-    permission: req.body.permission,
-    rfid: req.body.rfid
-  }).then(() => {
-    res.send({
-      type: "success",
-      header: "User Created",
-      msg: "User " + req.body.username + " was created." 
-    })
-  }).catch((err) => {
-    res.send({
-      type: "err",
-      header: "Failed to create user",
-      msg: "User " + req.body.username + " could not be created. Please make sure you supply a unique username and RFID tag."
-    })
-  })
 })
 
 app.post("/login", function(req, res) {
@@ -275,19 +254,52 @@ app.get('/', function(req, res) {
   res.redirect("/p/home")
 });
 
-app.get("/users/delete/:username", checkAdmin, (req, res) => {
-  users.findOneAndDelete({username: req.params.username}).then(() => {
+app.post("/register", function (req, res) {
+  users.create({
+    username: req.body.username,
+    password: hmacPass(req.body.password),
+    permission: req.body.permission,
+    rfid: req.body.rfid
+  }).then(() => {
+    res.send({
+      type: "success",
+      header: "User Created",
+      msg: "User " + req.body.username + " was created."
+    })
+  }).catch((err) => {
+    res.send({
+      type: "err",
+      header: "Failed to create user",
+      msg: "User " + req.body.username + " could not be created. Please make sure you supply a unique username and RFID tag."
+    })
+  })
+})
+
+app.post("/users/delete", checkAdmin, (req, res) => {
+  users.findByIdAndDelete(req.body.id).exec().then(doc => {
     res.send({
       type: "success",
       header: "Success",
       msg: "User successfully deleted."
     })
-  }).catch((err) => {
-    res.render("admin", {
-      req: req
-    })
-  });
+  })
 });
+
+app.post("/users/modify",checkAdmin, (req, res) => {
+  users.findOneAndUpdate({_id: req.body.id},req.body).exec().then(doc => {
+    res.send({
+      type: "success",
+      header: "Changes Saved Successfully",
+      msg: "User " + doc.username + "'s profile was updated successfully."
+    })
+  }).catch((err) => {
+    res.send({
+      type: "err",
+      header: "Your changes could not be saved.",
+      msg: "There was a problem editing user " + req.body.username + "'s profile. Please make sure you supply a unique username and RFID tag."
+    })
+  })
+})
 
 app.post("/changepassword", (req, res) => {
 
@@ -367,18 +379,15 @@ app.get("/myreservations/:id/:date", function(req, res) {
 
  });
 
- app.get("/machine/all", function(req, res) {
+ app.get("/machines/all", function(req, res) {
   machines.find({}).then(data => {
     res.send(data)
   })
  });
 
-app.post("/machine/new", checkAdmin, function(req, res) {
+app.post("/machines/new", checkAdmin, function(req, res) {
 
-    machines.create({
-      name: req.body.name,
-      type: req.body.type
-    }).then(() => {
+    machines.create(req.body).then(() => {
       res.send({
         type: "success",
         header: "Success",
@@ -395,9 +404,22 @@ app.post("/machine/new", checkAdmin, function(req, res) {
 
 });
 
-app.get("/machine/delete/:id", checkAdmin, function (req, res) {
+app.post("/machines/modify",(req, res) => {
+  console.log("id is: " + req.body._id)
+  machines.findOneAndUpdate({_id: req.body.id},req.body).exec().then(doc => {
+    res.send({
+      type: "success",
+      header: "Changes Saved",
+      msg: "The machine was updated"
+    }).catch((doc,err) => {
+      console.log(err)
+    })
+  })
+})
 
-  machines.findByIdAndRemove(req.params.id).exec().then((err, data) => {
+app.post("/machines/delete", checkAdmin, function (req, res) {
+
+  machines.findByIdAndRemove(req.body.id).exec().then((err, data) => {
     res.send({
       type: "success",
       header: "Success",

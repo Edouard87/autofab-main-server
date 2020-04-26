@@ -19,6 +19,7 @@ const ajaxTable = {
   connect: (x,y) => {
     y.target = x;
     tableConfig.push(y)
+    ajaxTable.refreshAll()
   },
   summon: (x,y,z) => {
     summonTable(x,y,z)
@@ -129,7 +130,7 @@ function summonTable(loc,conf,callback) {
       console.log("location is", loc)
       loc.empty()
       function generateTableHead(conf,style) {
-        return "<table style='"+ style + "' id='" + conf.id + "' class='machines-table ajax-table' data-url='" + conf.url + "' data-method='" + conf.method + "'> <thead> <tr> "
+        return "<table style='"+ style + "' id='" + conf.id + "' class='table ajax-table' data-url='" + conf.url + "' data-method='" + conf.method + "'> <thead> <tr> "
       }
       function generateTableFoot() {
         return "<td>Action</td></tr></thead><tbody></tbody></table>"

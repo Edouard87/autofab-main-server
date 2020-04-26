@@ -10,49 +10,104 @@
 </head>
 
 <body>
+  <!-- Modals -->
+  <!-- General Purpose Dialogues -->
+  <% include ../partials/success-modal.ejs %>
+  <!-- Edit Machine Modal -->
+  <div class="modal fade" id="edit-machine-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Machine</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class=" ajax-form" action="/machines/modify" method="post">
+            <input type="hidden" name="id" id="machineId">
+            <input type="text" name="name" id="machine-name" placeholder="Machine Name">
+            <input type="text" name="type" id="machine-type" placeholder="Machine Type">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" id="delete-machine" data-dismiss="modal">Delete Machine</button>
+          <button type="button" class="btn btn-primary" id="save-machine" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- New Machine Modal -->
+  <div class="modal fade" id="new-machine-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create New Machine</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/machines/new" method="post" class="ajax-form">
+            <input required placeholder="Machine Name" type="text" name="name">
+            <input required placeholder="Machine Type" type="text" name="type">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="create-machine" data-dismiss="modal">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $("#save-machine").on('click',() => {
+      ajaxForm.submit($("#edit-machine-modal form"));
+    })
+    $("#delete-machine").on('click',() => {
+      ajaxForm.submitTo({
+        url: "/machines/delete",
+        method: "post"
+      },$("#edit-machine-modal form"))
+    });
+    $("#create-machine").on("click",() => {
+      ajaxForm.submit($("#new-machine-modal form"))
+    })
+  </script>
   <%- include ../partials/navbar.ejs %>
   <div class="page-content">
-    <h1>Machines</h1>
-    <form action="/machine/new" method="post" class="ajax-form">
-      <h2>Register a new machine</h2>
-      <input required placeholder="Machine Name" type="text" name="name">
-      <input required placeholder="Machine Type" type="text" name="type">
-      <button>Create</button>
-    </form>
     <h2>All machines</h2>
-    <table class="machines-table ajax-table" data-url="/machine/all" data-method="get">
-      <thead>
-        <tr>
-          <td data-tag="name">Name</td>
-          <td data-tag="type">Type</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
-        
-      </tbody>
-    </table>
+    <div id="table-wrapper-1"></div>
+    <button type="button" style="margin-top: 10px;" 
+    class="btn btn-primary" data-toggle="modal" 
+    data-target="#new-machine-modal">Create New Machine</button>
   </div>
   <script>
 
-
-    tableConfig = {
+    ajaxTable.summon($("#table-wrapper-1"),{
+      url: "/machines/all",
+      method: "get",
+      id: "machines-table",
+      ignore: ["_id","__v"],
+      firstCap: true
+    },() => {
+      ajaxTable.connect($("#table-wrapper-1").children().first(),{
       action: (e) => {
-        console.log(e.data)
-        $.ajax({
-          url:"/machine/delete/" + e.data._id,
-          method: "get",
-          success: (msg) => {
-            statusMsg(msg)
-            setupAjaxTable(tableConfig)
-          }
-        })
+        console.log("E:",e.data)
+        $("#edit-machine-modal #machine-name").val(e.data.name)
+        $("#edit-machine-modal #machine-type").val(e.data.type)
+        $("#edit-machine-modal #machineId").val(e.data._id)
+        $("#edit-machine-modal").modal('toggle')
       },
-      actionName: "Delete",
-      actionClasses: ["btn","btn-sm","btn-danger"]
-    }
-    setupAjaxTable(tableConfig)
-    $(".ajax-form").on("success",() => {return setupAjaxTable(tableConfig)});
+      actionName: "Edit",
+      actionClasses: ["btn","btn-sm","btn-warning"]
+    })
+    })
+    setInterval(ajaxTable.refreshAll,1000)
+    $(".ajax-form").on("success",ajaxTable.refreshAll);
 
   </script>
   <style>

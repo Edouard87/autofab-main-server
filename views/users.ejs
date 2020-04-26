@@ -10,51 +10,117 @@
 </head>
 
 <body>
+  <!-- Modals -->
+  <!-- General Purpose Dialogues -->
+  <% include ../partials/success-modal.ejs %>
+  <!-- New Users Creation Menu -->
+  <div class="modal fade" id="new-user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/register" method="post" class="ajax-form">
+            <input name="username" type="text" placeholder="Username">
+            <input name="password" type="password" placeholder="Password">
+            <input name="rfid" type="text" placeholder="RFID tag">
+            <label>Permission:</label><select name="permission">
+              <option value="-1">Admin</option>
+              <option value="0">Student</option>
+            </select>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" id="new-user" data-dismiss="modal">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Edit User Modal -->
+   <div class="modal fade" id="edit-user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <form action="/users/modify" method="post" class="ajax-form">
+            <input type="hidden" name="id" id="user-id">
+             <input id="username" name="username" type="text" placeholder="Username">
+             <input id="rfid" name="rfid" type="text" placeholder="RFID tag">
+             <label>Permission:</label><select name="permission" id="permission">
+               <option value="-1">Admin</option>
+               <option value="0">Student</option>
+             </select>
+           </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-danger" id="delete-user" data-dismiss="modal">Delete User</button>
+           <button type="button" class="btn btn-primary" id="save-user" data-dismiss="modal">Save changes</button>
+         </div>
+       </div>
+     </div>
+   </div>
+   <script>
+     $("#new-user").on("click",()=>{
+       ajaxForm.submit($("#new-user-modal form"))
+     });
+     $("#delete-user").on("click",()=>{
+      ajaxForm.submitTo({url: "/users/delete",method:"post"},$("#edit-user-modal form"))
+     })
+     $("#save-user").on('click',()=> {
+       ajaxForm.submit($("#edit-user-modal form"))
+     })
+   </script>
   <%- include ../partials/navbar.ejs %>
   <div class="page-content">
-    <h1>Accounts</h1>
-    <h2>New User Account</h2>
-    <form action="/register" method="post" class="ajax-form">
-      <input name="username" type="text" placeholder="Username">
-      <input name="password" type="password" placeholder="Password">
-      <input name="rfid" type="text" placeholder="RFID tag">
-      <label>Permission:</label><select name="permission">
-        <option value="-1">Admin</option>
-        <option value="0">Student</option>
-      </select>
-      <button>Create User</button>
-    </form>
     <h2>All User Accounts</h2>
-    <table class="machines-table ajax-table" data-url="/users/all" data-method="get">
-      <thead>
-        <tr>
-          <td data-tag="username">Username</td>
-          <td data-tag="rfid">RFID Tag</td>
-          <td data-tag="permission">Permission</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <div id="table-wrapper-1"></div>
+    <button type="button" style="margin-top: 10px;" class="btn btn-primary" data-toggle="modal"
+      data-target="#new-user-modal">Create New User</button>
   </div>
   <script>
-    tableConfig = {
-      action: (e) => {
-        $.ajax({
-          url:"/users/delete/" + e.data.username,
-          method: "get",
-          success: (msg) => {
-            statusMsg(msg)
-            setupAjaxTable(tableConfig)
+    ajaxTable.summon($("#table-wrapper-1"),{
+      url: "/users/all",
+      method: "get",
+      id: "users-table",
+      ignore: ["_id","__v","password"],
+      firstCap: true
+    },()=>{
+      ajaxTable.connect($("#table-wrapper-1").children().first(),{
+        action: (e) => {
+          $("#edit-user-modal #user-id").val(e.data._id)
+          $("#edit-user-modal #rfid").val(e.data.rfid)
+          $("#edit-user-modal #username").val(e.data.username)
+          $("#edit-user-modal #permission").val(e.data.permissionId)
+          $("#edit-user-modal").modal('toggle')
+        },
+        validator: (e) => {
+          console.log(e)
+          e.permissionId = e.permission;
+          if (e.permission == 0) {
+            e.permission = "Student"
+          } else {
+            e.permission = "Admin"
           }
-        })
-      },
-      actionName: "Delete",
-      actionClasses: ["btn","btn-sm","btn-danger"]
-    }
-    setupAjaxTable(tableConfig)
-    $(".ajax-form").on("success",() => { return setupAjaxTable(tableConfig) });
+        },
+        actionName: "Manage",
+        actionClasses: ["btn","btn-sm","btn-warning"]
+      })
+    })
+    setInterval(ajaxTable.refreshAll,1000)
+    $(".ajax-form").on("success",ajaxTable.refreshAll);
 
   </script>
   <style>
