@@ -13,6 +13,7 @@ $(".ajax-form").submit(function (ev) {
 
 var ajaxForm = {
   submit: (selector) => {
+    console.log("submitting...")
     $.ajax({
       url: selector.attr("action"),
       method: selector.attr("method"),
