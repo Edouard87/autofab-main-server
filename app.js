@@ -486,7 +486,7 @@ app.post("/reservations/delete", (req, res) => {
 app.post("/reservations/new", function(req, res) {
 
   console.log("NEW RESERVATION",req.body)
-
+  
   var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
   var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
 

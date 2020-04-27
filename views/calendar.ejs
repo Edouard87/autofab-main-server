@@ -12,14 +12,15 @@
   <!-- General Purpose Dialogues -->
   <% include ../partials/success-modal.ejs %>
   <!-- New Reservation Modal -->
-  <div id="new-res-modal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Calendar</h5>
-        </div>
-        <div class="modal-body">
-          <form class="reservation-form ajax-form" method="post" action="/reservations/new">
+  <%- include ../partials/navbar.ejs %>
+  <div class="page-content">
+
+    <div class="card w-25 p-3 float-right">
+      <div class="card-body">
+        <h5 class="card-title">Calendar</h5>
+        <!-- <h6 class="card-subtitle mb-2 text-muted">Panel subtitle</h6> -->
+        <p class="card-text">
+          <form id="reservation-form" class="ajax-form" method="post" action="/reservations/new">
             <h1>View Options</h1>
             <select name="machine" id="machine-schedule">
               <% for (var i = 0; i < req.machines.length; i++ ) { %>
@@ -29,46 +30,28 @@
             <input required id="date" class="calendar-date-picker" name="schedule[global][date]" type="date">
             <h1>New Reservation</h1>
             <label for="start-time">Start Time: </label>
-            <input class="time-picker" required id="start-time" name="schedule[time][start]" type="time">
+            <input class="wicked-picker" required id="start-time" name="schedule[time][start]" type="time">
             <label for="end-time">End Time: </label>
-            <input required id="end-time" name="schedule[time][end]" type="time">
+            <input class="wicked-picker" required id="end-time" name="schedule[time][end]" type="time">
             <textarea style="width: 100%" name="justification" placeholder="Enter a reason here"></textarea>
             <!-- <div style="display: none" class="dialogue-box warn">
               <h2>Warning</h2>
               <p>Before you make this reservation, please make sure the end time is <b>after</b> the start time.</p>
             </div> -->
           </form>
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="res-create">Create Reservation</button>
-        </div>
+        </p>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="res-create">Create Reservation</button>
       </div>
     </div>
-  </div>
-  <script>
-    $(document).ready(() => {
-      $("#new-res-modal").modal({backdrop:false,show: false})
-      $("#new-res-modal").modal('toggle')
-      $("#new-res-modal").draggable({
-        handle: ".modal-header"
-      });
-      $("#res-create").on("click",() => {
-        ajaxForm.submit($("#new-res-modal form"))
-      });
-      ajaxDialogue.onClose(()=>{
-        $("#new-res-modal").modal('toggle')
-      })
-    })
-  </script>
-  <style>
 
-  </style>
-  <%- include ../partials/navbar.ejs %>
-  <div class="page-content">
-    <style>
-      
-    </style>
+     <script>
+       $(document).ready(() => {
+         $("#res-create").on("click", () => {
+           ajaxForm.submit($("#reservation-form"))
+         });
+       })
+     </script>
+
     <script>
       var start;
       var end;
