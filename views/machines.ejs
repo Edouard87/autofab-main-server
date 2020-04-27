@@ -29,6 +29,9 @@
             <input type="hidden" name="id" id="machineId">
             <input type="text" name="name" id="machine-name" placeholder="Machine Name">
             <input type="text" name="type" id="machine-type" placeholder="Machine Type">
+            <textarea id="machine-description" name="description">
+
+            </textarea>
           </form>
         </div>
         <div class="modal-footer">
@@ -54,6 +57,9 @@
           <form action="/machines/new" method="post" class="ajax-form">
             <input required placeholder="Machine Name" type="text" name="name">
             <input required placeholder="Machine Type" type="text" name="type">
+            <textarea name="description">
+
+            </textarea>
           </form>
         </div>
         <div class="modal-footer">
@@ -100,6 +106,7 @@
         $("#edit-machine-modal #machine-name").val(e.data.name)
         $("#edit-machine-modal #machine-type").val(e.data.type)
         $("#edit-machine-modal #machineId").val(e.data._id)
+        $("#edit-machine-modal #machine-description").val(e.data.description)
         $("#edit-machine-modal").modal('toggle')
       },
       actionName: "Edit",

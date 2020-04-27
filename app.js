@@ -53,9 +53,9 @@ mongoose.connect((process.env.MONGODB_URI || "mongodb://localhost/autofab"), {
 
 var userSchema = new mongoose.Schema({
   username: {type: String, unique: true},
-  password: String,
-  permission: Number,
-  rfid: {type: String, unique: true}
+  password: {type: String, required: true},
+  permission: {type: Number, required: true},
+  rfid: {type: String, unique: true, required: true}
 })
 
 var users = mongoose.model("User", userSchema);
@@ -63,8 +63,9 @@ var users = mongoose.model("User", userSchema);
 // Machines
 
 var machineSchema = new mongoose.Schema({
-  name: String,
-  type: String
+  name: {type: String, unique: true, required: true},
+  type: {type: String, required: true},
+  description: String
 })
 
 var machines = mongoose.model("machine",machineSchema)
@@ -72,13 +73,13 @@ var machines = mongoose.model("machine",machineSchema)
 // Reservations
 
 var reservationSchema = new mongoose.Schema({
-  start: Number,
-  end: Number,
-  date: String,
-  machine: String,
-  username: String,
-  status: String,
-  justification: String
+  start: {type: Number, required: true},
+  end: {type: Number, required: true},
+  date: {type: String, required: true},
+  machine: {type: String, required: true},
+  username: {type: String, required: true},
+  status: {type: String, required: true},
+  justification: {type: String, required: true}
 })
 
 var reservations = mongoose.model("reservation",reservationSchema)
@@ -87,8 +88,8 @@ var reservations = mongoose.model("reservation",reservationSchema)
 
 var readersSchema = new mongoose.Schema({
   ip: {type: String, unique: true},
-  machine: String,
-  status: String
+  machine: {type: String, required: true},
+  status: {type: String, required: true}
 })
 
 var readers = new mongoose.model("reader",readersSchema)
@@ -386,6 +387,8 @@ app.get("/myreservations/:id/:date", function(req, res) {
  });
 
 app.post("/machines/new", checkAdmin, function(req, res) {
+
+  console.log("Machine",req.body)
 
     machines.create(req.body).then(() => {
       res.send({
