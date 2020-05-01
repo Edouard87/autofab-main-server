@@ -79,7 +79,8 @@ var reservationSchema = new mongoose.Schema({
   machine: {type: String, required: true},
   username: {type: String, required: true},
   status: {type: String, required: true},
-  justification: {type: String, required: true}
+  justification: {type: String, required: true},
+  adminReason: String
 })
 
 var reservations = mongoose.model("reservation",reservationSchema)
@@ -323,10 +324,21 @@ app.post("/changepassword", (req, res) => {
 app.get("/schedule/:id/:date", function(req, res) {
 
     reservations.find({
-      machine: req.params.id,
-      date: req.params.date,
-      status: "approved"
-    }).then(data => res.send(data))
+      $or: [
+        {
+          machine: req.params.id,
+          date: req.params.date,
+          status: "approved"
+        },{
+          machine: req.params.id,
+          date: req.params.date,
+          status: "pending",
+          username: req.decoded.username
+        }
+      ]
+    }).then(data => {
+      res.send(data)
+    })
 
 })
 
@@ -486,10 +498,32 @@ app.post("/reservations/delete", (req, res) => {
   
 })
 
+app.post("/reservations/modify", (req, res) => {
+
+
+
+});
+
+app.post("/reservations/approve", function(req, res) {
+
+
+
+})
+
+app.post("/reservations/cancel", (req, res) => {
+
+
+
+});
+
 app.post("/reservations/new", function(req, res) {
 
-  console.log("NEW RESERVATION",req.body)
+  // make sure the username is the user. An admin does not need to do it this way.
 
+  if (!isAdmin(req)) {
+    req.body.username = req.decoded.username
+  }
+  
   var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
   var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
 
@@ -500,118 +534,105 @@ app.post("/reservations/new", function(req, res) {
   var dd = selectedDate[2]
   var yyyy = selectedDate[0]
   selectedDate = mm + "-" + dd + "-" + yyyy
+  req.body.schedule.global.date = selectedDate;
 
-  var status;
+  function checkConflict(resRequest,dbData,user) {
+    var check = 0;
+    var usernames = [];
+    var message = '';
+    var isConflict;
 
-  if (isAdmin(req)) {
-    status = req.body.status
-  } else {
-    status = "pending"
-  }
+    for (var i = 0; i < dbData.length; i++) {
 
-  if (status == undefined) {
-    status = "pending"
-  }
+      if (isBetween(resRequest.start, dbData[i].start, dbData[i].end) || isBetween(resRequest.end, dbData[i].start, dbData[i].end)) {
 
-  reservations.find({
-    status:"approved"
-  }).then((data) => {
-      var check = 0;
-
-      for (var i = 0; i < data.length; i++) {
-
-          if (isBetween(start, data[i].start, data[i].end) || isBetween(end, data[i].start, data[i].end)) {
-
-            if (end == data[i].start && start != data[i].end) {
-              check++
-            } else if (start == data[i].end && end != data[i].start) {
-              check++
-            }
-          } else {
-            check++
-          }
-
-      };
-
-      if (check == data.length) {
-        // a time slot is available
-
-        if (isAdmin(req)) {
-          // The user is an admin
-          if (req.body.id == undefined) {
-            // This is a new reservation
-            reservations.create({
-              start: start,
-              end: end,
-              date: selectedDate,
-              machine: req.body.machine,
-              username: req.body.username || req.decoded.username,
-              status: status,
-              justification: req.body.justification
-            }).then(res.send({
-              type: "success",
-              header: "Success",
-              msg: "Your resrevation was created."
-            }))
-          } else {
-            // This is a medification of an existing reservation
-            reservations.findOneAndUpdate({ _id: req.body.id }, {
-              start: start,
-              end: end,
-              date: selectedDate,
-              machine: req.body.machine,
-              username: req.body.username,
-              status: status,
-              justification: req.body.justification
-            }).exec().then(res.send({
-              type: "success",
-              header: "Success",
-              msg: "Your changes have been made."
-            }))
-          }
-        } else {
-          // The user is not an admin
-          if (req.id == undefined) {
-            // This is a new resrevation
-            reservations.create({
-              start: start,
-              end: end,
-              date: selectedDate,
-              machine: req.body.machine,
-              username: req.decoded.username,
-              status: "pending",
-              justification: req.body.justification
-            }).then(res.send({
-              type: "success",
-              header: "Success",
-              msg: "Your reservation has been created. Your teacher may now approve it."
-            }))
-          } else {
-            // This is a medification of an existing reservation
-            reservations.findOneAndUpdate({ _id: req.id,username:req.body.username}, {
-              start: start,
-              end: end,
-              date: selectedDate,
-              machine: req.body.machine,
-              username: req.decoded.username,
-              status: "pending",
-              justification: req.body.justification
-            }).then(res.send({
-              type: "success",
-              header: "Success",
-              msg: "Your changes have been made..."
-            }))
-          }
+        if (resRequest.end == dbData[i].start && resRequest.start != dbData[i].end) {
+          check++
+        } else if (resRequest.start == dbData[i].end && resRequest.end != dbData[i].start) {
+          check++
         }
       } else {
-        // a time slot is not available
-        return res.send({
-          type: "err",
-          header: "Reservation Failed",
-          msg: "The time you requested is not available (i.e. another reservation was made by somebody else). Please try another time."
-        })
+        check++
       }
 
+      if (dbData[i].status == "pending") {
+        usernames.push(dbData[i].username)
+      }
+
+    };
+    isConflict = !(check == dbData.length)
+    if (isConflict) {
+      if (usernames.includes(user)) {
+        message = "You have already made a reservation for this."
+      } else {
+        message = "Somebody else has already reserved this machine"
+      }
+    } else {
+      message = "A machine is available!"
+    }
+    return {
+      isConflict: isConflict,
+      message: message
+    }
+  } 
+
+  reservations.find({
+    $or: [{
+      status: "pending",
+      username: req.body.username,
+      date: req.body.schedule.global.date
+    },
+    {
+      status: "approved",
+      date: req.body.schedule.global.date
+    }]
+  }).then(doc => {
+    var conflict = checkConflict({
+      start: start,
+      end: end
+    }, doc, req.body.username)
+    if(!conflict.isConflict) {
+      // there is no conflict
+      reservations.create({
+        start: start,
+        end: end,
+        machine: req.body.machine,
+        justification: req.body.justification,
+        username: req.body.username,
+        status: "pending",
+        date: selectedDate
+      }).then((doc) => {
+        res.send({
+          type: "success",
+          header: "Reservation Made",
+          msg: "Your reservation has been made."
+        })
+      }).catch((err) => {
+        // An error occured (can be with the validation)
+        if (err.name == "ValidationError") {
+          var fields = " "
+          for (field in err.errors) {
+            if (fields == " ") {
+              fields += field
+            } else {
+              fields += ", " + field
+            }
+          }
+          res.send({
+            type: "err",
+            header: "Unable to make reservation",
+            msg: "Please make sure the following field(s) are filled: " + fields
+          })
+        }
+      })
+    } else {
+      // there is a conflict
+       res.send({
+         type: "success",
+         header: "Unable to make your reservation",
+         msg: conflict.message
+       })
+    }
   })
 
 });
@@ -757,33 +778,6 @@ io.on("connection", function(socket) {
       var i = connectedReaders.indexOf(socket);
       connectedReaders.splice(i, 1);
     })
-
-    // if (checkReaders == "") {
-
-    //     console.log("it is not defined");
-    //     checkReaders = setInterval(function () {
-
-    //         io.emit("")
-    //         console.log("test")
-    //         console.log("incoming connection...")
-    //         console.log(data.machine)
-    //         console.log(data.ip)
-    //         readersFile.readers.push({
-    //             ip: data.ip,
-    //             machine: data.machine
-    //         });
-    //         console.log(readersFile)
-    //         fs.writeFileSync(__dirname + "/data/readers.json",JSON.stringify(readersFile));
-
-    //     }, 1000);
-
-    // } else {
-
-    //     console.log("it is defined");
-    //     socket.emit("readers_update")
-    //     socket.on()
-
-    // }
 
     socket.on("handshake", function(data) {
         connectedReaders.push({

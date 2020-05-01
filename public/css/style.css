@@ -12,12 +12,16 @@ a {
 }
 
 .schedule-block {
-  background: black;
   position: absolute;
   width: 40vw;
   right: 0;
-  /* z-index: 3; */
-  /* top: 0; */
+}
+
+[data-status='approved'] {
+  background: red;
+}
+[data-status='pending'] {
+  background: orange;
 }
 
 .schedule-block * {
