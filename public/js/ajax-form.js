@@ -35,6 +35,16 @@ var ajaxForm = {
         ajaxDialogue.show(data)
       }
     })
+  },
+  submitToAndAct: (config, selector,callback) => {
+    $.ajax({
+      url: config.url,
+      method: config.method,
+      data: selector.serialize(),
+      success: data => {
+        callback(data)
+      }
+    })
   }
 }
 

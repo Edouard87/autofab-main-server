@@ -73,6 +73,8 @@
         </div>
         <div class="modal-body">
           <form class="ajax-form" action="/reservations/new" method="post">
+            <!-- <input type="hidden" name="origin" id="origin"> -->
+            <input type="hidden" name="mode" id="mode" value="standard">
             <input type="hidden" name="id" id="resId">
             <select data-restricted="true" id="username" name="username">
               <% for (var i = 0; i < req.users.length; i++ ) { %>
@@ -91,46 +93,105 @@
             <input type="time" id="start" name="schedule[time][start]">
             <input type="time" id="end" name="schedule[time][end]">
             <textarea id="justification" name="justification"></textarea>
-            <select data-restricted="true" name="status" id="status" name="status">
-              <option value="pending">Pending</option>
-              <option value="approved">Approved</option>
-            </select>
+            <p><span style="font-weight: bold;">Status: </span><span id="status-display"></span></p>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" id="delete-res" data-dismiss="modal">Delete Reservation</button>
-          <button type="button" class="btn btn-primary" id="save-res" data-dismiss="modal">Save changes</button>
+          <button type="button" class="btn btn-danger modal-button modal-button-ajax-action" data-action="cancel" id="delete-res"
+            data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-warning modal-button modal-button-ajax-action" data-action="modify"
+            id="save-res"
+            data-dismiss="modal">Modify</button>
+          <% if (req.decoded.permission == -1) { %>
+            <button type="button" class="btn btn-success modal-button modal-button-ajax-action" data-action="approve"
+              id="delete-res"
+              data-dismiss="modal">Approve</button>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Approval Warning Modal -->
+  <div class="modal fade" id="approval-warning-modal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Conflict Warning</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="ajax-form" action="/reservations/new" method="post">
+            <!-- <input type="hidden" name="mode" id="mode" value="force"> -->
+            <input type="hidden" name="reservationSet" id="reservationSet">
+            <span>The reservation you are approving conflicts with that of other students. Please review your action before continuing. <a href="#">What is this?</a></span>
+            <div id="conflicting-reservations">
+
+            </div>
+            <p>Clicking approve will cause conflicting reservations to be rejected. <a href="#">Learn more</a></p>
+            <label>Justification Message:</label>
+            <textarea id="actionReason" name="actionReason"></textarea>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success modal-button"
+            data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-warning modal-button"
+            id="force-approve"
+            data-dismiss="modal">Approve</button>
         </div>
       </div>
     </div>
   </div>
   <script>
-     $("#apply-filters").on("click",ajaxTable.refreshAll)
-     $("#delete-res").on("click", () => {
-       ajaxForm.submitTo({
-        url: "/reservations/delete",
+    $(document).ready(() => {
+      $(".modal-button-ajax-action").click(function() {
+        ajaxForm.submitToAndAct({
+        url: "/reservations/" + $(this).data('action'),
         method: "post",
-       },$("#edit-reservation-modal form"))
-     })
-     $("#save-res").on("click", () => {
-       ajaxForm.submit($("#edit-reservation-modal form"))
-     })
+        },$("#edit-reservation-modal form"), (data) => {
+          if (data.code == 1000) {
+            // there is a conflict. We need to set up a system to deal with this.
+            $("#reservationSet").val(data.data.reservationSet);
+            $("#approval-warning-modal").modal("toggle")
+            $(".ajax-form").trigger('success')
+          } else {
+            ajaxDialogue.show(data)
+            $(".ajax-form").trigger('success')
+          }
+        })
+      });
+      $("#force-approve").click(() => {
+        ajaxForm.submitTo({
+          url: "/reservations/reservationSet/action",
+          method: "post"
+        }, $("#approval-warning-modal form"))
+      })
+    })
+     $("#apply-filters").on("click",ajaxTable.refreshAll)
   </script>
   <%- include ../partials/navbar.ejs %>
   <div class="page-content">
     <h1 id="page-head"></h1>
     <button type="button" style="margin-bottom: 10px;" class="btn btn-primary" data-toggle="modal"
       data-target="#edit-filters-modal">Set Filters</button>
+      <input type="checkbox" id="autoRefresh" name="autoRefresh" value="autoRefresh" checked><label
+        for='autoRefresh'>Automatically Refresh
+        Page</label>
     <div id="table-wrapper-1"></div>
   </div>
   <script>
+
     var scheduleTarget
-    var ignoreFields = ["_id","__v"];
+    var ignoreFields = ["_id","__v","updatedAt","createdAt"];
     if (location.href.split("?")[1] == "all") {
       $(".ajax-table").attr("data-url","/schedule/a");
       scheduleTarget = "/schedule/a";
       $("#page-head").html("All Reservations")
+      $("#origin").val("all")
     } else {
       // restrict the page for people viewing the not all page
       $(".ajax-table").attr("data-url","/schedule/p")
@@ -138,6 +199,7 @@
       scheduleTarget = "/schedule/p"
       ignoreFields.push("username")
       $("#page-head").html("My Reservations")
+      $("#origin").val("my")
     }
 
     function humanReadableTime(date) {
@@ -184,6 +246,7 @@
             } else if (formStruct.hidden.includes(elmnt)) {
               $("#resId").val(e.data[elmnt])
             }
+            $("#status-display").html(e.data.status)
             $("#edit-reservation-modal").modal("toggle")
           })
         },
@@ -219,8 +282,18 @@
       })
     })
 
-      $(".ajax-form").on("success",ajaxTable.refreshAll)
-      setInterval(ajaxTable.refreshAll,1000);
+    var autoRefresh = setInterval(ajaxTable.refreshAll,1000);
+    $(".ajax-form").on("success",ajaxTable.refreshAll);
+    $("#autoRefresh:checkbox").on('change',() => {
+      console.log("CHECKBOX!")
+      if ($("#autoRefresh").prop("checked")) {
+        console.log("is now checked");
+        autoRefresh = setInterval(ajaxTable.refreshAll,1000);
+      } else {
+        clearInterval(autoRefresh)
+      }
+    })
+      
 
   </script>
   <style>

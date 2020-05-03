@@ -4,6 +4,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const fs = require("fs")
+var uniqueValidator = require('mongoose-unique-validator');
 
 const routes = require('./routes/index');
 // const users = require('./routes/user');
@@ -73,6 +74,8 @@ var machines = mongoose.model("machine",machineSchema)
 // Reservations
 
 var reservationSchema = new mongoose.Schema({
+  createdAt: Number,
+  updatedAt: Number,
   start: {type: Number, required: true},
   end: {type: Number, required: true},
   date: {type: String, required: true},
@@ -80,10 +83,29 @@ var reservationSchema = new mongoose.Schema({
   username: {type: String, required: true},
   status: {type: String, required: true},
   justification: {type: String, required: true},
-  adminReason: String
+  actionReason: String
+}, { 
+    timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
 })
 
 var reservations = mongoose.model("reservation",reservationSchema)
+
+// Reservations tablesets
+
+var reservationSetSchema = new mongoose.Schema({
+  createdAt: Number,
+  updatedAt: Number,
+  reject: {
+    type: Array
+  },
+  approve: {
+    type: Object
+  }
+}, {
+  timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
+})
+
+var reservationSets = mongoose.model("reservationSet", reservationSetSchema)
 
 // readers
 
@@ -504,95 +526,237 @@ app.post("/reservations/modify", (req, res) => {
 
 });
 
-app.post("/reservations/approve", function(req, res) {
+function checkConflict(resRequest, dbData, user) {
+  var check = 0;
+  var usernames = [];
+  var message = '';
+  var isConflict;
+  var conflicting = [];
+  var all;
 
+  for (var i = 0; i < dbData.length; i++) {
 
+    if (isBetween(resRequest.start, dbData[i].start, dbData[i].end) || isBetween(resRequest.end, dbData[i].start, dbData[i].end)) {
+
+      if (resRequest.end == dbData[i].start && resRequest.start != dbData[i].end) {
+        check++
+      } else if (resRequest.start == dbData[i].end && resRequest.end != dbData[i].start) {
+        check++
+      } else {
+        conflicting.push(dbData[i])
+      }
+    } else {
+      check++
+    }
+
+    if (dbData[i].status == "pending") {
+      usernames.push(dbData[i].username)
+    }
+
+  };
+  all = conflicting.slice()
+  excludeSelf = conflicting.slice()
+  for (var i = 0; i < excludeSelf.length; i++) {
+    if (excludeSelf[i]._id == resRequest.id) {
+      excludeSelf.splice(i, 1)
+    }
+  }
+  isConflict = !(check == dbData.length)
+  if (isConflict) {
+    if (usernames.includes(user)) {
+      message = "You have already made a reservation for this."
+    } else {
+      message = "Somebody else has already reserved this machine"
+    }
+  } else {
+    message = "A machine is available!"
+  }
+  return {
+    isConflict: isConflict,
+    message: message,
+    conflicting: {
+      all: all,
+      excludeSelf: excludeSelf
+    }
+  }
+} 
+
+function configTimes(data) {
+  var selectedDate = data.date.split("-")
+  var setDate;
+  var start;
+  var end;
+  var mm = selectedDate[1]
+  var dd = selectedDate[2]
+  var yyyy = selectedDate[0]
+  selectedDate = mm + "-" + dd + "-" + yyyy
+  setDate = data.date;
+  start = Math.floor(new Date(setDate + " " + data.start).getTime() / 1000);
+  end = Math.floor(new Date(setDate + " " + data.end).getTime() / 1000);
+  return {
+    start: start,
+    end: end,
+    date: selectedDate
+  }
+}
+
+app.post("/reservations/reservationSet/action", checkAdmin, (req, res) => {
+  console.log("BODY", req.body)
+  reservationSets.findById(req.body.reservationSet).then(resSet => {
+    console.log("SET1", resSet)
+    var reservation;
+    var dataPromises = [];
+    for (var i = 0; i < resSet.reject.length; i++) {
+      console.log("REJECTING...")
+      reservation = resSet.reject[i]
+      console.log("ID", reservation._id)
+      dataPromises.push(reservations.findById(reservation._id).then(doc => {
+        console.log("Changing status...")
+        doc.status = "rejected"
+        doc.actionReason = req.body.actionReason
+        doc.save().then(doc=> {
+
+        }).catch(err => {
+          console.log(err)
+        })
+      }))
+    }
+    console.log("APPROVING...")
+    dataPromises.push(reservations.findById(resSet.approve._id).then(doc => {
+      console.log("Changing status...2")
+      doc.status = "approved"
+      doc.save()
+    }))
+    console.log("PROMISES",dataPromises)
+    Promise.all(dataPromises).then(values => {
+      console.log(values)
+      res.send({
+        type: "success",
+        header: "Success",
+        msg: "The reservation was approved. All conflicting reservations were rejected."
+      })
+    })
+  })
+})
+
+app.post("/reservations/approve", checkAdmin, function(req, res) {
+
+  reservations.findOne({
+    _id: req.body.id,
+  }).then(doc => {
+    if (doc.status != "pending") {
+      console.log("APPROVED!")
+      res.send({
+        type:"err",
+        header: "Unable to approve",
+        msg: "You can only approve pending reservations.",
+        code: 10
+      })
+    } else {
+      reservations.find({
+        status: "pending"
+      }).then(allRes => {
+        console.log(doc)
+        var conflict = checkConflict(doc, allRes, req.body.username)
+        if (conflict.conflicting.excludeSelf.length == 0) {
+          doc.status = "approved"
+          doc.save().then(() => {
+            res.send({
+              status: "success",
+              msg: "There were no conflicting reservations. It was approved",
+              header: "Success!",
+              code: 0
+            })
+          })
+          console.log("no conflict")
+        } else {
+          console.log("conflict!")
+          console.log("Conflicting Status:")
+          for (var i = 0; i < conflict.conflicting.excludeSelf.length; i++) {
+            console.log(conflict.conflicting.status)
+          }
+          reservationSets.create({
+            reject: conflict.conflicting.excludeSelf,
+            approve: doc
+          }).then(set => {
+            res.send({
+              status: "warn",
+              code: 1000,
+              data: {
+                reservationSet: set._id,
+                conflicting: conflict.conflicting.excludeSelf
+              }
+            })
+          }).catch((err, doc) => {
+            if (err.code == 11000) {
+              console.log("Duplicate Entry")
+            }
+          })
+        }
+      })
+    }
+  })
 
 })
 
 app.post("/reservations/cancel", (req, res) => {
 
+  var query;
 
+  if (isAdmin(req)) {
+    query = {
+      _id: req.body.id
+    }
+  } else {
+    query = {
+      _id: req.body.id,
+      username: req.decoded.username
+    }
+  }
+  reservations.findOne(query).then((doc) => {
+    doc.status = "canceled"
+    doc.save()
+  }).then(doc => {
+    res.send({
+      type: "success",
+      header: "Reservation Cancelled",
+      msg: "Your reservation will no longer be taking place"
+    })
+  })
 
 });
 
 app.post("/reservations/new", function(req, res) {
+
+  var times = configTimes(req.body)
+  start = times.start
+  end = times.end
+  selectedDate = times.date
 
   // make sure the username is the user. An admin does not need to do it this way.
 
   if (!isAdmin(req)) {
     req.body.username = req.decoded.username
   }
-  
-  var start = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.start).getTime() / 1000);
-  var end = Math.floor(new Date(req.body.schedule.global.date + " " + req.body.schedule.time.end).getTime() / 1000);
-
-  // find the date of the reservation in mm-dd-yyyy
-
-  var selectedDate = req.body.schedule.global.date.split("-")
-  var mm = selectedDate[1]
-  var dd = selectedDate[2]
-  var yyyy = selectedDate[0]
-  selectedDate = mm + "-" + dd + "-" + yyyy
-  req.body.schedule.global.date = selectedDate;
-
-  function checkConflict(resRequest,dbData,user) {
-    var check = 0;
-    var usernames = [];
-    var message = '';
-    var isConflict;
-
-    for (var i = 0; i < dbData.length; i++) {
-
-      if (isBetween(resRequest.start, dbData[i].start, dbData[i].end) || isBetween(resRequest.end, dbData[i].start, dbData[i].end)) {
-
-        if (resRequest.end == dbData[i].start && resRequest.start != dbData[i].end) {
-          check++
-        } else if (resRequest.start == dbData[i].end && resRequest.end != dbData[i].start) {
-          check++
-        }
-      } else {
-        check++
-      }
-
-      if (dbData[i].status == "pending") {
-        usernames.push(dbData[i].username)
-      }
-
-    };
-    isConflict = !(check == dbData.length)
-    if (isConflict) {
-      if (usernames.includes(user)) {
-        message = "You have already made a reservation for this."
-      } else {
-        message = "Somebody else has already reserved this machine"
-      }
-    } else {
-      message = "A machine is available!"
-    }
-    return {
-      isConflict: isConflict,
-      message: message
-    }
-  } 
-
+  console.log("BODY",req.body)
+  console.log("DATE",req.body.date)
   reservations.find({
     $or: [{
       status: "pending",
       username: req.body.username,
-      date: req.body.schedule.global.date
+      date: selectedDate
     },
     {
       status: "approved",
-      date: req.body.schedule.global.date
+      date: selectedDate
     }]
   }).then(doc => {
+    console.log("DOC",doc)
     var conflict = checkConflict({
       start: start,
       end: end
     }, doc, req.body.username)
     if(!conflict.isConflict) {
-      // there is no conflict
       reservations.create({
         start: start,
         end: end,
@@ -609,6 +773,7 @@ app.post("/reservations/new", function(req, res) {
         })
       }).catch((err) => {
         // An error occured (can be with the validation)
+        console.log(err)
         if (err.name == "ValidationError") {
           var fields = " "
           for (field in err.errors) {

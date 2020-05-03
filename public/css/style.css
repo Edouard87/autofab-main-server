@@ -24,6 +24,30 @@ a {
   background: orange;
 }
 
+[data-content='pending'] {
+  color: rgb(196, 135, 22);
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+[data-content='rejected'] {
+  color: rgb(159, 52, 13);
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+[data-content='cancelled'] {
+  color: rgb(213, 75, 25);
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+[data-content='approved'] {
+  color: rgb(28, 138, 18);
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
 .schedule-block * {
   color: white;
   margin: 0;

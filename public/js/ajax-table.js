@@ -63,8 +63,10 @@ function setupAjaxTable() {
             }
           })
           var tRow = "<tr>"
+          var tag;
           ajaxTableElm.target.find("thead td[data-tag]").each(index => {
-            tRow = tRow + "<td>{{" + ajaxTableElm.target.find("thead td")[index].getAttribute("data-tag") + "}}</td>"
+            tag = ajaxTableElm.target.find("thead td")[index].getAttribute("data-tag")
+            tRow = tRow + "<td data-content='{{" + tag + "}}'>{{" + tag + "}}</td>"
           })
           tRow += "<td><button "
           ajaxTableElm.target.find("thead td[data-tag]").each(index => {

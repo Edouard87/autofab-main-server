@@ -34,17 +34,13 @@
                 <% } %>
               </select>
             <% } %>
-            <input required id="date" class="calendar-date-picker" name="schedule[global][date]" type="date">
+            <input required id="date" class="calendar-date-picker" name="date" type="date">
             <h1>New Reservation</h1>
             <label for="start-time">Start Time: </label>
-            <input class="wicked-picker" required id="start-time" name="schedule[time][start]" type="time">
+            <input class="wicked-picker" required id="start-time" name="start" type="time">
             <label for="end-time">End Time: </label>
-            <input class="wicked-picker" required id="end-time" name="schedule[time][end]" type="time">
+            <input class="wicked-picker" required id="end-time" name="end" type="time">
             <textarea style="width: 100%" name="justification" placeholder="Enter a reason here"></textarea>
-            <!-- <div style="display: none" class="dialogue-box warn">
-              <h2>Warning</h2>
-              <p>Before you make this reservation, please make sure the end time is <b>after</b> the start time.</p>
-            </div> -->
           </form>
         </p>
         <button type="button" class="btn btn-primary" data-dismiss="modal" id="res-create">Create Reservation</button>
