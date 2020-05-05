@@ -115,7 +115,7 @@
   <!-- Approval Warning Modal -->
   <div class="modal fade" id="approval-warning-modal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Conflict Warning</h5>
@@ -128,7 +128,8 @@
             <!-- <input type="hidden" name="mode" id="mode" value="force"> -->
             <input type="hidden" name="reservationSet" id="reservationSet">
             <span>The reservation you are approving conflicts with that of other students. Please review your action before continuing. <a href="#">What is this?</a></span>
-            <div id="conflicting-reservations">
+            <h1>The reservations below will be rejected</h1>
+            <div id="conflicting-reservations" style="overflow: scroll">
 
             </div>
             <p>Clicking approve will cause conflicting reservations to be rejected. <a href="#">Learn more</a></p>
@@ -158,6 +159,28 @@
             $("#reservationSet").val(data.data.reservationSet);
             $("#approval-warning-modal").modal("toggle")
             $(".ajax-form").trigger('success')
+            ajaxTable.summon($("#conflicting-reservations"),{
+              url: "/reservations/reservationSet/" + data.data.reservationSet,
+              method: "get",
+              id: "conflicting-table",
+              ignore: ["_id","status","__v","createdAt","updatedAt"],
+              firstCap: true,
+              action: false,
+              replaceKeys: {
+                status: "current status"
+              }
+            },()=> {
+              ajaxTable.connect($("#conflicting-reservations").children().first(),{
+                validator: (e) => {
+                  e.start = humanReadableTime(new Date(e.start * 1000))
+                  e.end = humanReadableTime(new Date(e.end * 1000))
+                  e.machine = $("option[value='" + e.machine + "']").html()
+                },
+                preSend: () => {},
+                actionName: "Manage",
+                actionClasses: ["btn","btn-sm","btn-warning"]
+              })
+            })
           } else {
             ajaxDialogue.show(data)
             $(".ajax-form").trigger('success')
@@ -229,12 +252,16 @@
           }
           dataKeys.forEach(elmnt=> {
             console.log()
+            console.log(elmnt)
             menElmnt = $("#edit-reservation-modal #" + elmnt)
             if (formStruct.text.includes(elmnt)) {
               menElmnt.val(e.data[elmnt])
             } else if (formStruct.textarea.includes(elmnt)) {
               menElmnt.html(e.data[elmnt])
             } else if (formStruct.time.includes(elmnt)) {
+              console.log("Logging time!")
+              console.log("man elemnt",menElmnt)
+              console.log("data",e.data[elmnt])
               menElmnt.val(e.data[elmnt])
             } else if (formStruct.select.includes(elmnt)) {
               $("#status").val(e.data[elmnt])

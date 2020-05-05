@@ -536,8 +536,10 @@ function checkConflict(resRequest, dbData, user) {
 
   for (var i = 0; i < dbData.length; i++) {
 
-    if (isBetween(resRequest.start, dbData[i].start, dbData[i].end) || isBetween(resRequest.end, dbData[i].start, dbData[i].end)) {
+    var reqBetween = (isBetween(resRequest.start, dbData[i].start, dbData[i].end) || isBetween(resRequest.end, dbData[i].start, dbData[i].end));
+    var dbBetween = (isBetween(dbData[i].start, resRequest.start, resRequest.end) || isBetween(dbData[i].end, resRequest.start, resRequest.end))
 
+    if (reqBetween || dbBetween) {
       if (resRequest.end == dbData[i].start && resRequest.start != dbData[i].end) {
         check++
       } else if (resRequest.start == dbData[i].end && resRequest.end != dbData[i].start) {
@@ -600,6 +602,12 @@ function configTimes(data) {
   }
 }
 
+app.get("/reservations/reservationSet/:id", checkAdmin, (req, res) => {
+  reservationSets.findById(req.params.id).then(doc => {
+    res.send(doc.reject)
+  })
+})
+
 app.post("/reservations/reservationSet/action", checkAdmin, (req, res) => {
   console.log("BODY", req.body)
   reservationSets.findById(req.body.reservationSet).then(resSet => {
@@ -645,7 +653,6 @@ app.post("/reservations/approve", checkAdmin, function(req, res) {
     _id: req.body.id,
   }).then(doc => {
     if (doc.status != "pending") {
-      console.log("APPROVED!")
       res.send({
         type:"err",
         header: "Unable to approve",

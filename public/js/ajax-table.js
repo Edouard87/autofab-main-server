@@ -29,6 +29,7 @@ const ajaxTable = {
 function setupAjaxTable() {
   console.log("running...")
   tableConfig.forEach((ajaxTableElm) => {
+    var isAction = ajaxTableElm.action instanceof Function
     try {
       if (ajaxTableElm.target.html() == undefined) {
         ajaxTableElm.target = $(".ajax-table")
@@ -68,13 +69,16 @@ function setupAjaxTable() {
             tag = ajaxTableElm.target.find("thead td")[index].getAttribute("data-tag")
             tRow = tRow + "<td data-content='{{" + tag + "}}'>{{" + tag + "}}</td>"
           })
-          tRow += "<td><button "
-          ajaxTableElm.target.find("thead td[data-tag]").each(index => {
-            tRow += "data-" + ajaxTableElm.target.find("thead td")[index].getAttribute("data-tag") +
-              "='{{" + ajaxTableElm.target.find("thead td")[index].getAttribute("data-tag") + "}}' "
-          })
-          tRow += " class='action-btn'>Manage</button></td></tr>"
-          console.log("data", data)
+          if (isAction) {
+            tRow += "<td><button "
+            ajaxTableElm.target.find("thead td[data-tag]").each(index => {
+              tRow += "data-" + ajaxTableElm.target.find("thead td")[index].getAttribute("data-tag") +
+                "='{{" + ajaxTableElm.target.find("thead td")[index].getAttribute("data-tag") + "}}' "
+            })
+            tRow += " class='action-btn'>Manage</button></td></tr>"
+          } else {
+            tRow += "</tr>"
+          }
           ajaxTableElm.target.find("tbody").empty();
           data.forEach(element => {
             ajaxTableElm.target.find("tbody").append(Mustache.to_html(tRow, element))
@@ -83,16 +87,10 @@ function setupAjaxTable() {
             ajaxTableElm.target.find(".action-btn").addClass(elmt)
           })
           ajaxTableElm.target.find(".action-btn").html(ajaxTableElm.actionName)
-          console.log("Data--", data)
           ajaxTableElm.target.find(".action-btn").each(i => {
-            console.log("i", i)
-            console.log("data II", data[i])
             ajaxTableElm.target.find(".action-btn").eq(i).on("click", data[i], ajaxTableElm.action)
-            console.log(ajaxTableElm.target.find(".action-btn").length)
-            console.log(data.length)
           })
         } else {
-          console.log("not an object")
           var targetParent = ajaxTableElm.target.parent()
           targetParent.css("display","none")
           $(".nothing-display").remove()
@@ -135,9 +133,12 @@ function summonTable(loc,conf,callback) {
         return "<table style='"+ style + "' id='" + conf.id + "' class='table ajax-table' data-url='" + conf.url + "' data-method='" + conf.method + "'> <thead> <tr> "
       }
       function generateTableFoot() {
-        return "<td>Action</td></tr></thead><tbody></tbody></table>"
+        if (conf.action) {
+          return "<td>Action</td></tr></thead><tbody></tbody></table>"
+        } else {
+          return "</tr></thead><tbody></tbody></table>"
+        }
       }
-      console.log(data)
       try {
         var keys = Object.keys(data[0])
         var table = generateTableHead(conf)
