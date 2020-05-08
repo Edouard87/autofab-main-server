@@ -11,7 +11,70 @@
   <!-- Modals -->
   <!-- General Purpose Dialogues -->
   <% include ../partials/success-modal.ejs %>
-  <!-- New Reservation Modal -->
+  <!-- File Upload Modal -->
+  <!-- View Reservation Modal -->
+  <div class="modal fade" id="file-upload-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add File</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h1>All Files</h1>
+          <div id="uploaded-files">
+
+          </div>
+          <h1>Upload a new file</h1>
+          <form id="new-file-form" action="/reservations/approve">
+            <input id="file" type="file" name="file">
+          </form>
+          <button class="btn btn-sm btn-secondary" id="upload-file">Upload File</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn modify-button btn-primary modal-button modal-button-ajax-action"
+            data-dismiss="modal">Select File</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $("#upload-file").on("click",() => {
+      var data = new FormData($('#new-file-form')[0]);
+      console.log(data.has("file"))
+      $.ajax({
+        url: '/files/upload',
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        method: 'POST'
+      })
+    })
+     ajaxTable.summon($("#uploaded-files"),{
+      url: "/files/all",
+      method: "get",
+      id: "uploaded-files-table",
+      ignore: ["_id"],
+      firstCap: true,
+      action: false
+    },()=> {
+      ajaxTable.connect($("#uploaded-files-table").children().first(),{
+        validator: (e) => {
+          // e.start = humanReadableTime(new Date(e.start * 1000))
+          // e.end = humanReadableTime(new Date(e.end * 1000))
+          // e.machine = $("option[value='" + e.machine + "']").html()
+        },
+        preSend: () => {},
+        actionName: "Manage",
+        actionClasses: ["btn","btn-sm","btn-warning"]
+      })
+    })
+  </script>
   <%- include ../partials/navbar.ejs %>
   <div class="page-content">
 
@@ -41,7 +104,9 @@
             <label for="end-time">End Time: </label>
             <input class="wicked-picker" required id="end-time" name="end" type="time">
             <textarea style="width: 100%" name="justification" placeholder="Enter a reason here"></textarea>
+            <input id="file-form" type="hidden" name="file">
           </form>
+          <button id="add-file">Add File</button>
         </p>
         <button type="button" class="btn btn-primary" data-dismiss="modal" id="res-create">Create Reservation</button>
       </div>
@@ -52,6 +117,11 @@
          $("#res-create").on("click", () => {
            ajaxForm.submit($("#reservation-form"))
          });
+         console.log("READY!")
+         $("#add-file").on('click', () => {
+           console.log("CLICKED!")
+           $("#file-upload-modal").modal("toggle")
+         })
        })
      </script>
 

@@ -6,6 +6,12 @@ const bodyParser = require('body-parser');
 const fs = require("fs")
 var uniqueValidator = require('mongoose-unique-validator');
 
+// File upload modules
+
+const multer = require("multer")
+const GridFsStorage = require("multer-gridfs-storage")
+const Grid = require("gridfs-stream")
+
 const routes = require('./routes/index');
 // const users = require('./routes/user');
 
@@ -46,9 +52,23 @@ const store = require("data-store")(__dirname + "/data/accounts.json");
 
 const mongoose = require('mongoose');
 
-mongoose.connect((process.env.MONGODB_URI || "mongodb://localhost/autofab"), {
+var conn = mongoose.createConnection((process.env.MONGODB_URI || "mongodb://localhost/autofab"), {
   useNewUrlParser: true
 })
+
+var gfs;
+
+conn.once('open', function () {
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('fs')
+  // all set!
+})
+
+const storage = new GridFsStorage({
+  db: conn
+});
+
+const upload = multer({storage})
 
 // Users
 
@@ -59,7 +79,7 @@ var userSchema = new mongoose.Schema({
   rfid: {type: String, unique: true, required: true}
 })
 
-var users = mongoose.model("User", userSchema);
+var users = conn.model("User", userSchema);
 
 // Machines
 
@@ -69,7 +89,7 @@ var machineSchema = new mongoose.Schema({
   description: String
 })
 
-var machines = mongoose.model("machine",machineSchema)
+var machines = conn.model("machine", machineSchema)
 
 // Reservations
 
@@ -88,7 +108,7 @@ var reservationSchema = new mongoose.Schema({
     timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
 })
 
-var reservations = mongoose.model("reservation",reservationSchema)
+var reservations = conn.model("reservation", reservationSchema)
 
 // Reservations tablesets
 
@@ -105,7 +125,7 @@ var reservationSetSchema = new mongoose.Schema({
   timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
 })
 
-var reservationSets = mongoose.model("reservationSet", reservationSetSchema)
+var reservationSets = conn.model("reservationSet", reservationSetSchema)
 
 // readers
 
@@ -115,7 +135,7 @@ var readersSchema = new mongoose.Schema({
   status: {type: String, required: true}
 })
 
-var readers = new mongoose.model("reader",readersSchema)
+var readers = conn.model("reader", readersSchema)
 
 // User auth stuff
 
@@ -480,6 +500,17 @@ app.get("/reserve", (req, res) => {
   res.render("make_reservation", {req: req, iserr: false, err: null, status: null})
 
 });
+
+app.post("/files/upload", upload.single('file'), (req, res) => {
+  console.log("RECIEVED",req.file)
+});
+
+app.get("/files/all", (req, res) => {
+  // console.log("GFS",gfs)
+  gfs.files.find().toArray((err, files) => {
+    res.send(files)
+  })
+})
 
 app.post("/reservations/delete", (req, res) => {
   if (isAdmin(req)) {
