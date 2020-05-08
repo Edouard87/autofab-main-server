@@ -60,51 +60,44 @@
       </div>
     </div>
   </div>
-  <!-- Edit Reservation Modal -->
-  <div class="modal fade" id="edit-reservation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <!-- View Reservation Modal -->
+  <div class="modal fade" id="view-reservation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Reservation</h5>
+          <h5 class="modal-title" id="exampleModalLabel">View Reservation</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form class="ajax-form" action="/reservations/new" method="post">
-            <!-- <input type="hidden" name="origin" id="origin"> -->
-            <input type="hidden" name="mode" id="mode" value="standard">
-            <input type="hidden" name="id" id="resId">
-            <select data-restricted="true" id="username" name="username">
-              <% for (var i = 0; i < req.users.length; i++ ) { %>
-              <option value="<%= req.users[i].username %>"><%= req.users[i].username %>
-              </option>
-              <% } %>
-            </select>
-            <select id="machine" name="machine">
-              <% for (var i = 0; i < req.machines.length; i++ ) { %>
-              <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>">
-                <%= req.machines[i].name %>
-              </option>
-              <% } %>
-            </select>
-            <input type="date" id="date" name="schedule[global][date]">
-            <input type="time" id="start" name="schedule[time][start]">
-            <input type="time" id="end" name="schedule[time][end]">
-            <textarea id="justification" name="justification"></textarea>
-            <p><span style="font-weight: bold;">Status: </span><span id="status-display"></span></p>
+          <form action="/reservations/approve">
+            <input type="hidden" name="id" id="id">
           </form>
+          <div class="card action-reason-card" style="display: none">
+            <div class="card-header">
+              Your reservation was set to '<label class="status-label"></label>'. It can no longer be edited or
+              modified.
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">The following reason was given by your teacher:</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger modal-button modal-button-ajax-action" data-action="cancel" id="delete-res"
+          <button type="button" class="btn cancel-button btn-danger modal-button modal-button-ajax-action"
+            data-action="cancel" id="delete-res"
             data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-warning modal-button modal-button-ajax-action" data-action="modify"
+          <button type="button" class="btn modify-button btn-warning modal-button modal-button-ajax-action" data-action="modify"
             id="save-res"
             data-dismiss="modal">Modify</button>
           <% if (req.decoded.permission == -1) { %>
-            <button type="button" class="btn btn-success modal-button modal-button-ajax-action" data-action="approve"
+            <button type="button" class="btn approve-button btn-success modal-button modal-button-ajax-action"
+              data-action="approve"
               id="delete-res"
               data-dismiss="modal">Approve</button>
           <% } %>
@@ -112,6 +105,48 @@
       </div>
     </div>
   </div>
+  <!-- Edit Reservation Modal -->
+   <div class="modal fade" id="edit-reservation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Edit Reservation</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <form class="ajax-form" action="/reservations/new" method="post">
+             <!-- <input type="hidden" name="origin" id="origin"> -->
+             <input type="hidden" name="mode" id="mode" value="standard">
+             <input type="hidden" name="id" id="resId">
+             <select data-restricted="true" id="username" name="username">
+               <% for (var i = 0; i < req.users.length; i++ ) { %>
+               <option value="<%= req.users[i].username %>"><%= req.users[i].username %>
+               </option>
+               <% } %>
+             </select>
+             <select id="machine" name="machine">
+               <% for (var i = 0; i < req.machines.length; i++ ) { %>
+               <option value="<%= req.machines[i].id %>" data-name="<%= req.machines[i].name %>">
+                 <%= req.machines[i].name %>
+               </option>
+               <% } %>
+             </select>
+             <input type="date" id="date" name="schedule[global][date]">
+             <input type="time" id="start" name="schedule[time][start]">
+             <input type="time" id="end" name="schedule[time][end]">
+             <textarea id="justification" name="justification"></textarea>
+             <p><span style="font-weight: bold;">Status: </span><span id="status-display"></span></p>
+           </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div>
   <!-- Approval Warning Modal -->
   <div class="modal fade" id="approval-warning-modal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -134,7 +169,7 @@
             </div>
             <p>Clicking approve will cause conflicting reservations to be rejected. <a href="#">Learn more</a></p>
             <label>Justification Message:</label>
-            <textarea id="actionReason" name="actionReason"></textarea>
+            <textarea id="actionReason" name="actionReason">This reservation was rejected due to a time conflict. Please contact Mr. Mathewson.</textarea>
           </form>
         </div>
         <div class="modal-footer">
@@ -153,7 +188,8 @@
         ajaxForm.submitToAndAct({
         url: "/reservations/" + $(this).data('action'),
         method: "post",
-        },$("#edit-reservation-modal form"), (data) => {
+        },$("#view-reservation-modal form"), (data) => {
+          console.log("CLICKED")
           if (data.code == 1000) {
             // there is a conflict. We need to set up a system to deal with this.
             $("#reservationSet").val(data.data.reservationSet);
@@ -209,7 +245,7 @@
   <script>
 
     var scheduleTarget
-    var ignoreFields = ["_id","__v","updatedAt","createdAt"];
+    var ignoreFields = ["_id","__v","updatedAt","createdAt","actionReason"];
     if (location.href.split("?")[1] == "all") {
       $(".ajax-table").attr("data-url","/schedule/a");
       scheduleTarget = "/schedule/a";
@@ -229,59 +265,125 @@
       return date.getHours() + ":" + leadingZeroes(date.getMinutes())
     }
 
+    // function checkEqals(x) {
+
+    // }
+
+    function showModal(x) {
+      console.log("DATA",x)
+      dataKeys = Object.keys(x);
+      var keyElmnt;
+      var hiddenElmnt;
+      var order = ["date","machine","start","end","status","username","justification"]
+      var orderNumber;
+      $("#view-reservation-modal .modal-body form").empty()
+      dataKeys.forEach(key => {
+        // console.log("INDEX of " + key,)
+        orderNumber = order.indexOf(key)
+        if (!(ignoreFields.includes(key))) {
+          keyElmnt = "<div class='res-key' data-content='"+ key +"' style='order:" + orderNumber + "'>"
+          keyElmnt += "<span class='key'>"
+          keyElmnt += firstCap(key) + ": </span>"
+          keyElmnt += "<span class='value' data-content='" + x[key] + "'>" + x[key] + "</span>"
+          keyElmnt += "</div>"
+          $("#view-reservation-modal .modal-body form").append(keyElmnt)
+        }
+        hiddenElmnt="<input type='hidden' name='" + key + "' value='" + x[key] + "'>"
+        $("#view-reservation-modal .modal-body form").append(hiddenElmnt)
+      })
+      console.log("STATUS",x.status)
+      console.log("STATUS_BOOL",(x.status == "Rejected"))
+      if (x.status == "Rejected" || x.status == "Canceled") {
+        if (x.status == "Rejected") {
+          $(".action-reason-card").css("display","block")
+          $(".action-reason-card .card-text").html(x.actionReason)
+          $(".action-reason-card .status-label").html(x.status)
+        } else {
+          $(".action-reason-card").css("display","none")
+        }
+        $("#view-reservation-modal .modal-button-ajax-action").css("display","none")
+      } else if (x.status == "Approved") {
+        $("#view-reservation-modal .approve-button").css("display","none")
+        $("#view-reservation-modal .modify-button").css("display","none")
+        $("#view-reservation-modal [data-action='cancel']").css("display","block")
+      } else {
+        $(".action-reason-card").css("display","none")
+        $("#view-reservation-modal [data-action='approve']").css("display","block")
+        $("#view-reservation-modal [data-action='cancel']").css("display","block")
+        $("#view-reservation-modal [data-action='modify']").css("display","block")
+      }
+      $("#view-reservation-modal .modal-header").attr("data-status",x.status)
+      $("#view-reservation-modal").modal("toggle")
+    }
+
+    // showModal({
+    //   createdAt: 1588477574,
+    //   date: "05-02-2020",
+    //   end: "15:00",
+    //   justification: "This 3D print is really long!",
+    //   machine: "Dave",
+    //   start: "3:00",
+    //   status: "Rejected",
+    //   updatedAt: 1588477583,
+    //   username: "Edouard",
+    //   _id: "5eb0c3bc9ae9dcdb58faff3c",
+    //   actionReason: "Lorem ipsum solor sit ameit."
+    // })
+
     ajaxTable.summon($("#table-wrapper-1"),{
       url: scheduleTarget,
       method: "post",
       id: "schedule-table",
       ignore: ignoreFields,
-      firstCap: true
+      firstCap: true,
+      action: true
     },()=> {
       ajaxTable.connect($("#table-wrapper-1").children().first(),{
         action: (e) => {
-          dataKeys = Object.keys(e.data);
-          console.log(e.data)
-          var menElmnt;
-          const formStruct = {
-            text: ["username"],
-            textarea: ["justification"],
-            time: ["start","end"],
-            select: ["status"],
-            date: ["date"],
-            machine: ["machine"],
-            hidden: ["_id"]
-          }
-          dataKeys.forEach(elmnt=> {
-            console.log()
-            console.log(elmnt)
-            menElmnt = $("#edit-reservation-modal #" + elmnt)
-            if (formStruct.text.includes(elmnt)) {
-              menElmnt.val(e.data[elmnt])
-            } else if (formStruct.textarea.includes(elmnt)) {
-              menElmnt.html(e.data[elmnt])
-            } else if (formStruct.time.includes(elmnt)) {
-              console.log("Logging time!")
-              console.log("man elemnt",menElmnt)
-              console.log("data",e.data[elmnt])
-              menElmnt.val(e.data[elmnt])
-            } else if (formStruct.select.includes(elmnt)) {
-              $("#status").val(e.data[elmnt])
-            } else if (formStruct.date.includes(elmnt)) {
-              menElmnt.val(deformatDate(e.data[elmnt]))
-            } else if (formStruct.machine.includes(elmnt)) {
-              $("#machine option").removeAttr("selected");
-              $("#machine option[data-name='" + e.data[elmnt] + "']").attr("selected","selected")
-            } else if (formStruct.hidden.includes(elmnt)) {
-              $("#resId").val(e.data[elmnt])
-            }
-            $("#status-display").html(e.data.status)
-            $("#edit-reservation-modal").modal("toggle")
-          })
+          showModal(e.data)
+          // var menElmnt;
+          // const formStruct = {
+          //   text: ["username"],
+          //   textarea: ["justification"],
+          //   time: ["start","end"],
+          //   select: ["status"],
+          //   date: ["date"],
+          //   machine: ["machine"],
+          //   hidden: ["_id"]
+          // }
+          // dataKeys.forEach(elmnt=> {
+          //   console.log()
+          //   console.log(elmnt)
+          //   menElmnt = $("#view-reservation-modal #" + elmnt)
+          //   if (formStruct.text.includes(elmnt)) {
+          //     menElmnt.val(e.data[elmnt])
+          //   } else if (formStruct.textarea.includes(elmnt)) {
+          //     menElmnt.html(e.data[elmnt])
+          //   } else if (formStruct.time.includes(elmnt)) {
+          //     console.log("Logging time!")
+          //     console.log("man elemnt",menElmnt)
+          //     console.log("data",e.data[elmnt])
+          //     menElmnt.val(e.data[elmnt])
+          //   } else if (formStruct.select.includes(elmnt)) {
+          //     $("#status").val(e.data[elmnt])
+          //   } else if (formStruct.date.includes(elmnt)) {
+          //     menElmnt.val(deformatDate(e.data[elmnt]))
+          //   } else if (formStruct.machine.includes(elmnt)) {
+          //     $("#machine option").removeAttr("selected");
+          //     $("#machine option[data-name='" + e.data[elmnt] + "']").attr("selected","selected")
+          //   } else if (formStruct.hidden.includes(elmnt)) {
+          //     $("#resId").val(e.data[elmnt])
+          //   }
+          //   $("#status-display").html(e.data.status)
+            
+          // })
         },
         validator: (e) => {
           console.log(e)
           e.start = humanReadableTime(new Date(e.start * 1000))
           e.end = humanReadableTime(new Date(e.end * 1000))
           e.machine = $("option[value='" + e.machine + "']").html()
+          e.status = firstCap(e.status)
         },
         preSend: () => {
           var query = {}
@@ -324,9 +426,10 @@
 
   </script>
   <style>
-    #edit-reservation-modal .modal-body * {
-      display: block;
-      margin: 10px 0;
+    .res-key .key {
+      /* display: block;
+      margin: 10px 0; */
+      font-weight: bold;
     }
   </style>
 </body>

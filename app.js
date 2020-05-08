@@ -650,7 +650,7 @@ app.post("/reservations/reservationSet/action", checkAdmin, (req, res) => {
 app.post("/reservations/approve", checkAdmin, function(req, res) {
 
   reservations.findOne({
-    _id: req.body.id,
+    _id: req.body._id,
   }).then(doc => {
     if (doc.status != "pending") {
       res.send({
@@ -708,27 +708,38 @@ app.post("/reservations/approve", checkAdmin, function(req, res) {
 
 app.post("/reservations/cancel", (req, res) => {
 
+  console.log("BODY",req.body)
+  console.log("_ID",req.body._id)
+
   var query;
+  var no = ["rejected"]
 
   if (isAdmin(req)) {
     query = {
-      _id: req.body.id
+      _id: req.body._id,
     }
   } else {
     query = {
-      _id: req.body.id,
+      _id: req.body._id,
       username: req.decoded.username
     }
   }
   reservations.findOne(query).then((doc) => {
     doc.status = "canceled"
     doc.save()
-  }).then(doc => {
-    res.send({
-      type: "success",
-      header: "Reservation Cancelled",
-      msg: "Your reservation will no longer be taking place"
-    })
+    if (no.includes(doc.status)) {
+      res.send({
+        type: "err",
+        header: "Cannot cancel",
+        msg: "You cannot cancel this reservation"
+      })
+    } else {
+      res.send({
+        type: "success",
+        header: "Reservation Cancelled",
+        msg: "Your reservation will no longer be taking place"
+      })
+    }
   })
 
 });

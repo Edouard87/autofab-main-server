@@ -132,6 +132,7 @@ function summonTable(loc,conf,callback) {
       function generateTableHead(conf,style) {
         return "<table style='"+ style + "' id='" + conf.id + "' class='table ajax-table' data-url='" + conf.url + "' data-method='" + conf.method + "'> <thead> <tr> "
       }
+      conf.action = conf.action || true
       function generateTableFoot() {
         if (conf.action) {
           return "<td>Action</td></tr></thead><tbody></tbody></table>"
@@ -173,3 +174,13 @@ function retrySummon() {
     summonTable(table[0], table[1], table[2])
   })
 }
+
+$(document).ready(() => {
+  $(".modal.fade").on("hidden.bs.modal", function () {
+    console.log("ATTR", $(".modal.fade").data("clear-on-close"))
+    console.log("ATTR", $(".modal.fade").attr("clear-on-close"))
+    if ($(".modal.fade").attr("data-clear-on-close") == "true") {
+      console.log("clearing!")
+    }
+  });
+})

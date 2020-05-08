@@ -17,35 +17,64 @@ a {
   right: 0;
 }
 
-[data-status='approved'] {
-  background: red;
-}
+[data-status='Pending'],
 [data-status='pending'] {
-  background: orange;
+  background: rgb(196, 135, 22);
+  color: white
+}
+[data-status='Rejected'] {
+  background: rgb(213, 75, 25);
+  color: white
+}
+[data-status='Approved'],
+[data-status='approved'] {
+  background: green;
+  color: white
+}
+[data-status='Canceled'] {
+  background: red;
+  color: white
 }
 
-[data-content='pending'] {
+.modal-header[data-status] {
+  border-radius: 0;
+}
+
+.modal-header[data-status] [aria-hidden] {
+  color: white
+}
+
+[data-content='Pending'] {
   color: rgb(196, 135, 22);
   text-transform: capitalize;
   font-weight: bold;
 }
 
-[data-content='rejected'] {
+[data-content='Rejected'] {
   color: rgb(159, 52, 13);
   text-transform: capitalize;
   font-weight: bold;
 }
 
-[data-content='cancelled'] {
+[data-content='Canceled'] {
   color: rgb(213, 75, 25);
   text-transform: capitalize;
   font-weight: bold;
 }
 
-[data-content='approved'] {
+[data-content='Approved'] {
   color: rgb(28, 138, 18);
   text-transform: capitalize;
   font-weight: bold;
+}
+
+#view-reservation-modal .modal-body form {
+  display: flex;
+  flex-direction: column
+}
+
+.status-label {
+  margin: 0;
 }
 
 .schedule-block * {

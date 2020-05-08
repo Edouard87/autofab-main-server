@@ -24,3 +24,7 @@ function leadingZeroes(num) {
   }
 
 }
+
+function firstCap(x) {
+  return x.charAt(0).toUpperCase() + x.slice(1);
+}
