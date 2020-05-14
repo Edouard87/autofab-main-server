@@ -1,0 +1,621 @@
+
+
+.thelabspacepage {
+  width               : 100%;
+  min-width           : 1683px;
+  height              : 100vh;
+  min-height          : 1024px;
+  position            : relative;
+  overflow            : hidden;
+  margin              : 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color    : rgba(255, 255, 255, 1.0);
+  opacity             : 1.0;
+}
+a {
+  text-decoration     : none;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.anima-full-width-a {
+  width               : 100%;
+}
+.anima-full-height-a {
+  height              : 100%;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.thelabspacepage .thelccfablab {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 208px;
+  height              : auto;
+  width               : 710px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 42.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 57.0px;
+}
+.thelabspacepage .line4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 282px;
+  height              : 2px;
+  width               : 767px;
+  position            : absolute;
+  margin              : 0;
+  left                : 46px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .theteam {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 356px;
+  height              : auto;
+  width               : 168px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabspacepage .thespace {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 404px;
+  height              : auto;
+  width               : 168px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabspacepage .themachines {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 452px;
+  height              : auto;
+  width               : 179px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabspacepage .bitmap {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 323px;
+  height              : 177px;
+  width               : 177px;
+  position            : absolute;
+  margin              : 0;
+  left                : 313px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .a4090avenueroyal51 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 356px;
+  height              : auto;
+  width               : 349px;
+  position            : absolute;
+  margin              : 0;
+  left                : 490px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabspacepage .servicesoffered3d {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 512px;
+  height              : auto;
+  width               : 462px;
+  position            : absolute;
+  margin              : 0;
+  left                : 325px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabspacepage .servicesoffered3d .span1 {
+  text-align          : justify;
+}
+.thelabspacepage .servicesoffered3d .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 623px;
+  height              : auto;
+  width               : 444px;
+  position            : absolute;
+  margin              : 0;
+  left                : 325px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabspacepage .hoursofoperation .span1 {
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span3 {
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span4 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span5 {
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span6 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span7 {
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span8 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span9 {
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span10 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span11 {
+  text-align          : justify;
+}
+.thelabspacepage .hoursofoperation .span12 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.thelabspacepage .bitmap1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 282px;
+  height              : 225px;
+  width               : 681px;
+  position            : absolute;
+  margin              : 0;
+  left                : 952px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .bitmap2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 522px;
+  height              : 165px;
+  width               : 681px;
+  position            : absolute;
+  margin              : 0;
+  left                : 952px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .bitmap3 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 713px;
+  height              : 237px;
+  width               : 316px;
+  position            : absolute;
+  margin              : 0;
+  left                : 952px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .bitmap4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 713px;
+  height              : 237px;
+  width               : 316px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1317px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .statusopen {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 623px;
+  height              : auto;
+  width               : auto;
+  position            : absolute;
+  margin              : 0;
+  left                : 612px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabspacepage .statusopen .span1 {
+  text-align          : justify;
+}
+.thelabspacepage .statusopen .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  color               : rgba(109, 212, 0, 1.0);
+  text-align          : justify;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : -171px;
+  height              : 345px;
+  width               : 1722px;
+  position            : absolute;
+  margin              : 0;
+  left                : -24px;
+  overflow            : hidden;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .background {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 345px;
+  width               : 1722px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .screenshot20200421at112321pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : 174px;
+  width               : 231px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .thelab {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 256px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 280px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .reservations {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 460px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .manageyouraccount {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 984px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .bookamachine {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 713px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .bitmap5 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 237px;
+  height              : 83px;
+  width               : 83px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1541px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .davidsmith2321123 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 236px;
+  height              : auto;
+  width               : 179px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1364px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+  text-align          : justify;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+  font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .trianglecopy {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 260px;
+  height              : 29px;
+  width               : 29px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1642px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .line6 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 344px;
+  height              : 1px;
+  width               : 1684px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .line7 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 227px;
+  height              : 94px;
+  width               : 1px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1331px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .redbarbottom {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : 12px;
+  width               : 1704px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .newnavbarlongscreenredbar4links .redbarbottom .rectangle {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 0px;
+  height              : 12px;
+  box-sizing          : border-box;
+  width               : 1704px;
+  position            : relative;
+  margin              : 0;
+  left                : 0px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .hotspot {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 29px;
+  height              : 144px;
+  width               : 153px;
+  position            : absolute;
+  margin              : 0;
+  left                : 25px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .hotspot1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 356px;
+  height              : 48px;
+  width               : 166px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabspacepage .hotspot2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 452px;
+  height              : 48px;
+  width               : 177px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+/* .anima-animate-appear prefix for appear animations */
+.anima-animate-appear {
+  opacity             : 0;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 normal forwards;
+}
+.anima-animate-disappear {
+  opacity             : 1;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+}
+.anima-animate-nodelay {
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay  : 0;
+  animation-delay     : 0;
+}
+@-webkit-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-moz-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-o-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+.anima-component-wrapper,
+.anima-component-wrapper * {
+  pointer-events      : none;
+}
+.anima-component-wrapper a *,
+.anima-component-wrapper a,
+.anima-component-wrapper input,
+.anima-component-wrapper video,
+.anima-component-wrapper iframe,
+.anima-listeners-active,
+.anima-listeners-active * {
+  pointer-events      : auto;
+}
+.anima-hidden,
+.anima-hidden * {
+  visibility          : hidden;
+  pointer-events      : none;
+}
+.anima-smart-layers-pointers,
+.anima-smart-layers-pointers * {
+  pointer-events      : auto;
+  visibility          : visible;
+}
+.anima-component-wrapper.anima-not-ready,
+.anima-component-wrapper.anima-not-ready * {
+  visibility          : hidden !important;
+}
+.anima-listeners-active-click,
+.anima-listeners-active-click * {
+  cursor              : pointer;
+}
+.anima-word-break {
+  overflow-wrap       : break-word;
+  word-wrap           : break-word;
+  word-break          : break-all;
+  word-break          : break-word;
+}

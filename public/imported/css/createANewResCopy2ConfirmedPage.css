@@ -1,0 +1,688 @@
+
+
+.createanewrescopy2confirmedpage {
+  width               : 100%;
+  min-width           : 1683px;
+  height              : 100vh;
+  min-height          : 1034px;
+  position            : relative;
+  overflow            : hidden;
+  margin              : 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color    : rgba(255, 255, 255, 1.0);
+  opacity             : 1.0;
+}
+a {
+  text-decoration     : none;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.anima-full-width-a {
+  width               : 100%;
+}
+.anima-full-height-a {
+  height              : 100%;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.createanewrescopy2confirmedpage .createanewreserva {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 243px;
+  height              : auto;
+  width               : 710px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 42.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 57.0px;
+}
+.createanewrescopy2confirmedpage .line {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 315px;
+  height              : 2px;
+  width               : 633px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .rectangle {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 364px;
+  height              : 188px;
+  box-sizing          : border-box;
+  width               : 1389px;
+  position            : absolute;
+  margin              : 0;
+  left                : 147px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .thankyouyourrese {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 413px;
+  height              : auto;
+  width               : 1250px;
+  position            : absolute;
+  margin              : 0;
+  left                : 288px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 45.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 30.0px;
+}
+.createanewrescopy2confirmedpage .thankyouyourrese .span1 {
+  line-height         : 61.0px;
+}
+.createanewrescopy2confirmedpage .thankyouyourrese .span2 {
+  font-size           : 30.0px;
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .bitmap {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 379px;
+  height              : 159px;
+  width               : 159px;
+  position            : absolute;
+  margin              : 0;
+  left                : 210px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .group {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 640px;
+  height              : 363px;
+  width               : 438px;
+  position            : absolute;
+  margin              : 0;
+  left                : 131px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .group .bitmap3 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 104px;
+  width               : 137px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .group .trotecspeedy300 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 22px;
+  height              : auto;
+  width               : 283px;
+  position            : absolute;
+  margin              : 0;
+  left                : 156px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .group .april25th2020 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 152px;
+  height              : auto;
+  width               : 283px;
+  position            : absolute;
+  margin              : 0;
+  left                : 156px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .group .a12pm2pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 275px;
+  height              : auto;
+  width               : 283px;
+  position            : absolute;
+  margin              : 0;
+  left                : 138px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .group .bitmap1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 119px;
+  height              : 104px;
+  width               : 93px;
+  position            : absolute;
+  margin              : 0;
+  left                : 31px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .group .bitmap2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 242px;
+  height              : 104px;
+  width               : 104px;
+  position            : absolute;
+  margin              : 0;
+  left                : 26px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .pending {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 1088px;
+  height              : auto;
+  width               : 162px;
+  position            : absolute;
+  margin              : 0;
+  left                : 20px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(247, 181, 0, 1.0);
+  text-align          : center;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .modify {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 1088px;
+  height              : auto;
+  width               : 162px;
+  position            : absolute;
+  margin              : 0;
+  left                : 176px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 41.0px;
+  text-decoration     : underline;
+}
+.createanewrescopy2confirmedpage .cancel {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 1088px;
+  height              : auto;
+  width               : 162px;
+  position            : absolute;
+  margin              : 0;
+  left                : 318px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 41.0px;
+  text-decoration     : underline;
+}
+.createanewrescopy2confirmedpage .yourreservationis {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 627px;
+  height              : auto;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 619px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Italic", Helvetica, Arial, serif;
+  font-size           : 25.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 34.0px;
+}
+.createanewrescopy2confirmedpage .yourreservationis .span1 {
+  
+}
+.createanewrescopy2confirmedpage .yourreservationis .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+}
+.createanewrescopy2confirmedpage .yourreservationis .span3 {
+  font-family         : "AvenirNext-MediumItalic", Helvetica, Arial, serif;
+}
+.createanewrescopy2confirmedpage .yourreservationis .span4 {
+  
+}
+.createanewrescopy2confirmedpage .group2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 628px;
+  height              : 406px;
+  width               : 322px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1214px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .group2 .lowercanadacollege {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : auto;
+  width               : 324px;
+  position            : absolute;
+  margin              : 0;
+  left                : -1px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 37.0px;
+}
+.createanewrescopy2confirmedpage .group2 .shouldyouhaveany {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 240px;
+  height              : auto;
+  width               : 289px;
+  position            : absolute;
+  margin              : 0;
+  left                : 20px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 37.0px;
+}
+.createanewrescopy2confirmedpage .group2 .shouldyouhaveany .span1 {
+  
+}
+.createanewrescopy2confirmedpage .group2 .shouldyouhaveany .span2 {
+  font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
+  text-decoration     : underline;
+}
+.createanewrescopy2confirmedpage .group2 .rectangle1 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 160px;
+  height              : 38px;
+  box-sizing          : border-box;
+  width               : 271px;
+  position            : absolute;
+  margin              : 0;
+  left                : 21px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .group2 .viewmore {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 165px;
+  height              : auto;
+  width               : 239px;
+  position            : absolute;
+  margin              : 0;
+  left                : 35px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 26.0px;
+  color               : rgba(255, 255, 255, 1.0);
+  text-align          : center;
+  line-height         : 36.0px;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : -173px;
+  height              : 345px;
+  width               : 1722px;
+  position            : absolute;
+  margin              : 0;
+  left                : -19px;
+  overflow            : hidden;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .background {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 345px;
+  width               : 1722px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .screenshot20200421at112321pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : 174px;
+  width               : 231px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .thelab {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 256px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 280px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .reservations {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 460px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .manageyouraccount {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 984px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .bookamachine {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 713px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .bitmap1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 237px;
+  height              : 83px;
+  width               : 83px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1541px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .davidsmith2321123 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 236px;
+  height              : auto;
+  width               : 179px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1364px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+  text-align          : justify;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+  font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .trianglecopy {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 260px;
+  height              : 29px;
+  width               : 29px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1642px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .line6 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 344px;
+  height              : 1px;
+  width               : 1684px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .line7 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 227px;
+  height              : 94px;
+  width               : 1px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1331px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .redbarbottom {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : 12px;
+  width               : 1704px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .redbarbottom .rectangle1 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 0px;
+  height              : 12px;
+  box-sizing          : border-box;
+  width               : 1704px;
+  position            : relative;
+  margin              : 0;
+  left                : 0px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .hotspot {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 792px;
+  height              : 34px;
+  width               : 271px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1235px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .hotspot1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 38px;
+  height              : 134px;
+  width               : 118px;
+  position            : absolute;
+  margin              : 0;
+  left                : 49px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+/* .anima-animate-appear prefix for appear animations */
+.anima-animate-appear {
+  opacity             : 0;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 normal forwards;
+}
+.anima-animate-disappear {
+  opacity             : 1;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+}
+.anima-animate-nodelay {
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay  : 0;
+  animation-delay     : 0;
+}
+@-webkit-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-moz-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-o-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+.anima-component-wrapper,
+.anima-component-wrapper * {
+  pointer-events      : none;
+}
+.anima-component-wrapper a *,
+.anima-component-wrapper a,
+.anima-component-wrapper input,
+.anima-component-wrapper video,
+.anima-component-wrapper iframe,
+.anima-listeners-active,
+.anima-listeners-active * {
+  pointer-events      : auto;
+}
+.anima-hidden,
+.anima-hidden * {
+  visibility          : hidden;
+  pointer-events      : none;
+}
+.anima-smart-layers-pointers,
+.anima-smart-layers-pointers * {
+  pointer-events      : auto;
+  visibility          : visible;
+}
+.anima-component-wrapper.anima-not-ready,
+.anima-component-wrapper.anima-not-ready * {
+  visibility          : hidden !important;
+}
+.anima-listeners-active-click,
+.anima-listeners-active-click * {
+  cursor              : pointer;
+}
+.anima-word-break {
+  overflow-wrap       : break-word;
+  word-wrap           : break-word;
+  word-break          : break-all;
+  word-break          : break-word;
+}

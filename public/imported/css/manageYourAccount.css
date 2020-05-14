@@ -1,0 +1,914 @@
+
+
+.manageyouraccount {
+  width               : 100%;
+  min-width           : 1683px;
+  height              : 100vh;
+  min-height          : 1024px;
+  position            : relative;
+  overflow            : hidden;
+  margin              : 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color    : rgba(255, 255, 255, 1.0);
+  opacity             : 1.0;
+}
+a {
+  text-decoration     : none;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.anima-full-width-a {
+  width               : 100%;
+}
+.anima-full-height-a {
+  height              : 100%;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.manageyouraccount .manageyouraccount1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 235px;
+  height              : auto;
+  width               : 710px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 42.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 57.0px;
+}
+.manageyouraccount .line4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 309px;
+  height              : 1px;
+  width               : 494px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .firstname {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 344px;
+  height              : auto;
+  width               : 466px;
+  position            : absolute;
+  margin              : 0;
+  left                : 890px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .firstname .span1 {
+  text-align          : justify;
+}
+.manageyouraccount .firstname .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.manageyouraccount .newpassword {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 815px;
+  height              : auto;
+  width               : 466px;
+  position            : absolute;
+  margin              : 0;
+  left                : 890px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .confirmnewpassword {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 815px;
+  height              : auto;
+  width               : 466px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1122px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .studentid {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 451px;
+  height              : auto;
+  width               : 466px;
+  position            : absolute;
+  margin              : 0;
+  left                : 890px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .emailaddress {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 549px;
+  height              : auto;
+  width               : 466px;
+  position            : absolute;
+  margin              : 0;
+  left                : 890px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .lastname {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 344px;
+  height              : auto;
+  width               : 466px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1122px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .lastname .span1 {
+  text-align          : justify;
+}
+.manageyouraccount .lastname .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.manageyouraccount .rectangle {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 376px;
+  height              : 67px;
+  box-sizing          : border-box;
+  width               : 215px;
+  position            : absolute;
+  margin              : 0;
+  left                : 890px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 5px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .rectangle1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 841px;
+  height              : 67px;
+  box-sizing          : border-box;
+  width               : 215px;
+  position            : absolute;
+  margin              : 0;
+  left                : 889px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 5px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .rectangle2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 841px;
+  height              : 67px;
+  box-sizing          : border-box;
+  width               : 215px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1121px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 5px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .rectangle3 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 482px;
+  height              : 67px;
+  box-sizing          : border-box;
+  width               : 447px;
+  position            : absolute;
+  margin              : 0;
+  left                : 890px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 5px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .rectangle4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 579px;
+  height              : 67px;
+  box-sizing          : border-box;
+  width               : 447px;
+  position            : absolute;
+  margin              : 0;
+  left                : 889px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 5px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .rectangle5 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 376px;
+  height              : 67px;
+  box-sizing          : border-box;
+  width               : 215px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1122px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 5px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .david {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 396px;
+  height              : auto;
+  width               : 196px;
+  position            : absolute;
+  margin              : 0;
+  left                : 960px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .a23211234 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 504px;
+  height              : auto;
+  width               : 196px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1076px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .dsmithwearelccca {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 603px;
+  height              : auto;
+  width               : 196px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1025px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .smith {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 396px;
+  height              : auto;
+  width               : 196px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1207px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .rectangle6 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 663px;
+  height              : 33px;
+  box-sizing          : border-box;
+  width               : 447px;
+  position            : absolute;
+  margin              : 0;
+  left                : 890px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .rectangle7 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 919px;
+  height              : 33px;
+  box-sizing          : border-box;
+  width               : 447px;
+  position            : absolute;
+  margin              : 0;
+  left                : 890px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .save {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 666px;
+  height              : auto;
+  width               : 248px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1089px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(255, 255, 255, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .changepassword {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 922px;
+  height              : auto;
+  width               : 248px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1033px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(255, 255, 255, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.manageyouraccount .accountinfomation {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 390px;
+  height              : auto;
+  width               : 250px;
+  position            : absolute;
+  margin              : 0;
+  left                : 46px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.manageyouraccount .myprojects {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 449px;
+  height              : auto;
+  width               : 250px;
+  position            : absolute;
+  margin              : 0;
+  left                : 46px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.manageyouraccount .group2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 472px;
+  height              : 88px;
+  width               : 415px;
+  position            : absolute;
+  margin              : 0;
+  left                : 444px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .group2 .group {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 88px;
+  width               : 415px;
+  position            : relative;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .group2 .group .rectangle8 {
+  background-color    : rgba(109, 212, 0, 0.6);
+  top                 : 0px;
+  height              : 69px;
+  box-sizing          : border-box;
+  width               : 309px;
+  position            : absolute;
+  margin              : 0;
+  left                : 53px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(81, 152, 6, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .group2 .group .accountsavedsucces {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 20px;
+  height              : auto;
+  width               : 417px;
+  position            : absolute;
+  margin              : 0;
+  left                : -1px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 27.0px;
+}
+.manageyouraccount .group21 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 652px;
+  height              : 88px;
+  width               : 415px;
+  position            : absolute;
+  margin              : 0;
+  left                : 444px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .group21 .group {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 88px;
+  width               : 415px;
+  position            : relative;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .group21 .group .rectangle8 {
+  background-color    : rgba(224, 32, 32, 0.6);
+  top                 : 0px;
+  height              : 69px;
+  box-sizing          : border-box;
+  width               : 309px;
+  position            : absolute;
+  margin              : 0;
+  left                : 53px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(188, 18, 18, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .group21 .group .failedtosavesucce {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 20px;
+  height              : auto;
+  width               : 417px;
+  position            : absolute;
+  margin              : 0;
+  left                : -1px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 27.0px;
+}
+.manageyouraccount .group22 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 841px;
+  height              : 88px;
+  width               : 415px;
+  position            : absolute;
+  margin              : 0;
+  left                : 447px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .group22 .group {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 88px;
+  width               : 415px;
+  position            : relative;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .group22 .group .rectangle8 {
+  background-color    : rgba(109, 212, 0, 0.6);
+  top                 : 0px;
+  height              : 69px;
+  box-sizing          : border-box;
+  width               : 309px;
+  position            : absolute;
+  margin              : 0;
+  left                : 53px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(81, 152, 6, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .group22 .group .passwordsavedsucce {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 20px;
+  height              : auto;
+  width               : 417px;
+  position            : absolute;
+  margin              : 0;
+  left                : -1px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 27.0px;
+}
+.manageyouraccount .line41 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 764px;
+  height              : 2px;
+  width               : 448px;
+  position            : absolute;
+  margin              : 0;
+  left                : 890px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : -172px;
+  height              : 345px;
+  width               : 1722px;
+  position            : absolute;
+  margin              : 0;
+  left                : -19px;
+  overflow            : hidden;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .background {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 345px;
+  width               : 1722px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .screenshot20200421at112321pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : 174px;
+  width               : 231px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .thelab {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 256px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 280px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .reservations {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 460px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .manageyouraccount2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 984px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .bookamachine {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 713px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .bitmap {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 237px;
+  height              : 83px;
+  width               : 83px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1541px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .davidsmith2321123 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 236px;
+  height              : auto;
+  width               : 179px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1364px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+  text-align          : justify;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+  font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .trianglecopy {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 260px;
+  height              : 29px;
+  width               : 29px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1642px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .line6 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 344px;
+  height              : 1px;
+  width               : 1684px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .line7 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 227px;
+  height              : 94px;
+  width               : 1px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1331px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .redbarbottom {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : 12px;
+  width               : 1704px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .newnavbarlongscreenredbar4links .redbarbottom .rectangle8 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 0px;
+  height              : 12px;
+  box-sizing          : border-box;
+  width               : 1704px;
+  position            : relative;
+  margin              : 0;
+  left                : 0px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.manageyouraccount .hotspot {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 29px;
+  height              : 144px;
+  width               : 123px;
+  position            : absolute;
+  margin              : 0;
+  left                : 48px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+/* .anima-animate-appear prefix for appear animations */
+.anima-animate-appear {
+  opacity             : 0;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 normal forwards;
+}
+.anima-animate-disappear {
+  opacity             : 1;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+}
+.anima-animate-nodelay {
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay  : 0;
+  animation-delay     : 0;
+}
+@-webkit-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-moz-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-o-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+.anima-component-wrapper,
+.anima-component-wrapper * {
+  pointer-events      : none;
+}
+.anima-component-wrapper a *,
+.anima-component-wrapper a,
+.anima-component-wrapper input,
+.anima-component-wrapper video,
+.anima-component-wrapper iframe,
+.anima-listeners-active,
+.anima-listeners-active * {
+  pointer-events      : auto;
+}
+.anima-hidden,
+.anima-hidden * {
+  visibility          : hidden;
+  pointer-events      : none;
+}
+.anima-smart-layers-pointers,
+.anima-smart-layers-pointers * {
+  pointer-events      : auto;
+  visibility          : visible;
+}
+.anima-component-wrapper.anima-not-ready,
+.anima-component-wrapper.anima-not-ready * {
+  visibility          : hidden !important;
+}
+.anima-listeners-active-click,
+.anima-listeners-active-click * {
+  cursor              : pointer;
+}
+.anima-word-break {
+  overflow-wrap       : break-word;
+  word-wrap           : break-word;
+  word-break          : break-all;
+  word-break          : break-word;
+}

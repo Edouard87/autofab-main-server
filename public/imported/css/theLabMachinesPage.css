@@ -1,0 +1,631 @@
+
+
+.thelabmachinespage {
+  width               : 100%;
+  min-width           : 1683px;
+  height              : 100vh;
+  min-height          : 1143px;
+  position            : relative;
+  overflow            : hidden;
+  margin              : 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color    : rgba(255, 255, 255, 1.0);
+  opacity             : 1.0;
+}
+a {
+  text-decoration     : none;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.anima-full-width-a {
+  width               : 100%;
+}
+.anima-full-height-a {
+  height              : 100%;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.thelabmachinespage .thelccfablab {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 208px;
+  height              : auto;
+  width               : 710px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 42.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 57.0px;
+}
+.thelabmachinespage .line4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 283px;
+  height              : 1px;
+  width               : 766px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .theteam {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 356px;
+  height              : auto;
+  width               : 168px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabmachinespage .thespace {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 404px;
+  height              : auto;
+  width               : 168px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabmachinespage .themachines {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 452px;
+  height              : auto;
+  width               : 179px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabmachinespage .bitmap {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 317px;
+  height              : 220px;
+  width               : 290px;
+  position            : absolute;
+  margin              : 0;
+  left                : 354px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .trotecspeedy300la {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 326px;
+  height              : auto;
+  width               : 417px;
+  position            : absolute;
+  margin              : 0;
+  left                : 662px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabmachinespage .trotecspeedy300la .span1 {
+  text-align          : justify;
+}
+.thelabmachinespage .trotecspeedy300la .span2 {
+  color               : rgba(109, 212, 0, 1.0);
+  text-align          : justify;
+}
+.thelabmachinespage .sindoh3dwox3dprin {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 588px;
+  height              : auto;
+  width               : 417px;
+  position            : absolute;
+  margin              : 0;
+  left                : 662px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabmachinespage .sindoh3dwox3dprin .span1 {
+  text-align          : justify;
+}
+.thelabmachinespage .sindoh3dwox3dprin .span2 {
+  color               : rgba(109, 212, 0, 1.0);
+  text-align          : justify;
+}
+.thelabmachinespage .rolandmdx50millin {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 883px;
+  height              : auto;
+  width               : 417px;
+  position            : absolute;
+  margin              : 0;
+  left                : 663px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 37.0px;
+}
+.thelabmachinespage .rolandmdx50millin .span1 {
+  text-align          : justify;
+}
+.thelabmachinespage .rolandmdx50millin .span2 {
+  color               : rgba(109, 212, 0, 1.0);
+  text-align          : justify;
+}
+.thelabmachinespage .rolandmdx50millin .span3 {
+  text-align          : justify;
+}
+.thelabmachinespage .thespeedyistheid {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 328px;
+  height              : auto;
+  width               : 397px;
+  position            : absolute;
+  margin              : 0;
+  left                : 991px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Italic", Helvetica, Arial, serif;
+  font-size           : 25.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 34.0px;
+}
+.thelabmachinespage .southkoreanmultif {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 590px;
+  height              : auto;
+  width               : 397px;
+  position            : absolute;
+  margin              : 0;
+  left                : 991px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Italic", Helvetica, Arial, serif;
+  font-size           : 25.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 34.0px;
+}
+.thelabmachinespage .themdx50benchtop {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 877px;
+  height              : auto;
+  width               : 397px;
+  position            : absolute;
+  margin              : 0;
+  left                : 991px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Italic", Helvetica, Arial, serif;
+  font-size           : 25.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 34.0px;
+}
+.thelabmachinespage .line5 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 562px;
+  height              : 1px;
+  width               : 1033px;
+  position            : absolute;
+  margin              : 0;
+  left                : 401px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .bitmap1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 588px;
+  height              : 220px;
+  width               : 207px;
+  position            : absolute;
+  margin              : 0;
+  left                : 395px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .line51 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 831px;
+  height              : 1px;
+  width               : 1033px;
+  position            : absolute;
+  margin              : 0;
+  left                : 401px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .bitmap2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 865px;
+  height              : 220px;
+  width               : 293px;
+  position            : absolute;
+  margin              : 0;
+  left                : 352px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .line52 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 1118px;
+  height              : 2px;
+  width               : 1034px;
+  position            : absolute;
+  margin              : 0;
+  left                : 400px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : -173px;
+  height              : 346px;
+  width               : 1723px;
+  position            : absolute;
+  margin              : 0;
+  left                : -20px;
+  overflow            : hidden;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .background {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 1px;
+  height              : 345px;
+  width               : 1722px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .screenshot20200421at112321pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 171px;
+  height              : 174px;
+  width               : 231px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .thelab {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 257px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 281px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .reservations {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 259px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 461px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .manageyouraccount {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 259px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 985px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .bookamachine {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 259px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 714px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .bitmap3 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 238px;
+  height              : 83px;
+  width               : 83px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1542px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .davidsmith2321123 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 237px;
+  height              : auto;
+  width               : 179px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1365px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+  text-align          : justify;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+  font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .trianglecopy {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 260px;
+  height              : 30px;
+  width               : 30px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1642px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .line6 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 344px;
+  height              : 2px;
+  width               : 1685px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .line7 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 227px;
+  height              : 95px;
+  width               : 2px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1331px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .redbarbottom {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : 13px;
+  width               : 1705px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .newnavbarlongscreenredbar4links .redbarbottom .rectangle {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 0px;
+  height              : 13px;
+  box-sizing          : border-box;
+  width               : 1705px;
+  position            : relative;
+  margin              : 0;
+  left                : 0px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .hotspot {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 173px;
+  width               : 131px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .hotspot1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 356px;
+  height              : 48px;
+  width               : 166px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.thelabmachinespage .hotspot2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 404px;
+  height              : 48px;
+  width               : 166px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+/* .anima-animate-appear prefix for appear animations */
+.anima-animate-appear {
+  opacity             : 0;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 normal forwards;
+}
+.anima-animate-disappear {
+  opacity             : 1;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+}
+.anima-animate-nodelay {
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay  : 0;
+  animation-delay     : 0;
+}
+@-webkit-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-moz-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-o-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+.anima-component-wrapper,
+.anima-component-wrapper * {
+  pointer-events      : none;
+}
+.anima-component-wrapper a *,
+.anima-component-wrapper a,
+.anima-component-wrapper input,
+.anima-component-wrapper video,
+.anima-component-wrapper iframe,
+.anima-listeners-active,
+.anima-listeners-active * {
+  pointer-events      : auto;
+}
+.anima-hidden,
+.anima-hidden * {
+  visibility          : hidden;
+  pointer-events      : none;
+}
+.anima-smart-layers-pointers,
+.anima-smart-layers-pointers * {
+  pointer-events      : auto;
+  visibility          : visible;
+}
+.anima-component-wrapper.anima-not-ready,
+.anima-component-wrapper.anima-not-ready * {
+  visibility          : hidden !important;
+}
+.anima-listeners-active-click,
+.anima-listeners-active-click * {
+  cursor              : pointer;
+}
+.anima-word-break {
+  overflow-wrap       : break-word;
+  word-wrap           : break-word;
+  word-break          : break-all;
+  word-break          : break-word;
+}

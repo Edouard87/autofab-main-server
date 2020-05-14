@@ -1,0 +1,35 @@
+{
+    "pages": [{
+        "name": "all",
+        "partials": [{
+            "name":"global-header.ejs",
+            "location":"head",
+            "position":"beforeend"
+        }]
+    },{
+        "name": "home",
+        "replace": [{
+          "selector": ".group4",
+          "partial": "machines-dropdown",
+          "meta": {
+              "className": "schedule-form group4",
+              "idName": "machine-select",
+              "type":"machine"
+          }
+        },{
+            "selector": ".group5",
+            "partial": "input",
+            "meta": {
+            "className": "schedule-form group5",
+            "idName": "date-select",
+            "type": "machine",
+            "inputType":"text"
+            }
+        }]
+    }],
+    "projDir": "/Users/edouarddesparois-perrault/Documents/GitHub/autofab-main-server",
+    "fileDir": "/Users/edouarddesparois-perrault/Downloads/EntireThingSomeLinksWorkingWithLandingandLoginv1",
+    "partialDataRoute": "http://localhost:3000/preprocess",
+    "key":"kFHSJaiHhsUFHUEWS1345rnsd"
+}
+

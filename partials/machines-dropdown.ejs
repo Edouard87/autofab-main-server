@@ -1,0 +1,6 @@
+<label>User: </label><select class="<%= className %>" id="<%= idName %>">
+  <% for (var i = 0; i < machines.length; i++ ) { %>
+    <option value="<%= machines[i].username %>"><%= machines[i].name %></option>
+  <% } %>
+</select>
+

@@ -1,0 +1,1033 @@
+
+
+.createanewres {
+  width               : 100%;
+  min-width           : 1440px;
+  height              : 100vh;
+  min-height          : 1024px;
+  position            : relative;
+  overflow            : hidden;
+  margin              : 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color    : rgba(255, 255, 255, 1.0);
+  opacity             : 1.0;
+}
+a {
+  text-decoration     : none;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.anima-full-width-a {
+  width               : 100%;
+}
+.anima-full-height-a {
+  height              : 100%;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.createanewres .createanewreserva {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 50px;
+  height              : auto;
+  width               : 710px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 42.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 50.0px;
+}
+.createanewres .line {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 119px;
+  height              : 2px;
+  width               : 634px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .chooseamachine {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 148px;
+  height              : auto;
+  width               : 428px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 36.0px;
+}
+.createanewres .starttime {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 145px;
+  height              : auto;
+  width               : 428px;
+  position            : absolute;
+  margin              : 0;
+  left                : 387px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 36.0px;
+}
+.createanewres .endtime {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 267px;
+  height              : auto;
+  width               : 428px;
+  position            : absolute;
+  margin              : 0;
+  left                : 387px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 36.0px;
+}
+.createanewres .group4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 199px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group4 .group2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group4 .group2 .rectangle4 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
+  height              : 46px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group4 .group2 .trotecspeedy300 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 11px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 16px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 24.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.createanewres .group4 .line2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 14px;
+  height              : 24px;
+  width               : 10px;
+  position            : absolute;
+  margin              : 0;
+  left                : 259px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group7 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 199px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 387px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group7 .group6 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group7 .group6 .rectangle4 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
+  height              : 46px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group7 .group6 .a1200pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 11px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 20px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 24.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.createanewres .group7 .line2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 10px;
+  height              : 24px;
+  width               : 10px;
+  position            : absolute;
+  margin              : 0;
+  left                : 260px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group5 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 324px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group5 .group3 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group5 .group3 .rectangle4 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
+  height              : 46px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group5 .group3 .april252020 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 9px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 16px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 24.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.createanewres .group5 .line2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 15px;
+  height              : 24px;
+  width               : 10px;
+  position            : absolute;
+  margin              : 0;
+  left                : 256px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group8 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 325px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 387px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group8 .rectangle4 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
+  height              : 46px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group8 .line2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 10px;
+  height              : 24px;
+  width               : 10px;
+  position            : absolute;
+  margin              : 0;
+  left                : 259px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group8 .a200pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 11px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 20px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 26.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 31.0px;
+}
+.createanewres .chooseaday {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 268px;
+  height              : auto;
+  width               : 262px;
+  position            : absolute;
+  margin              : 0;
+  left                : 38px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 36.0px;
+}
+.createanewres .rectangle {
+  background-color    : rgba(255, 255, 255, 1.0);
+  top                 : 50px;
+  height              : 907px;
+  box-sizing          : border-box;
+  width               : 632px;
+  position            : absolute;
+  margin              : 0;
+  left                : 754px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .reservedunavailab {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 278px;
+  height              : auto;
+  width               : 189px;
+  position            : absolute;
+  margin              : 0;
+  left                : 984px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 24.0px;
+}
+.createanewres .a8am {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a10am {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 310px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a11am {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 379px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a12pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 449px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a1pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 519px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a2pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 589px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a3pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 659px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a4pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 728px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a5pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 798px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a6pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 868px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .a9am {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 240px;
+  height              : auto;
+  width               : 84px;
+  position            : absolute;
+  margin              : 0;
+  left                : 770px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .showingresultsona {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 92px;
+  height              : auto;
+  width               : 591px;
+  position            : absolute;
+  margin              : 0;
+  left                : 797px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Oblique", Helvetica, Arial, serif;
+  font-size           : 22.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 26.0px;
+}
+.createanewres .rectangle1 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 421px;
+  height              : 202px;
+  box-sizing          : border-box;
+  width               : 632px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .explainwhatyouwil {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 455px;
+  height              : auto;
+  width               : 605px;
+  position            : absolute;
+  margin              : 0;
+  left                : 49px;
+  transform           : rotate(0deg);
+  opacity             : 0.19;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 26.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 31.0px;
+}
+.createanewres .pleasenotethatyou {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 820px;
+  height              : auto;
+  width               : 333px;
+  position            : absolute;
+  margin              : 0;
+  left                : 16px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 28.0px;
+}
+.createanewres .rectangle2 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 663px;
+  height              : 298px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 387px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .requestreservation {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 886px;
+  height              : auto;
+  width               : 247px;
+  position            : absolute;
+  margin              : 0;
+  left                : 407px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .bitmap {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 669px;
+  height              : 202px;
+  width               : 202px;
+  position            : absolute;
+  margin              : 0;
+  left                : 425px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line3 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 184px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .uploadfileiegc {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 658px;
+  height              : auto;
+  width               : 318px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .group {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 728px;
+  height              : 39px;
+  width               : 321px;
+  position            : absolute;
+  margin              : 0;
+  left                : 28px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group .rectangle4 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
+  height              : 39px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 13px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .group .choosefile1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 4px;
+  height              : auto;
+  width               : 249px;
+  position            : absolute;
+  margin              : 0;
+  left                : 72px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 23.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 28.0px;
+}
+.createanewres .line31 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 253px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line32 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 323px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line33 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 393px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line34 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 463px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line35 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 533px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line36 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 602px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line37 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 672px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line38 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 742px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line39 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 812px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .line310 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 882px;
+  height              : 1px;
+  width               : 446px;
+  position            : absolute;
+  margin              : 0;
+  left                : 900px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .rectangle3 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 254px;
+  height              : 140px;
+  box-sizing          : border-box;
+  width               : 211px;
+  position            : absolute;
+  margin              : 0;
+  left                : 973px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.createanewres .reserved911am {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 268px;
+  height              : auto;
+  width               : 189px;
+  position            : absolute;
+  margin              : 0;
+  left                : 985px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica-Bold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(255, 255, 255, 1.0);
+  text-align          : left;
+  line-height         : 36.0px;
+}
+.createanewres .reserved911am .span1 {
+  text-align          : justify;
+}
+.createanewres .reserved911am .span2 {
+  
+}
+.createanewres .choosefile {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 737px;
+  height              : auto;
+  width               : 259px;
+  position            : absolute;
+  margin              : 0;
+  left                : 90px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-size           : 24.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+/* .anima-animate-appear prefix for appear animations */
+.anima-animate-appear {
+  opacity             : 0;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 normal forwards;
+}
+.anima-animate-disappear {
+  opacity             : 1;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+}
+.anima-animate-nodelay {
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay  : 0;
+  animation-delay     : 0;
+}
+@-webkit-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-moz-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-o-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+.anima-component-wrapper,
+.anima-component-wrapper * {
+  pointer-events      : none;
+}
+.anima-component-wrapper a *,
+.anima-component-wrapper a,
+.anima-component-wrapper input,
+.anima-component-wrapper video,
+.anima-component-wrapper iframe,
+.anima-listeners-active,
+.anima-listeners-active * {
+  pointer-events      : auto;
+}
+.anima-hidden,
+.anima-hidden * {
+  visibility          : hidden;
+  pointer-events      : none;
+}
+.anima-smart-layers-pointers,
+.anima-smart-layers-pointers * {
+  pointer-events      : auto;
+  visibility          : visible;
+}
+.anima-component-wrapper.anima-not-ready,
+.anima-component-wrapper.anima-not-ready * {
+  visibility          : hidden !important;
+}
+.anima-listeners-active-click,
+.anima-listeners-active-click * {
+  cursor              : pointer;
+}
+.anima-word-break {
+  overflow-wrap       : break-word;
+  word-wrap           : break-word;
+  word-break          : break-all;
+  word-break          : break-word;
+}

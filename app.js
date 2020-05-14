@@ -142,7 +142,7 @@ users.find().then(doc => {
 
 function authenticate(req, res, next) {
   const token = req.cookies.auth
-  if (req.url == "/login") {
+  if (req.url == "/login" || req.url == "/preprocess") {
     next()
   } else if (token == undefined) {
     res.render("login", {iserr: false, err: null})
@@ -237,6 +237,27 @@ app.get("/p/:name", function(req, res, next) {
 
 app.get("/a/:name", checkAdmin, function (req, res, next) {
   res.render(req.params.name, { req: req })
+})
+
+app.get("/preprocess", (req, res) => {
+
+  console.log(req.headers)
+
+  if (req.headers["preprocessor-key"] == "kFHSJaiHhsUFHUEWS1345rnsd") {
+    Promise.all([users.find({}), machines.find({})]).then((values) => {
+      req.accounts = values[0]
+      req.users = values[0]
+      req.machines = values[1]
+      req.readers = []
+      res.send({
+        accounts: values[0],
+        users: values[0],
+        machines: values[1]
+      })
+    })
+  } else {
+    res.redirect("/p/login")
+  }
 })
 
 app.post("/login", function(req, res) {

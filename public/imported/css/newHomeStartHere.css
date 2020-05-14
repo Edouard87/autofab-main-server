@@ -1,0 +1,937 @@
+
+
+.newhomestarthere {
+  width               : 100%;
+  min-width           : 1440px;
+  height              : 100vh;
+  min-height          : 1024px;
+  position            : relative;
+  overflow            : hidden;
+  margin              : 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color    : rgba(255, 255, 255, 1.0);
+  opacity             : 1.0;
+}
+a {
+  text-decoration     : none;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.anima-full-width-a {
+  width               : 100%;
+}
+.anima-full-height-a {
+  height              : 100%;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.newhomestarthere .autofabredandblacktextlogopng {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : -170px;
+  height              : 182px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 581px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .screenshot20200421at112321pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 174px;
+  width               : 231px;
+  position            : absolute;
+  margin              : 0;
+  left                : -18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .thelab {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 86px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 262px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.newhomestarthere .yourreservations {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 86px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 419px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.newhomestarthere .upcomingreservation {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 553px;
+  height              : auto;
+  width               : 352px;
+  position            : absolute;
+  margin              : 0;
+  left                : 51px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.newhomestarthere .helpcontact {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 553px;
+  height              : auto;
+  width               : 352px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1014px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.newhomestarthere .manageyouraccount {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 86px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 697px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.newhomestarthere .rectangle {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 61px;
+  height              : 100px;
+  box-sizing          : border-box;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1112px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .bitmap {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 74px;
+  height              : 83px;
+  width               : 83px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1303px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .davidsmith2321123 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 73px;
+  height              : auto;
+  width               : 179px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1126px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.newhomestarthere .rectangle1 {
+  background-color    : rgba(255, 255, 255, 1.0);
+  top                 : 287px;
+  height              : 225px;
+  box-sizing          : border-box;
+  width               : 1341px;
+  position            : absolute;
+  margin              : 0;
+  left                : 51px;
+  border-style        : solid;
+  border-width        : 3px;
+  border-color        : rgba(0, 0, 0, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 355px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 74px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group4 .group2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group4 .group2 .rectangle9 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
+  height              : 46px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group4 .group2 .trotecspeedy300 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 10px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 16px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 24.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 33.0px;
+}
+.newhomestarthere .group4 .line2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 14px;
+  height              : 24px;
+  width               : 10px;
+  position            : absolute;
+  margin              : 0;
+  left                : 259px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .rectangle2 {
+  background-color    : rgba(255, 255, 255, 1.0);
+  top                 : 621px;
+  height              : 281px;
+  box-sizing          : border-box;
+  width               : 386px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1006px;
+  border-style        : solid;
+  border-width        : 3px;
+  border-color        : rgba(0, 0, 0, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group7 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 355px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 748px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group7 .group6 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group7 .group6 .rectangle9 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
+  height              : 46px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group7 .group6 .a1200pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 10px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 20px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 24.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 33.0px;
+}
+.newhomestarthere .group7 .line2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 10px;
+  height              : 24px;
+  width               : 10px;
+  position            : absolute;
+  margin              : 0;
+  left                : 260px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group5 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 355px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 419px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group5 .group3 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group5 .group3 .rectangle9 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
+  height              : 46px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group5 .group3 .april252020 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 8px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 16px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 24.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 33.0px;
+}
+.newhomestarthere .group5 .line2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 15px;
+  height              : 24px;
+  width               : 10px;
+  position            : absolute;
+  margin              : 0;
+  left                : 256px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group8 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 354px;
+  height              : 46px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1062px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group8 .rectangle9 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
+  height              : 46px;
+  box-sizing          : border-box;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 15px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group8 .line2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 10px;
+  height              : 24px;
+  width               : 10px;
+  position            : absolute;
+  margin              : 0;
+  left                : 259px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .group8 .a200pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 10px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 20px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 26.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 36.0px;
+}
+.newhomestarthere .reserveamachine {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 232px;
+  height              : auto;
+  width               : 295px;
+  position            : absolute;
+  margin              : 0;
+  left                : 51px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.newhomestarthere .rectangle3 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 449px;
+  height              : 41px;
+  box-sizing          : border-box;
+  width               : 467px;
+  position            : absolute;
+  margin              : 0;
+  left                : 454px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .continuereservation {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 454px;
+  height              : auto;
+  width               : 467px;
+  position            : absolute;
+  margin              : 0;
+  left                : 454px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 24.0px;
+  color               : rgba(255, 255, 255, 1.0);
+  text-align          : center;
+  line-height         : 33.0px;
+}
+.newhomestarthere .rectangle4 {
+  background-color    : rgba(255, 255, 255, 1.0);
+  top                 : 621px;
+  height              : 281px;
+  box-sizing          : border-box;
+  width               : 380px;
+  position            : absolute;
+  margin              : 0;
+  left                : 51px;
+  border-style        : solid;
+  border-width        : 3px;
+  border-color        : rgba(0, 0, 0, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .rectangle5 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 835px;
+  height              : 44px;
+  box-sizing          : border-box;
+  width               : 234px;
+  position            : absolute;
+  margin              : 0;
+  left                : 94px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .bitmap1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 697px;
+  height              : 104px;
+  width               : 137px;
+  position            : absolute;
+  margin              : 0;
+  left                : 284px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .april27th2004 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 685px;
+  height              : auto;
+  width               : 212px;
+  position            : absolute;
+  margin              : 0;
+  left                : 64px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 27.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 27.0px;
+}
+.newhomestarthere .april27th2004 .span1 {
+  text-align          : justify;
+  line-height         : 37.0px;
+}
+.newhomestarthere .april27th2004 .span2 {
+  color               : rgba(109, 212, 0, 1.0);
+  text-align          : justify;
+  line-height         : 37.0px;
+}
+.newhomestarthere .april27th2004 .span3 {
+  font-size           : 30.0px;
+  text-align          : justify;
+  line-height         : 41.0px;
+}
+.newhomestarthere .viewall {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 840px;
+  height              : auto;
+  width               : 223px;
+  position            : absolute;
+  margin              : 0;
+  left                : 100px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 25.0px;
+  color               : rgba(255, 255, 255, 1.0);
+  text-align          : center;
+  line-height         : 34.0px;
+}
+.newhomestarthere .rectangle6 {
+  background-color    : rgba(255, 255, 255, 1.0);
+  top                 : 621px;
+  height              : 281px;
+  box-sizing          : border-box;
+  width               : 456px;
+  position            : absolute;
+  margin              : 0;
+  left                : 484px;
+  border-style        : solid;
+  border-width        : 3px;
+  border-color        : rgba(0, 0, 0, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .labinfo {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 553px;
+  height              : auto;
+  width               : 228px;
+  position            : absolute;
+  margin              : 0;
+  left                : 444px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 41.0px;
+}
+.newhomestarthere .thefablabisopen {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 626px;
+  height              : auto;
+  width               : 419px;
+  position            : absolute;
+  margin              : 0;
+  left                : 509px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 22.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 20.0px;
+}
+.newhomestarthere .thefablabisopen .span1 {
+  line-height         : 30.0px;
+}
+.newhomestarthere .thefablabisopen .span2 {
+  color               : rgba(109, 212, 0, 1.0);
+  line-height         : 30.0px;
+}
+.newhomestarthere .thefablabisopen .span3 {
+  line-height         : 30.0px;
+}
+.newhomestarthere .thefablabisopen .span4 {
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span5 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span6 {
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span7 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span8 {
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span9 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span10 {
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span11 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span12 {
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span13 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  line-height         : 27.0px;
+}
+.newhomestarthere .thefablabisopen .span14 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  line-height         : 30.0px;
+}
+.newhomestarthere .ifyouhaveanyques {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 648px;
+  height              : auto;
+  width               : 365px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1019px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 27.0px;
+}
+.newhomestarthere .rectangle7 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 830px;
+  height              : 44px;
+  box-sizing          : border-box;
+  width               : 234px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1085px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .sendamessage {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 835px;
+  height              : auto;
+  width               : 340px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1032px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 24.0px;
+  color               : rgba(255, 255, 255, 1.0);
+  text-align          : center;
+  line-height         : 33.0px;
+}
+.newhomestarthere .triangle {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 96px;
+  height              : 29px;
+  width               : 29px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1030px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .trianglecopy {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 97px;
+  height              : 29px;
+  width               : 29px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1404px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .redbarbottom {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 1014px;
+  height              : 27px;
+  width               : 1450px;
+  position            : absolute;
+  margin              : 0;
+  left                : -5px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .redbarbottom .rectangle9 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 0px;
+  height              : 27px;
+  box-sizing          : border-box;
+  width               : 1450px;
+  position            : relative;
+  margin              : 0;
+  left                : 0px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .rectangle8 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 835px;
+  height              : 44px;
+  box-sizing          : border-box;
+  width               : 234px;
+  position            : absolute;
+  margin              : 0;
+  left                : 595px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.newhomestarthere .viewmore {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 844px;
+  height              : auto;
+  width               : 276px;
+  position            : absolute;
+  margin              : 0;
+  left                : 574px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 22.0px;
+  color               : rgba(255, 255, 255, 1.0);
+  text-align          : center;
+  line-height         : 30.0px;
+}
+/* .anima-animate-appear prefix for appear animations */
+.anima-animate-appear {
+  opacity             : 0;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 normal forwards;
+}
+.anima-animate-disappear {
+  opacity             : 1;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+}
+.anima-animate-nodelay {
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay  : 0;
+  animation-delay     : 0;
+}
+@-webkit-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-moz-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-o-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+.anima-component-wrapper,
+.anima-component-wrapper * {
+  pointer-events      : none;
+}
+.anima-component-wrapper a *,
+.anima-component-wrapper a,
+.anima-component-wrapper input,
+.anima-component-wrapper video,
+.anima-component-wrapper iframe,
+.anima-listeners-active,
+.anima-listeners-active * {
+  pointer-events      : auto;
+}
+.anima-hidden,
+.anima-hidden * {
+  visibility          : hidden;
+  pointer-events      : none;
+}
+.anima-smart-layers-pointers,
+.anima-smart-layers-pointers * {
+  pointer-events      : auto;
+  visibility          : visible;
+}
+.anima-component-wrapper.anima-not-ready,
+.anima-component-wrapper.anima-not-ready * {
+  visibility          : hidden !important;
+}
+.anima-listeners-active-click,
+.anima-listeners-active-click * {
+  cursor              : pointer;
+}
+.anima-word-break {
+  overflow-wrap       : break-word;
+  word-wrap           : break-word;
+  word-break          : break-all;
+  word-break          : break-word;
+}
