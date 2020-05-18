@@ -7,16 +7,18 @@
     <script src="/components/jquery/dist/jquery.min.js"></script>
 <script src="/components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/components/mustache.js/mustache.js"></script>
+<script src="/components/moment/min/moment.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/components/materialize/dist/css/materialize.min.css" media="screen,projection">
 
-<script src="/components/wickedpicker/dist/wickedpicker.min.js"></script>
-<link rel="stylesheet" href="/components/wickedpicker/dist/wickedpicker.min.css">
+<!-- <script src="/components/wickedpicker/dist/wickedpicker.min.js"></script> -->
+<!-- <link rel="stylesheet" href="/components/wickedpicker/dist/wickedpicker.min.css"> -->
 
-<link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/jquery-ui.min.css">
-<link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/theme.css">
+<!-- <link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/jquery-ui.min.css">
+<link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/theme.css"> -->
 
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/action-menu.css">
-<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
 <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
 <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
@@ -31,14 +33,28 @@
 <script src="/js/ajax-form.js"></script>
 <script src="/js/status-msg.js"></script></head>
     <body style="margin: 0;
- background: rgba(255, 255, 255, 1.0);">
+ background: rgba(255, 255, 255, 1.0);"><div id="status-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4 class="modal-title">Modal Header</h4>
+    <p class="modal-body">A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="close-ajax-dialogue">Close</a>
+  </div>
+</div>
+
+<script>
+  $(document).ready(() => {
+    ajaxDialogue.init()
+  })
+</script>
         <input id="anPageName" name="page" type="hidden" value="thelabmachinespage">
         <div class="thelabmachinespage anima-word-break ">
             <div style="width: 1683px; height: 100%; position:relative; margin:auto;">
                 <div class="thelccfablab">
                     The LCC Fab Lab
                 </div>
-                <img alt="Image" anima-src="./img/my-reservations-line-4-2.png" class="line4" src="../imported/img/my-reservations-line-4-2.png">
+                <img alt="Image" anima-src="./img/the-lab-machines-page-line-4.png" class="line4" src="../imported/img/the-lab-machines-page-line-4.png">
                 <div class="theteam">
                     The Team
                 </div>
@@ -75,7 +91,7 @@
                 <div class="newnavbarlongscreenredbar4links">
                     <div class="background">
                     </div>
-                    <img alt="Image" anima-src="./img/create-a-new-res-copy-screen-shot-2020-04-21-at-112321-pm@2x.png" class="screenshot20200421at112321pm" src="../imported/img/create-a-new-res-copy-screen-shot-2020-04-21-at-112321-pm@2x.png">
+                    <img alt="Image" anima-src="./img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png" class="screenshot20200421at112321pm" src="../imported/img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png">
                     <div class="thelab">
                         The Lab
                     </div>
@@ -88,19 +104,19 @@
                     <div class="bookamachine">
                         Book A Machine
                     </div>
-                    <img alt="Image" anima-src="./img/manage-your-account-bitmap@2x.png" class="bitmap3" src="../imported/img/manage-your-account-bitmap@2x.png">
+                    <img alt="Image" anima-src="./img/reservations-bitmap-5@2x.png" class="bitmap3" src="../imported/img/reservations-bitmap-5@2x.png">
                     <div class="davidsmith2321123">
                         <span class="span1">David Smith<br></span><span class="span2">#23211234</span>
                     </div>
-                    <img alt="Image" anima-src="./img/the-lab-team-page-triangle-copy@2x.png" class="trianglecopy" src="../imported/img/the-lab-team-page-triangle-copy@2x.png">
-                    <img alt="Image" anima-src="./img/my-reservations---past-line-6.png" class="line6" src="../imported/img/my-reservations---past-line-6.png">
-                    <img alt="Image" anima-src="./img/create-a-new-res-copy-line-7@2x.png" class="line7" src="../imported/img/create-a-new-res-copy-line-7@2x.png">
+                    <img alt="Image" anima-src="./img/reservations-triangle-copy@2x.png" class="trianglecopy" src="../imported/img/reservations-triangle-copy@2x.png">
+                    <img alt="Image" anima-src="./img/home-line-6.png" class="line6" src="../imported/img/home-line-6.png">
+                    <img alt="Image" anima-src="./img/manage-your-account-line-7@2x.png" class="line7" src="../imported/img/manage-your-account-line-7@2x.png">
                     <div class="redbarbottom">
                         <div class="rectangle">
                         </div>
                     </div>
                 </div>
-                <a href="newhomestarthereredesignedtestlargernoboxestest">
+                <a href="home">
                     <div class="hotspot">
                     </div>
                 </a>
@@ -193,4 +209,34 @@
         <!-- End of Scripts -->
     
 
-</body></html>
+<script src="../components/materialize/dist/js/materialize.min.js"></script>
+<script>
+    // Time picker was removed due to certain requirements that needed a callback to run on close.
+    // $('.date-picker').datepicker({
+    //     format: "mm-dd-yyyy",
+    //     defaultDate: new Date(),
+    //     setDefaultDate: true
+    // });
+    $(".time-picker").timepicker();
+</script><script>
+    $(document).ready(() => {
+        // setup the machine selector
+        $("select[data-collection='machines']").each((index, value) => {
+            $.ajax({
+                url: "/query/" + value.getAttribute("data-collection"),
+                method: "get",
+                success: data => {
+                    console.log("success!")
+                    console.log(data)
+                    $.each(data, (x, y) => {
+                        var elmnt = document.createElement("option")
+                        elmnt.innerHTML = y.name
+                        elmnt.value = y._id
+                        value.appendChild(elmnt)
+                        console.log("added values!")
+                    })
+                }
+            })
+        })
+    })
+</script></body></html>

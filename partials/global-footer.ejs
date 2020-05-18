@@ -1,0 +1,22 @@
+<script>
+    $(document).ready(() => {
+        // setup the machine selector
+        $("select[data-collection='machines']").each((index, value) => {
+            $.ajax({
+                url: "/query/" + value.getAttribute("data-collection"),
+                method: "get",
+                success: data => {
+                    console.log("success!")
+                    console.log(data)
+                    $.each(data, (x, y) => {
+                        var elmnt = document.createElement("option")
+                        elmnt.innerHTML = y.name
+                        elmnt.value = y._id
+                        value.appendChild(elmnt)
+                        console.log("added values!")
+                    })
+                }
+            })
+        })
+    })
+</script>

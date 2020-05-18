@@ -1,0 +1,172 @@
+<style>
+    .hour-label {
+        font-weight: bold;
+        background: white;
+        z-index: 2;
+        position: absolute; 
+        left: 0;
+    }
+    .schedule-block[data-status='approved'] {
+        background-color: red;
+    }
+</style>
+
+<script>
+    $(document).ready(() => {
+        // Get the calendar lines to show
+
+        var linesTemplate;
+        $.ajax({
+            url: "/templates/calendar-line.mustache",
+            method: "get",
+            success: data => {
+                console.log(data)
+                linesTemplate = data
+            }
+        })
+
+        var blockTemplate
+         $.ajax({
+            url: "/templates/schedule-block.mustache",
+            method: "get",
+            success: data => {
+                console.log(data)
+                blockTemplate = data
+                // Make sure to get the reservations after the time select has been updated
+                getReservations()
+            }
+        })
+
+        var currentUser;
+        $.ajax({
+            url: "/users/getcurrentuser",
+            method: "get",
+            success: data => {
+                currentUser = data
+            }
+        })
+
+        var lineHeight = 2;
+        var openingTime = 0;
+        var closingTime = 24;
+        var hourHeight = (parseInt($(".calendarresults").css("height"))/(closingTime-openingTime))
+        var windowWidth = parseInt($(".calendarresults").css("width"))
+        var generatedLines = false
+        function generateLines() {
+            if (!generatedLines) {
+                console.log("complete!")
+                var period;
+                var hourNum;
+                var multiplyer=-1;
+                for (var i = 0; i <= 24; i++) {
+                    if (i < openingTime || i > closingTime) {
+                        // These number should not be shown
+                    } else {
+                        multiplyer++
+                        if (i == 0) {
+                            period = "AM"
+                            hourNum = 12;
+                        } else if (i == 12) {
+                            period = "PM"
+                            hourNum = 12;
+                        } else if (i == 24) {
+                            period = "AM"
+                            hourNum = 12;
+                        } else if (i < 12) {
+                            period = "AM"
+                            hourNum = i;
+                        } else {
+                            period = "PM";
+                            hourNum = i-12
+                        }
+                        console.log(i + ": Generating")
+                        $(".calendarresults").append(Mustache.to_html(linesTemplate,{
+                            top: multiplyer*hourHeight,
+                            height: hourHeight,
+                            topText: (multiplyer*hourHeight)-(hourHeight/2),
+                            time: hourNum + " " + period,
+                            width: windowWidth,
+                            textWidth: windowWidth*0.1,
+                            lineHeight: lineHeight
+                        }))
+                    }
+                    
+                }
+                generatedLines = true
+            }
+            
+        }
+
+        $(document).ajaxComplete(() => {
+            generateLines()
+        })
+
+        // Get the calendar reservations to show
+
+        function getReservations() {
+            $(".schedule-block").remove()
+            $.ajax({
+                url: "/query/reservations?" + $.param({
+                    date: $("#date-picker").val(),
+                    machine: $("[data-collection='machines']").val()
+                }),
+                method: "get",
+                success: data => {
+                    $.each(data, (index, value) => {
+                        var startTimeMinutes = (new Date(value.start)).getMinutes()
+                        var resDuractionMins = ((value.end-value.start)/1000)/60
+                        $(".calendarresults").append(Mustache.to_html(blockTemplate, {
+                            top: (startTimeMinutes/60)*hourHeight,
+                            height: (resDuractionMins/60)*hourHeight,
+                            width: windowWidth*0.5,
+                            left: (windowWidth/2)-((windowWidth*0.5)/2)+(windowWidth*0.1),
+                            status: value.status
+                        }))
+                    })
+                }
+            })
+        }
+
+        $('.date-picker').datepicker({
+            format: "mm-dd-yyyy",
+            defaultDate: new Date(),
+            setDefaultDate: true,
+            onClose: getReservations
+        });
+        $("[data-collection='machines']").on("change",getReservations)
+
+        // Manage reservation creation
+        $(document).ajaxComplete(() => {
+            var searchParams = new URLSearchParams((new URL(location.href)).search);
+            searchParams.forEach((value, key) => {
+                $("input." + key).val(value)
+                $("select." + key).val(value)
+            })
+        })
+        // Manage submission of reservation
+        $("[href='createanewrescopy2confirmedpage']").on("click", ev => {
+            ev.preventDefault()
+            var selection = {
+                machine: $("[data-collection='machines']").val(),
+                start: $("input[name='start']").val(),
+                end: $("input[name='end']").val(),
+                date: $("input[name='date']").val(),
+                justification:$("textarea[name='justification']").val()
+            }
+            $.ajax({
+                url: "/reservations/new",
+                method: "post",
+                data: $.param(selection),
+                success: data => {
+                    if (!(data.code == 1)) {
+                        ajaxDialogue.show(data)
+                    } else {
+                        // redirect the user to the confirmed page
+                        selection.conf = data.data.conf
+                        location.href = "/p/createanewrescopy2confirmedpage?" + $.param(selection)
+                    }
+                }
+            })
+        })
+    })
+</script>

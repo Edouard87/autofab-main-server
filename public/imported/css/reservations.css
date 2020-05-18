@@ -1,0 +1,743 @@
+
+
+.reservations {
+  width               : 100%;
+  min-width           : 1683px;
+  height              : 100vh;
+  min-height          : 1024px;
+  position            : relative;
+  overflow            : hidden;
+  margin              : 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color    : rgba(255, 255, 255, 1.0);
+  opacity             : 1.0;
+}
+a {
+  text-decoration     : none;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.anima-full-width-a {
+  width               : 100%;
+}
+.anima-full-height-a {
+  height              : 100%;
+}
+div {
+  -webkit-text-size-adjust: none;
+}
+.reservations .viewyourupcomingr {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 235px;
+  height              : auto;
+  width               : 710px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 42.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 57.0px;
+}
+.reservations .line4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 309px;
+  height              : 1px;
+  width               : 766px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .sindoh3dwoxapril2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 353px;
+  height              : auto;
+  width               : 369px;
+  position            : absolute;
+  margin              : 0;
+  left                : 262px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .trotecspeedy300ma {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 567px;
+  height              : auto;
+  width               : 369px;
+  position            : absolute;
+  margin              : 0;
+  left                : 271px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .trotecspeedy300ma1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 777px;
+  height              : auto;
+  width               : 369px;
+  position            : absolute;
+  margin              : 0;
+  left                : 271px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .line41 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 518px;
+  height              : 2px;
+  width               : 767px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .bitmap {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 546px;
+  height              : 187px;
+  width               : 246px;
+  position            : absolute;
+  margin              : 0;
+  left                : 25px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .bitmap1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 546px;
+  height              : 187px;
+  width               : 246px;
+  position            : absolute;
+  margin              : 0;
+  left                : 25px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .bitmap2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 770px;
+  height              : 187px;
+  width               : 246px;
+  position            : absolute;
+  margin              : 0;
+  left                : 25px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .line42 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 742px;
+  height              : 2px;
+  width               : 767px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .line43 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 959px;
+  height              : 2px;
+  width               : 767px;
+  position            : absolute;
+  margin              : 0;
+  left                : 46px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .messageu201cprintingp {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 353px;
+  height              : auto;
+  width               : 287px;
+  position            : absolute;
+  margin              : 0;
+  left                : 507px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .messageu201cprintingp .span1 {
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp .span3 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp .span4 {
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp .span5 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp .span6 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 777px;
+  height              : auto;
+  width               : 287px;
+  position            : absolute;
+  margin              : 0;
+  left                : 507px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .messageu201cprintingp1 .span1 {
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp1 .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp1 .span3 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp1 .span4 {
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp1 .span5 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp1 .span6 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 563px;
+  height              : auto;
+  width               : 287px;
+  position            : absolute;
+  margin              : 0;
+  left                : 507px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .messageu201cprintingp2 .span1 {
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp2 .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp2 .span3 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp2 .span4 {
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp2 .span5 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .messageu201cprintingp2 .span6 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .bitmap3 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 322px;
+  height              : 187px;
+  width               : 176px;
+  position            : absolute;
+  margin              : 0;
+  left                : 47px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .bitmap4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 973px;
+  height              : 187px;
+  width               : 176px;
+  position            : absolute;
+  margin              : 0;
+  left                : 48px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .sindoh3dwox {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 973px;
+  height              : auto;
+  width               : auto;
+  position            : absolute;
+  margin              : 0;
+  left                : 262px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .approved {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 390px;
+  height              : auto;
+  width               : 336px;
+  position            : absolute;
+  margin              : 0;
+  left                : 870px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(109, 212, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .approved1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 604px;
+  height              : auto;
+  width               : 336px;
+  position            : absolute;
+  margin              : 0;
+  left                : 870px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(109, 212, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .pending {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 843px;
+  height              : auto;
+  width               : 336px;
+  position            : absolute;
+  margin              : 0;
+  left                : 870px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(247, 181, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .upcomingreservation {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 322px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1385px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 27.0px;
+}
+.reservations .pastreservations {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 370px;
+  height              : auto;
+  width               : 238px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1385px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 20.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 27.0px;
+}
+.reservations .path {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 322px;
+  height              : 2758px;
+  width               : 1px;
+  position            : absolute;
+  margin              : 0;
+  left                : -11998px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .newnavbarlongscreenredbar4links {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : -172px;
+  height              : 345px;
+  width               : 1722px;
+  position            : absolute;
+  margin              : 0;
+  left                : -19px;
+  overflow            : hidden;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .newnavbarlongscreenredbar4links .background {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 345px;
+  width               : 1722px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .newnavbarlongscreenredbar4links .screenshot20200421at112321pm {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : 174px;
+  width               : 231px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .newnavbarlongscreenredbar4links .thelab {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 256px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 280px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.reservations .newnavbarlongscreenredbar4links .reservations1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 280px;
+  position            : absolute;
+  margin              : 0;
+  left                : 460px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.reservations .newnavbarlongscreenredbar4links .manageyouraccount {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 984px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.reservations .newnavbarlongscreenredbar4links .bookamachine {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 331px;
+  position            : absolute;
+  margin              : 0;
+  left                : 713px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.reservations .newnavbarlongscreenredbar4links .bitmap5 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 237px;
+  height              : 83px;
+  width               : 83px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1541px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .newnavbarlongscreenredbar4links .davidsmith2321123 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 236px;
+  height              : auto;
+  width               : 179px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1364px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 41.0px;
+}
+.reservations .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+  text-align          : justify;
+}
+.reservations .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+  font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .newnavbarlongscreenredbar4links .trianglecopy {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 260px;
+  height              : 29px;
+  width               : 29px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1642px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .newnavbarlongscreenredbar4links .line6 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 344px;
+  height              : 1px;
+  width               : 1684px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .newnavbarlongscreenredbar4links .line7 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 227px;
+  height              : 94px;
+  width               : 1px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1331px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .newnavbarlongscreenredbar4links .redbarbottom {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 170px;
+  height              : 12px;
+  width               : 1704px;
+  position            : absolute;
+  margin              : 0;
+  left                : 18px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .newnavbarlongscreenredbar4links .redbarbottom .rectangle {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 0px;
+  height              : 12px;
+  box-sizing          : border-box;
+  width               : 1704px;
+  position            : relative;
+  margin              : 0;
+  left                : 0px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .hotspot {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 370px;
+  height              : 45px;
+  width               : 236px;
+  position            : absolute;
+  margin              : 0;
+  left                : 1386px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .hotspot1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 30px;
+  height              : 143px;
+  width               : 152px;
+  position            : absolute;
+  margin              : 0;
+  left                : 25px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+/* .anima-animate-appear prefix for appear animations */
+.anima-animate-appear {
+  opacity             : 0;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 normal forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 normal forwards;
+}
+.anima-animate-disappear {
+  opacity             : 1;
+  display             : block;
+  -webkit-animation   : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  -moz-animation      : anima-reveal 0.3s ease-in 1 normal forwards;
+  -o-animation        : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+  animation           : anima-reveal 0.3s ease-in-out 1 reverse forwards;
+}
+.anima-animate-nodelay {
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay  : 0;
+  animation-delay     : 0;
+}
+@-webkit-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-moz-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@-o-keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+@keyframes anima-reveal {
+  0%
+   
+  {
+      opacity: 0;
+    }
+  
+    
+  100%
+   
+  {
+      opacity: 1;
+    }
+}
+.anima-component-wrapper,
+.anima-component-wrapper * {
+  pointer-events      : none;
+}
+.anima-component-wrapper a *,
+.anima-component-wrapper a,
+.anima-component-wrapper input,
+.anima-component-wrapper video,
+.anima-component-wrapper iframe,
+.anima-listeners-active,
+.anima-listeners-active * {
+  pointer-events      : auto;
+}
+.anima-hidden,
+.anima-hidden * {
+  visibility          : hidden;
+  pointer-events      : none;
+}
+.anima-smart-layers-pointers,
+.anima-smart-layers-pointers * {
+  pointer-events      : auto;
+  visibility          : visible;
+}
+.anima-component-wrapper.anima-not-ready,
+.anima-component-wrapper.anima-not-ready * {
+  visibility          : hidden !important;
+}
+.anima-listeners-active-click,
+.anima-listeners-active-click * {
+  cursor              : pointer;
+}
+.anima-word-break {
+  overflow-wrap       : break-word;
+  word-wrap           : break-word;
+  word-break          : break-all;
+  word-break          : break-word;
+}

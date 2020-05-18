@@ -6,6 +6,10 @@ const bodyParser = require('body-parser');
 const fs = require("fs")
 var uniqueValidator = require('mongoose-unique-validator');
 
+// moment.js is used for time validation
+
+const moment = require("moment")
+
 const routes = require('./routes/index');
 // const users = require('./routes/user');
 
@@ -83,7 +87,8 @@ var reservationSchema = new mongoose.Schema({
   username: {type: String, required: true},
   status: {type: String, required: true},
   justification: {type: String, required: true},
-  actionReason: String
+  actionReason: String,
+  conf: Number
 }, { 
     timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
 })
@@ -141,8 +146,10 @@ users.find().then(doc => {
 })
 
 function authenticate(req, res, next) {
-  const token = req.cookies.auth
-  if (req.url == "/login" || req.url == "/preprocess") {
+  const token = req.cookies.auth;
+  console.log("URL",req.url)
+  if (req.url == "/login" || req.url == "/preprocess" || req.url == "/p/old") {
+    console.log("moving on...")
     next()
   } else if (token == undefined) {
     res.render("login", {iserr: false, err: null})
@@ -264,10 +271,12 @@ app.post("/login", function(req, res) {
   users.findOne({username: req.body.username}).then(data => {
     if (data == null) {
       // no user exists
-      res.render("login", {
-        iserr: true,
-        err: "No user with that username exists. If you think this is an error, please ask your teacher to register you as a student."
-      });
+      res.send({
+        type: "err",
+        header: "Login Failed",
+        msg: "No user exists with that username.",
+        code: 11
+      })
     } else {
       if (hmacPass(req.body.password) == data.password) {
         // password is correct
@@ -276,13 +285,14 @@ app.post("/login", function(req, res) {
           permission: data.permission
         }, 'hgfhjnbghj');
         res.cookie("auth", token);
-        res.redirect("/")
+        res.send({
+          code: 0
+        })
       } else {
         // password is incorrect
-        res.render("login", {
-          iserr: true,
-          err: "The password you have supplied is incorrect."
-        });
+        res.send({
+          code: 12
+        })
       }
     }
   })
@@ -298,6 +308,32 @@ app.get("/logout", (req, res) => {
 app.get('/', function(req, res) {
   res.redirect("/p/home")
 });
+
+app.get("/query/:collection", (req, res) => {
+  var studentAllowed = ["machines","reservations"]
+  if ((!isAdmin(req)) && (!(studentAllowed.includes(req.params.collection)))) {
+    console.log("UNAUTHORIZED")
+    res.send({
+      code: 14
+    })
+  } else {
+    try {
+      eval(req.params.collection).find(req.query).then(docs => {
+        res.send(docs)
+      }).catch((err, doc) => {
+        console.err(err)
+      })
+    } catch (err) {
+      console.err(err)
+    }
+  }
+  
+})
+
+app.get("/users/getcurrentuser", (req, res) => {
+  console.log("user:", req.decoded.username)
+  res.send({username: req.decoded.username})
+})
 
 app.post("/register", function (req, res) {
   users.create({
@@ -605,21 +641,12 @@ function checkConflict(resRequest, dbData, user) {
 } 
 
 function configTimes(data) {
-  var selectedDate = data.date.split("-")
-  var setDate;
-  var start;
-  var end;
-  var mm = selectedDate[1]
-  var dd = selectedDate[2]
-  var yyyy = selectedDate[0]
-  selectedDate = mm + "-" + dd + "-" + yyyy
-  setDate = data.date;
-  start = Math.floor(new Date(setDate + " " + data.start).getTime() / 1000);
-  end = Math.floor(new Date(setDate + " " + data.end).getTime() / 1000);
+  var start = moment(data.date + ", " + data.start,"MM-DD-YYYY, hh:mm A")
+  var end = moment(data.date + ", " + data.end,"MM-DD-YYYY, hh:mm A")
   return {
     start: start,
     end: end,
-    date: selectedDate
+    date: data.date
   }
 }
 
@@ -765,20 +792,26 @@ app.post("/reservations/cancel", (req, res) => {
 
 });
 
+function getNumber(callback) {
+  var n = Math.floor(Math.random() * 1000000000);
+  reservations.findOne({
+    'conf': n
+  }, function (err, result) {
+    if (err) callback(err);
+    else if (result) return getNumber(callback);
+    else callback(null, n);
+  });
+}
+
 app.post("/reservations/new", function(req, res) {
 
   var times = configTimes(req.body)
   start = times.start
   end = times.end
   selectedDate = times.date
-
   // make sure the username is the user. An admin does not need to do it this way.
+  req.body.username = req.decoded.username
 
-  if (!isAdmin(req)) {
-    req.body.username = req.decoded.username
-  }
-  console.log("BODY",req.body)
-  console.log("DATE",req.body.date)
   reservations.find({
     $or: [{
       status: "pending",
@@ -796,38 +829,47 @@ app.post("/reservations/new", function(req, res) {
       end: end
     }, doc, req.body.username)
     if(!conflict.isConflict) {
-      reservations.create({
-        start: start,
-        end: end,
-        machine: req.body.machine,
-        justification: req.body.justification,
-        username: req.body.username,
-        status: "pending",
-        date: selectedDate
-      }).then((doc) => {
-        res.send({
-          type: "success",
-          header: "Reservation Made",
-          msg: "Your reservation has been made."
-        })
-      }).catch((err) => {
-        // An error occured (can be with the validation)
-        console.log(err)
-        if (err.name == "ValidationError") {
-          var fields = " "
-          for (field in err.errors) {
-            if (fields == " ") {
-              fields += field
-            } else {
-              fields += ", " + field
-            }
-          }
+      getNumber((err, conf) => {
+        if (err) return console.log(err)
+        reservations.create({
+          start: start,
+          end: end,
+          machine: req.body.machine,
+          justification: req.body.justification,
+          username: req.body.username,
+          status: "pending",
+          date: selectedDate,
+          conf: conf
+        }).then((doc) => {
           res.send({
-            type: "err",
-            header: "Unable to make reservation",
-            msg: "Please make sure the following field(s) are filled: " + fields
+            type: "success",
+            header: "Reservation Made",
+            msg: "Your reservation has been made.",
+            code: 1,
+            data: {
+              conf: conf
+            }
           })
-        }
+        }).catch((err) => {
+          // An error occured (can be with the validation)
+          console.log(err)
+          if (err.name == "ValidationError") {
+            var fields = " "
+            for (field in err.errors) {
+              if (fields == " ") {
+                fields += field
+              } else {
+                fields += ", " + field
+              }
+            }
+            res.send({
+              type: "err",
+              header: "Unable to make reservation",
+              msg: "Please make sure the following field(s) are filled: " + fields,
+              code: 13
+            })
+          }
+        })
       })
     } else {
       // there is a conflict

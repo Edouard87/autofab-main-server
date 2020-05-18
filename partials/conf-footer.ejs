@@ -1,0 +1,21 @@
+<select style="display: none" data-collection='machines'>
+
+</select>
+
+<script>
+    $(document).ready(() => {
+        // Put the confirmation number in the right place
+        var searchParams = new URLSearchParams(location.href.split("?")[1]);
+        $(".span2").html("Confirmnation #" + searchParams.get("conf"))
+        console.log("params: ", searchParams.get("machine"))
+        console.log("Query: ", $("option[value='" + searchParams.get("machine") + "']"))
+        console.log("The machine is:", $("option[value='" + searchParams.get("machine") + "']"))
+        $(document).ajaxStop(() => {
+            $(".trotecspeedy300").html($("option[value='" + searchParams.get("machine") + "']").html())
+        })
+        var startDate = moment(searchParams.get("date") + ", " + searchParams.get("start"),"MM-DD-YYYY, hh:mm A")
+        var endDate = moment(searchParams.get("date") + ", " + searchParams.get("end"),"MM-DD-YYYY, hh:mm A")
+        $(".april25th2020").html(startDate.format("MMMM Do YYYY"))
+        $(".a12pm2pm").html(startDate.format("h A") + " - " + endDate.format("h A"))
+    })
+</script>

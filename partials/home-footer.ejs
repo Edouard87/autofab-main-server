@@ -1,0 +1,18 @@
+<script>
+    $(document).ready(function(){
+        $('.date-picker').datepicker({
+            format: "mm-dd-yyyy",
+            defaultDate: new Date(),
+            setDefaultDate: true
+        });
+        $("[href='calendar']").on('click',e => {
+            e.preventDefault();
+            location.href="calendar?" + $.param({
+                machine: $(".machinedropdown").val(),
+                date: $('#date-picker').val(),
+                start: $('.starttime').val(),
+                end: $('.endtime').val()
+            })
+        })
+    });
+</script>

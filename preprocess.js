@@ -9,25 +9,21 @@ const ejs = require("ejs")
 
 const config = require("./preprocess.json");
 
-console.log("CONFIG: " + config.json)
-
 const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
     })
 
-console.log("Retrieving server resources...")
 axios.get(config.partialDataRoute || "http://localhost/preprocess", {
     headers: {
         "preprocessor-key":config.key
     }
 }).then(res => {
-    console.log("connected!")
     var ejsData = res.data
     rl.question("Project Directory: ", (projDir) => {
-      projDir = config.projDir || projDir
+      projDir = projDir || config.projDir
       rl.question(`File Directory: `, (dir) => {
-        dir = config.fileDir || dir
+        dir = dir || config.fileDir
         var files = fs.readdirSync(dir, "utf-8")
         var oldPath;
         var newPath;
@@ -41,7 +37,6 @@ axios.get(config.partialDataRoute || "http://localhost/preprocess", {
           newPath = projDir + "/public/imported/" + file;
           if (file.includes(".html")) {
             fileName = replaceExt(file, ".ejs")
-            console.log("File name:", fileName)
             file = fs.readFileSync(oldPath, "utf-8")
             dom = new JSDOM(file);
             document = dom.window.document
@@ -61,9 +56,13 @@ axios.get(config.partialDataRoute || "http://localhost/preprocess", {
             // Add partials 
             var partials = [];
             var replace = [];
+            var remove = [];
+            var extract = [];
             pages.forEach(page => {
               page.partials = page.partials || []
               page.replace = page.replace || []
+              page.remove = page.remove || []
+              page.extract = page.extract || []
               if (page.name == "all" || page.name + ".ejs" == fileName) {
                 page.partials.forEach(x => {
                   partials.push(x)
@@ -71,15 +70,55 @@ axios.get(config.partialDataRoute || "http://localhost/preprocess", {
                 page.replace.forEach(x => {
                   replace.push(x)
                 })
+                page.remove.forEach(x => {
+                  remove.push(x)
+                })
+                page.extract.forEach(x => {
+                  extract.push(x)
+                })
               }
             });
+            // Add partials
             partials.forEach(partial => {
               var loc = partial.location
               var pos = partial.position
+              Object.keys(partial.meta || {}).forEach((key, i) => {
+                ejsData[key] = partial.meta[key]
+              })
               partial = fs.readFileSync(projDir + "/partials/" + partial.name,"utf-8")
               document.querySelectorAll(loc).forEach(x => {
                 x.insertAdjacentHTML(pos, ejs.render(partial, ejsData))
               })
+            })
+            // Extract elements set to be extracted
+            extract.forEach(x => {
+              var template = new JSDOM(document.querySelectorAll(x.selector)[0].outerHTML)
+              var templateDocument = template.window.document
+              // console.log(templateDocument.querySelectorAll("div")[0].innerHTML)
+              var path;
+              // var completePath;
+              var compiledTemplate;
+              if (x.type == "mustache") {
+                // mustache template
+                path = x.path || "/public/templates/"
+                x.data.forEach(y => {
+                  templateDocument.querySelectorAll(y.selector).forEach(elmnt => {
+                    elmnt.innerHTML = "{{" + y.key + "}}"
+                  })
+                })
+                // compiledTemplate = template
+              } else if (x.type == "ejs") {
+                // ejs template
+                path = x.path || "/partials/"
+                // compiledTemplate = template.outerHTML
+              } else {
+                // custom template
+              }
+              if (x.remove == true) {
+                // remove the elements it is supposed to remove by adding their selectors to the remove array
+                remove.push(x.selector)
+              }
+              fs.writeFileSync(projDir + path + x.name + "." + x.type, templateDocument.querySelectorAll("body")[0].innerHTML)
             })
             // Replace elements set to be replaced
             replace.forEach(x => {
@@ -90,6 +129,12 @@ axios.get(config.partialDataRoute || "http://localhost/preprocess", {
               var renderedpartial = ejs.render(replaceELm, ejsData)
               document.querySelectorAll(x.selector).forEach(el => {
                 el.outerHTML = renderedpartial
+              })
+            })
+            // Remove necesssary elements
+            remove.forEach(x => {
+              document.querySelectorAll(x).forEach(el => {
+                el.parentNode.removeChild(el);
               })
             })
             // write the finalized html page

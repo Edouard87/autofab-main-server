@@ -2,21 +2,23 @@
         <link href="../imported/img/favicon.png" rel="shortcut icon">
         <meta charset="utf-8">
         <meta content="width=1683, maximum-scale=1.0" name="viewport">
-        <link href="../imported/css/newHomeStartHereRedesignedTestLargerNoBoxesTest.css" rel="stylesheet" type="text/css">
+        <link href="../imported/css/home.css" rel="stylesheet" type="text/css">
         <meta content="AnimaApp.com - Design to code, Automated." name="author">
     <script src="/components/jquery/dist/jquery.min.js"></script>
 <script src="/components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/components/mustache.js/mustache.js"></script>
+<script src="/components/moment/min/moment.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/components/materialize/dist/css/materialize.min.css" media="screen,projection">
 
-<script src="/components/wickedpicker/dist/wickedpicker.min.js"></script>
-<link rel="stylesheet" href="/components/wickedpicker/dist/wickedpicker.min.css">
+<!-- <script src="/components/wickedpicker/dist/wickedpicker.min.js"></script> -->
+<!-- <link rel="stylesheet" href="/components/wickedpicker/dist/wickedpicker.min.css"> -->
 
-<link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/jquery-ui.min.css">
-<link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/theme.css">
+<!-- <link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/jquery-ui.min.css">
+<link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/theme.css"> -->
 
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/action-menu.css">
-<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
 <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
 <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
@@ -31,14 +33,28 @@
 <script src="/js/ajax-form.js"></script>
 <script src="/js/status-msg.js"></script></head>
     <body style="margin: 0;
- background: rgba(255, 255, 255, 1.0);">
-        <input id="anPageName" name="page" type="hidden" value="newhomestarthereredesignedtestlargernoboxestest">
-        <div class="newhomestarthereredesignedtestlargernoboxestest anima-word-break ">
+ background: rgba(255, 255, 255, 1.0);"><div id="status-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4 class="modal-title">Modal Header</h4>
+    <p class="modal-body">A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="close-ajax-dialogue">Close</a>
+  </div>
+</div>
+
+<script>
+  $(document).ready(() => {
+    ajaxDialogue.init()
+  })
+</script>
+        <input id="anPageName" name="page" type="hidden" value="home">
+        <div class="home anima-word-break ">
             <div style="width: 1683px; height: 100%; position:relative; margin:auto;">
                 <div class="newnavbarlongscreenredbar4links">
                     <div class="background">
                     </div>
-                    <img alt="Image" anima-src="./img/create-a-new-res-copy-screen-shot-2020-04-21-at-112321-pm@2x.png" class="screenshot20200421at112321pm" src="../imported/img/create-a-new-res-copy-screen-shot-2020-04-21-at-112321-pm@2x.png">
+                    <img alt="Image" anima-src="./img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png" class="screenshot20200421at112321pm" src="../imported/img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png">
                     <div class="thelab">
                         The Lab
                     </div>
@@ -51,111 +67,104 @@
                     <div class="bookamachine">
                         Book A Machine
                     </div>
-                    <img alt="Image" anima-src="./img/manage-your-account-bitmap@2x.png" class="bitmap1" src="../imported/img/manage-your-account-bitmap@2x.png">
+                    <img alt="Image" anima-src="./img/reservations-bitmap-5@2x.png" class="bitmap" src="../imported/img/reservations-bitmap-5@2x.png">
                     <div class="davidsmith2321123">
                         <span class="span1">David Smith<br></span><span class="span2">#23211234</span>
                     </div>
-                    <img alt="Image" anima-src="./img/the-lab-team-page-triangle-copy@2x.png" class="trianglecopy" src="../imported/img/the-lab-team-page-triangle-copy@2x.png">
-                    <img alt="Image" anima-src="./img/my-reservations---past-line-6.png" class="line62" src="../imported/img/my-reservations---past-line-6.png">
-                    <img alt="Image" anima-src="./img/create-a-new-res-copy-line-7@2x.png" class="line7" src="../imported/img/create-a-new-res-copy-line-7@2x.png">
+                    <img alt="Image" anima-src="./img/reservations-triangle-copy@2x.png" class="trianglecopy" src="../imported/img/reservations-triangle-copy@2x.png">
+                    <img alt="Image" anima-src="./img/home-line-6.png" class="line62" src="../imported/img/home-line-6.png">
+                    <img alt="Image" anima-src="./img/manage-your-account-line-7@2x.png" class="line7" src="../imported/img/manage-your-account-line-7@2x.png">
                     <div class="redbarbottom">
-                        <div class="rectangle3">
+                        <div class="rectangle">
                         </div>
                     </div>
                 </div>
                 <div class="upcomingreservation">
-                    Upcoming Reservation
+                    <div class="upcomingreservation1">
+                        Upcoming Reservation
+                    </div>
+                    <div class="group11">
+                        <div class="rectangle1">
+                        </div>
+                        <div class="viewall">
+                            View All
+                        </div>
+                    </div>
+                    <img alt="Image" anima-src="./img/create-a-new-res-copy-2---confirmed-page-bitmap-1@2x.png" class="bitmap" src="../imported/img/create-a-new-res-copy-2---confirmed-page-bitmap-1@2x.png">
+                    <div class="upcomingdate">
+                        April 27th<br>
+                    </div>
+                    <div class="upcomingtime">
+                        2:00 - 4:00 PM<br><br>
+                    </div>
+                    <div class="rectangle">
+                    </div>
+                    <a href="reservations">
+                        <div class="hotspot5">
+                        </div>
+                    </a>
+                    <div class="upcomingstatus">
+                        Approved
+                    </div>
                 </div>
                 <div class="helpcontact">
-                    Help &amp; Contact
-                </div>
-                <label>User: </label><select class="schedule-form group4" id="machine-select">
-  
-    <option value="">Adam</option>
-  
-    <option value="">Carlos</option>
-  
-</select>
-
-
-                <div class="group9">
+                    <div class="helpcontact1">
+                        Help &amp; Contact
+                    </div>
                     <div class="ifyouhaveanyques">
                         <span class="span1">If you have any questions or concerns, feel free to reach out to us by sending us a message below and we will get back to you as soon as possible.<br><br>For general questions view our </span><span class="span2">Support</span><span class="span3"> Page.</span>
                     </div>
-                    <div class="rectangle3">
+                    <div class="rectangle">
                     </div>
                     <div class="sendamessage">
                         Send a Message
                     </div>
-                </div>
-                <div class="group7">
-                    <div class="group6">
-                        <div class="rectangle3">
-                        </div>
-                        <div class="a1200pm">
-                            12:00 PM
-                        </div>
+                    <div class="rectangle1">
                     </div>
-                    <img alt="Image" anima-src="./img/new-home-start-here---redesigned-test-larger-no-boxes-test-line-2-3@2x.png" class="line2" src="../imported/img/new-home-start-here---redesigned-test-larger-no-boxes-test-line-2-3@2x.png">
                 </div>
-                <input class="schedule-form group5" id="date-select" type="text">
+                <select data-collection="machines" class="schedule-form machinedropdown browser-default" id="machine-select"></select>
 
-                <div class="group8">
-                    <div class="rectangle3">
-                    </div>
-                    <img alt="Image" anima-src="./img/new-home-start-here---redesigned-test-larger-no-boxes-test-line-2-3@2x.png" class="line2" src="../imported/img/new-home-start-here---redesigned-test-larger-no-boxes-test-line-2-3@2x.png">
-                    <div class="a200pm">
-                        2:00 PM
-                    </div>
-                </div>
+
+                <input name="end" class="starttime browser-default time-picker" id="start-time-select" type="text" placeholder="Start ">
+
+
+                <input name="end" class="date-picker datepicker browser-default" id="date-picker" type="text" placeholder="Date ">
+
+
+                <input name="end" class="endtime browser-default time-picker" id="end-time-select" type="text" placeholder="End ">
+
+
                 <div class="reserveamachine">
                     Reserve A Machine
                 </div>
-                <div class="group">
-                    <div class="rectangle3">
+                <div class="continuereservation">
+                    <div class="rectangle">
                     </div>
-                    <div class="continuereservation">
+                    <div class="continuereservation1">
                         Continue Reservation
                     </div>
                 </div>
-                <div class="group11">
-                    <div class="rectangle3">
-                    </div>
-                    <div class="viewall">
-                        View All
-                    </div>
-                </div>
-                <img alt="Image" anima-src="./img/create-a-new-res-copy-2---confirmed-page-bitmap-1@2x.png" class="bitmap" src="../imported/img/create-a-new-res-copy-2---confirmed-page-bitmap-1@2x.png">
-                <div class="april27th2004">
-                    <span class="span1">April 27th<br>2:00 - 4:00 PM<br></span><span class="span2">Approved</span><span class="span3"><br></span>
-                </div>
-                <div class="group10">
-                    <div class="monday8am5pmt">
+                <div class="labinfo">
+                    <div class="labschedule">
                         <span class="span1"><br></span><span class="span2">Monday: </span><span class="span3">8 AM -5 PM<br></span><span class="span4">Tuesday: </span><span class="span5">8 AM - 5 PM</span><span class="span6"><br>Wednesday: </span><span class="span7">8 AM - 3 PM</span><span class="span8"><br>Thursday: </span><span class="span9">8 AM -5 PM</span><span class="span10"><br>Friday:</span><span class="span11"> 8 AM - 5PM<br></span><span class="span12">Saturday &amp; Sunday</span><span class="span13">: Closed</span><span class="span14"><br><br></span>
                     </div>
-                    <div class="group12">
-                        <div class="rectangle3">
-                        </div>
-                        <div class="viewmore">
-                            View More
-                        </div>
+                    <div class="rectangle">
+                    </div>
+                    <div class="viewmore">
+                        View More
+                    </div>
+                    <div class="labinfo1">
+                        Lab Info
+                    </div>
+                    <div class="labstatus">
+                        <span class="span1">The Fab Lab is </span><span class="span2">Open</span><span class="span3"><br></span>
+                    </div>
+                    <div class="rectangle1">
                     </div>
                 </div>
-                <div class="labinfo">
-                    Lab Info
-                </div>
-                <div class="thefablabisopen">
-                    <span class="span1">The Fab Lab is </span><span class="span2">Open</span><span class="span3"><br></span>
-                </div>
-                <div class="rectangle">
-                </div>
-                <div class="rectangle1">
-                </div>
-                <div class="rectangle2">
-                </div>
-                <img alt="Image" anima-src="./img/my-reservations---past-line-6.png" class="line6" src="../imported/img/my-reservations---past-line-6.png">
-                <img alt="Image" anima-src="./img/my-reservations---past-line-6.png" class="line61" src="../imported/img/my-reservations---past-line-6.png">
-                <a href="createanewrescopy">
+                <img alt="Image" anima-src="./img/home-line-6.png" class="line6" src="../imported/img/home-line-6.png">
+                <img alt="Image" anima-src="./img/home-line-6.png" class="line61" src="../imported/img/home-line-6.png">
+                <a href="calendar">
                     <div class="hotspot">
                     </div>
                 </a>
@@ -165,28 +174,24 @@
                     <a href="manageyouraccount">
                     </a>
                     <a href="manageyouraccount">
-                        <div class="hotspot6">
+                        <div class="hotspot5">
                         </div>
                     </a>
                 </div>
-                <a href="myreservations">
+                <a href="thelabspacepage">
                     <div class="hotspot1">
                     </div>
                 </a>
-                <a href="thelabspacepage">
+                <a href="reservations">
                     <div class="hotspot2">
                     </div>
                 </a>
-                <a href="myreservations">
+                <a href="calendar">
                     <div class="hotspot3">
                     </div>
                 </a>
-                <a href="createanewrescopy">
+                <a href="landing">
                     <div class="hotspot4">
-                    </div>
-                </a>
-                <a href="landingpagetologin">
-                    <div class="hotspot5">
                     </div>
                 </a>
             </div>
@@ -270,4 +275,52 @@
         <!-- End of Scripts -->
     
 
-</body></html>
+<script>
+    $(document).ready(function(){
+        $('.date-picker').datepicker({
+            format: "mm-dd-yyyy",
+            defaultDate: new Date(),
+            setDefaultDate: true
+        });
+        $("[href='calendar']").on('click',e => {
+            e.preventDefault();
+            location.href="calendar?" + $.param({
+                machine: $(".machinedropdown").val(),
+                date: $('#date-picker').val(),
+                start: $('.starttime').val(),
+                end: $('.endtime').val()
+            })
+        })
+    });
+</script>
+<script src="../components/materialize/dist/js/materialize.min.js"></script>
+<script>
+    // Time picker was removed due to certain requirements that needed a callback to run on close.
+    // $('.date-picker').datepicker({
+    //     format: "mm-dd-yyyy",
+    //     defaultDate: new Date(),
+    //     setDefaultDate: true
+    // });
+    $(".time-picker").timepicker();
+</script><script>
+    $(document).ready(() => {
+        // setup the machine selector
+        $("select[data-collection='machines']").each((index, value) => {
+            $.ajax({
+                url: "/query/" + value.getAttribute("data-collection"),
+                method: "get",
+                success: data => {
+                    console.log("success!")
+                    console.log(data)
+                    $.each(data, (x, y) => {
+                        var elmnt = document.createElement("option")
+                        elmnt.innerHTML = y.name
+                        elmnt.value = y._id
+                        value.appendChild(elmnt)
+                        console.log("added values!")
+                    })
+                }
+            })
+        })
+    })
+</script></body></html>

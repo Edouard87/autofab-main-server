@@ -1,34 +1,177 @@
 {
     "pages": [{
-        "name": "all",
-        "partials": [{
-            "name":"global-header.ejs",
-            "location":"head",
-            "position":"beforeend"
-        }]
-    },{
         "name": "home",
+        "partials": [{
+          "name": "home-footer.ejs",
+          "location": "body",
+          "position": "beforeend"
+        }],
         "replace": [{
-          "selector": ".group4",
-          "partial": "machines-dropdown",
+          "selector": ".machinedropdown",
+          "partial": "dropdown",
           "meta": {
-              "className": "schedule-form group4",
+              "className": "schedule-form machinedropdown browser-default",
               "idName": "machine-select",
-              "type":"machine"
+              "type":"machine",
+              "collection":"machines"
           }
         },{
-            "selector": ".group5",
+            "selector": ".datepicker",
             "partial": "input",
             "meta": {
-            "className": "schedule-form group5",
-            "idName": "date-select",
+            "className": "date-picker datepicker browser-default",
+            "idName": "date-picker",
             "type": "machine",
-            "inputType":"text"
+            "inputType":"text",
+            "placeholderName":"Date"
             }
+        }, {
+          "selector": ".starttime",
+          "partial": "input",
+          "meta": {
+            "className": "starttime browser-default time-picker",
+            "idName": "start-time-select",
+            "inputType": "text",
+             "placeholderName": "Start"
+          }
+        }, {
+          "selector": ".endtime",
+          "partial": "input",
+          "meta": {
+            "className": "endtime browser-default time-picker",
+            "idName": "end-time-select",
+            "inputType": "text",
+            "placeholderName": "End"
+          }
         }]
+    }, {
+      "name": "calendar",
+      "partials": [{
+        "name": "calendar-script.ejs",
+        "location": "body",
+        "position": "beforeend"
+      },{
+        "name": "make-res-footer.ejs",
+        "location":"body",
+        "position":"beforeend"
+      }],
+      "remove": [".explainwhatyouwil"],
+      "replace":[{
+        "selector": ".group4",
+        "partial": "dropdown",
+        "meta": {
+          "className": "schedule-form group4 browser-default machine",
+          "idName": "machine-select",
+          "type": "machine",
+          "collection":"machines"
+        }
+      }, {
+        "selector": ".group7",
+        "partial": "input",
+        "meta": {
+          "className": "group7 browser-default time-picker start",
+          "idName": "start-time-select",
+          "inputType": "text",
+          "placeholderName": "Start",
+          "nameValue": "start"
+        }
+      }, {
+        "selector": ".group5",
+        "partial": "input",
+        "meta": {
+          "className": "group5 browser-default date-picker date",
+          "idName": "date-picker",
+          "inputType": "text",
+          "placeholderName": "Date",
+          "nameValue": "date"
+        }
+      }, {
+        "selector": ".rectangle",
+        "partial": "textarea",
+        "meta": {
+          "className": "rectangle",
+          "idName": "justification",
+          "nameValue": "justification"
+        }
+      }, {
+        "selector": ".group8",
+        "partial": "input",
+        "meta": {
+          "className": "group8 browser-default time-picker end",
+          "idName": "end-time-select",
+          "inputType": "text",
+          "placeholderName": "End",
+          "nameValue": "end"
+        }
+      }, {
+        "selector": ".group9",
+        "partial": "div",
+        "meta": {
+          "className": "group9 calendarresults",
+          "idName": ""
+        }
+      }
+    ]
+    },{
+      "name":"login",
+      "remove": [".username",".password"],
+      "replace": [{
+        "selector": ".rectangle2",
+        "partial":"input",
+        "meta": {
+          "className": "browser-default login-form rectangle2",
+          "idName": "username",
+          "inputType": "text",
+          "placeholderName": "Username",
+          "nameValue": "username"
+        }
+      }, {
+        "selector": ".rectangle3",
+        "partial": "input",
+        "meta": {
+          "className": "browser-default login-form rectangle3",
+          "idName": "password",
+          "inputType": "password",
+          "placeholderName": "Password",
+          "nameValue":"password"
+        }
+      }],
+      "partials":[{
+        "name":"login-script.ejs",
+        "location":"body",
+        "position":"beforeend"
+      }]
+    }, {
+      "name": "createanewrescopy2confirmedpage",
+      "partials":[{
+        "name":"conf-footer.ejs",
+        "location":"body",
+        "position":"beforeend"
+      }]
+    }, {
+      "name": "all",
+      "partials": [{
+          "name": "global-header.ejs",
+          "location": "head",
+          "position": "beforeend"
+        }, {
+          "name": "setup-pickers.ejs",
+          "location": "body",
+          "position": "beforeend"
+        },
+        {
+          "name": "general-modals.ejs",
+          "location": "body",
+          "position": "afterbegin"
+        }, {
+          "name": "global-footer.ejs",
+          "location": "body",
+          "position": "beforeend"
+        }
+      ]
     }],
     "projDir": "/Users/edouarddesparois-perrault/Documents/GitHub/autofab-main-server",
-    "fileDir": "/Users/edouarddesparois-perrault/Downloads/EntireThingSomeLinksWorkingWithLandingandLoginv1",
+    "fileDir": "/Users/edouarddesparois-perrault/Downloads/trythisnowed",
     "partialDataRoute": "http://localhost:3000/preprocess",
     "key":"kFHSJaiHhsUFHUEWS1345rnsd"
 }

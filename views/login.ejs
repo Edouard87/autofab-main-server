@@ -7,16 +7,18 @@
     <script src="/components/jquery/dist/jquery.min.js"></script>
 <script src="/components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/components/mustache.js/mustache.js"></script>
+<script src="/components/moment/min/moment.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/components/materialize/dist/css/materialize.min.css" media="screen,projection">
 
-<script src="/components/wickedpicker/dist/wickedpicker.min.js"></script>
-<link rel="stylesheet" href="/components/wickedpicker/dist/wickedpicker.min.css">
+<!-- <script src="/components/wickedpicker/dist/wickedpicker.min.js"></script> -->
+<!-- <link rel="stylesheet" href="/components/wickedpicker/dist/wickedpicker.min.css"> -->
 
-<link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/jquery-ui.min.css">
-<link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/theme.css">
+<!-- <link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/jquery-ui.min.css">
+<link rel="stylesheet" href="/components/jquery-ui/themes/black-tie/theme.css"> -->
 
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/action-menu.css">
-<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
 <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
 <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
@@ -31,7 +33,21 @@
 <script src="/js/ajax-form.js"></script>
 <script src="/js/status-msg.js"></script></head>
     <body style="margin: 0;
- background: rgba(255, 255, 255, 1.0);">
+ background: rgba(255, 255, 255, 1.0);"><div id="status-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4 class="modal-title">Modal Header</h4>
+    <p class="modal-body">A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="close-ajax-dialogue">Close</a>
+  </div>
+</div>
+
+<script>
+  $(document).ready(() => {
+    ajaxDialogue.init()
+  })
+</script>
         <input id="anPageName" name="page" type="hidden" value="login">
         <div class="login anima-word-break ">
             <div style="width: 1683px; height: 100%; position:relative; margin:auto;">
@@ -45,22 +61,20 @@
                 <div class="forgotyourusername">
                     Forgot your username or password?
                 </div>
-                <div class="rectangle2">
-                </div>
-                <div class="rectangle3">
-                </div>
+                <input name="username" class="browser-default login-form rectangle2" id="username" type="text" placeholder="Username ">
+
+
+                <input name="password" class="browser-default login-form rectangle3" id="password" type="password" placeholder="Password ">
+
+
                 <div class="rectangle4">
                 </div>
-                <div class="username">
-                    Username
-                </div>
-                <div class="password">
-                    Password
-                </div>
+                
+                
                 <div class="signin">
                     Sign In
                 </div>
-                <a href="newhomestarthereredesignedtestlargernoboxestest">
+                <a href="home">
                     <div class="hotspot">
                     </div>
                 </a>
@@ -145,4 +159,59 @@
         <!-- End of Scripts -->
     
 
-</body></html>
+<script>
+    $("[href='home']").on("click", e=> {
+        e.preventDefault();
+        $.ajax({
+            url:"/login",
+            method:"post",
+            data: $.param($(".login-form").serializeArray()),
+            success: data => {
+                if (data.code == 0) {
+                    location.href = "/"
+                } else if (data.code == 12) {
+                    data.header = "Incorrect password"
+                    data.msg = "The password you have provided is incorrect."
+                    ajaxDialogue.show(data)
+                } else if (data.code == 11) {
+                    data.header = "No user"
+                    data.msg = "The user you have specified could not be found"
+                    ajaxDialogue.show(data)
+                }
+            }
+        })
+    })
+</script>
+
+
+<script src="../components/materialize/dist/js/materialize.min.js"></script>
+<script>
+    // Time picker was removed due to certain requirements that needed a callback to run on close.
+    // $('.date-picker').datepicker({
+    //     format: "mm-dd-yyyy",
+    //     defaultDate: new Date(),
+    //     setDefaultDate: true
+    // });
+    $(".time-picker").timepicker();
+</script><script>
+    $(document).ready(() => {
+        // setup the machine selector
+        $("select[data-collection='machines']").each((index, value) => {
+            $.ajax({
+                url: "/query/" + value.getAttribute("data-collection"),
+                method: "get",
+                success: data => {
+                    console.log("success!")
+                    console.log(data)
+                    $.each(data, (x, y) => {
+                        var elmnt = document.createElement("option")
+                        elmnt.innerHTML = y.name
+                        elmnt.value = y._id
+                        value.appendChild(elmnt)
+                        console.log("added values!")
+                    })
+                }
+            })
+        })
+    })
+</script></body></html>

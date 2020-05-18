@@ -1,0 +1,25 @@
+<script>
+    $("[href='home']").on("click", e=> {
+        e.preventDefault();
+        $.ajax({
+            url:"/login",
+            method:"post",
+            data: $.param($(".login-form").serializeArray()),
+            success: data => {
+                if (data.code == 0) {
+                    location.href = "/"
+                } else if (data.code == 12) {
+                    data.header = "Incorrect password"
+                    data.msg = "The password you have provided is incorrect."
+                    ajaxDialogue.show(data)
+                } else if (data.code == 11) {
+                    data.header = "No user"
+                    data.msg = "The user you have specified could not be found"
+                    ajaxDialogue.show(data)
+                }
+            }
+        })
+    })
+</script>
+
+
