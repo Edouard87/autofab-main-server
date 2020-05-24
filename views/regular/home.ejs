@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include ../../partials/regular/global-header.ejs %>
+</head>
+<body>
+    <% include ../../partials/regular/navbar.ejs %>
+    <div class="page-content">
+        <h1>Welcome to AutoFAB</h1>
+        <p>You are using one of the first ever production interfaces (yay!). Please use the navigation bar above to reach the different parts of the app!</p>
+        <h1>Lab Status</h1>
+        <span>The lab is currently <span id="lab-status"></span></span>
+        <div style="display: none" id="no-config">No time configuration was made! Ask your FabLab manager to set up a schedule for the lab!</div>
+        <script>
+            // find lab status
+            console.log("loading...")
+            $.ajax({
+                url:"/query/timetables",
+                method:"get",
+                data:{
+                    active: true
+                },
+                success: function(data) {
+                    if (data.length == 0) {
+                        $("#no-config").css("display","block")
+                    }
+                    console.log("Recieved!")
+                    console.log(data)
+                    var isOpen = true
+                    // we're going to see if we can change isOpen to false
+                    var todayDate = moment()
+                    var today = todayDate.format("dddd").toLowerCase()
+                    var midnight = moment("00:00","HH:mm").valueOf()
+                    console.log(today)
+                    data.forEach(function(timetable) {
+                        var daySchedule = timetable.days[today]
+                        if (daySchedule.isOpen) {
+                            console.log("it is open today!")
+                            console.log(midnight)
+                            // var now = moment().valueOf()
+                            var now = moment("01:00","HH:mm").valueOf()
+                            var open = moment(daySchedule.open,"HH;mm").valueOf()
+                            var close = moment(daySchedule.close,"HH:mm").valueOf()
+                            console.log("close ", close)
+                            if (now < open || now > close) {
+                                // It is currently closed
+                                return isOpen = false;
+                            } else {
+                                // It is currently open
+                            }
+                        }
+                    })
+                    if (!isOpen) {
+                        $("#lab-status").html("closed")
+                    } else {
+                        $("#lab-status").html("open")
+                    }
+                }
+            })
+        </script>
+        <style>
+            p {
+                margin-top: 16px
+            }
+            a.btn-outline-primary {
+                color: white;
+            }
+        </style>
+        <script>
+            function openPage(page) {
+                location.href = page
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -138,7 +138,10 @@ axios.get(config.partialDataRoute || "http://localhost/preprocess", {
               })
             })
             // write the finalized html page
-            fs.writeFileSync(projDir + "/views/" + fileName, dom.serialize())
+            var subdirs = config.subdirs || {
+              views: "/views"
+            }
+            fs.writeFileSync(projDir + subdirs.views + "/" + fileName, dom.serialize())
           } else if (file.includes(".")) {
             // we are ignoringing all other files
           } else {

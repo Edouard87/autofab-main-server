@@ -185,4 +185,31 @@
             })
         })
     })
+</script><div id="my-account" class="modal">
+  <div class="modal-content">
+    <h4>My Account</h4>
+    <a href="#">View Account Settings</a>
+    <a href="/logout">Log Out</a>
+    <h4>Swith Interface</h4>
+    <a href="/interface/set/regular">Regular</a>
+    <a href="/interface/set/new">New</a>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+  </div>
+</div>
+<style>
+    #my-account a {
+        display: block;
+        margin-bottom: 14px;
+    }
+</style>
+<script>
+    $(document).ready(() => {
+        $("[href='landing']").on("click", e => {
+            e.preventDefault()
+            $("#my-account").modal()
+            $("#my-account").modal("open")
+        });
+    })
 </script></body></html>

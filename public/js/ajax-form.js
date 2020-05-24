@@ -1,15 +1,25 @@
-$(".ajax-form").submit(function (ev) {
-  ev.preventDefault();
-  $(".ajax-form").find(".dialogue-box").remove()
-  $.ajax({
-    url: $(this).attr("action"),
-    method: $(this).attr("method"),
-    data: $(this).serialize(),
-    success: data => {
-      $(".ajax-form").trigger("success")
-    }
-  })
-});
+$(document).ready(() => {
+  $(".ajax-form").submit(function (ev) {
+    ev.preventDefault();
+    console.log("submitting...")
+    $(".ajax-form").find(".dialogue-box").remove()
+    $.ajax({
+      url: $(this).attr("action"),
+      method: $(this).attr("method"),
+      data: $(this).serialize(),
+      success: data => {
+        console.log("success!")
+        // console.log("recieved",data)
+        $(".ajax-form").trigger("success", data)
+         if (data.code == 0) {
+          $(".ajax-form").trigger("next")
+         } else {
+          ajaxDialogue.show(data)
+         }
+      }
+    })
+  });
+})
 
 var ajaxForm = {
   submit: (selector) => {

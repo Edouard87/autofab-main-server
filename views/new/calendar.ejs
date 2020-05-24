@@ -105,9 +105,7 @@
                         Choose File
                     </div>
                 </div>
-                <div class="choosefile">
-                    Choose File
-                </div>
+                
                 <div class="newnavbarlongscreenredbar4links">
                     <div class="background">
                     </div>
@@ -333,9 +331,7 @@
         // Get the calendar reservations to show
 
         function getReservations() {
-            console.log("Date picker changing!")
             $(".schedule-block").remove()
-            // console.log("Date:", $("#date-picker").val())
             $.ajax({
                 url: "/query/reservations?" + $.param({
                     date: $("#date-picker").val(),
@@ -343,13 +339,9 @@
                 }),
                 method: "get",
                 success: data => {
-                    console.log("DATA: ", data)
                     $.each(data, (index, value) => {
                         var startTimeMinutes = (new Date(value.start)).getMinutes()
                         var resDuractionMins = ((value.end-value.start)/1000)/60
-                        console.log("resDuractionMins",resDuractionMins)
-                        console.log(startTimeMinutes)
-                        console.log("TEMPLATE", typeof blockTemplate)
                         $(".calendarresults").append(Mustache.to_html(blockTemplate, {
                             top: (startTimeMinutes/60)*hourHeight,
                             height: (resDuractionMins/60)*hourHeight,
@@ -371,20 +363,13 @@
         $("[data-collection='machines']").on("change",getReservations)
 
         // Manage reservation creation
-        var runWhenReady = new Array()
-
-
-        var populateFields = () => {
+        $(document).ajaxComplete(() => {
             var searchParams = new URLSearchParams((new URL(location.href)).search);
             searchParams.forEach((value, key) => {
-                console.log("populating")
-                console.log(key,value)
                 $("input." + key).val(value)
                 $("select." + key).val(value)
             })
-        }
-
-        $(document).ajaxComplete(populateFields)
+        })
         // Manage submission of reservation
         $("[href='createanewrescopy2confirmedpage']").on("click", ev => {
             ev.preventDefault()
@@ -440,5 +425,32 @@
                 }
             })
         })
+    })
+</script><div id="my-account" class="modal">
+  <div class="modal-content">
+    <h4>My Account</h4>
+    <a href="#">View Account Settings</a>
+    <a href="/logout">Log Out</a>
+    <h4>Swith Interface</h4>
+    <a href="/interface/set/regular">Regular</a>
+    <a href="/interface/set/new">New</a>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+  </div>
+</div>
+<style>
+    #my-account a {
+        display: block;
+        margin-bottom: 14px;
+    }
+</style>
+<script>
+    $(document).ready(() => {
+        $("[href='landing']").on("click", e => {
+            e.preventDefault()
+            $("#my-account").modal()
+            $("#my-account").modal("open")
+        });
     })
 </script></body></html>

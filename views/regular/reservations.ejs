@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <%- include ../partials/global-header.ejs %>
+  <%- include ../../partials/regular/global-header.ejs %>
   <link rel="stylesheet" href="../css/all_reservations.css">
   <title>Document</title>
 </head>
@@ -13,7 +13,7 @@
 <body>
   <!-- Modals -->
   <!-- General Purpose Dialogues -->
-  <% include ../partials/success-modal.ejs %>
+  <% include ../partials/regular/success-modal.ejs %>
   <!-- Edit Filters Modal -->
   <div class="modal fade" id="edit-filters-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -232,7 +232,7 @@
     })
      $("#apply-filters").on("click",ajaxTable.refreshAll)
   </script>
-  <%- include ../partials/navbar.ejs %>
+  <%- include ../../partials/regular/navbar.ejs %>
   <div class="page-content">
     <h1 id="page-head"></h1>
     <button type="button" style="margin-bottom: 10px;" class="btn btn-primary" data-toggle="modal"

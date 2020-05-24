@@ -167,11 +167,18 @@
           "name": "global-footer.ejs",
           "location": "body",
           "position": "beforeend"
+        }, {
+          "name": "accountdropdown.ejs",
+          "location": "body",
+          "position": "beforeend"
         }
       ]
     }],
     "projDir": "/Users/edouarddesparois-perrault/Documents/GitHub/autofab-main-server",
     "fileDir": "/Users/edouarddesparois-perrault/Downloads/trythisnowed",
+    "subdirs": {
+      "views":"/views/new"
+    },
     "partialDataRoute": "http://localhost:3000/preprocess",
     "key":"kFHSJaiHhsUFHUEWS1345rnsd"
 }

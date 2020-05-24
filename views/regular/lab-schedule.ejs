@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <%- include ../../partials/regular/global-header.ejs %>
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- Modals -->
+  <!-- General Purpose Dialogues -->
+  <% include ../../partials/regular/success-modal.ejs %>
+  <!-- New Restriction Modal -->
+   <div class="modal fade" id="edit-user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <form action="/users/modify" method="post" class="ajax-form">
+            <input type="hidden" name="id" id="user-id">
+             <input id="username" name="username" type="text" placeholder="Username">
+             <input id="rfid" name="rfid" type="text" placeholder="RFID tag">
+             <label>Permission:</label><select name="permission" id="permission">
+               <option value="-1">Admin</option>
+               <option value="0">Student</option>
+             </select>
+           </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-danger" id="delete-user" data-dismiss="modal">Delete User</button>
+           <button type="button" class="btn btn-primary" id="save-user" data-dismiss="modal">Save changes</button>
+         </div>
+       </div>
+     </div>
+   </div>
+   <script>
+    //  $("#new-user").on("click",()=>{
+    //    ajaxForm.submit($("#new-user-modal form"))
+    //  });
+    //  $("#delete-user").on("click",()=>{
+    //   ajaxForm.submitTo({url: "/users/delete",method:"post"},$("#edit-user-modal form"))
+    //  })
+    //  $("#save-user").on('click',()=> {
+    //    ajaxForm.submit($("#edit-user-modal form"))
+    //  })
+   </script>
+  <%- include ../../partials/regular/navbar.ejs %>
+  <div class="page-content">
+    <form class="ajax-form timetable-view-form" action="/timetables/new" method="post">
+      <input type="hidden" name="type" value="opening_hours">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <h1>Edit your Opening Hours</h1>
+            <p>Let your users know when you are open!</p>
+            <select name="_id" class="timetable-select">
+            </select>
+            <input name="name" type="text" placeholder="Give your timetable a name!">
+          </div>
+        </div>
+        <% var days = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]%>
+        <% days.forEach(function(day, index) { %>
+          <div class="row">
+            <div class="col">
+              <input type="checkbox" name="days[<%= day %>][isOpen]" value="true" class="open-checkbox" id="<%= day %>-checkbox" data-day="<%= day %>"><label for="<%= day %>-checkbox">Open</label>
+            </div>
+            <div class="col">
+              <%= day[0].toUpperCase() + day.slice(1) %>
+            </div>
+            <div class="col-6">
+              <span>From </span><input disabled="disabled" class="<%= day %>-time-input" type="time" name="days[<%= day %>][open]"><span>To </span><input type="time"
+                name="days[<%= day %>][close]" class="<%= day %>-time-input" disabled="disabled">
+            </div>
+            <div class="col-sm">
+              <button class="apply-btn" data-day="<%= day %>">Apply to all</button>
+            </div>
+          </div>
+        <% }) %>
+        <div class="row">
+          <div class="col">
+            <input type="checkbox" name="active" value="true" id="active" checked="checked" data-default="checked"><label for ="active">Active</label>
+          </div>
+          <div class="col-sm">
+            <button class="btn btn-lrg btn-success" id="save-create-schedule">Save</button>
+          </div>
+          <div class="col-sm edit-buttons" style="display: none">
+            <button class="btn btn-lrg btn-primary">Save as Copy</button>
+            <button class="btn btn-lrg btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <h1>Manage your retsrictions</h1>
+            <p>These restrictions override the above schedule.</p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+    $(document).ready(() => {
+      // define functions
+      function checkCheckboxes() {
+        console.log("checking...")
+        console.log("ID",$(this).attr("id"))
+        if ($(this).prop("checked") == true) {
+          $("." + $(this).data("day") + "-time-input").removeAttr("disabled")
+        }
+        else if ($(this).prop("checked") == false) {
+          $("." + $(this).data("day") + "-time-input").attr("disabled", "disabled")
+        }
+      }
+      // Handle the restriction creation tools
+      $(".apply-btn").on("click", function(ev) {
+        ev.preventDefault()
+        console.log("CLICKED: ",$(ev.currentTarget).parent().parent().find("input"))
+        $(ev.currentTarget).parent().parent().find("input").each(function(index) {
+          console.log($(this).val())
+          var elmnt = this;
+          $("input").each(function(i) {
+            if ($(this).attr("name").includes("open") && $(elmnt).attr("name").includes("open")) {
+              $(this).val($(elmnt).val())
+            } else if ($(this).attr("name").includes("close") && $(elmnt).attr("name").includes("close")) {
+              $(this).val($(elmnt).val())
+            }
+          })
+        });
+        var clickedButton = $(this)
+        $(".open-checkbox").each(function (i) {
+          if ($(this).attr("id") != clickedButton.data("day") + "-checkbox") {
+             $(this).trigger("click")
+            console.log("going for it!" + i)
+            console.log($(this).attr("id"))
+            console.log(clickedButton.data("day") + "-checkbox")
+            if ($(this).prop("checked")) {
+
+            }
+          }
+        })
+      })
+      // handle the checkboxes being greyed out with the buttons being pressed
+      $('.open-checkbox').click(checkCheckboxes);
+      // Handle the form submission
+      // populate the dropdown menu with saved reservations
+      function loadDropdown() {
+        $(".timetable-select").empty()
+        $(".timetable-select").append($("<option>").val("new").html("Create New Timetable"))
+          $.ajax({
+          url: "/query/timetables",
+          method: "get",
+          success: function(res) {
+            var requestedURL = new URLSearchParams(location.href.split("?")[1])
+              requestedURL.forEach(function(value, key) {
+                console.log(key + ": " + value)
+              });
+              var forceNew = requestedURL.get("new")
+              console.log(forceNew)
+            console.log(res)
+            res.forEach(element => {
+              var timetableOption = $("<option>").html(element.name).attr("value", element._id)
+              if (element.active && (!forceNew)) {
+                timetableOption.attr("selected","selected")
+              }
+              $(".timetable-select").append(timetableOption)
+              if (element.active && (!forceNew)) {
+              $(".timetable-select").trigger("change")
+              }
+            });
+          }
+        })
+      }
+      loadDropdown()
+      $(".timetable-view-form").on("success",loadDropdown)
+
+      // function updateFields() {
+
+      // }
+      
+      // Handle loading the data back in
+      $(".timetable-select").on("change",function(ev) {
+        function clearForm() {
+          console.log("clearing...")
+          $(".timetable-view-form").attr("action","/timetables/new")
+          $(".edit-buttons").css("display","none")
+          $(".open-checkbox").prop("checked",false)
+          $(".open-checkbox:checked").each(function(index) {
+            console.log("-->" + index)
+            // $(this).trigger("change")
+          })
+          $("input[type='time']").val("")
+          $("input[name='name']").val("")
+          $("input[name='active']").prop("checked",true)
+        }
+        console.log("=====[Changing...]=====")
+        console.log($(this).val())
+        if ($(this).val() == "new") {
+          // location.href = location.href + "?" + $.param({
+          //   new: true
+          // })
+          clearForm()
+          $("#save-create-schedule").html("Create")
+        } else {
+          // loading an existing schedule
+          $.ajax({
+          url:"/query/timetables",
+          method: "get",
+          data: {
+            _id: $(this).val()
+          },
+          success: function(data) {
+            $("#save-create-schedule").html("Save")
+            console.log("Got: ", data)
+            var timetable = data[0];
+            // plug in the data in the right spots
+            clearForm()
+            $("input[name='name'][type='text']").val(timetable.name)
+            $("input[name='active']").prop("checked",timetable.active)
+            $(".edit-buttons").css("display","block")
+            $(".timetable-view-form").attr("action","/timetables/modify")
+            $.each( timetable.days, function( key, value ) {
+              console.log(key + ": ", value)
+              // change checkbox
+              $("#" + key + "-checkbox").prop("checked",value.isOpen)
+              $("input[name='days[" + key + "][open]'").val(value.open)
+              $("input[name='days[" + key + "][close]'").val(value.close)
+            });
+          }
+        })
+        }
+      });
+       
+    })
+    // ajaxTable.summon($("#table-wrapper-1"),{
+    //   url: "/users/all",
+    //   method: "get",
+    //   id: "users-table",
+    //   ignore: ["_id","__v","password"],
+    //   firstCap: true
+    // },()=>{
+    //   ajaxTable.connect($("#table-wrapper-1").children().first(),{
+    //     action: (e) => {
+    //       $("#edit-user-modal #user-id").val(e.data._id)
+    //       $("#edit-user-modal #rfid").val(e.data.rfid)
+    //       $("#edit-user-modal #username").val(e.data.username)
+    //       $("#edit-user-modal #permission").val(e.data.permissionId)
+    //       $("#edit-user-modal").modal('toggle')
+    //     },
+    //     validator: (e) => {
+    //       console.log(e)
+    //       e.permissionId = e.permission;
+    //       if (e.permission == 0) {
+    //         e.permission = "Student"
+    //       } else {
+    //         e.permission = "Admin"
+    //       }
+    //     },
+    //     actionName: "Manage",
+    //     actionClasses: ["btn","btn-sm","btn-warning"]
+    //   })
+    // })
+    // setInterval(ajaxTable.refreshAll,1000)
+    // $(".ajax-form").on("success",ajaxTable.refreshAll);
+
+  </script>
+</body>
+
+</html>

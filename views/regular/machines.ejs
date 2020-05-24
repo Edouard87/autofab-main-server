@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <%- include ../partials/global-header.ejs %>
+  <%- include ../../partials/regular/global-header.ejs %>
   <title>Document</title>
 </head>
 
 <body>
   <!-- Modals -->
   <!-- General Purpose Dialogues -->
-  <% include ../partials/success-modal.ejs %>
+  <% include ../../partials/regular/success-modal.ejs %>
   <!-- Edit Machine Modal -->
   <div data-clear-on-close="true" class="modal fade" id="edit-machine-modal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel"
@@ -84,7 +84,7 @@
       ajaxForm.submit($("#new-machine-modal form"))
     })
   </script>
-  <%- include ../partials/navbar.ejs %>
+  <%- include ../../partials/regular/navbar.ejs %>
   <div class="page-content">
     <h2>All machines</h2>
     <div id="table-wrapper-1"></div>

@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <%- include ../partials/global-header.ejs %>
+  <%- include ../../partials/regular/global-header.ejs %>
   <title>Document</title>
 </head>
 
 <body>
   <!-- Modals -->
   <!-- General Purpose Dialogues -->
-  <% include ../partials/success-modal.ejs %>
+  <% include ../../partials/regular/success-modal.ejs %>
   <!-- New Users Creation Menu -->
   <div class="modal fade" id="new-user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -83,7 +83,7 @@
        ajaxForm.submit($("#edit-user-modal form"))
      })
    </script>
-  <%- include ../partials/navbar.ejs %>
+  <%- include ../../partials/regular/navbar.ejs %>
   <div class="page-content">
     <h2>All User Accounts</h2>
     <div id="table-wrapper-1"></div>

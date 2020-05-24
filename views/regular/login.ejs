@@ -1,0 +1,61 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>autofab</title>
+  <% include ../../partials/regular/global-header.ejs %>
+  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+  <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
+  <link rel="stylesheet" href="/assets/css/Header-Blue.css">
+  <link rel="stylesheet" href="/assets/css/Login-Form-Dark.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+    <% include ../../partials/regular/success-modal.ejs %>
+  <div class="login-dark" style="height: 100vh;">
+    <form class="ajax-form" method="post" action="/login">
+      <h2 class="sr-only">Login Form</h2>
+      <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+      <div class="form-group"><input class="form-control" type="text" name="username" placeholder="Username"></div>
+      <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+      <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a
+        class="forgot" href="#">Forgot your email or password?</a>
+    </form>
+  </div>
+  <script>
+      $(document).ready(() => {
+        $(".ajax-form").on("next",e => {
+            console.log("success!")
+            location.href = "/"
+        })
+      })
+  </script>
+  <style>
+    .error-msg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #d60f2d;
+      padding: 10px;
+      border: 2px solid white;
+      width: 100vw;
+    }
+
+    .error-msg * {
+      color: white;
+      text-align: center;
+    }
+
+    .error-msg p {
+      margin: 10px 20px;
+    }
+  </style>
+  <script src="/assets/js/jquery.min.js"></script>
+  <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

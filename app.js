@@ -30,8 +30,8 @@ console.log(process.env.MONGODB_URI)
 
 // view engine setup
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
 
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
 // app.use(logger('dev'));
@@ -112,6 +112,26 @@ var reservationSetSchema = new mongoose.Schema({
 
 var reservationSets = mongoose.model("reservationSet", reservationSetSchema)
 
+// Schedules
+
+var timetableSchema = new mongoose.Schema({
+  name: String,
+  days: Object,
+  active: Boolean
+})
+
+timetableSchema.pre('save', function (next) {
+  if (this.name === null || this.name === undefined || this.name === "") {
+      this.name = 'Timetable';
+    }
+  if (this.active === null || this.active === undefined || this.active === "") {
+    this.active = false
+  }
+    next();
+  });
+
+var timetables = mongoose.model("timetable", timetableSchema)
+
 // readers
 
 var readersSchema = new mongoose.Schema({
@@ -145,14 +165,51 @@ users.find().then(doc => {
   }
 })
 
+function checkInterface(req, res, next) {
+  if (req.url.includes("/interface/set")) {
+    next()
+  } else  if (req.cookies.interface == undefined) {
+    return res.redirect("/interface/set/regular")
+  } else {
+    next()
+  }
+}
+
+app.all("*",checkInterface)
+
+function checkURL(pages, req) {
+  var check = false;
+  pages.forEach(page => {
+    if (page.strict) {
+      if (req.url == page.name) {
+        check = true
+      }
+    } else {
+      if (req.url.includes(page.name) || page.name.includes(req.url)) {
+        console.log("FOUND IT!")
+        check = true
+      }
+    }
+  })
+  return check
+}
+
 function authenticate(req, res, next) {
   const token = req.cookies.auth;
+  var noAuthPages = [{
+    name: "login",
+    strict: false
+  }, {
+    name: "interface",
+    strict: false
+  }]
   console.log("URL",req.url)
-  if (req.url == "/login" || req.url == "/preprocess" || req.url == "/p/old") {
+  if (checkURL(noAuthPages, req)) {
     console.log("moving on...")
     next()
   } else if (token == undefined) {
-    res.render("login", {iserr: false, err: null})
+    res.redirect("/p/login")
+    console.log("CONNECTION REFUSED!")
   } else {
     try {
       const result = jwt.verify(token, 'hgfhjnbghj');
@@ -239,11 +296,15 @@ app.get("/p/:name", function(req, res, next) {
       return res.redirect("/a/" + req.params.name)
     }
   }
-  res.render(req.params.name, {req: req})
+  res.render(__dirname + "/views/" + "/" + req.cookies.interface + "/" + req.params.name + ".ejs", {
+    req: req
+  })
 })
 
 app.get("/a/:name", checkAdmin, function (req, res, next) {
-  res.render(req.params.name, { req: req })
+  res.render(__dirname + "/views/" + "/" + req.cookies.interface + "/" + req.params.name + ".ejs", {
+    req: req
+  })
 })
 
 app.get("/preprocess", (req, res) => {
@@ -265,6 +326,11 @@ app.get("/preprocess", (req, res) => {
   } else {
     res.redirect("/p/login")
   }
+})
+
+app.get("/interface/set/:interface", (req, res) => {
+  res.cookie("interface",req.params.interface);
+  res.redirect("/")
 })
 
 app.post("/login", function(req, res) {
@@ -297,6 +363,35 @@ app.post("/login", function(req, res) {
     }
   })
 });
+
+app.post("/timetables/new", checkAdmin, (req, res) => {
+  console.log("creating!")
+  console.log(req.body)
+  timetables.create(req.body).then(doc => {
+    res.send({
+      code: 1,
+      header: "Timetable Saved",
+      msg: "Your timetable was saved."
+    })
+    console.log("created: ", doc)
+  }).catch((err, doc) => {
+    console.err(err)
+  })
+});
+
+app.post("/timetables/modify", checkAdmin, (req, res) => {
+  console.log("Body",req.body)
+  timetables.findOneAndUpdate({_id: req.body._id},req.body).then(doc => {
+    console.log("Original",doc)
+    res.send({
+      code: 1,
+      header: "Changes saved",
+      msg: "Your chnages to this time table have been saved successfully."
+    })
+  }).catch(err => {
+    console.log(err)
+  })
+})
 
 app.get("/logout", (req, res) => {
 
