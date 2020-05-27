@@ -64,73 +64,75 @@
                 <div class="endtime">
                     End Time:
                 </div>
-                <select data-collection="machines" class="schedule-form group4 browser-default machine" id="machine-select"></select>
+                <select data-collection="machines" class="machinedropdown schedule-form browser-default machine" id="machine-select"></select>
 
 
-                <input name="start" class="group7 browser-default time-picker start" id="start-time-select" type="text" placeholder="Start ">
+                <input name="start" class="starttime1 browser-default time-picker start" id="start-time-select" type="text" placeholder="Start ">
 
 
-                <input name="date" class="group5 browser-default date-picker date" id="date-picker" type="text" placeholder="Date ">
+                <input name="date" class="datepicker browser-default date-picker date" id="date-picker" type="text" placeholder="Date ">
 
 
-                <input name="end" class="group8 browser-default time-picker end" id="end-time-select" type="text" placeholder="End ">
+                <input name="end" class="endtime1 browser-default time-picker end" id="end-time-select" type="text" placeholder="End ">
 
 
                 <div class="chooseaday">
                     Choose A Day:
                 </div>
-                <div class="group9 calendarresults" id="">
+                <div class="calendarresults" id="">
 
 </div>
 
 
-                <textarea name="justification" id="justification" class="rectangle"></textarea>
-                
+                <textarea name="justification" id="justification" class="explain browser-default"></textarea>
                 <div class="pleasenotethatyou">
                     Please note that your reservation is not guaranteed, and is simply a request to the Fab Lab team to be reviewed for approval.
                 </div>
-                <div class="rectangle1">
-                </div>
                 <div class="requestreservation">
-                    Request Reservation
+                    <div class="rectangle">
+                    </div>
+                    <div class="requestreservation1">
+                        Request Reservation
+                    </div>
                 </div>
                 <img alt="Image" anima-src="./img/calendar-bitmap@2x.png" class="bitmap" src="../imported/img/calendar-bitmap@2x.png">
                 <div class="uploadfileiegc">
                     Upload File (i.e .gcode, .ai):
                 </div>
-                <div class="group">
-                    <div class="rectangle2">
+                <div class="choosefile">
+                    <div class="group">
+                        <div class="rectangle">
+                        </div>
                     </div>
                     <div class="choosefile1">
                         Choose File
                     </div>
                 </div>
-                
                 <div class="newnavbarlongscreenredbar4links">
                     <div class="background">
                     </div>
                     <img alt="Image" anima-src="./img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png" class="screenshot20200421at112321pm" src="../imported/img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png">
-                    <div class="thelab">
+                    <div class="labinfo">
                         The Lab
                     </div>
                     <div class="reservations">
                         Reservations
                     </div>
-                    <div class="manageyouraccount">
+                    <div class="account">
                         Manage Your Account
                     </div>
-                    <div class="bookamachine">
+                    <div class="book">
                         Book A Machine
                     </div>
                     <img alt="Image" anima-src="./img/reservations-bitmap-5@2x.png" class="bitmap1" src="../imported/img/reservations-bitmap-5@2x.png">
-                    <div class="davidsmith2321123">
+                    <div class="username">
                         <span class="span1">David Smith<br></span><span class="span2">#23211234</span>
                     </div>
-                    <img alt="Image" anima-src="./img/reservations-triangle-copy@2x.png" class="trianglecopy" src="../imported/img/reservations-triangle-copy@2x.png">
+                    <img alt="Image" anima-src="./img/reservations-logindropdown@2x.png" class="logindropdown" src="../imported/img/reservations-logindropdown@2x.png">
                     <img alt="Image" anima-src="./img/home-line-6.png" class="line6" src="../imported/img/home-line-6.png">
                     <img alt="Image" anima-src="./img/manage-your-account-line-7@2x.png" class="line7" src="../imported/img/manage-your-account-line-7@2x.png">
                     <div class="redbarbottom">
-                        <div class="rectangle2">
+                        <div class="rectangle">
                         </div>
                     </div>
                 </div>
@@ -142,6 +144,9 @@
                     <div class="hotspot1">
                     </div>
                 </a>
+                <div class="results">
+                    Showing results on April 25th, 2020 for Trotec Speedy 300:
+                </div>
             </div>
         </div>
         <!-- Scripts -->
@@ -254,13 +259,12 @@
 
         var blockTemplate
          $.ajax({
-            url: "/templates/schedule-block.mustache",
+            url: "/templates/reservation-test.mustache",
             method: "get",
             success: data => {
                 console.log(data)
                 blockTemplate = data
                 // Make sure to get the reservations after the time select has been updated
-                getReservations()
             }
         })
 
@@ -331,6 +335,7 @@
         // Get the calendar reservations to show
 
         function getReservations() {
+            // console.log("here we go!")
             $(".schedule-block").remove()
             $.ajax({
                 url: "/query/reservations?" + $.param({
@@ -339,17 +344,28 @@
                 }),
                 method: "get",
                 success: data => {
+                    console.log("DATA",data)
                     $.each(data, (index, value) => {
-                        var startTimeMinutes = (new Date(value.start)).getMinutes()
+                        var mnt = moment(value.start);
+                        var end = moment(value.end)
+                        var mntMidnight = mnt.clone().startOf('day')
+                        var startTimeMinutes = mnt.diff(mntMidnight, 'minutes');
                         var resDuractionMins = ((value.end-value.start)/1000)/60
                         $(".calendarresults").append(Mustache.to_html(blockTemplate, {
                             top: (startTimeMinutes/60)*hourHeight,
                             height: (resDuractionMins/60)*hourHeight,
                             width: windowWidth*0.5,
                             left: (windowWidth/2)-((windowWidth*0.5)/2)+(windowWidth*0.1),
-                            status: value.status
+                            status: value.status,
+                            timeDisplay: "(" + mnt.format("H") + " – " + end.format("H") + ")"
                         }))
+                        console.log('changing')
+                        console.log(moment($(".datepicker").val(),"MM-DD-YYYY").format("MMM Do, YYYY"))
+                        // $(".results").html("HELLO!")
+
                     })
+                    $(".results").html("Showing results on " + moment($(".datepicker").val(),"MM-DD-YYYY").format("MMMDo, YYYY") + " for the " +
+                    $("option[value='"+ $("[data-collection='machines']").val() +"']").html())
                 }
             })
         }
@@ -360,15 +376,23 @@
             setDefaultDate: true,
             onClose: getReservations
         });
-        $("[data-collection='machines']").on("change",getReservations)
+        $("[data-collection='machines']").on("change",(ev=> {
+            console.log("yahoo!")
+            ev.stopPropagation();
+            getReservations()
+        }))
 
         // Manage reservation creation
-        $(document).ajaxComplete(() => {
-            var searchParams = new URLSearchParams((new URL(location.href)).search);
-            searchParams.forEach((value, key) => {
-                $("input." + key).val(value)
-                $("select." + key).val(value)
-            })
+        function loadKeys() {
+             var searchParams = new URLSearchParams((new URL(location.href)).search);
+             searchParams.forEach((value, key) => {
+             $("input." + key).val(value)
+             $("select." + key).val(value)
+             })
+        }
+        $("[data-collection='machines']").on("complete", ev => {
+            loadKeys()
+            getReservations()
         })
         // Manage submission of reservation
         $("[href='createanewrescopy2confirmedpage']").on("click", ev => {
@@ -421,6 +445,7 @@
                         elmnt.value = y._id
                         value.appendChild(elmnt)
                         console.log("added values!")
+                        $("select[data-collection='machines']").trigger("complete")
                     })
                 }
             })

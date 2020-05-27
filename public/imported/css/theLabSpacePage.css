@@ -313,7 +313,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.thelabspacepage .newnavbarlongscreenredbar4links .thelab {
+.thelabspacepage .newnavbarlongscreenredbar4links .labinfo {
   background-color    : rgba(255,255,255,0.0);
   top                 : 256px;
   height              : auto;
@@ -345,7 +345,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.thelabspacepage .newnavbarlongscreenredbar4links .manageyouraccount {
+.thelabspacepage .newnavbarlongscreenredbar4links .account {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -361,7 +361,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.thelabspacepage .newnavbarlongscreenredbar4links .bookamachine {
+.thelabspacepage .newnavbarlongscreenredbar4links .book {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -388,7 +388,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.thelabspacepage .newnavbarlongscreenredbar4links .davidsmith2321123 {
+.thelabspacepage .newnavbarlongscreenredbar4links .username {
   background-color    : rgba(255,255,255,0.0);
   top                 : 236px;
   height              : auto;
@@ -404,14 +404,14 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.thelabspacepage .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+.thelabspacepage .newnavbarlongscreenredbar4links .username .span1 {
   text-align          : justify;
 }
-.thelabspacepage .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+.thelabspacepage .newnavbarlongscreenredbar4links .username .span2 {
   font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.thelabspacepage .newnavbarlongscreenredbar4links .trianglecopy {
+.thelabspacepage .newnavbarlongscreenredbar4links .logindropdown {
   background-color    : rgba(255,255,255,0.0);
   top                 : 260px;
   height              : 29px;

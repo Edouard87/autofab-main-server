@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <%- include ../partials/global-header.ejs %>
+  <%- include ../../partials/regular/global-header.ejs %>
 </head>
 <body>
   <!-- Modals -->
   <!-- General Purpose Dialogues -->
-  <% include ../partials/success-modal.ejs %>
+  <% include ../../partials/regular/success-modal.ejs %>
   <!-- New Reservation Modal -->
-  <%- include ../partials/navbar.ejs %>
+  <%- include ../../partials/regular/navbar.ejs %>
   <div class="page-content">
 
     <div class="card w-25 p-3 float-right">
@@ -34,12 +34,15 @@
                 <% } %>
               </select>
             <% } %>
-            <input required id="date" class="calendar-date-picker" name="date" type="date">
+            <input required id="date" class="calendar-date-picker" type="date">
+            <input id="calendar-date" name="date" type="hidden">
             <h1>New Reservation</h1>
             <label for="start-time">Start Time: </label>
-            <input class="wicked-picker" required id="start-time" name="start" type="time">
+            <input class="wicked-picker" required id="start-time-select" type="time">
+            <input id="start-time" name="start" type="hidden">
             <label for="end-time">End Time: </label>
-            <input class="wicked-picker" required id="end-time" name="end" type="time">
+            <input class="wicked-picker" required id="end-time-select" name="end" type="time">
+            <input id="end-time" name="end" type="hidden">
             <textarea style="width: 100%" name="justification" placeholder="Enter a reason here"></textarea>
           </form>
         </p>
@@ -50,6 +53,11 @@
      <script>
        $(document).ready(() => {
          $("#res-create").on("click", () => {
+           $("#start-time").val($("#start-time-select").val())
+           $("#end-time").val($("#end-time-select").val())
+           $("#calendar-date").val(moment($("#date").val(),"YYYY-MM-DD").format("MM-DD-YYYY"))
+           console.log($("#start-time").val())
+           console.log($("#end-time").val())
            ajaxForm.submit($("#reservation-form"))
          });
        })
@@ -186,12 +194,15 @@
           var status;
 
           for (var i = 0; i < data.length; i++) {
+            var mnt = moment(data[i].start);
+            var mntMidnight = mnt.clone().startOf('day');
+            var startMins = mnt.diff(mntMidnight, 'minutes');
+            console.log("start",new Date(data[i].start))
+            console.log("end",new Date(data[i].end))
+            durationHours = ((data[i].end-data[i].start)/1000)/60;
+            console.log("Duration",durationHours)
 
-            startMins = (new Date(data[i].start * 1000).getHours()*60) + new Date(data[i].start * 1000).getMinutes();
-            endMins = (new Date(data[i].end * 1000).getHours()*60) + new Date(data[i].end * 1000 ).getMinutes();
-            duration = endMins-startMins;
-
-            if (duration >= 60) {
+            if (durationHours >= 60) {
               displayText = "block"
             } else {
               displayText = "none"
@@ -204,16 +215,23 @@
 
             // scale
 
+            console.log("HEIGHT",(durationHours/60) * scale)
+            console.log("durationMins",durationHours/60)
+            console.log("start",startMins)
+            console.log("end",endMins)
+
             $("#schedule").append(Mustache.to_html(template, { 
               name: data[i].username, 
               startHours: startDate.getHours(),
               startMinutes: leadingZeroes(startDate.getMinutes()),
               endHours: endDate.getHours(),
               endMinutes: leadingZeroes(endDate.getMinutes()),
-              height: (duration * scale) + "px",
-              top: (startMins * scale) + "px",
+              height: (durationHours) * scale,
+              top: (startMins * scale),
               displayText: displayText,
-              status: data[i].status
+              status: data[i].status,
+              width: "100",
+              left: "30"
             }));
           }
 

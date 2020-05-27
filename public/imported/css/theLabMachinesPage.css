@@ -323,7 +323,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.thelabmachinespage .newnavbarlongscreenredbar4links .thelab {
+.thelabmachinespage .newnavbarlongscreenredbar4links .labinfo {
   background-color    : rgba(255,255,255,0.0);
   top                 : 257px;
   height              : auto;
@@ -355,7 +355,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.thelabmachinespage .newnavbarlongscreenredbar4links .manageyouraccount {
+.thelabmachinespage .newnavbarlongscreenredbar4links .account {
   background-color    : rgba(255,255,255,0.0);
   top                 : 259px;
   height              : auto;
@@ -371,7 +371,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.thelabmachinespage .newnavbarlongscreenredbar4links .bookamachine {
+.thelabmachinespage .newnavbarlongscreenredbar4links .book {
   background-color    : rgba(255,255,255,0.0);
   top                 : 259px;
   height              : auto;
@@ -398,7 +398,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.thelabmachinespage .newnavbarlongscreenredbar4links .davidsmith2321123 {
+.thelabmachinespage .newnavbarlongscreenredbar4links .username {
   background-color    : rgba(255,255,255,0.0);
   top                 : 237px;
   height              : auto;
@@ -414,14 +414,14 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.thelabmachinespage .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+.thelabmachinespage .newnavbarlongscreenredbar4links .username .span1 {
   text-align          : justify;
 }
-.thelabmachinespage .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+.thelabmachinespage .newnavbarlongscreenredbar4links .username .span2 {
   font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.thelabmachinespage .newnavbarlongscreenredbar4links .trianglecopy {
+.thelabmachinespage .newnavbarlongscreenredbar4links .logindropdown {
   background-color    : rgba(255,255,255,0.0);
   top                 : 260px;
   height              : 30px;

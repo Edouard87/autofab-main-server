@@ -127,7 +127,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.createanewrescopy2confirmedpage .group .trotecspeedy300 {
+.createanewrescopy2confirmedpage .group .machinename {
   background-color    : rgba(255,255,255,0.0);
   top                 : 22px;
   height              : auto;
@@ -143,7 +143,7 @@ div {
   text-align          : center;
   line-height         : 41.0px;
 }
-.createanewrescopy2confirmedpage .group .april25th2020 {
+.createanewrescopy2confirmedpage .group .resdate {
   background-color    : rgba(255,255,255,0.0);
   top                 : 152px;
   height              : auto;
@@ -159,7 +159,7 @@ div {
   text-align          : center;
   line-height         : 41.0px;
 }
-.createanewrescopy2confirmedpage .group .a12pm2pm {
+.createanewrescopy2confirmedpage .group .timeinterval {
   background-color    : rgba(255,255,255,0.0);
   top                 : 275px;
   height              : auto;
@@ -391,7 +391,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .thelab {
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .labinfo {
   background-color    : rgba(255,255,255,0.0);
   top                 : 256px;
   height              : auto;
@@ -423,7 +423,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .manageyouraccount {
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .account {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -439,7 +439,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .bookamachine {
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .book {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -466,7 +466,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .davidsmith2321123 {
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .username {
   background-color    : rgba(255,255,255,0.0);
   top                 : 236px;
   height              : auto;
@@ -482,14 +482,14 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .username .span1 {
   text-align          : justify;
 }
-.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .username .span2 {
   font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .trianglecopy {
+.createanewrescopy2confirmedpage .newnavbarlongscreenredbar4links .logindropdown {
   background-color    : rgba(255,255,255,0.0);
   top                 : 260px;
   height              : 29px;
@@ -569,6 +569,22 @@ div {
   left                : 49px;
   transform           : rotate(0deg);
   opacity             : 1.0;
+}
+.createanewrescopy2confirmedpage .confnum {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 476px;
+  height              : auto;
+  width               : auto;
+  position            : absolute;
+  margin              : 0;
+  left                : 414px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  font-size           : 30.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : center;
+  line-height         : 41.0px;
 }
 /* .anima-animate-appear prefix for appear animations */
 .anima-animate-appear {
