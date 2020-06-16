@@ -79,8 +79,8 @@
                 <div class="messageu201cprintingp2">
                     <span class="span1">Message:</span><span class="span2"> “Printing parts for my project on 3mm Plywood with a size of 30 x 15 cm.”</span><span class="span3"><br><br></span><span class="span4">File:</span><span class="span5"> </span><span class="span6">SMITH_1.ai<br></span>
                 </div>
-                <img alt="Image" anima-src="./img/reservations-bitmap-3@2x.png" class="bitmap3" src="../imported/img/reservations-bitmap-3@2x.png">
-                <img alt="Image" anima-src="./img/reservations-bitmap-3@2x.png" class="bitmap4" src="../imported/img/reservations-bitmap-3@2x.png">
+                <img alt="Image" anima-src="./img/reservations-bitmap@2x.png" class="bitmap3" src="../imported/img/reservations-bitmap@2x.png">
+                <img alt="Image" anima-src="./img/reservations-bitmap@2x.png" class="bitmap4" src="../imported/img/reservations-bitmap@2x.png">
                 <div class="sindoh3dwox">
                     Sindoh 3DWOX<br>
                 </div>
@@ -104,23 +104,23 @@
                     <div class="background">
                     </div>
                     <img alt="Image" anima-src="./img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png" class="screenshot20200421at112321pm" src="../imported/img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png">
-                    <div class="thelab">
+                    <div class="labinfo">
                         The Lab
                     </div>
                     <div class="reservations">
                         Reservations
                     </div>
-                    <div class="manageyouraccount">
+                    <div class="account">
                         Manage Your Account
                     </div>
-                    <div class="bookamachine">
+                    <div class="book">
                         Book A Machine
                     </div>
                     <img alt="Image" anima-src="./img/reservations-bitmap-5@2x.png" class="bitmap5" src="../imported/img/reservations-bitmap-5@2x.png">
-                    <div class="davidsmith2321123">
+                    <div class="username">
                         <span class="span1">David Smith<br></span><span class="span2">#23211234</span>
                     </div>
-                    <img alt="Image" anima-src="./img/reservations-triangle-copy@2x.png" class="trianglecopy" src="../imported/img/reservations-triangle-copy@2x.png">
+                    <img alt="Image" anima-src="./img/reservations-logindropdown@2x.png" class="logindropdown" src="../imported/img/reservations-logindropdown@2x.png">
                     <img alt="Image" anima-src="./img/home-line-6.png" class="line6" src="../imported/img/home-line-6.png">
                     <img alt="Image" anima-src="./img/manage-your-account-line-7@2x.png" class="line7" src="../imported/img/manage-your-account-line-7@2x.png">
                     <div class="redbarbottom">
@@ -238,6 +238,7 @@
                         elmnt.value = y._id
                         value.appendChild(elmnt)
                         console.log("added values!")
+                        $("select[data-collection='machines']").trigger("complete")
                     })
                 }
             })

@@ -6,12 +6,12 @@
       <ul class="nav navbar-nav mr-auto">
         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false"
             href="#">Account</a>
-          <div class="dropdown-menu" role="menu"></a><a
-              class="dropdown-item" role="presentation" href="/p/reservations">My Reservations</a><a
-                class="dropdown-item"
-              role="presentation" href="/p/myaccount">Account Settings</a></div>
+            <div class="dropdown-menu" role="menu"></a>
+              <a class="dropdown-item" role="presentation" href="/p/reservations">My Reservations</a>
+              <a class="dropdown-item" role="presentation" href="/p/myaccount">Account Settings</a>
+              <a class="dropdown-item" role="presentation" href="/p/all_dms">My Direct Messages</a>
+            </div>
         </li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/p/calendar">Calendar</a></li>
         <li class="nav-item" role="presentation"><a class="nav-link" href="/interface/set/new">Use the New Interface</a></li>
         <% if (req.decoded.permission == -1) { %>
           <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false"

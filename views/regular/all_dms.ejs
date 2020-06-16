@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <%- include ../../partials/regular/global-header.ejs %>
+</head>
+
+<body>
+  <% include ../../partials/regular/navbar.ejs %>
+  <!-- General Modals -->
+  <% include ../../partials/regular/general-modals.ejs %>
+  <!-- View Chat Modal -->
+  <div class="modal fade" id="view-chat-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">View Chat</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span><strong>Title:</strong> <span class="title">Test Chat</span></span>
+          <span><strong>Description:</strong> <span class="description">A chat to test</span></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+          <button type="button" class="btn btn-success" id="openchat" data-dismiss="modal">Open</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- New Chat Modal -->
+  <div class="modal fade" id="new-chat-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create a New Chat</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" action="/chats/new">
+                <span><label>Title:</label><input name="title"></span>
+                <span><label>Description</label><input name="description"></span>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success" id="create-chat" data-dismiss="modal">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-content">
+    <h1>View all your Direct Messages</h1>
+    <button type="button" style="margin-top: 10px;" class="btn btn-primary" data-toggle="modal"
+      data-target="#new-chat-modal">New</button>
+    <div id="alldms"></div>
+    <script>
+        ajaxTable.summon($("#alldms"),{
+      url: "/chats/all",
+      method: "get",
+      id: "schedule-table",
+      ignore: ["messages","members","_id","__v"],
+      firstCap: true,
+      action: true
+    },()=> {
+      ajaxTable.connect($("#alldms").children().first(),{
+        action: (e) => {
+            console.log(e)
+            $("#view-chat-modal .title").html(e.data.title)
+            $("#view-chat-modal .description").html(e.data.description)
+            $("#view-chat-modal #openchat").attr("data-id",e.data._id)
+          $("#view-chat-modal").modal("toggle")
+        },
+        actionName: "Manage",
+        actionClasses: ["btn","btn-sm","btn-warning"]
+      })
+    })
+    setInterval(ajaxTable.refreshAll,1000)
+    $(".ajax-form").on("success",ajaxTable.refreshAll);
+    $("#create-chat").on("click", () => {
+        console.log("submitting")
+        ajaxForm.submit($("#new-chat-modal form"))
+    })
+    $("#openchat").on("click", function() {
+        console.log($(this).data("id"))
+        location.href = "/p/chat?" + $.param({id: $(this).data("id")})
+    })
+    </script>
+    <style>
+
+    </style>
+  </div>
+</body>
+
+</html>

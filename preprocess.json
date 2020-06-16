@@ -57,61 +57,83 @@
       }],
       "remove": [".explainwhatyouwil"],
       "replace":[{
-        "selector": ".group4",
+        "selector": ".machinedropdown",
         "partial": "dropdown",
         "meta": {
-          "className": "schedule-form group4 browser-default machine",
+          "className": "machinedropdown schedule-form browser-default machine",
           "idName": "machine-select",
           "type": "machine",
           "collection":"machines"
         }
       }, {
-        "selector": ".group7",
+        "selector": ".starttime1",
         "partial": "input",
         "meta": {
-          "className": "group7 browser-default time-picker start",
+          "className": "starttime1 browser-default time-picker start",
           "idName": "start-time-select",
           "inputType": "text",
           "placeholderName": "Start",
           "nameValue": "start"
         }
       }, {
-        "selector": ".group5",
+        "selector": ".datepicker",
         "partial": "input",
         "meta": {
-          "className": "group5 browser-default date-picker date",
+          "className": "datepicker browser-default date-picker date",
           "idName": "date-picker",
           "inputType": "text",
           "placeholderName": "Date",
           "nameValue": "date"
         }
       }, {
-        "selector": ".rectangle",
+        "selector": ".explain",
         "partial": "textarea",
         "meta": {
-          "className": "rectangle",
+          "className": "explain browser-default",
           "idName": "justification",
           "nameValue": "justification"
         }
       }, {
-        "selector": ".group8",
+        "selector": ".endtime1",
         "partial": "input",
         "meta": {
-          "className": "group8 browser-default time-picker end",
+          "className": "endtime1 browser-default time-picker end",
           "idName": "end-time-select",
           "inputType": "text",
           "placeholderName": "End",
           "nameValue": "end"
         }
       }, {
-        "selector": ".group9",
+        "selector": ".calendarresults",
         "partial": "div",
         "meta": {
-          "className": "group9 calendarresults",
+          "className": "calendarresults",
           "idName": ""
         }
       }
-    ]
+    ],
+    "extract": [{
+      "selector": ".reservationblock",
+      "type":"mustache",
+      "name":"reservation-test",
+      "attributes":[{
+        "selector": ".reservationblock",
+        "name":"style",
+        "content": "position: absolute; left: {{left}}px; height: {{height}}px; top: {{top}}px; width: {{width}}px; z-index: 3;"
+      },{
+        "selector": ".reserved911am",
+        "name":"style",
+        "content":"top: 0px;"
+      }, {
+        "selector": ".reservationblockbackground",
+        "name": "style",
+        "content": "height: 100%;"
+      }],
+      "fill": [{
+        "selector":".span3",
+        "content":"{{timeDisplay}}"
+      }]
+    }]
     },{
       "name":"login",
       "remove": [".username",".password"],
@@ -175,7 +197,7 @@
       ]
     }],
     "projDir": "/Users/edouarddesparois-perrault/Documents/GitHub/autofab-main-server",
-    "fileDir": "/Users/edouarddesparois-perrault/Downloads/trythisnowed",
+    "fileDir": "/Users/edouarddesparois-perrault/Downloads/MODIFIEDNAMESV1MAY19",
     "subdirs": {
       "views":"/views/new"
     },

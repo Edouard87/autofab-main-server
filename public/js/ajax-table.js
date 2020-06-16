@@ -91,6 +91,7 @@ function setupAjaxTable() {
             ajaxTableElm.target.find(".action-btn").eq(i).on("click", data[i], ajaxTableElm.action)
           })
         } else {
+          console.log("now wanted")
           var targetParent = ajaxTableElm.target.parent()
           targetParent.css("display","none")
           $(".nothing-display").remove()
@@ -127,6 +128,7 @@ function summonTable(loc,conf,callback) {
     url: conf.url,
     method: conf.method,
     success: (data) => {
+      console.log("data: ", data)
       console.log("location is", loc)
       loc.empty()
       function generateTableHead(conf,style) {
@@ -143,6 +145,7 @@ function summonTable(loc,conf,callback) {
       try {
         var keys = Object.keys(data[0])
         var table = generateTableHead(conf)
+        conf.ignore = conf.ignore || []
         conf.ignore.forEach(ig => {
           removeA(keys, ig);
         })
@@ -161,6 +164,7 @@ function summonTable(loc,conf,callback) {
         callback()
       } catch(err) {
         unsummoned.push([loc,conf,callback]);
+        console.log(err)
         loc.append("<p>Nothing to display</p>")
       }
     }

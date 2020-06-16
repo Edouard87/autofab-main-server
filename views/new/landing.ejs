@@ -180,6 +180,7 @@
                         elmnt.value = y._id
                         value.appendChild(elmnt)
                         console.log("added values!")
+                        $("select[data-collection='machines']").trigger("complete")
                     })
                 }
             })

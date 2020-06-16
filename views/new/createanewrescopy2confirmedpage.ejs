@@ -58,18 +58,18 @@
                 <div class="rectangle">
                 </div>
                 <div class="thankyouyourrese">
-                    <span class="span1">Thank you! Your reservation has been confirmed.<br></span><span class="span2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmation #1221122</span>
+                    <span class="span1">Thank you! Your reservation has been confirmed.<br></span><span class="span2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 </div>
                 <img alt="Image" anima-src="./img/create-a-new-res-copy-2---confirmed-page-bitmap@2x.png" class="bitmap" src="../imported/img/create-a-new-res-copy-2---confirmed-page-bitmap@2x.png">
                 <div class="group">
                     <img alt="Image" anima-src="./img/create-a-new-res-copy-2---confirmed-page-bitmap-1@2x.png" class="bitmap3" src="../imported/img/create-a-new-res-copy-2---confirmed-page-bitmap-1@2x.png">
-                    <div class="trotecspeedy300">
+                    <div class="machinename">
                         Trotec Speedy 300
                     </div>
-                    <div class="april25th2020">
+                    <div class="resdate">
                         April 25th, 2020<br>
                     </div>
-                    <div class="a12pm2pm">
+                    <div class="timeinterval">
                         12 PM - 2 PM
                     </div>
                     <img alt="Image" anima-src="./img/create-a-new-res-copy-2---confirmed-page-bitmap-2@2x.png" class="bitmap1" src="../imported/img/create-a-new-res-copy-2---confirmed-page-bitmap-2@2x.png">
@@ -104,23 +104,23 @@
                     <div class="background">
                     </div>
                     <img alt="Image" anima-src="./img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png" class="screenshot20200421at112321pm" src="../imported/img/manage-your-account-screen-shot-2020-04-21-at-112321-pm@2x.png">
-                    <div class="thelab">
+                    <div class="labinfo">
                         The Lab
                     </div>
                     <div class="reservations">
                         Reservations
                     </div>
-                    <div class="manageyouraccount">
+                    <div class="account">
                         Manage Your Account
                     </div>
-                    <div class="bookamachine">
+                    <div class="book">
                         Book A Machine
                     </div>
                     <img alt="Image" anima-src="./img/reservations-bitmap-5@2x.png" class="bitmap1" src="../imported/img/reservations-bitmap-5@2x.png">
-                    <div class="davidsmith2321123">
+                    <div class="username">
                         <span class="span1">David Smith<br></span><span class="span2">#23211234</span>
                     </div>
-                    <img alt="Image" anima-src="./img/reservations-triangle-copy@2x.png" class="trianglecopy" src="../imported/img/reservations-triangle-copy@2x.png">
+                    <img alt="Image" anima-src="./img/reservations-logindropdown@2x.png" class="logindropdown" src="../imported/img/reservations-logindropdown@2x.png">
                     <img alt="Image" anima-src="./img/home-line-6.png" class="line6" src="../imported/img/home-line-6.png">
                     <img alt="Image" anima-src="./img/manage-your-account-line-7@2x.png" class="line7" src="../imported/img/manage-your-account-line-7@2x.png">
                     <div class="redbarbottom">
@@ -136,6 +136,9 @@
                     <div class="hotspot1">
                     </div>
                 </a>
+                <div class="confnum">
+                    Confirmation #1221122
+                </div>
             </div>
         </div>
         <!-- Scripts -->
@@ -225,17 +228,17 @@
     $(document).ready(() => {
         // Put the confirmation number in the right place
         var searchParams = new URLSearchParams(location.href.split("?")[1]);
-        $(".span2").html("Confirmnation #" + searchParams.get("conf"))
+        $(".confnum").html("Confirmation #" + searchParams.get("conf"))
         console.log("params: ", searchParams.get("machine"))
         console.log("Query: ", $("option[value='" + searchParams.get("machine") + "']"))
         console.log("The machine is:", $("option[value='" + searchParams.get("machine") + "']"))
         $(document).ajaxStop(() => {
-            $(".trotecspeedy300").html($("option[value='" + searchParams.get("machine") + "']").html())
+            $(".machinename").html($("option[value='" + searchParams.get("machine") + "']").html())
         })
         var startDate = moment(searchParams.get("date") + ", " + searchParams.get("start"),"MM-DD-YYYY, hh:mm A")
         var endDate = moment(searchParams.get("date") + ", " + searchParams.get("end"),"MM-DD-YYYY, hh:mm A")
-        $(".april25th2020").html(startDate.format("MMMM Do YYYY"))
-        $(".a12pm2pm").html(startDate.format("h A") + " - " + endDate.format("h A"))
+        $(".resdate").html(startDate.format("MMMM Do YYYY"))
+        $(".timeinterval").html(startDate.format("h A") + " - " + endDate.format("h A"))
     })
 </script><script src="../components/materialize/dist/js/materialize.min.js"></script>
 <script>
@@ -262,6 +265,7 @@
                         elmnt.value = y._id
                         value.appendChild(elmnt)
                         console.log("added values!")
+                        $("select[data-collection='machines']").trigger("complete")
                     })
                 }
             })

@@ -91,15 +91,26 @@ div {
   text-align          : center;
   line-height         : 25.0px;
 }
-.login .rectangle2 {
+.login .inputusername {
   background-color    : rgba(255,255,255,0.0);
   top                 : 316px;
   height              : 75px;
+  width               : 568px;
+  position            : absolute;
+  margin              : 0;
+  left                : 538px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.login .inputusername .rectangle2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 75px;
   box-sizing          : border-box;
   width               : 536px;
   position            : absolute;
   margin              : 0;
-  left                : 570px;
+  left                : 32px;
   border-radius       : 10px;
   border-style        : solid;
   border-width        : 5px;
@@ -107,46 +118,14 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.login .rectangle3 {
+.login .inputusername .username {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 442px;
-  height              : 75px;
-  box-sizing          : border-box;
-  width               : 536px;
-  position            : absolute;
-  margin              : 0;
-  left                : 570px;
-  border-radius       : 10px;
-  border-style        : solid;
-  border-width        : 5px;
-  border-color        : rgba(150, 150, 150, 1.0);
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-}
-.login .rectangle4 {
-  background-color    : rgba(224, 32, 32, 1.0);
-  top                 : 568px;
-  height              : 75px;
-  box-sizing          : border-box;
-  width               : 536px;
-  position            : absolute;
-  margin              : 0;
-  left                : 570px;
-  border-radius       : 10px;
-  border-style        : solid;
-  border-width        : 1px;
-  border-color        : rgba(222, 32, 32, 1.0);
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-}
-.login .username {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 338px;
+  top                 : 22px;
   height              : auto;
   width               : 218px;
   position            : absolute;
   margin              : 0;
-  left                : 538px;
+  left                : 0px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
@@ -155,14 +134,41 @@ div {
   text-align          : center;
   line-height         : 30.0px;
 }
-.login .password {
+.login .inputpassword {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 466px;
+  top                 : 442px;
+  height              : 75px;
+  width               : 568px;
+  position            : absolute;
+  margin              : 0;
+  left                : 538px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.login .inputpassword .rectangle2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 75px;
+  box-sizing          : border-box;
+  width               : 536px;
+  position            : absolute;
+  margin              : 0;
+  left                : 32px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 5px;
+  border-color        : rgba(150, 150, 150, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.login .inputpassword .password {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 24px;
   height              : auto;
   width               : 218px;
   position            : absolute;
   margin              : 0;
-  left                : 538px;
+  left                : 0px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
@@ -173,12 +179,39 @@ div {
 }
 .login .signin {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 589px;
+  top                 : 568px;
+  height              : 75px;
+  width               : 536px;
+  position            : absolute;
+  margin              : 0;
+  left                : 570px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.login .signin .rectangle2 {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 0px;
+  height              : 75px;
+  box-sizing          : border-box;
+  width               : 536px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  border-radius       : 10px;
+  border-style        : solid;
+  border-width        : 1px;
+  border-color        : rgba(222, 32, 32, 1.0);
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.login .signin .signin1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 21px;
   height              : auto;
   width               : 328px;
   position            : absolute;
   margin              : 0;
-  left                : 678px;
+  left                : 108px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;

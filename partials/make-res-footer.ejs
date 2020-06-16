@@ -27,13 +27,12 @@
 
         var blockTemplate
          $.ajax({
-            url: "/templates/schedule-block.mustache",
+            url: "/templates/reservation-test.mustache",
             method: "get",
             success: data => {
                 console.log(data)
                 blockTemplate = data
                 // Make sure to get the reservations after the time select has been updated
-                getReservations()
             }
         })
 
@@ -104,6 +103,7 @@
         // Get the calendar reservations to show
 
         function getReservations() {
+            // console.log("here we go!")
             $(".schedule-block").remove()
             $.ajax({
                 url: "/query/reservations?" + $.param({
@@ -112,17 +112,28 @@
                 }),
                 method: "get",
                 success: data => {
+                    console.log("DATA",data)
                     $.each(data, (index, value) => {
-                        var startTimeMinutes = (new Date(value.start)).getMinutes()
+                        var mnt = moment(value.start);
+                        var end = moment(value.end)
+                        var mntMidnight = mnt.clone().startOf('day')
+                        var startTimeMinutes = mnt.diff(mntMidnight, 'minutes');
                         var resDuractionMins = ((value.end-value.start)/1000)/60
                         $(".calendarresults").append(Mustache.to_html(blockTemplate, {
                             top: (startTimeMinutes/60)*hourHeight,
                             height: (resDuractionMins/60)*hourHeight,
                             width: windowWidth*0.5,
                             left: (windowWidth/2)-((windowWidth*0.5)/2)+(windowWidth*0.1),
-                            status: value.status
+                            status: value.status,
+                            timeDisplay: "(" + mnt.format("H") + " – " + end.format("H") + ")"
                         }))
+                        console.log('changing')
+                        console.log(moment($(".datepicker").val(),"MM-DD-YYYY").format("MMM Do, YYYY"))
+                        // $(".results").html("HELLO!")
+
                     })
+                    $(".results").html("Showing results on " + moment($(".datepicker").val(),"MM-DD-YYYY").format("MMMDo, YYYY") + " for the " +
+                    $("option[value='"+ $("[data-collection='machines']").val() +"']").html())
                 }
             })
         }
@@ -133,15 +144,23 @@
             setDefaultDate: true,
             onClose: getReservations
         });
-        $("[data-collection='machines']").on("change",getReservations)
+        $("[data-collection='machines']").on("change",(ev=> {
+            console.log("yahoo!")
+            ev.stopPropagation();
+            getReservations()
+        }))
 
         // Manage reservation creation
-        $(document).ajaxComplete(() => {
-            var searchParams = new URLSearchParams((new URL(location.href)).search);
-            searchParams.forEach((value, key) => {
-                $("input." + key).val(value)
-                $("select." + key).val(value)
-            })
+        function loadKeys() {
+             var searchParams = new URLSearchParams((new URL(location.href)).search);
+             searchParams.forEach((value, key) => {
+             $("input." + key).val(value)
+             $("select." + key).val(value)
+             })
+        }
+        $("[data-collection='machines']").on("complete", ev => {
+            loadKeys()
+            getReservations()
         })
         // Manage submission of reservation
         $("[href='createanewrescopy2confirmedpage']").on("click", ev => {

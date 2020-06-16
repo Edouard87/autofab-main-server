@@ -628,7 +628,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.manageyouraccount .newnavbarlongscreenredbar4links .thelab {
+.manageyouraccount .newnavbarlongscreenredbar4links .labinfo {
   background-color    : rgba(255,255,255,0.0);
   top                 : 256px;
   height              : auto;
@@ -660,7 +660,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.manageyouraccount .newnavbarlongscreenredbar4links .manageyouraccount2 {
+.manageyouraccount .newnavbarlongscreenredbar4links .account {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -676,7 +676,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.manageyouraccount .newnavbarlongscreenredbar4links .bookamachine {
+.manageyouraccount .newnavbarlongscreenredbar4links .book {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -703,7 +703,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.manageyouraccount .newnavbarlongscreenredbar4links .davidsmith2321123 {
+.manageyouraccount .newnavbarlongscreenredbar4links .username {
   background-color    : rgba(255,255,255,0.0);
   top                 : 236px;
   height              : auto;
@@ -719,14 +719,14 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.manageyouraccount .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+.manageyouraccount .newnavbarlongscreenredbar4links .username .span1 {
   text-align          : justify;
 }
-.manageyouraccount .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+.manageyouraccount .newnavbarlongscreenredbar4links .username .span2 {
   font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.manageyouraccount .newnavbarlongscreenredbar4links .trianglecopy {
+.manageyouraccount .newnavbarlongscreenredbar4links .logindropdown {
   background-color    : rgba(255,255,255,0.0);
   top                 : 260px;
   height              : 29px;

@@ -44,25 +44,47 @@ div {
   text-align          : left;
   line-height         : 57.0px;
 }
-.reservations .line4 {
+.reservations .reservationinfocontainer {
   background-color    : rgba(255,255,255,0.0);
   top                 : 309px;
+  height              : 851px;
+  width               : 1179px;
+  position            : absolute;
+  margin              : 0;
+  left                : 25px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .reservationinfocontainer .reservationinfo {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 237px;
+  width               : 1157px;
+  position            : absolute;
+  margin              : 0;
+  left                : 22px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .reservationinfocontainer .reservationinfo .line42 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
   height              : 1px;
   width               : 766px;
   position            : absolute;
   margin              : 0;
-  left                : 47px;
+  left                : 0px;
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.reservations .sindoh3dwoxapril2 {
+.reservations .reservationinfocontainer .reservationinfo .sindoh3dwoxapril2 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 353px;
+  top                 : 44px;
   height              : auto;
   width               : 369px;
   position            : absolute;
   margin              : 0;
-  left                : 262px;
+  left                : 215px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
@@ -71,112 +93,25 @@ div {
   text-align          : left;
   line-height         : 29.0px;
 }
-.reservations .trotecspeedy300ma {
+.reservations .reservationinfocontainer .reservationinfo .line411 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 567px;
-  height              : auto;
-  width               : 369px;
-  position            : absolute;
-  margin              : 0;
-  left                : 271px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-  font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
-  font-size           : 21.0px;
-  color               : rgba(0, 0, 0, 1.0);
-  text-align          : left;
-  line-height         : 29.0px;
-}
-.reservations .trotecspeedy300ma1 {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 777px;
-  height              : auto;
-  width               : 369px;
-  position            : absolute;
-  margin              : 0;
-  left                : 271px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-  font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
-  font-size           : 21.0px;
-  color               : rgba(0, 0, 0, 1.0);
-  text-align          : left;
-  line-height         : 29.0px;
-}
-.reservations .line41 {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 518px;
+  top                 : 209px;
   height              : 2px;
   width               : 767px;
   position            : absolute;
   margin              : 0;
-  left                : 47px;
+  left                : 0px;
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.reservations .bitmap {
+.reservations .reservationinfocontainer .reservationinfo .messageu201cprintingp2 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 546px;
-  height              : 187px;
-  width               : 246px;
-  position            : absolute;
-  margin              : 0;
-  left                : 25px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-}
-.reservations .bitmap1 {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 546px;
-  height              : 187px;
-  width               : 246px;
-  position            : absolute;
-  margin              : 0;
-  left                : 25px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-}
-.reservations .bitmap2 {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 770px;
-  height              : 187px;
-  width               : 246px;
-  position            : absolute;
-  margin              : 0;
-  left                : 25px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-}
-.reservations .line42 {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 742px;
-  height              : 2px;
-  width               : 767px;
-  position            : absolute;
-  margin              : 0;
-  left                : 47px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-}
-.reservations .line43 {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 959px;
-  height              : 2px;
-  width               : 767px;
-  position            : absolute;
-  margin              : 0;
-  left                : 46px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-}
-.reservations .messageu201cprintingp {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 353px;
+  top                 : 44px;
   height              : auto;
   width               : 287px;
   position            : absolute;
   margin              : 0;
-  left                : 507px;
+  left                : 460px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
@@ -185,134 +120,237 @@ div {
   text-align          : left;
   line-height         : 29.0px;
 }
-.reservations .messageu201cprintingp .span1 {
+.reservations .reservationinfocontainer .reservationinfo .messageu201cprintingp2 .span1 {
   text-align          : justify;
 }
-.reservations .messageu201cprintingp .span2 {
+.reservations .reservationinfocontainer .reservationinfo .messageu201cprintingp2 .span2 {
   font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.reservations .messageu201cprintingp .span3 {
+.reservations .reservationinfocontainer .reservationinfo .messageu201cprintingp2 .span3 {
   font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.reservations .messageu201cprintingp .span4 {
+.reservations .reservationinfocontainer .reservationinfo .messageu201cprintingp2 .span4 {
   text-align          : justify;
 }
-.reservations .messageu201cprintingp .span5 {
+.reservations .reservationinfocontainer .reservationinfo .messageu201cprintingp2 .span5 {
   font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.reservations .messageu201cprintingp .span6 {
+.reservations .reservationinfocontainer .reservationinfo .messageu201cprintingp2 .span6 {
   font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.reservations .messageu201cprintingp1 {
+.reservations .reservationinfocontainer .reservationinfo .bitmap4 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 777px;
-  height              : auto;
-  width               : 287px;
-  position            : absolute;
-  margin              : 0;
-  left                : 507px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
-  font-size           : 21.0px;
-  color               : rgba(0, 0, 0, 1.0);
-  text-align          : left;
-  line-height         : 29.0px;
-}
-.reservations .messageu201cprintingp1 .span1 {
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp1 .span2 {
-  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp1 .span3 {
-  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp1 .span4 {
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp1 .span5 {
-  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp1 .span6 {
-  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp2 {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 563px;
-  height              : auto;
-  width               : 287px;
-  position            : absolute;
-  margin              : 0;
-  left                : 507px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
-  font-size           : 21.0px;
-  color               : rgba(0, 0, 0, 1.0);
-  text-align          : left;
-  line-height         : 29.0px;
-}
-.reservations .messageu201cprintingp2 .span1 {
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp2 .span2 {
-  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp2 .span3 {
-  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp2 .span4 {
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp2 .span5 {
-  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
-  text-align          : justify;
-}
-.reservations .messageu201cprintingp2 .span6 {
-  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
-  text-align          : justify;
-}
-.reservations .bitmap3 {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 322px;
+  top                 : 13px;
   height              : 187px;
   width               : 176px;
   position            : absolute;
   margin              : 0;
-  left                : 47px;
+  left                : 0px;
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.reservations .bitmap4 {
+.reservations .reservationinfocontainer .reservationinfo .approved1 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 973px;
+  top                 : 81px;
+  height              : auto;
+  width               : 336px;
+  position            : absolute;
+  margin              : 0;
+  left                : 823px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(109, 212, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .reservationinfocontainer .trotecspeedy300ma {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 258px;
+  height              : auto;
+  width               : 369px;
+  position            : absolute;
+  margin              : 0;
+  left                : 246px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .reservationinfocontainer .trotecspeedy300ma1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 468px;
+  height              : auto;
+  width               : 369px;
+  position            : absolute;
+  margin              : 0;
+  left                : 246px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .reservationinfocontainer .bitmap {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 237px;
+  height              : 187px;
+  width               : 246px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .reservationinfocontainer .bitmap1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 237px;
+  height              : 187px;
+  width               : 246px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .reservationinfocontainer .bitmap2 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 461px;
+  height              : 187px;
+  width               : 246px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .reservationinfocontainer .line4 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 433px;
+  height              : 2px;
+  width               : 767px;
+  position            : absolute;
+  margin              : 0;
+  left                : 22px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .reservationinfocontainer .line41 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 650px;
+  height              : 2px;
+  width               : 767px;
+  position            : absolute;
+  margin              : 0;
+  left                : 21px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 468px;
+  height              : auto;
+  width               : 287px;
+  position            : absolute;
+  margin              : 0;
+  left                : 482px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp .span1 {
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp .span3 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp .span4 {
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp .span5 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp .span6 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp1 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 254px;
+  height              : auto;
+  width               : 287px;
+  position            : absolute;
+  margin              : 0;
+  left                : 482px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
+  font-size           : 21.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 29.0px;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp1 .span1 {
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp1 .span2 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp1 .span3 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp1 .span4 {
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp1 .span5 {
+  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .messageu201cprintingp1 .span6 {
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
+  text-align          : justify;
+}
+.reservations .reservationinfocontainer .bitmap3 {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 664px;
   height              : 187px;
   width               : 176px;
   position            : absolute;
   margin              : 0;
-  left                : 48px;
+  left                : 23px;
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.reservations .sindoh3dwox {
+.reservations .reservationinfocontainer .sindoh3dwox {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 973px;
+  top                 : 664px;
   height              : auto;
   width               : auto;
   position            : absolute;
   margin              : 0;
-  left                : 262px;
+  left                : 237px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-Medium", Helvetica, Arial, serif;
@@ -321,14 +359,14 @@ div {
   text-align          : left;
   line-height         : 29.0px;
 }
-.reservations .approved {
+.reservations .reservationinfocontainer .approved {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 390px;
+  top                 : 295px;
   height              : auto;
   width               : 336px;
   position            : absolute;
   margin              : 0;
-  left                : 870px;
+  left                : 845px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
@@ -337,30 +375,14 @@ div {
   text-align          : left;
   line-height         : 29.0px;
 }
-.reservations .approved1 {
+.reservations .reservationinfocontainer .pending {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 604px;
+  top                 : 534px;
   height              : auto;
   width               : 336px;
   position            : absolute;
   margin              : 0;
-  left                : 870px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-  font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
-  font-size           : 21.0px;
-  color               : rgba(109, 212, 0, 1.0);
-  text-align          : left;
-  line-height         : 29.0px;
-}
-.reservations .pending {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 843px;
-  height              : auto;
-  width               : 336px;
-  position            : absolute;
-  margin              : 0;
-  left                : 870px;
+  left                : 845px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
@@ -385,7 +407,7 @@ div {
   text-align          : center;
   line-height         : 27.0px;
 }
-.reservations .pastreservations {
+.reservations .reservationspbutton {
   background-color    : rgba(255,255,255,0.0);
   top                 : 370px;
   height              : auto;
@@ -446,7 +468,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.reservations .newnavbarlongscreenredbar4links .thelab {
+.reservations .newnavbarlongscreenredbar4links .labinfo {
   background-color    : rgba(255,255,255,0.0);
   top                 : 256px;
   height              : auto;
@@ -478,7 +500,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.reservations .newnavbarlongscreenredbar4links .manageyouraccount {
+.reservations .newnavbarlongscreenredbar4links .account {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -494,7 +516,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.reservations .newnavbarlongscreenredbar4links .bookamachine {
+.reservations .newnavbarlongscreenredbar4links .book {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -510,7 +532,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.reservations .newnavbarlongscreenredbar4links .bitmap5 {
+.reservations .newnavbarlongscreenredbar4links .bitmap {
   background-color    : rgba(255,255,255,0.0);
   top                 : 237px;
   height              : 83px;
@@ -521,7 +543,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.reservations .newnavbarlongscreenredbar4links .davidsmith2321123 {
+.reservations .newnavbarlongscreenredbar4links .username {
   background-color    : rgba(255,255,255,0.0);
   top                 : 236px;
   height              : auto;
@@ -537,14 +559,14 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.reservations .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+.reservations .newnavbarlongscreenredbar4links .username .span1 {
   text-align          : justify;
 }
-.reservations .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+.reservations .newnavbarlongscreenredbar4links .username .span2 {
   font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.reservations .newnavbarlongscreenredbar4links .trianglecopy {
+.reservations .newnavbarlongscreenredbar4links .logindropdown {
   background-color    : rgba(255,255,255,0.0);
   top                 : 260px;
   height              : 29px;

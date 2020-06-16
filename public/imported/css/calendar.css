@@ -103,7 +103,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.calendar .group4 {
+.calendar .machinedropdown {
   background-color    : rgba(255,255,255,0.0);
   top                 : 394px;
   height              : 46px;
@@ -114,7 +114,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group4 .group2 {
+.calendar .machinedropdown .group2 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 0px;
   height              : 46px;
@@ -125,7 +125,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group4 .group2 .rectangle2 {
+.calendar .machinedropdown .group2 .rectangle {
   background-color    : rgba(215, 215, 215, 1.0);
   top                 : 0px;
   height              : 46px;
@@ -141,7 +141,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group4 .group2 .trotecspeedy300 {
+.calendar .machinedropdown .group2 .trotecspeedy300 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 10px;
   height              : auto;
@@ -157,7 +157,7 @@ div {
   text-align          : left;
   line-height         : 33.0px;
 }
-.calendar .group4 .line2 {
+.calendar .machinedropdown .line2 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 14px;
   height              : 24px;
@@ -168,7 +168,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group7 {
+.calendar .starttime1 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 394px;
   height              : 46px;
@@ -179,7 +179,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group7 .group6 {
+.calendar .starttime1 .group6 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 0px;
   height              : 46px;
@@ -190,7 +190,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group7 .group6 .rectangle2 {
+.calendar .starttime1 .group6 .rectangle {
   background-color    : rgba(215, 215, 215, 1.0);
   top                 : 0px;
   height              : 46px;
@@ -206,7 +206,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group7 .group6 .a1200pm {
+.calendar .starttime1 .group6 .a1200pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 10px;
   height              : auto;
@@ -222,7 +222,7 @@ div {
   text-align          : left;
   line-height         : 33.0px;
 }
-.calendar .group7 .line2 {
+.calendar .starttime1 .line2 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 10px;
   height              : 24px;
@@ -233,7 +233,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group5 {
+.calendar .datepicker {
   background-color    : rgba(255,255,255,0.0);
   top                 : 519px;
   height              : 46px;
@@ -244,7 +244,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group5 .group3 {
+.calendar .datepicker .group3 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 0px;
   height              : 46px;
@@ -255,7 +255,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group5 .group3 .rectangle2 {
+.calendar .datepicker .group3 .rectangle {
   background-color    : rgba(215, 215, 215, 1.0);
   top                 : 0px;
   height              : 46px;
@@ -271,9 +271,9 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group5 .group3 .april252020 {
+.calendar .datepicker .group3 .april252020 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 9px;
+  top                 : 8px;
   height              : auto;
   width               : 238px;
   position            : absolute;
@@ -281,13 +281,13 @@ div {
   left                : 16px;
   transform           : rotate(0deg);
   opacity             : 1.0;
-  font-family         : "Helvetica", Helvetica, Arial, serif;
+  font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
   font-size           : 24.0px;
   color               : rgba(0, 0, 0, 1.0);
   text-align          : left;
-  line-height         : 29.0px;
+  line-height         : 33.0px;
 }
-.calendar .group5 .line2 {
+.calendar .datepicker .line2 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 15px;
   height              : 24px;
@@ -298,7 +298,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group8 {
+.calendar .endtime1 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 520px;
   height              : 46px;
@@ -309,7 +309,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group8 .rectangle2 {
+.calendar .endtime1 .rectangle {
   background-color    : rgba(215, 215, 215, 1.0);
   top                 : 0px;
   height              : 46px;
@@ -325,7 +325,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group8 .line2 {
+.calendar .endtime1 .line2 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 10px;
   height              : 24px;
@@ -336,7 +336,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group8 .a200pm {
+.calendar .endtime1 .a200pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 10px;
   height              : auto;
@@ -368,7 +368,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.calendar .group9 {
+.calendar .calendarresults {
   background-color    : rgba(255,255,255,0.0);
   top                 : 245px;
   height              : 907px;
@@ -379,7 +379,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .rectangle4 {
+.calendar .calendarresults .rectangle {
   background-color    : rgba(255, 255, 255, 1.0);
   top                 : 0px;
   height              : 907px;
@@ -394,7 +394,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .reservedunavailab {
+.calendar .calendarresults .reservedunavailab {
   background-color    : rgba(255,255,255,0.0);
   top                 : 228px;
   height              : auto;
@@ -410,7 +410,7 @@ div {
   text-align          : center;
   line-height         : 24.0px;
 }
-.calendar .group9 .a8am {
+.calendar .calendarresults .a8am {
   background-color    : rgba(255,255,255,0.0);
   top                 : 120px;
   height              : auto;
@@ -426,7 +426,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a10am {
+.calendar .calendarresults .a10am {
   background-color    : rgba(255,255,255,0.0);
   top                 : 260px;
   height              : auto;
@@ -442,7 +442,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a11am {
+.calendar .calendarresults .a11am {
   background-color    : rgba(255,255,255,0.0);
   top                 : 329px;
   height              : auto;
@@ -458,7 +458,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a12pm {
+.calendar .calendarresults .a12pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 399px;
   height              : auto;
@@ -474,7 +474,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a1pm {
+.calendar .calendarresults .a1pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 469px;
   height              : auto;
@@ -490,7 +490,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a2pm {
+.calendar .calendarresults .a2pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 539px;
   height              : auto;
@@ -506,7 +506,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a3pm {
+.calendar .calendarresults .a3pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 609px;
   height              : auto;
@@ -522,7 +522,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a4pm {
+.calendar .calendarresults .a4pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 678px;
   height              : auto;
@@ -538,7 +538,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a5pm {
+.calendar .calendarresults .a5pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 748px;
   height              : auto;
@@ -554,7 +554,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a6pm {
+.calendar .calendarresults .a6pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 818px;
   height              : auto;
@@ -570,7 +570,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .a9am {
+.calendar .calendarresults .a9am {
   background-color    : rgba(255,255,255,0.0);
   top                 : 190px;
   height              : auto;
@@ -586,23 +586,7 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group9 .showingresultsona {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 41px;
-  height              : auto;
-  width               : 591px;
-  position            : absolute;
-  margin              : 0;
-  left                : 43px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-  font-family         : "AvenirNext-Italic", Helvetica, Arial, serif;
-  font-size           : 22.0px;
-  color               : rgba(0, 0, 0, 1.0);
-  text-align          : left;
-  line-height         : 30.0px;
-}
-.calendar .group9 .line3 {
+.calendar .calendarresults .line3 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 134px;
   height              : 1px;
@@ -613,7 +597,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line31 {
+.calendar .calendarresults .line31 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 203px;
   height              : 1px;
@@ -624,7 +608,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line32 {
+.calendar .calendarresults .line32 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 273px;
   height              : 1px;
@@ -635,7 +619,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line33 {
+.calendar .calendarresults .line33 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 343px;
   height              : 1px;
@@ -646,7 +630,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line34 {
+.calendar .calendarresults .line34 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 413px;
   height              : 1px;
@@ -657,7 +641,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line35 {
+.calendar .calendarresults .line35 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 483px;
   height              : 1px;
@@ -668,7 +652,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line36 {
+.calendar .calendarresults .line36 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 552px;
   height              : 1px;
@@ -679,7 +663,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line37 {
+.calendar .calendarresults .line37 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 622px;
   height              : 1px;
@@ -690,7 +674,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line38 {
+.calendar .calendarresults .line38 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 692px;
   height              : 1px;
@@ -701,7 +685,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line39 {
+.calendar .calendarresults .line39 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 762px;
   height              : 1px;
@@ -712,7 +696,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .line310 {
+.calendar .calendarresults .line310 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 832px;
   height              : 1px;
@@ -723,29 +707,40 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .rectangle11 {
-  background-color    : rgba(224, 32, 32, 1.0);
+.calendar .calendarresults .reservationblock {
+  background-color    : rgba(255,255,255,0.0);
   top                 : 204px;
+  height              : 140px;
+  width               : 211px;
+  position            : absolute;
+  margin              : 0;
+  left                : 219px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.calendar .calendarresults .reservationblock .reservationblockbackground {
+  background-color    : rgba(224, 32, 32, 1.0);
+  top                 : 0px;
   height              : 140px;
   box-sizing          : border-box;
   width               : 211px;
   position            : absolute;
   margin              : 0;
-  left                : 219px;
+  left                : 0px;
   border-style        : solid;
   border-width        : 1px;
   border-color        : rgba(150, 150, 150, 1.0);
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .reserved911am {
+.calendar .calendarresults .reservationblock .reserved911am {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 217px;
+  top                 : 13px;
   height              : auto;
   width               : auto;
   position            : absolute;
   margin              : 0;
-  left                : 238px;
+  left                : 19px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-Bold", Helvetica, Arial, serif;
@@ -754,17 +749,17 @@ div {
   text-align          : center;
   line-height         : 41.0px;
 }
-.calendar .group9 .reserved911am .span1 {
+.calendar .calendarresults .reservationblock .reserved911am .span1 {
   
 }
-.calendar .group9 .reserved911am .span2 {
+.calendar .calendarresults .reservationblock .reserved911am .span2 {
   font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
 }
-.calendar .group9 .reserved911am .span3 {
+.calendar .calendarresults .reservationblock .reserved911am .span3 {
   font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.calendar .group9 .rectangle2 {
+.calendar .calendarresults .rectangle1 {
   background-color    : rgba(247, 181, 0, 1.0);
   top                 : 622px;
   height              : 139px;
@@ -779,7 +774,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .pending35pm {
+.calendar .calendarresults .pending35pm {
   background-color    : rgba(255,255,255,0.0);
   top                 : 651px;
   height              : auto;
@@ -795,14 +790,14 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.calendar .group9 .pending35pm .span1 {
+.calendar .calendarresults .pending35pm .span1 {
   text-align          : justify;
 }
-.calendar .group9 .pending35pm .span2 {
+.calendar .calendarresults .pending35pm .span2 {
   font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.calendar .group9 .rectangle3 {
+.calendar .calendarresults .rectangle2 {
   background-color    : rgba(224, 32, 32, 1.0);
   top                 : 414px;
   height              : 40px;
@@ -817,7 +812,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group9 .reserved121230 {
+.calendar .calendarresults .reserved121230 {
   background-color    : rgba(255,255,255,0.0);
   top                 : 427px;
   height              : auto;
@@ -833,15 +828,26 @@ div {
   text-align          : center;
   line-height         : 18.0px;
 }
-.calendar .rectangle {
-  background-color    : rgba(215, 215, 215, 1.0);
+.calendar .explain {
+  background-color    : rgba(255,255,255,0.0);
   top                 : 616px;
+  height              : 202px;
+  width               : 632px;
+  position            : absolute;
+  margin              : 0;
+  left                : 33px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.calendar .explain .explain1 {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
   height              : 202px;
   box-sizing          : border-box;
   width               : 632px;
   position            : absolute;
   margin              : 0;
-  left                : 33px;
+  left                : 0px;
   border-radius       : 15px;
   border-style        : solid;
   border-width        : 1px;
@@ -849,14 +855,14 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .explainwhatyouwil {
+.calendar .explain .explainwhatyouwil {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 649px;
+  top                 : 33px;
   height              : auto;
   width               : 605px;
   position            : absolute;
   margin              : 0;
-  left                : 49px;
+  left                : 16px;
   transform           : rotate(0deg);
   opacity             : 0.19;
   font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
@@ -881,15 +887,26 @@ div {
   text-align          : center;
   line-height         : 31.0px;
 }
-.calendar .rectangle1 {
-  background-color    : rgba(215, 215, 215, 1.0);
+.calendar .requestreservation {
+  background-color    : rgba(255,255,255,0.0);
   top                 : 858px;
+  height              : 298px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 387px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.calendar .requestreservation .rectangle {
+  background-color    : rgba(215, 215, 215, 1.0);
+  top                 : 0px;
   height              : 298px;
   box-sizing          : border-box;
   width               : 278px;
   position            : absolute;
   margin              : 0;
-  left                : 387px;
+  left                : 0px;
   border-radius       : 15px;
   border-style        : solid;
   border-width        : 1px;
@@ -897,14 +914,14 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .requestreservation {
+.calendar .requestreservation .requestreservation1 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 1079px;
+  top                 : 225px;
   height              : auto;
-  width               : 247px;
+  width               : 222px;
   position            : absolute;
   margin              : 0;
-  left                : 407px;
+  left                : 29px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-DemiBold", Helvetica, Arial, serif;
@@ -940,24 +957,35 @@ div {
   text-align          : left;
   line-height         : 31.0px;
 }
-.calendar .group {
+.calendar .choosefile {
   background-color    : rgba(255,255,255,0.0);
   top                 : 923px;
   height              : 39px;
-  width               : 321px;
+  width               : 278px;
   position            : absolute;
   margin              : 0;
   left                : 28px;
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group .rectangle2 {
+.calendar .choosefile .group {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 0px;
+  height              : 39px;
+  width               : 278px;
+  position            : absolute;
+  margin              : 0;
+  left                : 0px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+}
+.calendar .choosefile .group .rectangle {
   background-color    : rgba(215, 215, 215, 1.0);
   top                 : 0px;
   height              : 39px;
   box-sizing          : border-box;
   width               : 278px;
-  position            : absolute;
+  position            : relative;
   margin              : 0;
   left                : 0px;
   border-radius       : 13px;
@@ -967,37 +995,21 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .group .choosefile1 {
+.calendar .choosefile .choosefile1 {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 4px;
+  top                 : 6px;
   height              : auto;
-  width               : 249px;
+  width               : 112px;
   position            : absolute;
   margin              : 0;
-  left                : 72px;
-  transform           : rotate(0deg);
-  opacity             : 1.0;
-  font-family         : "Helvetica", Helvetica, Arial, serif;
-  font-size           : 23.0px;
-  color               : rgba(0, 0, 0, 1.0);
-  text-align          : left;
-  line-height         : 28.0px;
-}
-.calendar .choosefile {
-  background-color    : rgba(255,255,255,0.0);
-  top                 : 931px;
-  height              : auto;
-  width               : 259px;
-  position            : absolute;
-  margin              : 0;
-  left                : 90px;
+  left                : 83px;
   transform           : rotate(0deg);
   opacity             : 1.0;
   font-family         : "AvenirNext-Regular", Helvetica, Arial, serif;
-  font-size           : 24.0px;
+  font-size           : 20.0px;
   color               : rgba(0, 0, 0, 1.0);
   text-align          : left;
-  line-height         : 33.0px;
+  line-height         : 27.0px;
 }
 .calendar .newnavbarlongscreenredbar4links {
   background-color    : rgba(255,255,255,0.0);
@@ -1033,7 +1045,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .newnavbarlongscreenredbar4links .thelab {
+.calendar .newnavbarlongscreenredbar4links .labinfo {
   background-color    : rgba(255,255,255,0.0);
   top                 : 256px;
   height              : auto;
@@ -1065,7 +1077,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.calendar .newnavbarlongscreenredbar4links .manageyouraccount {
+.calendar .newnavbarlongscreenredbar4links .account {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -1081,7 +1093,7 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.calendar .newnavbarlongscreenredbar4links .bookamachine {
+.calendar .newnavbarlongscreenredbar4links .book {
   background-color    : rgba(255,255,255,0.0);
   top                 : 258px;
   height              : auto;
@@ -1108,7 +1120,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .newnavbarlongscreenredbar4links .davidsmith2321123 {
+.calendar .newnavbarlongscreenredbar4links .username {
   background-color    : rgba(255,255,255,0.0);
   top                 : 236px;
   height              : auto;
@@ -1124,14 +1136,14 @@ div {
   text-align          : left;
   line-height         : 41.0px;
 }
-.calendar .newnavbarlongscreenredbar4links .davidsmith2321123 .span1 {
+.calendar .newnavbarlongscreenredbar4links .username .span1 {
   text-align          : justify;
 }
-.calendar .newnavbarlongscreenredbar4links .davidsmith2321123 .span2 {
+.calendar .newnavbarlongscreenredbar4links .username .span2 {
   font-family         : "AvenirNext-UltraLight", Helvetica, Arial, serif;
   text-align          : justify;
 }
-.calendar .newnavbarlongscreenredbar4links .trianglecopy {
+.calendar .newnavbarlongscreenredbar4links .logindropdown {
   background-color    : rgba(255,255,255,0.0);
   top                 : 260px;
   height              : 29px;
@@ -1175,7 +1187,7 @@ div {
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
-.calendar .newnavbarlongscreenredbar4links .redbarbottom .rectangle2 {
+.calendar .newnavbarlongscreenredbar4links .redbarbottom .rectangle {
   background-color    : rgba(224, 32, 32, 1.0);
   top                 : 0px;
   height              : 12px;
@@ -1192,12 +1204,12 @@ div {
 }
 .calendar .hotspot {
   background-color    : rgba(255,255,255,0.0);
-  top                 : 858px;
+  top                 : 876px;
   height              : 298px;
   width               : 278px;
   position            : absolute;
   margin              : 0;
-  left                : 387px;
+  left                : 388px;
   transform           : rotate(0deg);
   opacity             : 1.0;
 }
@@ -1211,6 +1223,22 @@ div {
   left                : 34px;
   transform           : rotate(0deg);
   opacity             : 1.0;
+}
+.calendar .results {
+  background-color    : rgba(255,255,255,0.0);
+  top                 : 287px;
+  height              : auto;
+  width               : 591px;
+  position            : absolute;
+  margin              : 0;
+  left                : 928px;
+  transform           : rotate(0deg);
+  opacity             : 1.0;
+  font-family         : "AvenirNext-Italic", Helvetica, Arial, serif;
+  font-size           : 22.0px;
+  color               : rgba(0, 0, 0, 1.0);
+  text-align          : left;
+  line-height         : 30.0px;
 }
 /* .anima-animate-appear prefix for appear animations */
 .anima-animate-appear {

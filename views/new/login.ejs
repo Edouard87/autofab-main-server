@@ -61,18 +61,25 @@
                 <div class="forgotyourusername">
                     Forgot your username or password?
                 </div>
-                <input name="username" class="browser-default login-form rectangle2" id="username" type="text" placeholder="Username ">
+                <div class="inputusername">
+                    <input name="username" class="browser-default login-form rectangle2" id="username" type="text" placeholder="Username ">
 
 
-                <input name="password" class="browser-default login-form rectangle3" id="password" type="password" placeholder="Password ">
-
-
-                <div class="rectangle4">
+                    
                 </div>
-                
-                
+                <div class="inputpassword">
+                    <input name="username" class="browser-default login-form rectangle2" id="username" type="text" placeholder="Username ">
+
+
+                    
+                </div>
                 <div class="signin">
-                    Sign In
+                    <input name="username" class="browser-default login-form rectangle2" id="username" type="text" placeholder="Username ">
+
+
+                    <div class="signin1">
+                        Sign In
+                    </div>
                 </div>
                 <a href="home">
                     <div class="hotspot">
@@ -209,6 +216,7 @@
                         elmnt.value = y._id
                         value.appendChild(elmnt)
                         console.log("added values!")
+                        $("select[data-collection='machines']").trigger("complete")
                     })
                 }
             })

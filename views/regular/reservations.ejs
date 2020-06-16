@@ -13,7 +13,7 @@
 <body>
   <!-- Modals -->
   <!-- General Purpose Dialogues -->
-  <% include ../partials/regular/success-modal.ejs %>
+  <% include ../../partials/regular/success-modal.ejs %>
   <!-- Edit Filters Modal -->
   <div class="modal fade" id="edit-filters-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -248,7 +248,7 @@
     var ignoreFields = ["_id","__v","updatedAt","createdAt","actionReason"];
     if (location.href.split("?")[1] == "all") {
       $(".ajax-table").attr("data-url","/schedule/a");
-      scheduleTarget = "/schedule/a";
+      scheduleTarget = "/query/schedule";
       $("#page-head").html("All Reservations")
       $("#origin").val("all")
     } else {
