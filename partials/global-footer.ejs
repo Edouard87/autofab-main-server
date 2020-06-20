@@ -1,7 +1,7 @@
 <script>
     $(document).ready(() => {
         // setup the machine selector
-        $("select[data-collection='machines']").each((index, value) => {
+        $("select[data-collection='machines']").each(function(index, value) {
             $.ajax({
                 url: "/query/" + value.getAttribute("data-collection"),
                 method: "get",

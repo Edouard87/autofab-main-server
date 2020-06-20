@@ -27,15 +27,11 @@ var reservationSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  justification: {
-    type: String,
-    required: true
-  },
   actionReason: String,
   conf: Number
 }, {
   timestamps: {
-    currentTime: () => Math.floor(Date.now() / 1000)
+    currentTime: () => Date.now()
   }
 })
 

@@ -1,27 +1,18 @@
 var chats = require("../../schemas/chat.js")
 var users = require("../../schemas/users.js")
+var createChat = require("./create.js")
 
 module.exports = (req, res) => {
 
-  req.body.members = new Array();
-
-  users.find({permission: -1}).then(adminUsers => {
-    adminUsers.forEach(adminUser => {
-      req.body.members.push(adminUser.username)
+  req.body.owner = req.decoded.username
+  createChat(req.body, function() {
+    res.send({
+      msg: "Your new chat has been created!",
+      header: "Success"
     })
-    req.body.members.push(req.decoded.username)
-     req.body.owner = req.decoded.username
-     chats.create(req.body).then(doc => {
-       res.send({
-         msg: "Your new chat has been created!",
-         header: "Success"
-       })
-     }).catch((err, doc) => {
-       console.log(err)
-     })
-
+  }, function(err, doc) {
+    console.log(err)
   })
-
  
 }
 

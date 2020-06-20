@@ -10,7 +10,8 @@ var machineSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  description: String
+  description: String,
+  default_status: Number
 })
 
 module.exports = mongoose.model("machine", machineSchema)

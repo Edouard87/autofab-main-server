@@ -6,28 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <%- include ../../partials/regular/global-header.ejs %>
+  <link rel="stylesheet" href="/components/wickedpicker/dist/wickedpicker.min.css">
+    <link rel="stylesheet" href="/components/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.css">
 </head>
 
 <body>
   <% include ../../partials/regular/navbar.ejs %>
   <div class="page-content">
+    <div class="chatinfo">
+        <span><strong>Name: </strong><span id="chat-name"></span></span>
+    </div>
     <div class="chatbox">
-
     </div>
     <div class="msgbox">
         <form class="ajax-form" action="/chats/message" method="post">
             <!-- The chat ID -->
-            <input type="hidden" name="_id">
+            <input type="hidden" id="selectedId" name="_id">
             <!-- The Message -->
             <input type="text" name="message">
             <button>Send</button>
         </form>
     </div>
     <div class="linkedcontrols">
-        <h1>Not Linked</h1>
+        <h1>Your Reservations</h1>
+        <span><label>Start: </label><input class="modifyres timepicker" name="start"></span>
+        <span><label>End: </label><input class="modifyres timepicker" name="end"></span>
+        <span><label>Date: </label><input class="modifyres" id="datepicker" name="date" autocomplete="off"></span>
+        <input class="modifyres" type="hidden" name="machine">
+        <span><label>Machine: </label><select data-collection="machines"></select></span>
+        <button class="btn btn-lrg btn-danger" id="cancel-res">Cancel Reservaton</button>
+        <button class="btn btn-lrg btn-warning" id="modifyres">Commit Modifications</button>
+        
     </div>
     <script>
-       $("input[name='_id'").val((new URLSearchParams(location.href.split("?")[1])).get("id"))
+        var selectedId = (new URLSearchParams(location.href.split("?")[1])).get("id")
+        console.log(selectedId)
+       $("#selectedId").val(selectedId)
        var currentData = new Array()
        $(".ajax-form").on('success', () => {
            $("input[name='message'").val("")
@@ -41,24 +55,59 @@
                 chatMessageTemplate = template
             }
         })
+        var reservationMessageTemplate = new String()
+        $.ajax({
+            url: "/templates/chat/reservation.mustache",
+            method: "get",
+            success: function(template) {
+                reservationMessageTemplate = template
+            }
+        })
+        var allMachines = new Array()
+        $.ajax({
+            url: "/machines/all",
+            method: "get",
+            success: function(x) {
+                allMachines = x
+            }
+        })
         $.ajax({
             url: "/chats/messages/all",
             type: "get",
-            data: {id: $("input[name='_id']").val()},
+            data: {id: selectedId},
             success: data => {
+                console.log(data)
                 var timesArray = new Array()
                 if (data.length > currentData.length) {
                     $(".chatbox").empty()
                     currentData = data
                     data.forEach(msg => {
                         timesArray.push(msg.time)
-                        if (msg.type == "message") {
+                        // var templateData = new Object
+                        if (msg.type == 0) {
                               $(".chatbox").append(Mustache.to_html(chatMessageTemplate, {
                                   username: msg.owner,
                                   message: msg.data,
                                   time: moment.unix(Math.floor(msg.time / 1000)).format("MMMM DD, YYYY") + " at "
                                   +moment.unix(Math.floor(msg.time / 1000)).format("hh:mm A")
                               }))
+                        } else if (msg.type == 1) {
+                            dateCreated = moment(msg.data.createdAt)
+                            msg.data.headerMessage = "New reservation created by " + msg.data.username + " on " + dateCreated.format("dddd, MMMM Do YYYY") + " at " + dateCreated.format("hh:mm a")
+                            Object.keys(msg.data).forEach(key => {
+                                if (key == "start" || key == "end") {
+                                    msg.data[key] = moment(msg.data[key]).format("hh:mm a")
+                                } else if (key == "date") {
+                                    msg.data[key] = moment(msg.data[key], "mm-dd-yyyy").format("dddd, MMMM Do YYYY")
+                                } else if (key == "machine") {
+                                    allMachines.forEach(machine => {
+                                        if (machine._id == msg.data[key]) {
+                                            msg.data[key] = machine.name
+                                        }
+                                    })
+                                }
+                            })
+                            $(".chatbox").append(Mustache.to_html(reservationMessageTemplate, msg.data))
                         }
                     })
                     $(".chatbox").animate({
@@ -69,13 +118,90 @@
             }
         })
        },1000)
+       // testing some functionnality
+       $(".chatbox").append()
 
+       // Get the data for the reservation that is linked:
+
+       $.ajax({
+           url: "/chats/view/" + selectedId,
+           method: "get",
+           success: foundChat => {
+            console.log(foundChat[0])
+               console.log(foundChat[0].title)
+               console.log("found link ",foundChat[0].link)
+               $("#chat-name").html(foundChat[0].title)
+               $.ajax({
+                    url: "/reservations/view/" + foundChat[0].link,
+                    method: "get",
+                    success: linkedReservation => {
+                        console.log("found!")
+                        console.log(linkedReservation)
+                        Object.keys(linkedReservation).forEach(key => {
+                            $(".modifyres[name='" + key + "']").val(linkedReservation[key])
+                            $(".modifyres[name='" + key + "']").trigger("generate")
+                        })
+                        // console.log(Object.keys(linkedReservation))
+                        // console.log(linkedReservation)
+                    }
+                })
+           }
+       })
+       $(".modifyres[name='start'], .modifyres[name='end']").on("generate", function(ev) {
+            // console.log($(this).val())
+            console.log("here we go!")
+            var inputValue = moment(new Number($(this).val()))
+            // console.log(new String(inputValue))
+            $(this).val(inputValue.format("h : mm A"))
+            $(this).wickedpicker({now: inputValue.format("hh:mm")});
+       });
+       $("[data-collection='machines']").on("complete", function(ev) {
+            console.log("getting machine...")
+            $("[data-collection='machines']").val($(".modifyres[name='machine']").val())
+       })   
+       $("#modifyres").on("click", function() {
+        //    console.log($("#datepicker").val() + " " + $(".timepicker[name='start']").val())
+        // console.log(moment("06-18-2020 6 : 02 AM", "MM-DD-YYYY h : mm A").unix())
+        var modifications = new Object()   
+        $(".modifyres").each((i, elm) => {
+               console.log(elm)
+                if ($(elm).attr("name") == "date") {
+                    // console.log(moment($(this).val(), "MM-DD-yyyy").format("mm-dd-yyyy"))
+                } else if ($(elm).hasClass("timepicker")) {
+                    modifications[$(elm).attr("name")] = moment($("#datepicker").val() + " " + $(elm).val(), "MM-DD-YYYY h : mm A").unix()*1000
+                    // console.log()
+                }
+           })
+           modifications.date = $("#datepicker").val()
+           modifications.machine = $("[data-collection='machines']").val()
+           console.log(modifications)
+           $.ajax({
+               url: "/reservations/modify",
+               data: $.param(modifications),
+               method: "post",
+               success: function(data) {
+                   console.log(data)
+                   ajaxDialogue.show(data)
+               }
+           })
+           
+       })
+
+    </script>
+    <script src="/components/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="/components/wickedpicker/dist/wickedpicker.min.js"></script>
+    <script>
+        // date picker setup
+        $('.modifyres[name="date"]').datepicker({
+            format: "mm-dd-yyyy",
+            startDate: "06-18-2020"
+        });
     </script>
     <style>
         .chatbox {
             width: 100%;
-            height: 200px;
-            background-color: grey;
+            height: 500px;
+            background-color: #dc3545;
             /* display: inline-block; */
             overflow-y: scroll;
             padding: 10px;
@@ -83,6 +209,7 @@
         .chatbox-message span {
             display: block;
             width: 100%;
+            color: white;
         }
         .chatbox-message .username {
             font-weight: bold;
@@ -90,7 +217,19 @@
         .chatbox-message .time {
             font-size: 10px;
         }
+        .chatboxreservation {
+            padding: 10px;
+            border-radius: 3px;
+            background-color: white;
+        }
+        .chatboxreservation span {
+            display: block;
+        }
+        .linkedcontrols span {
+            display: block;
+        }
     </style>
+    <% include ../../partials/global-footer.ejs %>
   </div>
 </body>
 

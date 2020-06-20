@@ -130,7 +130,7 @@ app.post("/schedule/p", require("./routes/reservations/get_schedule/student.js")
 
 app.post("/reservations/delete", require("./routes/reservations/delete.js"))
 
-app.post("/reservations/modify", (req, res) => {});
+app.post("/reservations/modify", require("./routes/reservations/modify.js"));
 
 app.get("/reservations/reservationSet/:id", checkAdmin, require("./routes/reservations/reservationSets/get.js"))
 
@@ -141,6 +141,8 @@ app.post("/reservations/approve", checkAdmin, require("./routes/reservations/app
 app.post("/reservations/cancel", require("./routes/reservations/cancel.js"));
 
 app.post("/reservations/new", require("./routes/reservations/new.js"))
+
+app.get("/reservations/view/:id", require("./routes/reservations/getOne.js"))
 
 //  #Collection Query Route (general route for querying the db)
 
@@ -165,6 +167,8 @@ app.post("/chats/new", require("./routes/chat/new.js"))
 app.post("/chats/message", require("./routes/chat/message.js"))
 
 app.get("/chats/messages/all", require("./routes/chat/allmessages.js"))
+
+app.get("/chats/view/:id", require("./routes/chat/view.js"))
 
 //  #Readers (not in other file for technical reasons)
 

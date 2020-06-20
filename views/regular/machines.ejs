@@ -62,7 +62,7 @@
 
             </textarea>
             <span>Options</span>
-            <label>Default Status: </label><select name="[options]default_status">
+            <label>Default Status: </label><select name="default_status">
               <option value="0">Reserved</option>
               <option value="1">Hold</option>
             </select>
@@ -103,7 +103,7 @@
       url: "/machines/all",
       method: "get",
       id: "machines-table",
-      ignore: ["_id","__v"],
+      ignore: ["_id","__v","default_status"],
       firstCap: true
     },() => {
       ajaxTable.connect($("#table-wrapper-1").children().first(),{

@@ -18,7 +18,7 @@ module.exports = (req, res) => {
       eval(req.params.collection).find(req.query).then(docs => {
         res.send(docs)
       }).catch((err, doc) => {
-        console.err(err)
+        console.log(err)
       })
     } catch (err) {
       console.log(err)
